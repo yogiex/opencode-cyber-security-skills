@@ -1,0 +1,39 @@
+{
+  "name": "cyber-security-agent-skills",
+  "description": "cyber-security agent skills",
+  "version": "1.0.0",
+  "author": {
+    "name": "yogiex",
+    "email": "priyagung.yoggi@gmail.com"
+  },
+  "homepage": "https://example.com",
+  "repository": "https://github.com/cyber-security/agent-skills",
+  "license": "MIT",
+  "keywords": [
+    "ai",
+    "agent",
+    "skill"
+  ],
+  "skills": [
+    {
+      "name": "owasp-top10-2025",
+      "description": "Complete reference for OWASP Top 10 2025 web application security risks. Use when conducting threat modeling, code review, penetration testing, secure design, or when user asks about any AXX:2025 category, vulnerability explanations, or mitigation strategies.",
+      "version": "1.0.0",
+      "source": "./skills/owasp-top10-2025",
+      "license": "MIT",
+      "keywords": []
+    },
+    {
+      "name": "ptes-standard",
+      "description": "Penetration Testing Execution Standard (PTES) - comprehensive guide for conducting penetration tests across 7 phases: pre-engagement, intelligence gathering, threat modeling, vulnerability analysis, exploitation, post-exploitation, and reporting. Use when planning or executing penetration tests, security assessments, or when user asks about PTES methodology.",
+      "version": "1.0.0",
+      "source": "./skills/ptes-standard",
+      "license": "MIT",
+      "keywords": [
+        "ai",
+        "agent",
+        "skill"
+      ]
+    }
+  ]
+}

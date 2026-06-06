@@ -1,6 +1,13 @@
 {
   "skills": [
     {
+      "name": "comptia-cysa",
+      "description": "Panduan lengkap CompTIA CySA+ (CS0-004 V4) mencakup Security Operations, Vulnerability Management, Incident Response, dan Reporting & Communication untuk mempersiapkan sertifikasi Cybersecurity Analyst.",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "devsecops-mindset",
       "description": "Panduan pola pikir dan mindset DevSecOps untuk mengintegrasikan keamanan dalam siklus pengembangan secara berkelanjutan, tanpa fokus pada alat/tools tertentu.",
       "files": [

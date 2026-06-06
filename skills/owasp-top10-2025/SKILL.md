@@ -248,3 +248,123 @@ When user asks about a specific risk:
 If user asks for a full list, output the table summary and then ask which category they want to deep dive.
 
 Always prioritize **practical, fixable advice** over academic theory.
+
+## Referensi Lengkap
+
+### Official OWASP Documentation
+
+| Nama | Deskripsi | Link |
+|------|-----------|------|
+| OWASP Top 10:2025 — Official | Halaman resmi dengan data, metodologi, dan detail per kategori | [owasp.org](https://owasp.org/Top10/2025/) |
+| OWASP Top 10 GitHub Project | Repositori markdown resmi, data kontribusi kuesioner, rencana remediasi | [github.com](https://github.com/owasp/top10) |
+| OWASP ASVS v4.0 | Application Security Verification Standard — kerangka audit teknis mendalam | [owasp.org](https://owasp.org/www-project-application-security-verification-standard/) |
+| OWASP WSTG v4.2 | Web Security Testing Guide — panduan testing untuk setiap kerentanan | [owasp.org](https://owasp.org/www-project-web-security-testing-guide/) |
+| OWASP Cheat Sheet Series | Koleksi concise cheat sheet per topik keamanan | [cheatsheetseries.owasp.org](https://cheatsheetseries.owasp.org/) |
+| OWASP Juice Shop | Aplikasi sengaja rentan (Node.js/Angular) untuk training dan CTF | [owasp.org](https://owasp.org/www-project-juice-shop/) |
+| OWASP Dependency-Check | Open-source SCA tool untuk identifikasi komponen rentan | [owasp.org](https://owasp.org/www-project-dependency-check/) |
+| OWASP ZAP | Zed Attack Proxy — open-source DAST tool terkemuka | [zaproxy.org](https://www.zaproxy.org/) |
+
+### Buku & Publications
+
+| Judul | Penulis | Fokus Utama |
+|-------|---------|-------------|
+| Alice and Bob Learn Application Security | Tanya Janca | Fondasi AppSec untuk developer — praktis, mudah dipahami |
+| Agile Application Security | Laura Bell, Michael Brunton-Spall, Rich Smith, Jim Bird | Integrasi OWASP ke siklus CI/CD dan Agile |
+| The Web Application Hacker's Handbook (2nd Ed.) | Dafydd Stuttard, Marcus Pinto | Bible of web app security — teknis mendalam |
+| Real-World Bug Hunting | Peter Yaworski | Studi kasus bug bounty — aplikasi nyata OWASP Top 10 |
+| Web Security for Developers | Malcolm McDonald | Pemrograman web aman untuk developer sehari-hari |
+| OWASP Testing Guide Implementation | Packt Publishing | Implementasi praktis OWASP WSTG dalam pengujian |
+| Hacking Web Apps | Mike Shema | Memahami kerentanan dari perspektif penyerang |
+| Browser Security Handbook | Google (Michal Zalewski) | Keamanan browser — Same-Origin Policy, CSP, XSS vectors |
+
+### SAST / DAST / SCA — Tools Matrix per Kategori
+
+| Kategori OWASP | SAST | DAST | SCA | Tools Rekomendasi |
+|----------------|------|------|-----|-------------------|
+| A01: Broken Access Control | 🔶 Parsial | 🟢 Sangat Efektif | ❌ Tidak Efektif | Burp Suite Enterprise, OWASP ZAP, Checkmarx |
+| A02: Security Misconfiguration | 🔶 Parsial (IaC) | 🟢 Sangat Efektif | ❌ Tidak Efektif | Semgrep, Trivy, OWASP ZAP |
+| A03: Supply Chain Failures | ❌ Tidak Efektif | ❌ Tidak Efektif | 🟢 Sangat Efektif | Snyk, Dependabot, OWASP Dependency-Check, Cycode |
+| A04: Cryptographic Failures | 🟢 Sangat Efektif | 🔶 Parsial | ❌ Tidak Efektif | SonarQube, Veracode, Fortify |
+| A05: Injection | 🟢 Sangat Efektif | 🟢 Sangat Efektif | ❌ Tidak Efektif | Semgrep, sqlmap, Acunetix, Burp Suite |
+| A06: Insecure Design | ❌ Sangat Lemah | ❌ Sangat Lemah | ❌ Tidak Efektif | Threat Modeling (STRIDE, LINDDUN, PASTA) |
+| A07: Authentication Failures | 🔶 Parsial | 🟢 Sangat Efektif | ❌ Tidak Efektif | OWASP ZAP, Burp Suite Pro |
+| A08: Integrity Failures | 🔶 Parsial | ❌ Tidak Efektif | 🟢 Sangat Efektif | Snyk, Black Duck, Sigstore/Cosign |
+| A09: Logging & Alert Failures | 🟢 Sangat Efektif | ❌ Tidak Efektif | ❌ Tidak Efektif | SonarQube, CodeQL, SIEM config auditors |
+| A10: Exceptional Conditions | 🟢 Sangat Efektif | 🔶 Parsial (Fuzzing) | ❌ Tidak Efektif | CodeQL, AFL++, libFuzzer |
+
+### Real-World CVE Examples per Kategori
+
+| Kategori | CVE | Deskripsi |
+|----------|-----|-----------|
+| A01: Broken Access Control | CVE-2024-21626 | Kernel container escape / access bypass via working directory |
+| A01: Broken Access Control | CVE-2023-3824 | PHP memory configuration exploitation via SSRF |
+| A02: Security Misconfiguration | CVE-2023-46604 | RCE pada Apache ActiveMQ via konfigurasi serialisasi |
+| A03: Supply Chain Failures | CVE-2024-25062 | XML certificate validation bypass pada library populer |
+| A04: Cryptographic Failures | CVE-2024-27198 | Parameter injection & bypass authentication di TeamCity |
+| A05: Injection | CVE-2023-4863 | Heap buffer overflow pada WebP codec — 0-day exploited |
+| A06: Insecure Design | CVE-2024-1597 | Authentication bypass pada PostgreSQL JDBC driver |
+| A07: Authentication Failures | CVE-2023-38606 | Kernel integrity bypass pada iOS — digunakan oleh spyware |
+| A08: Integrity Failures | CVE-2021-44228 | Log4Shell — remote code execution via logging library |
+| A09: Logging & Alert Failures | CVE-2024-22024 | XML external entity processing crash — fail-open condition |
+| A10: Exceptional Conditions | CVE-2024-22024 | Mishandling of exceptional XML parsing conditions |
+
+### Cloud-Specific Guidance
+
+| Kategori | Cloud Risk | Mitigasi |
+|----------|------------|----------|
+| A01: Broken Access Control | IAM policies wildcard terlalu longgar, privilege escalation via cloud API | AWS IAM Access Analyzer, least privilege, SCP tagging |
+| A02: Security Misconfiguration | S3 bucket publik, Azure Blob terbuka, GCP bucket misconfigured | CSPM tools (Orca, Prisma Cloud, Wiz), account-level block public access |
+| A03: Supply Chain Failures | Container base images tidak diverifikasi dari Docker Hub publik | Cosign/Sigstore signing, private registry, image scanning (Trivy, Grype) |
+| A04: Cryptographic Failures | KMS key misconfiguration, expired certificates di ELB/CloudFront | AWS KMS key rotation, ACM auto-renewal, TLS inspection |
+| A05: Injection | SQL injection via RDS, command injection via Lambda env vars | Parameterized queries, WAF (AWS WAF, Cloud Armor), input validation |
+| A06: Insecure Design | Cloud architecture tanpa security boundaries | Well-Architected Framework security pillar, threat modeling |
+| A07: Authentication Failures | Root user tanpa MFA, service account key leaked | Enforce MFA, IAM Roles Anywhere, Secrets Manager |
+| A09: Logging & Alert Failures | CloudTrail/GCP Audit Logs tidak enabled | Org-level trails, detective controls, SIEM integration (Sentinel, Splunk) |
+
+### Training & Courses
+
+| Nama | Provider | Level | Fokus |
+|------|----------|-------|-------|
+| SEC522: Defending Web Applications | SANS Institute | Advanced | Web application defense, OWASP Top 10 deep dive |
+| Learning the OWASP Top 10 (2025 Ver.) | LinkedIn Learning (Caroline Wong) | Beginner | Studi kasus nyata, ramah pemula |
+| Practical Web Defense | TCM Security | Intermediate | Hands-on lab, mitigasi kerentanan web modern |
+| Web Security Academy | PortSwigger | All levels | Ratusan lab interaktif terintegrasi OWASP |
+| WeSecureApp OWASP Training | WeSecureApp | Intermediate | OWASP Top 10 hands-on training |
+| Application Security & Secure Coding | Codecademy / Cybrary | Beginner-Intermediate | Secure coding fundamentals |
+
+### Certifications
+
+| Sertifikasi | Penerbit | Fokus | Biaya |
+|-------------|----------|------|-------|
+| GIAC GWEB | SANS | Web application defense, defensive techniques | ~$8,780 (incl. SEC522) |
+| Certified DevSecOps Professional (CDP) | Practical DevSecOps | CI/CD security automation, SAST/DAST/SCA | $899 |
+| Offensive Security Web Exploitation (OSWE) | Offensive Security | White-box code analysis, advanced manual exploitation | $1,599 |
+| Burp Suite Certified Practitioner | PortSwigger | Burp Suite proficiency, web security testing | ~$200 |
+| Certified Application Security Engineer (CASE) | EC-Council | Secure SDLC, OWASP Top 10 | ~$1,049 |
+| eWPTX (Web Application Pentesting eXtreme) | eLearnSecurity | Advanced web pentesting, multi-stage attacks | ~$850 |
+
+### CTF & Practice Platforms
+
+| Platform | Deskripsi | Link |
+|----------|-----------|------|
+| PortSwigger Web Security Academy | Lab interaktif gratis terbaik — 100+ lab, OWASP-aligned | [portswigger.net](https://portswigger.net/web-security) |
+| OWASP Juice Shop | Modern vulnerable web app (Node.js/Angular) untuk CTF internal | [owasp.org](https://owasp.org/www-project-juice-shop/) |
+| Hack The Box | Guided paths "Web Application Penetration Testing", CTF machines | [hackthebox.com](https://www.hackthebox.com/) |
+| TryHackMe | "OWASP Top 10" path, beginner-friendly rooms | [tryhackme.com](https://tryhackme.com/) |
+| PentesterLab | Web vulnerability labs by category — progressive difficulty | [pentesterlab.com](https://pentesterlab.com/) |
+| Root-Me | 400+ web challenges, OWASP-categorized | [root-me.org](https://www.root-me.org/) |
+| WebSec CTF Challenges | CTF khusus web security, berbagai kategori OWASP | [websec.fr](https://websec.fr/) |
+| Pentest-Training.com | Realistic attack scenarios with writeups | [pentest-training.com](https://pentest-training.com/) |
+
+### Communities & Curated Lists
+
+| Nama | Deskripsi | Link |
+|------|-----------|------|
+| OWASP Official Website | Project documentation, chapters, conferences | [owasp.org](https://owasp.org/) |
+| OWASP GitHub Organization | Semua project OWASP open-source | [github.com](https://github.com/owasp) |
+| PortSwigger Research | Web security research, blog posts, tool releases | [portswigger.net](https://portswigger.net/research) |
+| PortSwigger Blog | Daily web security news, techniques, writeups | [portswigger.net](https://portswigger.net/blog) |
+| Awesome Web Security (qazbnm456) | Curated list of web security resources (7k+ stars) | [github.com](https://github.com/qazbnm456/awesome-web-security) |
+| Awesome Hacking (Hack-with-Github) | Curated list of hacking tools & resources (80k+ stars) | [github.com](https://github.com/Hack-with-Github/Awesome-Hacking) |
+| Payloads All The Things | Curated payloads per vulnerability type | [github.com](https://github.com/swisskyrepo/PayloadsAllTheThings) |
+| Web Security Cheatsheet (infosecB) | Concise web security testing references | [github.com](https://github.com/infosecB/awesome-web-security) |

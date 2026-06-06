@@ -29,6 +29,13 @@
       ]
     },
     {
+      "name": "lf-cks",
+      "description": "Certified Kubernetes Security Specialist (CKS) — Kubernetes security mindset, defense-in-depth framework, cluster isolation models, workload segmentation, supply chain trust, authentication & authorization philosophy, network security architecture, runtime protection, compliance posture, dan decision framework untuk securing container platforms. Berbasis CNCF CKS curriculum dan CIS Kubernetes Benchmark.",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "log-management-nist-800-92",
       "description": "Panduan log management berdasarkan NIST SP 800-92 untuk perencanaan, pengumpulan, penyimpanan, analisis, dan retensi log keamanan secara terstruktur.",
       "files": [

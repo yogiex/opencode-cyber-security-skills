@@ -34,6 +34,7 @@ Agent Skills adalah folder berisi instruksi, skrip, dan sumber daya yang dapat d
 | [offsec-ir-200](./skills/offsec-ir-200) | OffSec IR-200 / OSIR (OffSec Incident Responder) — foundational incident response covering full IR lifecycle (NIST 800-61r2), Splunk SIEM analysis with SPL, digital forensics (Autopsy, Volatility 3, FTK Imager), malware triage with YARA, containment/eradication/recovery, and post-mortem reporting. |
 | [offsec-th-200](./skills/offsec-th-200) | OffSec TH-200 / OSTH (OffSec Threat Hunter) — foundational threat hunting covering proactive threat detection, Splunk SPL, CrowdStrike Falcon CQL, Suricata IDS/IPS, hypothesis-driven hunting (PEAK, SEARCH), MITRE ATT&CK mapping, ransomware & APT case studies, CTI integration, and professional hunt reporting. |
 | [offsec-soc-200](./skills/offsec-soc-200) | OffSec SOC-200 / OSDA (OffSec Defense Analyst) — security operations and defensive analysis. SIEM/ELK/KQL, Windows & Linux endpoint detection, attacker methodology, incident investigation, dan SOC analyst framework. |
+| [lf-cks](./skills/lf-cks) | Certified Kubernetes Security Specialist (CKS) — Kubernetes security mindset, defense-in-depth framework, cluster isolation models, workload segmentation, supply chain trust, authentication & authorization philosophy, network security architecture, runtime protection, compliance posture, dan decision framework untuk securing container platforms. |
 | [soc-analyst](./skills/soc-analyst) | Pola pikir dan pendekatan untuk Security Analyst dan SOC Analyst dalam mentriage, menyelidiki, merespon insiden, dan berkomunikasi secara efektif. |
 | [threat-intelligence](./skills/threat-intelligence) | Cyber Threat Intelligence (CTI) — intelligence lifecycle, analytic frameworks (Kill Chain, Diamond Model, ATT&CK), IOC management (STIX/TAXII, MISP, YARA, Sigma), threat hunting (PEAK, ABLE, HMM), dan analyst tradecraft. |
 
@@ -122,6 +123,7 @@ Script ini akan membuat struktur skill dan otomatis memperbarui manifest.json, p
 | [offsec-soc-200](./skills/offsec-soc-200) | OffSec SOC-200, OSDA Exam Guide | https://help.offsec.com/hc/en-us/articles/4410105675412-OSDA-Exam-Guide |
 | [oscp-methodology](./skills/oscp-methodology) | OffSec PEN-200, OSCP+ Exam Guide | https://help.offsec.com/hc/en-us/articles/360040165632-OSCP-Exam-Guide |
 | [devsecops-mindset](./skills/devsecops-mindset) | DevSecOps Principles | - |
+| [lf-cks](./skills/lf-cks) | Linux Foundation CKS, CNCF CKS Curriculum, CIS Kubernetes Benchmark | https://training.linuxfoundation.org/certification/certified-kubernetes-security-specialist/ |
 | [incident-response-plan](./skills/incident-response-plan) | NIST SP 800-61, SANS PICERL | - |
 | [log-management-nist-800-92](./skills/log-management-nist-800-92) | NIST SP 800-92 | https://csrc.nist.gov/pubs/sp/800/92 |
 | [mitre-attack](./skills/mitre-attack) | MITRE ATT&CK | https://attack.mitre.org |

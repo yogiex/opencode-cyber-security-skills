@@ -29,6 +29,7 @@ Agent Skills adalah folder berisi instruksi, skrip, dan sumber daya yang dapat d
 | [risk-management-framework](./skills/risk-management-framework) | Panduan NIST Risk Management Framework (SP 800-37) untuk mengelola risiko keamanan dan privasi secara terstruktur, fleksibel, dan berkelanjutan di seluruh siklus hidup sistem. |
 | [security-documentation](./skills/security-documentation) | Membuat laporan pengujian keamanan dalam format LaTeX dan mengompilasi ke PDF, mengikuti template dokumen yang tersedia. |
 | [soc-analyst](./skills/soc-analyst) | Pola pikir dan pendekatan untuk Security Analyst dan SOC Analyst dalam mentriage, menyelidiki, merespon insiden, dan berkomunikasi secara efektif. |
+| [threat-intelligence](./skills/threat-intelligence) | Cyber Threat Intelligence (CTI) — intelligence lifecycle, analytic frameworks (Kill Chain, Diamond Model, ATT&CK), IOC management (STIX/TAXII, MISP, YARA, Sigma), threat hunting (PEAK, ABLE, HMM), dan analyst tradecraft. |
 
 ### 🟢 General (Keduanya)
 
@@ -118,6 +119,7 @@ Script ini akan membuat struktur skill dan otomatis memperbarui manifest.json, p
 | [risk-management-framework](./skills/risk-management-framework) | NIST SP 800-37 Rev 2 | https://csrc.nist.gov/pubs/sp/800/37/r2 |
 | [security-documentation](./skills/security-documentation) | OWASP WSTG, PTES | - |
 | [soc-analyst](./skills/soc-analyst) | MITRE ATT&CK, NIST SP 800-61 | - |
+| [threat-intelligence](./skills/threat-intelligence) | CTI Lifecycle, MITRE ATT&CK, Cyber Kill Chain, Diamond Model, STIX/TAXII | https://attack.mitre.org |
 | [threat-modeling](./skills/threat-modeling) | STRIDE, DFD, NIST SP 800-154 | - |
 | [waf-evasion-methodology](./skills/waf-evasion-methodology) | OWASP CRS, MITRE ATT&CK | - |
 | [web-app-scan](./skills/web-app-scan) | OWASP WSTG, PTES | - |

@@ -93,6 +93,13 @@
       ]
     },
     {
+      "name": "threat-intelligence",
+      "description": "Cyber Threat Intelligence (CTI) - lifecycle, intelligence frameworks, IOC management, threat hunting, analyst tradecraft. Use when gathering threat intelligence, performing threat hunting, managing IOCs, conducting intelligence-driven analysis, or when user asks about CTI lifecycle, TIP platforms, STIX/TAXII, MISP, OpenCTI, or structured analytical techniques.",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "threat-modeling",
       "description": "Panduan threat modeling untuk mengidentifikasi, menganalisis, dan memitigasi risiko keamanan pada sistem atau aplikasi secara general dan non-teknis",
       "files": [

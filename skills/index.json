@@ -43,6 +43,13 @@
       ]
     },
     {
+      "name": "soc-analyst",
+      "description": "Pola pikir dan pendekatan untuk Security Analyst dan SOC Analyst dalam mentriage, menyelidiki, merespon insiden, dan berkomunikasi secara efektif.",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "threat-modeling",
       "description": "Panduan threat modeling untuk mengidentifikasi, menganalisis, dan memitigasi risiko keamanan pada sistem atau aplikasi secara general dan non-teknis",
       "files": [

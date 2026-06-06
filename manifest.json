@@ -24,6 +24,14 @@
       "keywords": []
     },
     {
+      "name": "cpent",
+      "description": "EC-Council CPENT (Certified Penetration Testing Professional) — mindset, metodologi, dan strategi komprehensif untuk CPENT exam mencakup 14 modul inti, binary exploitation 32/64-bit, IoT/OT/SCADA, double pivoting, report writing, dan LPT Master pathway.",
+      "version": "1.0.0",
+      "source": "./skills/cpent",
+      "license": "MIT",
+      "keywords": []
+    },
+    {
       "name": "devsecops-mindset",
       "description": "Panduan pola pikir dan mindset DevSecOps untuk mengintegrasikan keamanan dalam siklus pengembangan secara berkelanjutan, tanpa fokus pada alat/tools tertentu.",
       "version": "1.0.0",

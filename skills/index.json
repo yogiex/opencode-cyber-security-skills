@@ -85,6 +85,13 @@
       ]
     },
     {
+      "name": "waf-evasion-methodology",
+      "description": "Pola pikir dan metodologi sistematis untuk WAF evasion — memahami parsing discrepancies, encoding gaps, dan logic mismatches antara WAF dan backend application.",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "web-app-scan",
       "description": "Melakukan vulnerability assessment pada web application secara sistematis seperti tools Nessus (deteksi kerentanan umum: SQLi, XSS, config leak, header keamanan, SSL/TLS, dsb) dengan pendekatan terstruktur dan non-teknis.",
       "files": [

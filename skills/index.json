@@ -50,6 +50,13 @@
       ]
     },
     {
+      "name": "offsec-ir-200",
+      "description": "OffSec IR-200 / OSIR (OffSec Incident Responder) — foundational incident response covering full IR lifecycle (NIST 800-61r2), Splunk SIEM analysis with SPL, digital forensics (Autopsy, Volatility 3, FTK Imager), malware triage with YARA, containment/eradication/recovery strategies, incident communication plans, and post-mortem reporting.",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "offsec-pen-300",
       "description": "OffSec PEN-300 / OSEP (Offensive Security Experienced Penetration Tester) — advanced evasion techniques and breaching defenses. Covers AV/EDR evasion, AMSI/AppLocker/CLM bypass, process injection & hollowing, custom C# shellcode runners, MSSQL linked servers, AD exploitation, delegation attacks, ADCS, and professional report writing.",
       "files": [
@@ -59,6 +66,13 @@
     {
       "name": "offsec-soc-200",
       "description": "OffSec SOC-200 / OSDA (OffSec Defense Analyst) — security operations and defensive analysis. Covers SOC operations, Windows & Linux endpoint detection, SIEM analysis with ELK/Kibana/KQL, attacker methodology (Kill Chain, MITRE ATT&CK), Windows Event Log & Sysmon analysis, Active Directory threat detection, network detections, and incident investigation.",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "offsec-th-200",
+      "description": "OffSec TH-200 / OSTH (OffSec Threat Hunter) — foundational threat hunting covering proactive threat detection, behavioral analysis, threat actor profiling, Splunk SIEM analysis with SPL, CrowdStrike Falcon endpoint hunting, Suricata IDS/IPS, hypothesis-driven hunting methodologies (PEAK, SEARCH), MITRE ATT&CK mapping, ransomware & APT case studies, cyber threat intelligence integration, and professional hunt reporting.",
       "files": [
         "SKILL.md"
       ]

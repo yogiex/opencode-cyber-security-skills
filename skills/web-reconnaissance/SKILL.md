@@ -64,6 +64,26 @@ Lakukan langkah-langkah ini secara berurutan.
   - `vue` → Vue
 - Gunakan tools bantuan: Wappalyzer (extension browser)
 
+## 6. Cari CVE Terbaru
+
+Setelah mengetahui teknologi dan versi yang digunakan, cari CVE yang relevan:
+
+- Gunakan web search untuk setiap teknologi + versi yang ditemukan:
+  - `nginx 1.25.0 CVE`
+  - `Express 4.18.0 CVE`
+  - `Next.js 14.0.0 CVE`
+  - `WordPress 6.4 CVE`
+- Sumber pencarian:
+  - NVD (National Vulnerability Database) — search by product/version
+  - Google/Pencarian web untuk laporan CVE terbaru
+  - `searchsploit --cve <nama-teknologi>` (read-only, hanya lihat daftar)
+- Catat untuk setiap CVE yang ditemukan:
+  - **CVE ID** (contoh: CVE-2025-12345)
+  - **CVSS Score** (contoh: 8.2 HIGH)
+  - **Versi terpengaruh** (contoh: < 1.25.3)
+  - **Deskripsi singkat** dan status (Published, Reserved, Rejected)
+- **Jangan** menyertakan exploit code atau PoC — cukup identifikasi dan catat kerentanannya
+
 ## Contoh Perintah Cepat (opsional)
 
 ```bash
@@ -84,6 +104,7 @@ Buat ringkasan dengan format:
 - **Teknologi**: [backend, frontend, server]
 - **Endpoint ditemukan**: [daftar endpoint]
 - **Token/Session terekspos**: [ada/tidak, jika ada sebutkan]
+- **CVE Terkait**: [daftar CVE ID + CVSS score + versi terpengaruh]
 - **Potensi lanjutan**: [rekomendasi fuzzing atau testing lanjutan]
 
 Selesai. Gunakan skill ini saat perlu reconnaissance web cepat dan terstruktur.

@@ -81,13 +81,13 @@ The SKILL.md should include:
 ## Scripts
 
 - `node scripts/add-skill.js <name> "<description>"` — Scaffold a new skill
-- `node scripts/sync-skills.js` — Sync manifest.json, platform plugin files, marketplace.json, skills/index.json, and README.md with skills directory
+- `node scripts/sync-skills.js` — Sync manifest.json, platform plugin files, marketplace.json, and skills/index.json with skills directory. README.md is now manually maintained (categorized tables) — update it separately when adding skills.
 
 ## Workflow
 
 1. Add or edit reference files in `skills/<name>/references/`
 2. Update `SKILL.md` reference links if files were added/removed/renamed
-3. Run `node scripts/sync-skills.js` if SKILL.md frontmatter changed (updates manifest.json, platform plugin files, index.json, and README)
+3. Run `node scripts/sync-skills.js` if SKILL.md frontmatter changed (updates manifest.json, platform plugin files, and index.json). README.md is manually maintained (categorized tables) — update it in the same commit.
 
 ## Development
 

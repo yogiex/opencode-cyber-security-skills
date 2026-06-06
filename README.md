@@ -89,6 +89,24 @@ This will create the skill structure and automatically update manifest.json, pla
 | `node scripts/add-skill.js`   | Add a new skill to the repository                                                              |
 | `node scripts/sync-skills.js` | Sync manifest.json, platform plugin files, skills/index.json, and README with skills directory |
 
+## References
+
+| Skill | Source/Standard | Link |
+|---|---|---|
+| [devsecops-mindset](./skills/devsecops-mindset) | DevSecOps Principles | - |
+| [incident-response-plan](./skills/incident-response-plan) | NIST SP 800-61, SANS PICERL | - |
+| [log-management-nist-800-92](./skills/log-management-nist-800-92) | NIST SP 800-92 | https://csrc.nist.gov/pubs/sp/800/92 |
+| [mitre-attack](./skills/mitre-attack) | MITRE ATT&CK | https://attack.mitre.org |
+| [nist-800-53](./skills/nist-800-53) | NIST SP 800-53 Rev 5 (5.2.0) | https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final |
+| [owasp-top10-2025](./skills/owasp-top10-2025) | OWASP Top 10 2025 | https://owasp.org/Top10/ |
+| [ptes-standard](./skills/ptes-standard) | PTES | http://www.pentest-standard.org/ |
+| [risk-management-framework](./skills/risk-management-framework) | NIST SP 800-37 Rev 2 | https://csrc.nist.gov/pubs/sp/800/37/r2 |
+| [security-documentation](./skills/security-documentation) | OWASP WSTG, PTES | - |
+| [soc-analyst](./skills/soc-analyst) | MITRE ATT&CK, NIST SP 800-61 | - |
+| [threat-modeling](./skills/threat-modeling) | STRIDE, DFD, NIST SP 800-154 | - |
+| [web-app-scan](./skills/web-app-scan) | OWASP WSTG, PTES | - |
+| [web-recon-simple](./skills/web-reconnaissance) | OSINT Framework, OWASP WSTG | - |
+
 ## Resources
 
 - [Agent Skills Specification](https://agentskills.io/specification)

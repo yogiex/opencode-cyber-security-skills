@@ -80,6 +80,14 @@
       "keywords": []
     },
     {
+      "name": "offsec-soc-200",
+      "description": "OffSec SOC-200 / OSDA (OffSec Defense Analyst) — security operations and defensive analysis. Covers SOC operations, Windows & Linux endpoint detection, SIEM analysis with ELK/Kibana/KQL, attacker methodology (Kill Chain, MITRE ATT&CK), Windows Event Log & Sysmon analysis, Active Directory threat detection, network detections, and incident investigation.",
+      "version": "1.0.0",
+      "source": "./skills/offsec-soc-200",
+      "license": "MIT",
+      "keywords": []
+    },
+    {
       "name": "oscp-methodology",
       "description": "OSCP (Offensive Security Certified Professional) — mindset, metodologi, dan strategi komprehensif untuk PEN-200/OSCP+ mencakup filsafat Try Harder, 3 attack vectors, enumeration framework, privilege escalation AD/Linux/Windows, dan reporting.",
       "version": "1.0.0",

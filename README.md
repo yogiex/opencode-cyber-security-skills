@@ -30,6 +30,7 @@ Agent Skills adalah folder berisi instruksi, skrip, dan sumber daya yang dapat d
 | [nist-800-53](./skills/nist-800-53) | Panduan Security and Privacy Controls berdasarkan NIST SP 800-53 Rev 5 (Release 5.2.0) untuk pemilihan, implementasi, dan assessment kontrol keamanan dan privasi dalam Risk Management Framework. |
 | [risk-management-framework](./skills/risk-management-framework) | Panduan NIST Risk Management Framework (SP 800-37) untuk mengelola risiko keamanan dan privasi secara terstruktur, fleksibel, dan berkelanjutan di seluruh siklus hidup sistem. |
 | [security-documentation](./skills/security-documentation) | Membuat laporan pengujian keamanan dalam format LaTeX dan mengompilasi ke PDF, mengikuti template dokumen yang tersedia. |
+| [offsec-soc-200](./skills/offsec-soc-200) | OffSec SOC-200 / OSDA (OffSec Defense Analyst) — security operations and defensive analysis. SIEM/ELK/KQL, Windows & Linux endpoint detection, attacker methodology, incident investigation, dan SOC analyst framework. |
 | [soc-analyst](./skills/soc-analyst) | Pola pikir dan pendekatan untuk Security Analyst dan SOC Analyst dalam mentriage, menyelidiki, merespon insiden, dan berkomunikasi secara efektif. |
 | [threat-intelligence](./skills/threat-intelligence) | Cyber Threat Intelligence (CTI) — intelligence lifecycle, analytic frameworks (Kill Chain, Diamond Model, ATT&CK), IOC management (STIX/TAXII, MISP, YARA, Sigma), threat hunting (PEAK, ABLE, HMM), dan analyst tradecraft. |
 
@@ -112,6 +113,7 @@ Script ini akan membuat struktur skill dan otomatis memperbarui manifest.json, p
 | [comptia-cysa](./skills/comptia-cysa) | CompTIA CySA+ CS0-004 | https://www.comptia.org/certifications/cybersecurity-analyst |
 | [cpent](./skills/cpent) | EC-Council CPENT, LPT Master | https://www.eccouncil.org/train-certify/certified-penetration-testing-professional-cpent/ |
 | [offsec-pen-300](./skills/offsec-pen-300) | OffSec PEN-300, OSEP Exam Guide | https://help.offsec.com/hc/en-us/articles/360050293792-OSEP-Exam-Guide |
+| [offsec-soc-200](./skills/offsec-soc-200) | OffSec SOC-200, OSDA Exam Guide | https://help.offsec.com/hc/en-us/articles/4410105675412-OSDA-Exam-Guide |
 | [oscp-methodology](./skills/oscp-methodology) | OffSec PEN-200, OSCP+ Exam Guide | https://help.offsec.com/hc/en-us/articles/360040165632-OSCP-Exam-Guide |
 | [devsecops-mindset](./skills/devsecops-mindset) | DevSecOps Principles | - |
 | [incident-response-plan](./skills/incident-response-plan) | NIST SP 800-61, SANS PICERL | - |

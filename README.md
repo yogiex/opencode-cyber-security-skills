@@ -12,6 +12,7 @@ Agent Skills adalah folder berisi instruksi, skrip, dan sumber daya yang dapat d
 
 | Skill | Deskripsi |
 | ----- | --------- |
+| [oscp-methodology](./skills/oscp-methodology) | OSCP (Offensive Security Certified Professional) — mindset, metodologi, dan strategi komprehensif untuk PEN-200/OSCP+ mencakup filsafat Try Harder, 3 attack vectors, enumeration framework, privilege escalation (Linux, Windows, AD), dan reporting. |
 | [ptes-standard](./skills/ptes-standard) | Penetration Testing Execution Standard (PTES) — panduan komprehensif untuk penetration testing meliputi 7 fase: pre-engagement, intelligence gathering, threat modeling, vulnerability analysis, exploitation, post-exploitation, dan reporting. |
 | [waf-evasion-methodology](./skills/waf-evasion-methodology) | Pola pikir dan metodologi sistematis untuk WAF evasion — memahami parsing discrepancies, encoding gaps, dan logic mismatches antara WAF dan backend application. |
 | [web-app-scan](./skills/web-app-scan) | Vulnerability assessment pada web application secara sistematis (deteksi kerentanan umum: SQLi, XSS, config leak, header keamanan, SSL/TLS, dsb) dengan pendekatan terstruktur. |
@@ -106,6 +107,7 @@ Script ini akan membuat struktur skill dan otomatis memperbarui manifest.json, p
 | Skill | Sumber/Standar | Link |
 |---|---|---|
 | [comptia-cysa](./skills/comptia-cysa) | CompTIA CySA+ CS0-004 | https://www.comptia.org/certifications/cybersecurity-analyst |
+| [oscp-methodology](./skills/oscp-methodology) | OffSec PEN-200, OSCP+ Exam Guide | https://help.offsec.com/hc/en-us/articles/360040165632-OSCP-Exam-Guide |
 | [devsecops-mindset](./skills/devsecops-mindset) | DevSecOps Principles | - |
 | [incident-response-plan](./skills/incident-response-plan) | NIST SP 800-61, SANS PICERL | - |
 | [log-management-nist-800-92](./skills/log-management-nist-800-92) | NIST SP 800-92 | https://csrc.nist.gov/pubs/sp/800/92 |

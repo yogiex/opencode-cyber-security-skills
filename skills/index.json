@@ -78,6 +78,13 @@
       ]
     },
     {
+      "name": "offsec-web-300",
+      "description": "OffSec WEB-300 / OSWE (Offensive Security Web Expert) — advanced web application security assessment covering white-box testing methodology, source code review in Java, C#, PHP, Python, and JavaScript, custom exploit development for .NET deserialization, PHP type juggling, SQL injection, SSTI, SSRF, prototype pollution, authentication bypass, XXE, OS command injection, and professional exploit scripting in Python.",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "oscp-methodology",
       "description": "OSCP (Offensive Security Certified Professional) — mindset, metodologi, dan strategi komprehensif untuk PEN-200/OSCP+ mencakup filsafat Try Harder, 3 attack vectors, enumeration framework, privilege escalation AD/Linux/Windows, dan reporting.",
       "files": [

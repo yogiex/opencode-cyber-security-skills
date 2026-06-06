@@ -16,6 +16,7 @@ Agent Skills adalah folder berisi instruksi, skrip, dan sumber daya yang dapat d
 | [ptes-standard](./skills/ptes-standard) | Penetration Testing Execution Standard (PTES) — panduan komprehensif untuk penetration testing meliputi 7 fase: pre-engagement, intelligence gathering, threat modeling, vulnerability analysis, exploitation, post-exploitation, dan reporting. |
 | [cpent](./skills/cpent) | EC-Council CPENT (Certified Penetration Testing Professional) — mindset, metodologi, dan strategi komprehensif untuk CPENT exam mencakup 14 modul inti, binary exploitation 32/64-bit, IoT/OT/SCADA, double pivoting, report writing, dan LPT Master pathway. |
 | [offsec-pen-300](./skills/offsec-pen-300) | OffSec PEN-300 / OSEP (Offensive Security Experienced Penetration Tester) — advanced evasion techniques and breaching defenses. AV/EDR evasion, AMSI/AppLocker/CLM bypass, process injection & hollowing, custom C# shellcode runners, MSSQL linked servers, AD exploitation, delegation attacks, ADCS, dan report writing. |
+| [offsec-web-300](./skills/offsec-web-300) | OffSec WEB-300 / OSWE (Offensive Security Web Expert) — advanced web application security assessment, white-box testing, source code review (Java, C#, PHP, Python, JavaScript), custom exploit development, .NET deserialization, PHP type juggling, SQLi, SSTI, SSRF, prototype pollution, dan authentication bypass. |
 | [waf-evasion-methodology](./skills/waf-evasion-methodology) | Pola pikir dan metodologi sistematis untuk WAF evasion — memahami parsing discrepancies, encoding gaps, dan logic mismatches antara WAF dan backend application. |
 | [web-app-scan](./skills/web-app-scan) | Vulnerability assessment pada web application secara sistematis (deteksi kerentanan umum: SQLi, XSS, config leak, header keamanan, SSL/TLS, dsb) dengan pendekatan terstruktur. |
 | [web-recon-simple](./skills/web-reconnaissance) | Recon web sederhana: chunk file, network tab, API endpoint, localstorage/token/session, identifikasi teknologi. |
@@ -115,6 +116,7 @@ Script ini akan membuat struktur skill dan otomatis memperbarui manifest.json, p
 | [comptia-cysa](./skills/comptia-cysa) | CompTIA CySA+ CS0-004 | https://www.comptia.org/certifications/cybersecurity-analyst |
 | [cpent](./skills/cpent) | EC-Council CPENT, LPT Master | https://www.eccouncil.org/train-certify/certified-penetration-testing-professional-cpent/ |
 | [offsec-pen-300](./skills/offsec-pen-300) | OffSec PEN-300, OSEP Exam Guide | https://help.offsec.com/hc/en-us/articles/360050293792-OSEP-Exam-Guide |
+| [offsec-web-300](./skills/offsec-web-300) | OffSec WEB-300, OSWE Exam Guide | https://help.offsec.com/hc/en-us/articles/360049792232-OSWE-Exam-Guide |
 | [offsec-ir-200](./skills/offsec-ir-200) | OffSec IR-200, OSIR Exam Guide | https://help.offsec.com/hc/en-us/articles/30960007786900 |
 | [offsec-th-200](./skills/offsec-th-200) | OffSec TH-200, OSTH Exam Guide | https://help.offsec.com/hc/en-us/articles/29141776768148-OSTH-Exam-Guide |
 | [offsec-soc-200](./skills/offsec-soc-200) | OffSec SOC-200, OSDA Exam Guide | https://help.offsec.com/hc/en-us/articles/4410105675412-OSDA-Exam-Guide |

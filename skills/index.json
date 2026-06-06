@@ -71,6 +71,13 @@
       ]
     },
     {
+      "name": "security-auditor",
+      "description": "Panduan mindset, metodologi, dan referensi untuk security auditor — mencakup audit lifecycle, framework comparison, control testing, evidence collection, dan certification path.",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "security-documentation",
       "description": "Membuat laporan pengujian keamanan dalam format LaTeX dan mengompilasi ke PDF, mengikuti template docs/laporan.txt",
       "files": [

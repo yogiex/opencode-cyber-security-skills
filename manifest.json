@@ -96,6 +96,14 @@
       "keywords": []
     },
     {
+      "name": "security-auditor",
+      "description": "Panduan mindset, metodologi, dan referensi untuk security auditor — mencakup audit lifecycle, framework comparison, control testing, evidence collection, dan certification path.",
+      "version": "1.0.0",
+      "source": "./skills/security-auditor",
+      "license": "MIT",
+      "keywords": []
+    },
+    {
       "name": "security-documentation",
       "description": "Membuat laporan pengujian keamanan dalam format LaTeX dan mengompilasi ke PDF, mengikuti template docs/laporan.txt",
       "version": "1.0.0",

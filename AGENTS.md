@@ -95,6 +95,17 @@ The SKILL.md should include:
 - **Never force push, amend, or rewrite history** unless the user explicitly requests it and confirms. Force pushes can break release tracking and cause data loss.
 - **Never push to `main` directly** unless the user explicitly asks. Default to creating a feature branch and opening a PR.
 
+## Custom OpenCode Commands
+
+| Command | File | Description |
+|---------|------|-------------|
+| `/skill-research` | `.opencode/commands/skill-research.md` | Research, synthesize, and write a security skill with 100+ references. 4-phase workflow: scope → research → synthesis → write. Semi-automatic (asks before writing). |
+
+Usage example:
+```
+/skill-research mobile application security testing methodology
+```
+
 ## Resources
 
 [ARCHITECTURE.md](ARCHITECTURE.md): Project Architecture

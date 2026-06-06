@@ -1,6 +1,13 @@
 {
   "skills": [
     {
+      "name": "devsecops-mindset",
+      "description": "Panduan pola pikir dan mindset DevSecOps untuk mengintegrasikan keamanan dalam siklus pengembangan secara berkelanjutan, tanpa fokus pada alat/tools tertentu.",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "incident-response-plan",
       "description": "Panduan incident response non-teknis untuk organisasi: persiapan, deteksi, analisis, containment, eradikasi, recovery, dan pembelajaran. Cocok untuk tim manajemen, legal, PR, dan koordinator insiden.",
       "files": [

@@ -22,6 +22,13 @@
       ]
     },
     {
+      "name": "nist-800-53",
+      "description": "Panduan Security and Privacy Controls berdasarkan NIST SP 800-53 Rev 5 (Release 5.2.0) untuk pemilihan, implementasi, dan assessment kontrol keamanan dan privasi dalam Risk Management Framework.",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "owasp-top10-2025",
       "description": "Complete reference for OWASP Top 10 2025 web application security risks. Use when conducting threat modeling, code review, penetration testing, secure design, or when user asks about any AXX:2025 category, vulnerability explanations, or mitigation strategies.",
       "files": [

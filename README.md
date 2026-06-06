@@ -15,6 +15,7 @@ Agent Skills adalah folder berisi instruksi, skrip, dan sumber daya yang dapat d
 | [oscp-methodology](./skills/oscp-methodology) | OSCP (Offensive Security Certified Professional) — mindset, metodologi, dan strategi komprehensif untuk PEN-200/OSCP+ mencakup filsafat Try Harder, 3 attack vectors, enumeration framework, privilege escalation (Linux, Windows, AD), dan reporting. |
 | [ptes-standard](./skills/ptes-standard) | Penetration Testing Execution Standard (PTES) — panduan komprehensif untuk penetration testing meliputi 7 fase: pre-engagement, intelligence gathering, threat modeling, vulnerability analysis, exploitation, post-exploitation, dan reporting. |
 | [cpent](./skills/cpent) | EC-Council CPENT (Certified Penetration Testing Professional) — mindset, metodologi, dan strategi komprehensif untuk CPENT exam mencakup 14 modul inti, binary exploitation 32/64-bit, IoT/OT/SCADA, double pivoting, report writing, dan LPT Master pathway. |
+| [offsec-pen-300](./skills/offsec-pen-300) | OffSec PEN-300 / OSEP (Offensive Security Experienced Penetration Tester) — advanced evasion techniques and breaching defenses. AV/EDR evasion, AMSI/AppLocker/CLM bypass, process injection & hollowing, custom C# shellcode runners, MSSQL linked servers, AD exploitation, delegation attacks, ADCS, dan report writing. |
 | [waf-evasion-methodology](./skills/waf-evasion-methodology) | Pola pikir dan metodologi sistematis untuk WAF evasion — memahami parsing discrepancies, encoding gaps, dan logic mismatches antara WAF dan backend application. |
 | [web-app-scan](./skills/web-app-scan) | Vulnerability assessment pada web application secara sistematis (deteksi kerentanan umum: SQLi, XSS, config leak, header keamanan, SSL/TLS, dsb) dengan pendekatan terstruktur. |
 | [web-recon-simple](./skills/web-reconnaissance) | Recon web sederhana: chunk file, network tab, API endpoint, localstorage/token/session, identifikasi teknologi. |
@@ -110,6 +111,7 @@ Script ini akan membuat struktur skill dan otomatis memperbarui manifest.json, p
 |---|---|---|
 | [comptia-cysa](./skills/comptia-cysa) | CompTIA CySA+ CS0-004 | https://www.comptia.org/certifications/cybersecurity-analyst |
 | [cpent](./skills/cpent) | EC-Council CPENT, LPT Master | https://www.eccouncil.org/train-certify/certified-penetration-testing-professional-cpent/ |
+| [offsec-pen-300](./skills/offsec-pen-300) | OffSec PEN-300, OSEP Exam Guide | https://help.offsec.com/hc/en-us/articles/360050293792-OSEP-Exam-Guide |
 | [oscp-methodology](./skills/oscp-methodology) | OffSec PEN-200, OSCP+ Exam Guide | https://help.offsec.com/hc/en-us/articles/360040165632-OSCP-Exam-Guide |
 | [devsecops-mindset](./skills/devsecops-mindset) | DevSecOps Principles | - |
 | [incident-response-plan](./skills/incident-response-plan) | NIST SP 800-61, SANS PICERL | - |

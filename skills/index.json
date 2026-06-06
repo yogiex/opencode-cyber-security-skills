@@ -50,6 +50,13 @@
       ]
     },
     {
+      "name": "offsec-pen-300",
+      "description": "OffSec PEN-300 / OSEP (Offensive Security Experienced Penetration Tester) — advanced evasion techniques and breaching defenses. Covers AV/EDR evasion, AMSI/AppLocker/CLM bypass, process injection & hollowing, custom C# shellcode runners, MSSQL linked servers, AD exploitation, delegation attacks, ADCS, and professional report writing.",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "oscp-methodology",
       "description": "OSCP (Offensive Security Certified Professional) — mindset, metodologi, dan strategi komprehensif untuk PEN-200/OSCP+ mencakup filsafat Try Harder, 3 attack vectors, enumeration framework, privilege escalation AD/Linux/Windows, dan reporting.",
       "files": [

@@ -249,6 +249,12 @@ If user asks for a full list, output the table summary and then ask which catego
 
 Always prioritize **practical, fixable advice** over academic theory.
 
+## Reference Documentation
+
+| File | Description |
+|------|-------------|
+| [payloads-cheatsheet.md](references/payloads-cheatsheet.md) | Comprehensive payload reference — vulnerable parameters, HTTP request examples, and bypass techniques for 12 OWASP categories |
+
 ## Referensi Lengkap
 
 ### Official OWASP Documentation

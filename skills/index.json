@@ -22,6 +22,13 @@
       ]
     },
     {
+      "name": "mitre-attack",
+      "description": "Panduan MITRE ATT&CK framework untuk memahami adversary tactics, techniques, dan prosedur dalam threat intelligence, detection engineering, dan defensive gap analysis.",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "nist-800-53",
       "description": "Panduan Security and Privacy Controls berdasarkan NIST SP 800-53 Rev 5 (Release 5.2.0) untuk pemilihan, implementasi, dan assessment kontrol keamanan dan privasi dalam Risk Management Framework.",
       "files": [

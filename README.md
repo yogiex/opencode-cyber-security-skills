@@ -11,16 +11,16 @@ Agent Skills are folders of instructions, scripts, and resources that agents can
 <!-- START:Available-Skills -->
 | Skill | Description |
 | ----- | ----------- |
-| [devsecops-mindset](./skills/devsecops-mindset) | Panduan pola pikir dan mindset DevSecOps untuk mengintegrasikan keamanan dala... |
-| [incident-response-plan](./skills/incident-response-plan) | Panduan incident response non-teknis untuk organisasi: persiapan, deteksi, an... |
-| [owasp-top10-2025](./skills/owasp-top10-2025) | Complete reference for OWASP Top 10 2025 web application security risks. Use ... |
-| [ptes-standard](./skills/ptes-standard) | Penetration Testing Execution Standard (PTES) - comprehensive guide for condu... |
-| [risk-management-framework](./skills/risk-management-framework) | Panduan NIST Risk Management Framework (SP 800-37) untuk mengelola risiko kea... |
-| [security-documentation](./skills/security-documentation) | Membuat laporan pengujian keamanan dalam format LaTeX dan mengompilasi ke PDF... |
-| [soc-analyst](./skills/soc-analyst) | Pola pikir dan pendekatan untuk Security Analyst dan SOC Analyst dalam mentri... |
-| [threat-modeling](./skills/threat-modeling) | Panduan threat modeling untuk mengidentifikasi, menganalisis, dan memitigasi ... |
-| [web-app-scan](./skills/web-app-scan) | Melakukan vulnerability assessment pada web application secara sistematis sep... |
-| [web-recon-simple](./skills/web-reconnaissance) | Recon web sederhana: chunk file, network tab, API endpoint, localstorage/toke... |
+| [devsecops-mindset](./skills/devsecops-mindset) | Panduan pola pikir dan mindset DevSecOps untuk mengintegrasikan keamanan dalam siklus pengembangan secara berkelanjutan, tanpa fokus pada alat/tools tertentu. |
+| [incident-response-plan](./skills/incident-response-plan) | Panduan incident response non-teknis untuk organisasi: persiapan, deteksi, analisis, containment, eradikasi, recovery, dan pembelajaran. Cocok untuk tim manajemen, legal, PR, dan koordinator insiden. |
+| [owasp-top10-2025](./skills/owasp-top10-2025) | Complete reference for OWASP Top 10 2025 web application security risks. Use when conducting threat modeling, code review, penetration testing, secure design, or when user asks about any AXX:2025 category, vulnerability explanations, or mitigation strategies. |
+| [ptes-standard](./skills/ptes-standard) | Penetration Testing Execution Standard (PTES) - comprehensive guide for conducting penetration tests across 7 phases: pre-engagement, intelligence gathering, threat modeling, vulnerability analysis, exploitation, post-exploitation, and reporting. Use when planning or executing penetration tests, security assessments, or when user asks about PTES methodology. |
+| [risk-management-framework](./skills/risk-management-framework) | Panduan NIST Risk Management Framework (SP 800-37) untuk mengelola risiko keamanan dan privasi secara terstruktur, fleksibel, dan berkelanjutan di seluruh siklus hidup sistem |
+| [security-documentation](./skills/security-documentation) | Membuat laporan pengujian keamanan dalam format LaTeX dan mengompilasi ke PDF, mengikuti template docs/laporan.txt |
+| [soc-analyst](./skills/soc-analyst) | Pola pikir dan pendekatan untuk Security Analyst dan SOC Analyst dalam mentriage, menyelidiki, merespon insiden, dan berkomunikasi secara efektif. |
+| [threat-modeling](./skills/threat-modeling) | Panduan threat modeling untuk mengidentifikasi, menganalisis, dan memitigasi risiko keamanan pada sistem atau aplikasi secara general dan non-teknis |
+| [web-app-scan](./skills/web-app-scan) | Melakukan vulnerability assessment pada web application secara sistematis seperti tools Nessus (deteksi kerentanan umum: SQLi, XSS, config leak, header keamanan, SSL/TLS, dsb) dengan pendekatan terstruktur dan non-teknis. |
+| [web-recon-simple](./skills/web-reconnaissance) | Recon web sederhana: chunk file, network tab, API endpoint, localstorage/token/session, teknologi. |
 <!-- END:Available-Skills -->
 
 ## Installation

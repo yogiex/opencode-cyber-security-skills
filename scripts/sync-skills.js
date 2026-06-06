@@ -153,7 +153,7 @@ async function discoverSkills() {
   return skills.sort((a, b) => a.name.localeCompare(b.name));
 }
 
-function truncate(str, maxLength = 80) {
+function truncate(str, maxLength = 400) {
   if (str.length <= maxLength) {
     return str;
   }

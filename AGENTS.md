@@ -61,12 +61,15 @@ Source documentation often uses JSX/HTML components. Strip these when converting
 name: skill-name
 description: One-line description used for discovery and matching.
 license: MIT
+compatibility: opencode
 metadata:
-  author: "Author Name"
-  version: "1.0.0"
-  keywords: "ai, agent, skill, keyword1, keyword2"
+  audience: target-audience
+  workflow: reporting
+  source: reference-standard
 ---
 ```
+
+Common optional `metadata` fields seen in practice: `audience`, `workflow`, `source`, `year`, `standard`, `approach`, `tool-analogy`, `version`.
 
 The SKILL.md should include:
 - Quick start workflow

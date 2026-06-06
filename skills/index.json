@@ -1,6 +1,13 @@
 {
   "skills": [
     {
+      "name": "incident-response-plan",
+      "description": "Panduan incident response non-teknis untuk organisasi: persiapan, deteksi, analisis, containment, eradikasi, recovery, dan pembelajaran. Cocok untuk tim manajemen, legal, PR, dan koordinator insiden.",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
       "name": "owasp-top10-2025",
       "description": "Complete reference for OWASP Top 10 2025 web application security risks. Use when conducting threat modeling, code review, penetration testing, secure design, or when user asks about any AXX:2025 category, vulnerability explanations, or mitigation strategies.",
       "files": [
@@ -10,6 +17,41 @@
     {
       "name": "ptes-standard",
       "description": "Penetration Testing Execution Standard (PTES) - comprehensive guide for conducting penetration tests across 7 phases: pre-engagement, intelligence gathering, threat modeling, vulnerability analysis, exploitation, post-exploitation, and reporting. Use when planning or executing penetration tests, security assessments, or when user asks about PTES methodology.",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "risk-management-framework",
+      "description": "Panduan NIST Risk Management Framework (SP 800-37) untuk mengelola risiko keamanan dan privasi secara terstruktur, fleksibel, dan berkelanjutan di seluruh siklus hidup sistem",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "security-documentation",
+      "description": "Membuat laporan pengujian keamanan dalam format LaTeX dan mengompilasi ke PDF, mengikuti template docs/laporan.txt",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "threat-modeling",
+      "description": "Panduan threat modeling untuk mengidentifikasi, menganalisis, dan memitigasi risiko keamanan pada sistem atau aplikasi secara general dan non-teknis",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "web-app-scan",
+      "description": "Melakukan vulnerability assessment pada web application secara sistematis seperti tools Nessus (deteksi kerentanan umum: SQLi, XSS, config leak, header keamanan, SSL/TLS, dsb) dengan pendekatan terstruktur dan non-teknis.",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "web-reconnaissance",
+      "description": "Recon web sederhana: chunk file, network tab, API endpoint, localstorage/token/session, teknologi.",
       "files": [
         "SKILL.md"
       ]

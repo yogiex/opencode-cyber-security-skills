@@ -16,6 +16,14 @@
   ],
   "skills": [
     {
+      "name": "incident-response-plan",
+      "description": "Panduan incident response non-teknis untuk organisasi: persiapan, deteksi, analisis, containment, eradikasi, recovery, dan pembelajaran. Cocok untuk tim manajemen, legal, PR, dan koordinator insiden.",
+      "version": "1.0.0",
+      "source": "./skills/incident-response-plan",
+      "license": "MIT",
+      "keywords": []
+    },
+    {
       "name": "owasp-top10-2025",
       "description": "Complete reference for OWASP Top 10 2025 web application security risks. Use when conducting threat modeling, code review, penetration testing, secure design, or when user asks about any AXX:2025 category, vulnerability explanations, or mitigation strategies.",
       "version": "1.0.0",
@@ -26,14 +34,50 @@
     {
       "name": "ptes-standard",
       "description": "Penetration Testing Execution Standard (PTES) - comprehensive guide for conducting penetration tests across 7 phases: pre-engagement, intelligence gathering, threat modeling, vulnerability analysis, exploitation, post-exploitation, and reporting. Use when planning or executing penetration tests, security assessments, or when user asks about PTES methodology.",
-      "version": "1.0.0",
+      "version": "1.0",
       "source": "./skills/ptes-standard",
       "license": "MIT",
-      "keywords": [
-        "ai",
-        "agent",
-        "skill"
-      ]
+      "keywords": []
+    },
+    {
+      "name": "risk-management-framework",
+      "description": "Panduan NIST Risk Management Framework (SP 800-37) untuk mengelola risiko keamanan dan privasi secara terstruktur, fleksibel, dan berkelanjutan di seluruh siklus hidup sistem",
+      "version": "1.0.0",
+      "source": "./skills/risk-management-framework",
+      "license": "MIT",
+      "keywords": []
+    },
+    {
+      "name": "security-documentation",
+      "description": "Membuat laporan pengujian keamanan dalam format LaTeX dan mengompilasi ke PDF, mengikuti template docs/laporan.txt",
+      "version": "1.0.0",
+      "source": "./skills/security-documentation",
+      "license": "MIT",
+      "keywords": []
+    },
+    {
+      "name": "threat-modeling",
+      "description": "Panduan threat modeling untuk mengidentifikasi, menganalisis, dan memitigasi risiko keamanan pada sistem atau aplikasi secara general dan non-teknis",
+      "version": "1.0.0",
+      "source": "./skills/threat-modeling",
+      "license": "MIT",
+      "keywords": []
+    },
+    {
+      "name": "web-app-scan",
+      "description": "Melakukan vulnerability assessment pada web application secara sistematis seperti tools Nessus (deteksi kerentanan umum: SQLi, XSS, config leak, header keamanan, SSL/TLS, dsb) dengan pendekatan terstruktur dan non-teknis.",
+      "version": "1.0.0",
+      "source": "./skills/web-app-scan",
+      "license": "MIT",
+      "keywords": []
+    },
+    {
+      "name": "web-recon-simple",
+      "description": "Recon web sederhana: chunk file, network tab, API endpoint, localstorage/token/session, teknologi.",
+      "version": "1.0.0",
+      "source": "./skills/web-reconnaissance",
+      "license": "MIT",
+      "keywords": []
     }
   ]
 }

@@ -9,16 +9,16 @@ Agent Skills are folders of instructions, scripts, and resources that agents can
 ## Available Skills
 
 <!-- START:Available-Skills -->
-
-| Skill                                                           | Description                                                                                                                                                                                                                                              |
-| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [incident-response-plan](./skills/incident-response-plan)       | Panduan incident response non-teknis untuk organisasi: persiapan, deteksi, analisis, containment, eradikasi, recovery, dan pembelajaran. Cocok untuk tim manajemen, legal, PR, dan koordinator insiden.                                                  |
-| [owasp-top10-2025](./skills/owasp-top10-2025)                   | Complete reference for OWASP Top 10 2025 web application security risks. Use when discussing web app security, vulnerability assessments, or when user asks about OWASP, A01-A10, or specific risks like broken access control or supply chain failures. |
-| [ptes-standard](./skills/ptes-standard)                         | Penetration Testing Execution Standard (PTES) - comprehensive guide for conducting penetration tests, from pre-engagement to reporting.                                                                                                                  |
-| [risk-management-framework](./skills/risk-management-framework) | Panduan NIST Risk Management Framework (SP 800-37) untuk mengelola risiko keamanan dan privasi secara terstruktur, fleksibel, dan berkelanjutan di seluruh siklus hidup sistem.                                                                          |
-| [threat-modeling](./skills/threat-modeling)                     | Identifikasi ancaman pada desain sistem menggunakan STRIDE, DFD, dan prioritisasi risiko. Cocok untuk arsitek keamanan, developer lead, dan product manager.                                                                                             |
-| [web-reconnaissance](./skills/web-reconnaissance)               | Reconnaissance pada web app: chunk file, network tab, API endpoint mapping, localstorage/token/session, identifikasi teknologi. Cocok untuk security analyst dan penetration tester.                                                                     |
-
+| Skill | Description |
+| ----- | ----------- |
+| [incident-response-plan](./skills/incident-response-plan) | Panduan incident response non-teknis untuk organisasi: persiapan, deteksi, an... |
+| [owasp-top10-2025](./skills/owasp-top10-2025) | Complete reference for OWASP Top 10 2025 web application security risks. Use ... |
+| [ptes-standard](./skills/ptes-standard) | Penetration Testing Execution Standard (PTES) - comprehensive guide for condu... |
+| [risk-management-framework](./skills/risk-management-framework) | Panduan NIST Risk Management Framework (SP 800-37) untuk mengelola risiko kea... |
+| [security-documentation](./skills/security-documentation) | Membuat laporan pengujian keamanan dalam format LaTeX dan mengompilasi ke PDF... |
+| [threat-modeling](./skills/threat-modeling) | Panduan threat modeling untuk mengidentifikasi, menganalisis, dan memitigasi ... |
+| [web-app-scan](./skills/web-app-scan) | Melakukan vulnerability assessment pada web application secara sistematis sep... |
+| [web-recon-simple](./skills/web-reconnaissance) | Recon web sederhana: chunk file, network tab, API endpoint, localstorage/toke... |
 <!-- END:Available-Skills -->
 
 ## Installation

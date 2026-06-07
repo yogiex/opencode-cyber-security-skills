@@ -25,6 +25,7 @@ Agent Skills adalah folder berisi instruksi, skrip, dan sumber daya yang dapat d
 
 | Skill | Deskripsi |
 | ----- | --------- |
+| [ec-ecih](./skills/ec-ecih) | EC-Council ECIH (Certified Incident Handler) v3 — incident handler mindset, IR lifecycle (NIST 800-61 + ECIH 9-stage IH&R), decision frameworks per incident type, forensic readiness, containment strategies, eradication methodology, recovery planning, post-incident lessons learned, dan krisis communication. Berbasis ECIH 212-89 v3 curriculum. |
 | [incident-response-plan](./skills/incident-response-plan) | Panduan incident response non-teknis untuk organisasi: persiapan, deteksi, analisis, containment, eradikasi, recovery, dan pembelajaran. Cocok untuk tim manajemen, legal, PR, dan koordinator insiden. |
 | [log-management-nist-800-92](./skills/log-management-nist-800-92) | Panduan log management berdasarkan NIST SP 800-92 untuk perencanaan, pengumpulan, penyimpanan, analisis, dan retensi log keamanan secara terstruktur. |
 | [mitre-attack](./skills/mitre-attack) | Panduan MITRE ATT&CK framework untuk memahami adversary tactics, techniques, dan prosedur dalam threat intelligence, detection engineering, dan defensive gap analysis. |
@@ -124,6 +125,7 @@ Script ini akan membuat struktur skill dan otomatis memperbarui manifest.json, p
 | [oscp-methodology](./skills/oscp-methodology) | OffSec PEN-200, OSCP+ Exam Guide | https://help.offsec.com/hc/en-us/articles/360040165632-OSCP-Exam-Guide |
 | [devsecops-mindset](./skills/devsecops-mindset) | DevSecOps Principles | - |
 | [lf-cks](./skills/lf-cks) | Linux Foundation CKS, CNCF CKS Curriculum, CIS Kubernetes Benchmark | https://training.linuxfoundation.org/certification/certified-kubernetes-security-specialist/ |
+| [ec-ecih](./skills/ec-ecih) | EC-Council ECIH v3 (212-89), NIST SP 800-61, ISO 27035 | https://www.eccouncil.org/train-certify/certified-incident-handler-ecih/ |
 | [incident-response-plan](./skills/incident-response-plan) | NIST SP 800-61, SANS PICERL | - |
 | [log-management-nist-800-92](./skills/log-management-nist-800-92) | NIST SP 800-92 | https://csrc.nist.gov/pubs/sp/800/92 |
 | [mitre-attack](./skills/mitre-attack) | MITRE ATT&CK | https://attack.mitre.org |

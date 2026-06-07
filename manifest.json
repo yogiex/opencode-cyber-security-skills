@@ -40,6 +40,14 @@
       "keywords": []
     },
     {
+      "name": "ec-ecih",
+      "description": "EC-Council ECIH (Certified Incident Handler) v3 — incident handler mindset, IR lifecycle framework (NIST 800-61 + ECIH 9-stage IH&R), decision frameworks per incident type, forensic readiness, containment strategies, eradication methodology, recovery planning, post-incident lessons learned, dan komunikasi krisis. Berbasis ECIH 212-89 v3 curriculum.",
+      "version": "1.0.0",
+      "source": "./skills/ec-ecih",
+      "license": "MIT",
+      "keywords": []
+    },
+    {
       "name": "incident-response-plan",
       "description": "Panduan incident response non-teknis untuk organisasi: persiapan, deteksi, analisis, containment, eradikasi, recovery, dan pembelajaran. Cocok untuk tim manajemen, legal, PR, dan koordinator insiden.",
       "version": "1.0.0",

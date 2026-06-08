@@ -145,7 +145,7 @@
     },
     {
       "name": "ptes-standard",
-      "description": "Penetration Testing Execution Standard (PTES) - comprehensive guide for conducting penetration tests across 7 phases: pre-engagement, intelligence gathering, threat modeling, vulnerability analysis, exploitation, post-exploitation, and reporting. Use when planning or executing penetration tests, security assessments, or when user asks about PTES methodology.",
+      "description": "Penetration Testing Execution Standard (PTES) — comprehensive guide for conducting penetration tests across 7 phases: pre-engagement, intelligence gathering, threat modeling, vulnerability analysis, exploitation, post-exploitation, and reporting. Use when planning or executing penetration tests, security assessments, or when user asks about PTES methodology.",
       "version": "2.0",
       "source": "./skills/ptes-standard",
       "license": "MIT",

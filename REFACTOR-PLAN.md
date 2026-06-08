@@ -227,32 +227,9 @@ Setelah refactor, **semua** checklist ini harus terpenuhi:
 
 ---
 
-### 8. ptes-standard (785 lines)
+### 8. ptes-standard (785 → 103 lines) ✅
 
-**Current structure:**
-- 7 phases overview + detailed per phase (lines 23-247)
-- Response Style (lines 248-263)
-- Phase Deep-Dives (lines 264-401)
-- Tool-by-Phase Matrix (lines 402-439)
-- Standards Comparison (lines 440-464)
-- Modern Infrastructure Adaptations (lines 465-514)
-- Legal & Compliance Notes (lines 515-558)
-- Reporting Templates (lines 559-633)
-
-**Proposed reference files:**
-| File | Content |
-|------|---------|
-| `references/phase1-pre-engagement.md` | Scoping, ROE, legal agreements |
-| `references/phase2-intelligence.md` | OSINT, passive/active recon |
-| `references/phase3-threat-modeling.md` | Threat modeling methodologies |
-| `references/phase4-vuln-analysis.md` | Automated + manual vuln discovery |
-| `references/phase5-exploitation.md` | Exploitation methodologies |
-| `references/phase6-post-exploitation.md` | Persistence, pivoting, exfil |
-| `references/phase7-reporting.md` | Reporting standards, risk ratings |
-| `references/modern-infra.md` | Cloud, container, API pentesting adaptations |
-| `references/legal-compliance.md` | Legal notes, compliance requirements |
-
-**Assets:** `assets/reporting-templates.md`
+**Result:** SKILL.md 785→103 lines. 11 references (`pre-engagement`, `intelligence-gathering`, `threat-modeling`, `vulnerability-analysis`, `exploitation`, `post-exploitation`, `reporting`, `phase-deep-dives`, `modern-infra`, `legal-compliance`, `referensi`). Committed.
 
 ---
 
@@ -342,7 +319,7 @@ Setelah refactor, **semua** checklist ini harus terpenuhi:
 - [x] **05 — offsec-soc-200** → all 8 gates pass, README updated, committed
 - [x] **06 — oscp-methodology** → all 8 gates pass, README updated, committed
 - [x] **07 — cpent** → all 8 gates pass, README updated, committed
-- [ ] **08 — ptes-standard** → all 8 gates pass, README updated, committed
+- [x] **08 — ptes-standard** → all 8 gates pass, README updated, committed
 - [ ] **09 — threat-intelligence** → all 8 gates pass, README updated, committed
 - [ ] **10 — comptia-cysa** → all 8 gates pass, README updated, committed
 - [ ] **11 — waf-evasion-methodology** → all 8 gates pass, README updated, committed

@@ -1,0 +1,43 @@
+// ============================================================
+// OSDA Common Detection Queries — KQL (Kibana Query Language)
+// ============================================================
+
+// --- Authentication Events ---
+
+// All logons (success + failure)
+event.code : (4624 OR 4625)
+
+// Failed logons from specific IP
+event.code : 4625 AND source.ip : "192.168.1.100"
+
+// RDP logons (lateral movement)
+event.code : 4624 AND winlog.event_data.LogonType : 10
+
+// --- Process & Service Events ---
+
+// Service installs
+event.code : (7045 OR 4697)
+
+// Process with encoded PowerShell
+process.command_line : *-enc*
+
+// All PowerShell script block logs
+event.code : 4104
+
+// Scheduled tasks created
+event.code : 4698
+
+// --- Registry & Persistence ---
+
+// Registry persistence detection
+event.code : 13 AND registry.path : *Run*
+
+// --- Network Events ---
+
+// Network connections from unknown processes
+event.code : 3 AND NOT process.name : "svchost.exe"
+
+// --- Kerberos Events ---
+
+// Kerberoasting: multiple service tickets with RC4
+event.code : 4769 AND winlog.event_data.TicketEncryptionType : 0x17

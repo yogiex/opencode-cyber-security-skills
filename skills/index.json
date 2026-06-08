@@ -25,7 +25,14 @@
       "name": "ec-ecih",
       "description": "EC-Council ECIH (Certified Incident Handler) v3 — incident handler mindset, IR lifecycle framework (NIST 800-61 + ECIH 9-stage IH&R), decision frameworks per incident type, forensic readiness, containment strategies, eradication methodology, recovery planning, post-incident lessons learned, dan komunikasi krisis. Berbasis ECIH 212-89 v3 curriculum.",
       "files": [
-        "SKILL.md"
+        "SKILL.md",
+        "references/containment-evidence.md",
+        "references/detection-triage.md",
+        "references/eradication-recovery.md",
+        "references/ir-lifecycle.md",
+        "references/legal-compliance.md",
+        "references/playbooks.md",
+        "references/post-incident.md"
       ]
     },
     {
@@ -67,7 +74,16 @@
       "name": "offsec-ir-200",
       "description": "OffSec IR-200 / OSIR (OffSec Incident Responder) — foundational incident response covering full IR lifecycle (NIST 800-61r2), Splunk SIEM analysis with SPL, digital forensics (Autopsy, Volatility 3, FTK Imager), malware triage with YARA, containment/eradication/recovery strategies, incident communication plans, and post-mortem reporting.",
       "files": [
-        "SKILL.md"
+        "SKILL.md",
+        "assets/communication-template.md",
+        "references/containment-eradication-recovery.md",
+        "references/digital-forensics.md",
+        "references/ir-lifecycle.md",
+        "references/malware-triage.md",
+        "references/modules-overview.md",
+        "references/reporting.md",
+        "references/splunk-siem.md",
+        "scripts/yara-rules.yara"
       ]
     },
     {
@@ -81,7 +97,16 @@
       "name": "offsec-soc-200",
       "description": "OffSec SOC-200 / OSDA (OffSec Defense Analyst) — security operations and defensive analysis. Covers SOC operations, Windows & Linux endpoint detection, SIEM analysis with ELK/Kibana/KQL, attacker methodology (Kill Chain, MITRE ATT&CK), Windows Event Log & Sysmon analysis, Active Directory threat detection, network detections, and incident investigation.",
       "files": [
-        "SKILL.md"
+        "SKILL.md",
+        "assets/pre-exam-checklist.md",
+        "assets/report-template.md",
+        "references/challenge-labs.md",
+        "references/elk-kql.md",
+        "references/modules-overview.md",
+        "references/overview-exam.md",
+        "references/referensi.md",
+        "references/windows-event-logs.md",
+        "scripts/common-detection-queries.kql"
       ]
     },
     {
@@ -95,7 +120,13 @@
       "name": "offsec-web-300",
       "description": "OffSec WEB-300 / OSWE (Offensive Security Web Expert) — advanced web application security assessment covering white-box testing methodology, source code review in Java, C#, PHP, Python, and JavaScript, custom exploit development for .NET deserialization, PHP type juggling, SQL injection, SSTI, SSRF, prototype pollution, authentication bypass, XXE, OS command injection, and professional exploit scripting in Python.",
       "files": [
-        "SKILL.md"
+        "SKILL.md",
+        "references/dotnet-deserialization.md",
+        "references/injection-attacks.md",
+        "references/modules-overview.md",
+        "references/php-auth-bypass.md",
+        "references/prototype-pollution.md",
+        "references/ssrf-xxe.md"
       ]
     },
     {

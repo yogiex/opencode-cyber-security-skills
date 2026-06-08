@@ -46,7 +46,16 @@
       "name": "lf-cks",
       "description": "Certified Kubernetes Security Specialist (CKS) — Kubernetes security mindset, defense-in-depth framework, cluster isolation models, workload segmentation, supply chain trust, authentication & authorization philosophy, network security architecture, runtime protection, compliance posture, dan decision framework untuk securing container platforms. Berbasis CNCF CKS curriculum dan CIS Kubernetes Benchmark.",
       "files": [
-        "SKILL.md"
+        "SKILL.md",
+        "references/auth-authz.md",
+        "references/cluster-isolation.md",
+        "references/compliance-hardening.md",
+        "references/data-security.md",
+        "references/network-security.md",
+        "references/referensi.md",
+        "references/runtime-defense.md",
+        "references/supply-chain.md",
+        "references/workload-security.md"
       ]
     },
     {

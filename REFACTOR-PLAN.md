@@ -401,7 +401,7 @@ Setelah refactor, **semua** checklist ini harus terpenuhi:
 
 ## Quality Gates Checklist (global)
 
-- [ ] **01 — offsec-th-200** → all 8 gates pass, README updated, committed
+- [x] **01 — offsec-th-200** → all 8 gates pass, README updated, committed
 - [ ] **02 — lf-cks** → all 8 gates pass, README updated, committed
 - [x] **03 — offsec-ir-200** → all 8 gates pass, README updated, committed
 - [ ] **04 — offsec-pen-300** → all 8 gates pass, README updated, committed

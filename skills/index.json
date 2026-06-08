@@ -113,7 +113,17 @@
       "name": "offsec-th-200",
       "description": "OffSec TH-200 / OSTH (OffSec Threat Hunter) — foundational threat hunting covering proactive threat detection, behavioral analysis, threat actor profiling, Splunk SIEM analysis with SPL, CrowdStrike Falcon endpoint hunting, Suricata IDS/IPS, hypothesis-driven hunting methodologies (PEAK, SEARCH), MITRE ATT&CK mapping, ransomware & APT case studies, cyber threat intelligence integration, and professional hunt reporting.",
       "files": [
-        "SKILL.md"
+        "SKILL.md",
+        "assets/report-template.md",
+        "references/case-studies.md",
+        "references/crowdstrike-cql.md",
+        "references/endpoint-hunting.md",
+        "references/modules-overview.md",
+        "references/network-hunting.md",
+        "references/splunk-hunting.md",
+        "references/th-mindset.md",
+        "references/ti-integration.md",
+        "scripts/spl-queries.spl"
       ]
     },
     {

@@ -1,0 +1,185 @@
+/* 
+ * OSTH SPL Query Library — Threat Hunting
+ * Copy-paste ready queries for Phase 1 Splunk analysis
+ * Adjust time range and field names as needed for exam environment
+ */
+
+/* ========================================== */
+/* 1. INITIAL ACCESS                         */
+/* ========================================== */
+
+/* Phishing — Suspicious Attachment (Office → EXE) */
+index=windows sourcetype=WinEventLog:Security EventCode=4688
+| search CommandLine="*.exe*" ParentProcessName="*OUTLOOK.EXE*"
+| table _time, ComputerName, Account, CommandLine
+
+/* Web Shell Detection (IIS) */
+index=iis sourcetype=WinEventLog:IIS
+| search cs_uri_stem="*.aspx*" OR cs_uri_stem="*.php*" AND cs_method="POST"
+| stats count by cs_uri_stem, c_ip, cs_username
+| sort - count
+
+/* RDP Brute Force */
+index=windows sourcetype=WinEventLog:Security EventCode=4625 LogonType=10
+| stats count as FailedCount, dc(Account) as UniqueAccounts by src_ip, ComputerName
+| where FailedCount > 20
+| sort - FailedCount
+
+/* ========================================== */
+/* 2. EXECUTION                               */
+/* ========================================== */
+
+/* PowerShell Encoded Command */
+index=windows sourcetype=WinEventLog:Security EventCode=4688
+| search CommandLine="*-enc*" OR CommandLine="*-EncodedCommand*"
+| table _time, ComputerName, Account, CommandLine, ParentProcessName
+
+/* PowerShell Script Block Logging (4104) */
+index=windows sourcetype="WinEventLog:Microsoft-Windows-PowerShell/Operational" EventCode=4104
+| search ScriptBlockText="*DownloadString*" OR ScriptBlockText="*IEX*" OR ScriptBlockText="*Invoke-*"
+| table _time, ComputerName, Account, ScriptBlockText
+
+/* Sysmon Process Creation — Suspicious */
+index=sysmon EventCode=1
+| search CommandLine="*mimikatz*" OR CommandLine="*Invoke-*" OR CommandLine="*-enc*"
+| table _time, ComputerName, User, CommandLine, ParentCommandLine
+
+/* ========================================== */
+/* 3. PERSISTENCE                              */
+/* ========================================== */
+
+/* Scheduled Task Creation (4698) */
+index=windows sourcetype=WinEventLog:Security EventCode=4698
+| search NOT TaskName="*Microsoft*"
+| table _time, ComputerName, Account, TaskName, Command
+
+/* Service Installation (7045) */
+index=windows sourcetype=WinEventLog:System EventCode=7045
+| search ImagePath="*\\Users\\*" OR ImagePath="*\\Temp\\*"
+| table _time, ComputerName, ServiceName, ImagePath, Account
+
+/* Registry Run Key (Sysmon 13) */
+index=sysmon EventCode=13
+| search TargetObject="*\\CurrentVersion\\Run*"
+| table _time, ComputerName, User, TargetObject, Details
+
+/* ========================================== */
+/* 4. CREDENTIAL ACCESS                       */
+/* ========================================== */
+
+/* LSASS Access (Sysmon 10) — Credential Dumping */
+index=sysmon EventCode=10
+| search TargetImage="*\\lsass.exe"
+| where NOT match(SourceImage, "(?i)(svchost|MsMpEng|WerFault|taskmgr|csrss)")
+| table _time, ComputerName, SourceImage, SourceUser, GrantedAccess
+
+/* DCSync Detection (4662) */
+index=windows sourcetype=WinEventLog:Security EventCode=4662
+| search ObjectType="%19195a5b-6da0-11d0-afd3-00c04fd930c7" AND AccessMask="0x100"
+| table _time, ComputerName, Account, ObjectName
+
+/* ========================================== */
+/* 5. LATERAL MOVEMENT                        */
+/* ========================================== */
+
+/* Pass-the-Hash (4624 Type 3 + NTLM) */
+index=windows sourcetype=WinEventLog:Security EventCode=4624 LogonType=3
+| search LogonProcessName="NtLmSsp" AND AccountName!="ANONYMOUS LOGON$"
+| stats count by AccountName, ComputerName, WorkstationName, src_ip
+| sort - count
+
+/* PsExec */
+index=sysmon EventCode=1
+| search Image="*\\PSEXESVC.exe" OR ParentImage="*\\PsExec.exe"
+| table _time, ComputerName, User, Image, CommandLine
+
+/* WMI Remote Execution */
+index=sysmon EventCode=1
+| search ParentImage="*\\WmiPrvSE.exe" AND Image="*\\powershell.exe"
+| table _time, ComputerName, User, CommandLine
+
+/* ========================================== */
+/* 6. C2 DETECTION                            */
+/* ========================================== */
+
+/* Beaconing — Regular Intervals (Proxy) */
+index=proxy sourcetype=proxylogs
+| stats count, avg(eval(floor(_time/300)*300)) as bucket_avg by src_ip, dest_ip
+| where count > 100 AND count < 5000
+| eval regularity = round(bucket_avg, 0)
+
+/* DNS DGA Domains */
+index=dns sourcetype=dns
+| eval domain_len = len(query)
+| where domain_len > 25
+| stats count by query, src_ip
+| where count > 5
+
+/* Sysmon Network Connection — External (Event 3) */
+index=sysmon EventCode=3
+| search NOT DestIp=10.* AND NOT DestIp=192.168.* AND NOT DestIp=172.1[6-9].* AND NOT DestIp=172.2[0-9].* AND NOT DestIp=172.3[0-1].*
+| stats count by ComputerName, DestIp, DestPort, Image
+| sort - count
+
+/* ========================================== */
+/* 7. EXFILTRATION                            */
+/* ========================================== */
+
+/* Large Data Transfer */
+index=proxy sourcetype=proxylogs
+| stats sum(bytes_out) as TotalBytes, max(bytes_out) as MaxBytes by src_ip, dest_ip
+| where TotalBytes > 50000000
+| eval TotalMB = round(TotalBytes/1048576, 2)
+| sort - TotalBytes
+
+/* DNS TXT Query Exfiltration */
+index=dns sourcetype=dns query_type=TXT
+| stats count by query, src_ip
+| where len(query) > 50
+| sort - count
+
+/* ========================================== */
+/* 8. ADVANCED HUNTING                        */
+/* ========================================== */
+
+/* Unusual Parent-Child Processes */
+index=sysmon EventCode=1
+| where match(ParentImage, "(?i)(winword|excel|powerpnt|outlook|acrord32|firefox|chrome)")
+  AND match(Image, "(?i)(powershell|wscript|cscript|cmd|mshta|regsvr32)")
+| table _time, ComputerName, User, ParentImage, Image, CommandLine
+
+/* Executable Downloaded to User Space */
+index=sysmon EventCode=11
+| search TargetFilename="*\\Users\\*\\*.exe"
+| where TargetFilename!="*OneDrive*"
+| table _time, ComputerName, User, TargetFilename, Image
+
+/* Account Created then Added to Admin Group */
+index=windows sourcetype=WinEventLog:Security
+| search EventCode=4720 OR EventCode=4732
+| transaction AccountName maxpause=1h
+| where mvcount(EventCode) > 1
+| table _time, AccountName, TargetAccountName, EventCode
+
+/* Kerberoasting */
+index=windows sourcetype=WinEventLog:Security EventCode=4769
+| search TicketEncryptionType=0x17 ServiceName!="*$"
+| stats count by AccountName, ServiceName, ClientAddress
+| where count > 5
+| sort - count
+
+/* Time-Based Anomaly — Logons Outside Business Hours */
+index=windows sourcetype=WinEventLog:Security EventCode=4624
+| eval hour = strftime(_time, "%H")
+| where hour < 6 OR hour > 18
+| stats count by AccountName, ComputerName, src_ip
+| where count > 10
+| sort - count
+
+/* New Process Followed by Network Connection */
+index=sysmon
+| search EventCode=1 OR EventCode=3
+| sort _time
+| transaction ComputerName, Image maxpause=1m
+| where mvcount(EventCode) > 1 AND mvfind(EventCode, "1")=0 AND mvfind(EventCode, "3")=1
+| table _time, ComputerName, Image, CommandLine, DestIp, DestPort

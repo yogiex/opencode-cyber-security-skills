@@ -215,37 +215,9 @@ Setelah refactor, **semua** checklist ini harus terpenuhi:
 
 ## Priority 2 — Medium Certification Skills (2.6K+ lines, ~45 min each)
 
-### 6. oscp-methodology (990 lines)
+### 6. oscp-methodology (990 → 123 lines) ✅
 
-**Current structure:**
-- Filosofi OSCP (lines 35-63)
-- OSCP+ Exam Architecture (lines 64-103)
-- 3 Attack Vectors methodology (lines 104-156)
-- Recon & Enumeration Framework (lines 157-201)
-- Web Application Attacks (lines 202-256)
-- Buffer Overflow Methodology (lines 257-286)
-- Linux PE (lines 287-382)
-- Windows PE (lines 383-460)
-- AD — Full Attack Chain (lines 461-567)
-- Pivoting & Lateral Movement (lines 568-638)
-- Reporting (lines 639-676)
-- Exam Strategy (lines 677-717)
-- Password Cracking (lines 718-760)
-
-**Proposed reference files:**
-| File | Content |
-|------|---------|
-| `references/enumeration-framework.md` | Port scanning, service enumeration, version detection, searchsploit |
-| `references/web-attacks.md` | SQLi, XSS, LFI/RFI, file upload, shenanigans |
-| `references/buffer-overflow.md` | BoF methodology for OSCP (x86) |
-| `references/linux-pe.md` | Linux PE methodology, SUID, cron, kernel exploits |
-| `references/windows-pe.md` | Windows PE methodology, service misconfigs, kernel |
-| `references/ad-attack-chain.md` | AD full chain: enum → kerberoast → AS-REP → DCSync → ACL |
-| `references/pivoting.md` | SSH tunneling, chisel, ligolo, port forwarding |
-| `references/password-cracking.md` | Hashcat rules, wordlists, rule-based attacks |
-
-**Assets:** `assets/report-template.md`, `assets/exam-checklist.md`
-**Special:** Golden rules tetap di SKILL.md gotchas.
+**Result:** SKILL.md 990→123 lines. 11 references (`exam-architecture`, `enumeration-framework`, `web-attacks`, `buffer-overflow`, `linux-privesc`, `windows-privesc`, `ad-attack-chain`, `pivoting`, `password-cracking`, `exam-strategy`, `referensi`). Committed.
 
 ---
 
@@ -386,7 +358,7 @@ Setelah refactor, **semua** checklist ini harus terpenuhi:
 - [x] **03 — offsec-ir-200** → all 8 gates pass, README updated, committed
 - [x] **04 — offsec-pen-300** → all 8 gates pass, README updated, committed
 - [x] **05 — offsec-soc-200** → all 8 gates pass, README updated, committed
-- [ ] **06 — oscp-methodology** → all 8 gates pass, README updated, committed
+- [x] **06 — oscp-methodology** → all 8 gates pass, README updated, committed
 - [ ] **07 — cpent** → all 8 gates pass, README updated, committed
 - [ ] **08 — ptes-standard** → all 8 gates pass, README updated, committed
 - [ ] **09 — threat-intelligence** → all 8 gates pass, README updated, committed

@@ -163,7 +163,18 @@
       "name": "oscp-methodology",
       "description": "OSCP (Offensive Security Certified Professional) — mindset, metodologi, dan strategi komprehensif untuk PEN-200/OSCP+ mencakup filsafat Try Harder, 3 attack vectors, enumeration framework, privilege escalation AD/Linux/Windows, dan reporting.",
       "files": [
-        "SKILL.md"
+        "SKILL.md",
+        "references/ad-attack-chain.md",
+        "references/buffer-overflow.md",
+        "references/enumeration-framework.md",
+        "references/exam-architecture.md",
+        "references/exam-strategy.md",
+        "references/linux-privesc.md",
+        "references/password-cracking.md",
+        "references/pivoting.md",
+        "references/referensi.md",
+        "references/web-attacks.md",
+        "references/windows-privesc.md"
       ]
     },
     {

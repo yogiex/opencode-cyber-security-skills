@@ -11,7 +11,18 @@
       "name": "cpent",
       "description": "EC-Council CPENT (Certified Penetration Testing Professional) — mindset, metodologi, dan strategi komprehensif untuk CPENT exam mencakup 14 modul inti, binary exploitation 32/64-bit, IoT/OT/SCADA, double pivoting, report writing, dan LPT Master pathway.",
       "files": [
-        "SKILL.md"
+        "SKILL.md",
+        "references/binary-exploitation.md",
+        "references/exam-structure.md",
+        "references/exam-zones.md",
+        "references/linux-attacks.md",
+        "references/modules-overview.md",
+        "references/pivoting-report.md",
+        "references/referensi.md",
+        "references/tools-matrix.md",
+        "references/web-exploitation.md",
+        "references/windows-attacks.md",
+        "references/wireless-iot-scada.md"
       ]
     },
     {

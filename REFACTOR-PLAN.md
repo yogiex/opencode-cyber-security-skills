@@ -221,27 +221,9 @@ Setelah refactor, **semua** checklist ini harus terpenuhi:
 
 ---
 
-### 7. cpent (878 lines)
+### 7. cpent (878 → 124 lines) ✅
 
-**Current structure:**
-- Overview & Exam Structure (lines 28-99)
-- CPENT Mindset (lines 100-128)
-- 14 Modul Inti (lines 129-532)
-- Exam Zone Deep-Dives (lines 533-603)
-- Tools Matrix (lines 604-655)
-- Report Writing (lines 656-746)
-
-**Proposed reference files:**
-| File | Content |
-|------|---------|
-| `references/binary-exploitation.md` | 32/64-bit BoF, ROP, shellcode development |
-| `references/iot-ot-scada.md` | IoT/OT/SCADA pentesting, protocols, access methods |
-| `references/pivoting-double.md` | Single & double pivoting, proxychains, sshuttle |
-| `references/exam-zones.md` | Exam zone deep-dives, scoring strategy |
-| `references/tools-matrix.md` | CPENT tools categorized by phase |
-| `references/report-writing.md` | Report structure, finding documentation, LPT Master requirements |
-
-**Assets:** `assets/report-template.md`
+**Result:** SKILL.md 878→124 lines. 11 references (`exam-structure`, `modules-overview`, `windows-attacks`, `linux-attacks`, `web-exploitation`, `binary-exploitation`, `wireless-iot-scada`, `pivoting-report`, `exam-zones`, `tools-matrix`, `referensi`). Committed.
 
 ---
 
@@ -359,7 +341,7 @@ Setelah refactor, **semua** checklist ini harus terpenuhi:
 - [x] **04 — offsec-pen-300** → all 8 gates pass, README updated, committed
 - [x] **05 — offsec-soc-200** → all 8 gates pass, README updated, committed
 - [x] **06 — oscp-methodology** → all 8 gates pass, README updated, committed
-- [ ] **07 — cpent** → all 8 gates pass, README updated, committed
+- [x] **07 — cpent** → all 8 gates pass, README updated, committed
 - [ ] **08 — ptes-standard** → all 8 gates pass, README updated, committed
 - [ ] **09 — threat-intelligence** → all 8 gates pass, README updated, committed
 - [ ] **10 — comptia-cysa** → all 8 gates pass, README updated, committed

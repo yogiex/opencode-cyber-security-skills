@@ -44,7 +44,7 @@
 | # | Skill | Lines | Est. | Status |
 |---|-------|-------|------|--------|
 | 6 | lf-cks (CKS) | 1,574 | ~60m | [ ] |
-| 7 | cpent | 878 | ~45m | [ ] |
+| 7 | cpent | 878 | ~45m | [x] |
 
 **Total:** 2,452 lines → target ~800 lines  
 **Est. time:** ~1 jam 45m  

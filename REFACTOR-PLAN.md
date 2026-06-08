@@ -182,29 +182,9 @@ Setelah refactor, **semua** checklist ini harus terpenuhi:
 
 ---
 
-### 4. offsec-pen-300 (1,253 lines) — OSEP
+### 4. offsec-pen-300 (1,253 → 147 lines) — OSEP ✅
 
-**Current structure:**
-- Overview & Exam Structure (lines 28-94)
-- OSEP Mindset (lines 95-140)
-- 16 Module Deep-Dive (lines 141-721) — **largest section**
-- Evasion Techniques Deep-Dive (lines 722-839)
-- C2 Framework Strategy (lines 840-917)
-- Challenge Labs & Exam Strategy (lines 918-1066)
-
-**Proposed reference files:**
-| File | Content |
-|------|---------|
-| `references/modules-overview.md` | 16 module case studies |
-| `references/av-edr-evasion.md` | AV/EDR evasion, AMSI bypass, AppLocker, CLM |
-| `references/process-injection.md` | Process injection, hollowing, reflective DLL, APC |
-| `references/shellcode-runners.md` | C# shellcode runners, payload encryption, sandbox evasion |
-| `references/mssql-attacks.md` | MSSQL linked servers, relay attacks, command execution |
-| `references/ad-exploitation.md` | AD delegation attacks, trusts, ADCS, forest trusts |
-| `references/c2-strategy.md` | Metasploit, Sliver, Mythic, traffic shaping |
-
-**Assets:** `assets/shellcode-runner.cs`, `assets/exam-checklist.md`
-**Scripts:** Exploit development helper scripts
+**Result:** SKILL.md 1,253→147 lines. 9 references (`modules-overview`, `av-edr-evasion`, `process-injection`, `shellcode-runners`, `mssql-attacks`, `ad-exploitation`, `c2-strategy`, `exam-strategy`, `referensi`), 1 asset (`exam-checklist.md`), 1 script (`payload-encoder.py`). Committed.
 
 ---
 
@@ -404,7 +384,7 @@ Setelah refactor, **semua** checklist ini harus terpenuhi:
 - [x] **01 — offsec-th-200** → all 8 gates pass, README updated, committed
 - [x] **02 — lf-cks** → all 8 gates pass, README updated, committed
 - [x] **03 — offsec-ir-200** → all 8 gates pass, README updated, committed
-- [ ] **04 — offsec-pen-300** → all 8 gates pass, README updated, committed
+- [x] **04 — offsec-pen-300** → all 8 gates pass, README updated, committed
 - [x] **05 — offsec-soc-200** → all 8 gates pass, README updated, committed
 - [ ] **06 — oscp-methodology** → all 8 gates pass, README updated, committed
 - [ ] **07 — cpent** → all 8 gates pass, README updated, committed

@@ -29,7 +29,7 @@
 
 | # | Skill | Lines | Est. | Status |
 |---|-------|-------|------|--------|
-| 4 | offsec-pen-300 (OSEP) | 1,253 | ~60m | [ ] |
+| 4 | offsec-pen-300 (OSEP) | 1,253 | ~60m | [x] |
 | 5 | oscp-methodology | 990 | ~45m | [ ] |
 
 **Total:** 2,243 lines → target ~800 lines  

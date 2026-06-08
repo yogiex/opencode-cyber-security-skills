@@ -97,9 +97,20 @@
     },
     {
       "name": "offsec-pen-300",
-      "description": "OffSec PEN-300 / OSEP (Offensive Security Experienced Penetration Tester) — advanced evasion techniques and breaching defenses. Covers AV/EDR evasion, AMSI/AppLocker/CLM bypass, process injection & hollowing, custom C# shellcode runners, MSSQL linked servers, AD exploitation, delegation attacks, ADCS, and professional report writing.",
+      "description": "OffSec PEN-300 / OSEP — advanced evasion techniques, AV/EDR bypass, AMSI/AppLocker/CLM evasion, process injection, custom shellcode runners, MSSQL attacks, AD exploitation, delegation, ADCS, and professional report writing.",
       "files": [
-        "SKILL.md"
+        "SKILL.md",
+        "assets/exam-checklist.md",
+        "references/ad-exploitation.md",
+        "references/av-edr-evasion.md",
+        "references/c2-strategy.md",
+        "references/exam-strategy.md",
+        "references/modules-overview.md",
+        "references/mssql-attacks.md",
+        "references/process-injection.md",
+        "references/referensi.md",
+        "references/shellcode-runners.md",
+        "scripts/payload-encoder.py"
       ]
     },
     {

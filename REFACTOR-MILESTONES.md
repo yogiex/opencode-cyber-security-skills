@@ -15,8 +15,8 @@
 | # | Skill | Lines | Est. | Status |
 |---|-------|-------|------|--------|
 | 1 | offsec-soc-200 (OSDA) | 1,227 → 106 | ~60m | [x] |
-| 2 | offsec-ir-200 (OSIR) | 1,325 | ~60m | [ ] |
-| 3 | offsec-th-200 (OSTH) | 1,709 | ~60m | [ ] |
+| 2 | offsec-ir-200 (OSIR) | 1,325 | ~60m | [x] |
+| 3 | offsec-th-200 (OSTH) | 1,709 | ~60m | [x] |
 
 **Total:** 4,261 lines → target ~1,200 lines  
 **Est. time:** ~3 jam  
@@ -43,7 +43,7 @@
 
 | # | Skill | Lines | Est. | Status |
 |---|-------|-------|------|--------|
-| 6 | lf-cks (CKS) | 1,574 | ~60m | [ ] |
+| 6 | lf-cks (CKS) | 1,574 | ~60m | [x] |
 | 7 | cpent | 878 | ~45m | [x] |
 
 **Total:** 2,452 lines → target ~800 lines  
@@ -60,7 +60,7 @@
 | 8 | ptes-standard | 785 | ~45m | [x] |
 | 9 | comptia-cysa | 640 | ~30m | [x] |
 | 10 | threat-intelligence | 672 | ~30m | [x] |
-| 11 | waf-evasion-methodology | 525 | ~30m | [ ] |
+| 11 | waf-evasion-methodology | 525 | ~30m | [x] |
 
 **Total:** 2,622 lines → target ~1,200 lines  
 **Est. time:** ~2 jam 15m  
@@ -71,16 +71,16 @@
 
 | Milestone | Skills | Lines Now | Target Lines | Est. Time | Status |
 |-----------|--------|-----------|--------------|-----------|--------|
-| M1: Defensive Stack | 3 | 4,261 | ~1,200 | ~3h | [ ] |
-| M2: Offensive | 2 | 2,243 | ~800 | ~1h 45m | [ ] |
-| M3: Infra/Container | 2 | 2,452 | ~800 | ~1h 45m | [ ] |
-| M4: Standards | 4 | 2,622 | ~1,200 | ~2h 15m | [ ] |
+| M1: Defensive Stack | 3 | 4,261 | ~1,200 | ~3h | [x] |
+| M2: Offensive | 2 | 2,243 | ~800 | ~1h 45m | [x] |
+| M3: Infra/Container | 2 | 2,452 | ~800 | ~1h 45m | [x] |
+| M4: Standards | 4 | 2,622 | ~1,200 | ~2h 15m | [x] |
 | **Total** | **11** | **11,578** | **~4,000** | **~9h** | |
 
 ## Definition of Done per Milestone
 
-- [ ] Semua skill di milestone已完成 refactor (memenuhi 8 quality gates)
-- [ ] README.md status icons updated (📦 → 🔶)
-- [ ] REFACTOR-PLAN.md checklist diupdate
-- [ ] `node scripts/sync-skills.js` passes
-- [ ] All changes committed dengan prefix `refactor:`
+- [x] Semua skill di milestone已完成 refactor (memenuhi 8 quality gates)
+- [x] README.md status icons updated (📦 → 🔶)
+- [x] REFACTOR-PLAN.md checklist diupdate
+- [x] `node scripts/sync-skills.js` passes
+- [x] All changes committed dengan prefix `refactor:`

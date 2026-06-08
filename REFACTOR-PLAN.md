@@ -233,28 +233,9 @@ Setelah refactor, **semua** checklist ini harus terpenuhi:
 
 ---
 
-### 9. threat-intelligence (672 lines)
+### 9. threat-intelligence (672 → 76 lines) ✅
 
-**Current structure:**
-- CTI Fundamentals & Lifecycle (lines 25-67)
-- Analytic Frameworks (lines 68-145)
-- IOC Management & Standards (lines 146-247)
-- Threat Hunting (lines 248-355)
-- Platforms & Tools (lines 356-411)
-- Sharing & Communities (lines 412-452)
-- Analyst Tradecraft & Reporting (lines 453-527)
-
-**Proposed reference files:**
-| File | Content |
-|------|---------|
-| `references/cti-lifecycle.md` | 6-phase intelligence cycle, PIRs, intelligence levels |
-| `references/analytic-frameworks.md` | Kill Chain, Diamond Model, ATT&CK, structured analysis |
-| `references/ioc-management.md` | STIX/TAXII, MISP, YARA, Sigma, TLP, confidence scoring |
-| `references/threat-hunting.md` | PEAK, ABLE, HMM methodologies, hypothesis development |
-| `references/platforms-tools.md` | TIP comparison, OpenCTI, MISP deployment, integrations |
-| `references/tradecraft-reporting.md` | Intel report writing, source validation, briefing skills |
-
-**Note:** CTI is documentation-heavy, template-light — no assets needed.
+**Result:** SKILL.md 672→76 lines. 8 references (`cti-fundamentals`, `analytic-frameworks`, `ioc-management`, `threat-hunting`, `platforms-tools`, `sharing-communities`, `tradecraft-reporting`, `referensi`). Committed.
 
 ---
 
@@ -320,7 +301,7 @@ Setelah refactor, **semua** checklist ini harus terpenuhi:
 - [x] **06 — oscp-methodology** → all 8 gates pass, README updated, committed
 - [x] **07 — cpent** → all 8 gates pass, README updated, committed
 - [x] **08 — ptes-standard** → all 8 gates pass, README updated, committed
-- [ ] **09 — threat-intelligence** → all 8 gates pass, README updated, committed
+- [x] **09 — threat-intelligence** → all 8 gates pass, README updated, committed
 - [ ] **10 — comptia-cysa** → all 8 gates pass, README updated, committed
 - [ ] **11 — waf-evasion-methodology** → all 8 gates pass, README updated, committed
 - [ ] **Final** — `node scripts/sync-skills.js` full run, repo-wide verify

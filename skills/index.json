@@ -244,9 +244,17 @@
     },
     {
       "name": "threat-intelligence",
-      "description": "Cyber Threat Intelligence (CTI) - lifecycle, intelligence frameworks, IOC management, threat hunting, analyst tradecraft. Use when gathering threat intelligence, performing threat hunting, managing IOCs, conducting intelligence-driven analysis, or when user asks about CTI lifecycle, TIP platforms, STIX/TAXII, MISP, OpenCTI, or structured analytical techniques.",
+      "description": "Cyber Threat Intelligence (CTI) — lifecycle, intelligence frameworks, IOC management, threat hunting, analyst tradecraft. Use when gathering threat intelligence, performing threat hunting, managing IOCs, conducting intelligence-driven analysis, or when user asks about CTI lifecycle, TIP platforms, STIX/TAXII, MISP, OpenCTI, or structured analytical techniques.",
       "files": [
-        "SKILL.md"
+        "SKILL.md",
+        "references/analytic-frameworks.md",
+        "references/cti-fundamentals.md",
+        "references/ioc-management.md",
+        "references/platforms-tools.md",
+        "references/referensi.md",
+        "references/sharing-communities.md",
+        "references/threat-hunting.md",
+        "references/tradecraft-reporting.md"
       ]
     },
     {

@@ -178,7 +178,7 @@ Baca *execution traces*, bukan cuma final output. Jika agent buang waktu di lang
 | [offsec-soc-200](./skills/offsec-soc-200) | 🔶 | OffSec SOC-200 / OSDA (OffSec Defense Analyst) — security operations and defensive analysis. SIEM/ELK/KQL, Windows & Linux endpoint detection, attacker methodology, incident investigation, dan SOC analyst framework. |
 | [lf-cks](./skills/lf-cks) | 🔶 | Certified Kubernetes Security Specialist (CKS) — Kubernetes security mindset, defense-in-depth framework, cluster isolation models, workload segmentation, supply chain trust, authentication & authorization philosophy, network security architecture, runtime protection, compliance posture, dan decision framework untuk securing container platforms. |
 | [soc-analyst](./skills/soc-analyst) | ✅ | Pola pikir dan pendekatan untuk Security Analyst dan SOC Analyst dalam mentriage, menyelidiki, merespon insiden, dan berkomunikasi secara efektif. |
-| [threat-intelligence](./skills/threat-intelligence) | 📦 | Cyber Threat Intelligence (CTI) — intelligence lifecycle, analytic frameworks (Kill Chain, Diamond Model, ATT&CK), IOC management (STIX/TAXII, MISP, YARA, Sigma), threat hunting (PEAK, ABLE, HMM), dan analyst tradecraft. |
+| [threat-intelligence](./skills/threat-intelligence) | 🔶 | Cyber Threat Intelligence (CTI) — intelligence lifecycle, analytic frameworks (Kill Chain, Diamond Model, ATT&CK), IOC management (STIX/TAXII, MISP, YARA, Sigma), threat hunting (PEAK, ABLE, HMM), dan analyst tradecraft. |
 
 ### 🟢 General (Keduanya)
 

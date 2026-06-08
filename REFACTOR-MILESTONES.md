@@ -58,7 +58,7 @@
 | # | Skill | Lines | Est. | Status |
 |---|-------|-------|------|--------|
 | 8 | ptes-standard | 785 | ~45m | [x] |
-| 9 | comptia-cysa | 640 | ~30m | [ ] |
+| 9 | comptia-cysa | 640 | ~30m | [x] |
 | 10 | threat-intelligence | 672 | ~30m | [x] |
 | 11 | waf-evasion-methodology | 525 | ~30m | [ ] |
 

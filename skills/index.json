@@ -4,7 +4,13 @@
       "name": "comptia-cysa",
       "description": "Panduan lengkap CompTIA CySA+ (CS0-004 V4) mencakup Security Operations, Vulnerability Management, Incident Response, dan Reporting & Communication untuk mempersiapkan sertifikasi Cybersecurity Analyst.",
       "files": [
-        "SKILL.md"
+        "SKILL.md",
+        "references/domain1-security-operations.md",
+        "references/domain2-vulnerability-management.md",
+        "references/domain3-incident-response.md",
+        "references/domain4-reporting.md",
+        "references/exam-overview.md",
+        "references/tools-frameworks.md"
       ]
     },
     {

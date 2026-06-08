@@ -184,7 +184,7 @@ Baca *execution traces*, bukan cuma final output. Jika agent buang waktu di lang
 
 | Skill | Status | Deskripsi |
 | ----- | ------ | --------- |
-| [comptia-cysa](./skills/comptia-cysa) | 📦 | Panduan lengkap CompTIA CySA+ (CS0-004 V4) mencakup Security Operations, Vulnerability Management, Incident Response, dan Reporting & Communication untuk mempersiapkan sertifikasi Cybersecurity Analyst. |
+| [comptia-cysa](./skills/comptia-cysa) | 🔶 | Panduan lengkap CompTIA CySA+ (CS0-004 V4) mencakup Security Operations, Vulnerability Management, Incident Response, dan Reporting & Communication untuk mempersiapkan sertifikasi Cybersecurity Analyst. |
 | [devsecops-mindset](./skills/devsecops-mindset) | ✅ | Panduan pola pikir dan mindset DevSecOps untuk mengintegrasikan keamanan dalam siklus pengembangan secara berkelanjutan, tanpa fokus pada alat/tools tertentu. |
 | [owasp-top10-2025](./skills/owasp-top10-2025) | 🔶 | Referensi lengkap OWASP Top 10 2025 untuk risiko keamanan web application. Gunakan saat threat modeling, code review, penetration testing, atau saat membahas kategori A01-A10. |
 | [threat-modeling](./skills/threat-modeling) | ✅ | Panduan threat modeling untuk mengidentifikasi, menganalisis, dan memitigasi risiko keamanan pada sistem atau aplikasi secara general dan non-teknis. |

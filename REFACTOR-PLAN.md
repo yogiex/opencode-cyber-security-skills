@@ -302,7 +302,7 @@ Setelah refactor, **semua** checklist ini harus terpenuhi:
 - [x] **07 — cpent** → all 8 gates pass, README updated, committed
 - [x] **08 — ptes-standard** → all 8 gates pass, README updated, committed
 - [x] **09 — threat-intelligence** → all 8 gates pass, README updated, committed
-- [ ] **10 — comptia-cysa** → all 8 gates pass, README updated, committed
+- [x] **10 — comptia-cysa** → all 8 gates pass, README updated, committed
 - [ ] **11 — waf-evasion-methodology** → all 8 gates pass, README updated, committed
 - [ ] **Final** — `node scripts/sync-skills.js` full run, repo-wide verify
 

@@ -138,11 +138,16 @@ function collectChangedFiles(base) {
   return changed;
 }
 
-// A path counts as documented when it appears inside backticks. Entries with
-// `*` or `**` are wildcards: they only cover changes explicitly quarantined
-// (for example external work awaiting a decision) and are reported as warnings.
+// A path counts as documented only when it appears inside a table row, so
+// paths quoted in prose or in the rules section do not silently satisfy the
+// audit. Entries with `*` or `**` are wildcards: they only cover changes
+// explicitly quarantined (for example external work awaiting a decision).
 function collectDocumentedPaths(content) {
   const documented = new Set();
+  const tableRows = content
+    .split("\n")
+    .filter((line) => line.trimStart().startsWith("|"))
+    .join("\n");
   const pattern = /`([^`\n]+)`/g;
   let match = pattern.exec(content);
 
@@ -154,7 +159,7 @@ function collectDocumentedPaths(content) {
     ) {
       documented.add(candidate);
     }
-    match = pattern.exec(content);
+    match = pattern.exec(tableRows);
   }
 
   return documented;

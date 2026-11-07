@@ -17,7 +17,7 @@
   "skills": [
     {
       "name": "comptia-cysa",
-      "description": "Panduan lengkap CompTIA CySA+ (CS0-004 V4) mencakup Security Operations, Vulnerability Management, Incident Response, dan Reporting & Communication untuk mempersiapkan sertifikasi Cybersecurity Analyst.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/comptia-cysa",
       "license": "MIT",
@@ -25,7 +25,7 @@
     },
     {
       "name": "cpent",
-      "description": "EC-Council CPENT (Certified Penetration Testing Professional) — mindset, metodologi, dan strategi komprehensif untuk CPENT exam mencakup 14 modul inti, binary exploitation 32/64-bit, IoT/OT/SCADA, double pivoting, report writing, dan LPT Master pathway.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/cpent",
       "license": "MIT",
@@ -33,7 +33,7 @@
     },
     {
       "name": "devsecops-mindset",
-      "description": "Panduan pola pikir dan mindset DevSecOps untuk mengintegrasikan keamanan dalam siklus pengembangan secara berkelanjutan, tanpa fokus pada alat/tools tertentu.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/devsecops-mindset",
       "license": "MIT",
@@ -41,7 +41,7 @@
     },
     {
       "name": "ec-ecih",
-      "description": "EC-Council ECIH (Certified Incident Handler) v3 — incident handler mindset, IR lifecycle framework (NIST 800-61 + ECIH 9-stage IH&R), decision frameworks per incident type, forensic readiness, containment strategies, eradication methodology, recovery planning, post-incident lessons learned, dan komunikasi krisis. Berbasis ECIH 212-89 v3 curriculum.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/ec-ecih",
       "license": "MIT",
@@ -49,7 +49,7 @@
     },
     {
       "name": "incident-response-plan",
-      "description": "Panduan incident response non-teknis untuk organisasi: persiapan, deteksi, analisis, containment, eradikasi, recovery, dan pembelajaran. Cocok untuk tim manajemen, legal, PR, dan koordinator insiden.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/incident-response-plan",
       "license": "MIT",
@@ -57,7 +57,7 @@
     },
     {
       "name": "lf-cks",
-      "description": "Certified Kubernetes Security Specialist (CKS) — Kubernetes security mindset, defense-in-depth framework, cluster isolation models, workload segmentation, supply chain trust, authentication & authorization philosophy, network security architecture, runtime protection, compliance posture, dan decision framework untuk securing container platforms. Berbasis CNCF CKS curriculum dan CIS Kubernetes Benchmark.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/lf-cks",
       "license": "MIT",
@@ -65,7 +65,7 @@
     },
     {
       "name": "log-management-nist-800-92",
-      "description": "Panduan log management berdasarkan NIST SP 800-92 untuk perencanaan, pengumpulan, penyimpanan, analisis, dan retensi log keamanan secara terstruktur.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/log-management-nist-800-92",
       "license": "MIT",
@@ -73,7 +73,7 @@
     },
     {
       "name": "mitre-attack",
-      "description": "Panduan MITRE ATT&CK framework untuk memahami adversary tactics, techniques, dan prosedur dalam threat intelligence, detection engineering, dan defensive gap analysis.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/mitre-attack",
       "license": "MIT",
@@ -81,7 +81,7 @@
     },
     {
       "name": "nist-800-53",
-      "description": "Panduan Security and Privacy Controls berdasarkan NIST SP 800-53 Rev 5 (Release 5.2.0) untuk pemilihan, implementasi, dan assessment kontrol keamanan dan privasi dalam Risk Management Framework.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/nist-800-53",
       "license": "MIT",
@@ -89,7 +89,7 @@
     },
     {
       "name": "offsec-ir-200",
-      "description": "OffSec IR-200 / OSIR (OffSec Incident Responder) — foundational incident response covering full IR lifecycle (NIST 800-61r2), Splunk SIEM analysis with SPL, digital forensics (Autopsy, Volatility 3, FTK Imager), malware triage with YARA, containment/eradication/recovery strategies, incident communication plans, and post-mortem reporting.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/offsec-ir-200",
       "license": "MIT",
@@ -97,7 +97,7 @@
     },
     {
       "name": "offsec-pen-300",
-      "description": "OffSec PEN-300 / OSEP — advanced evasion techniques, AV/EDR bypass, AMSI/AppLocker/CLM evasion, process injection, custom shellcode runners, MSSQL attacks, AD exploitation, delegation, ADCS, and professional report writing.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/offsec-pen-300",
       "license": "MIT",
@@ -105,7 +105,7 @@
     },
     {
       "name": "offsec-soc-200",
-      "description": "OffSec SOC-200 / OSDA (OffSec Defense Analyst) — security operations and defensive analysis. Covers SOC operations, Windows & Linux endpoint detection, SIEM analysis with ELK/Kibana/KQL, attacker methodology (Kill Chain, MITRE ATT&CK), Windows Event Log & Sysmon analysis, Active Directory threat detection, network detections, and incident investigation.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/offsec-soc-200",
       "license": "MIT",
@@ -113,7 +113,7 @@
     },
     {
       "name": "offsec-th-200",
-      "description": "OffSec TH-200 / OSTH (OffSec Threat Hunter) — foundational threat hunting covering proactive threat detection, behavioral analysis, threat actor profiling, Splunk SIEM analysis with SPL, CrowdStrike Falcon endpoint hunting, Suricata IDS/IPS, hypothesis-driven hunting methodologies (PEAK, SEARCH), MITRE ATT&CK mapping, ransomware & APT case studies, cyber threat intelligence integration, and professional hunt reporting.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/offsec-th-200",
       "license": "MIT",
@@ -121,7 +121,7 @@
     },
     {
       "name": "offsec-web-300",
-      "description": "OffSec WEB-300 / OSWE (Offensive Security Web Expert) — advanced web application security assessment covering white-box testing methodology, source code review in Java, C#, PHP, Python, and JavaScript, custom exploit development for .NET deserialization, PHP type juggling, SQL injection, SSTI, SSRF, prototype pollution, authentication bypass, XXE, OS command injection, and professional exploit scripting in Python.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/offsec-web-300",
       "license": "MIT",
@@ -129,7 +129,7 @@
     },
     {
       "name": "oscp-methodology",
-      "description": "OSCP (Offensive Security Certified Professional) — mindset, metodologi, dan strategi komprehensif untuk PEN-200/OSCP+ mencakup filsafat Try Harder, 3 attack vectors, enumeration framework, privilege escalation AD/Linux/Windows, dan reporting.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/oscp-methodology",
       "license": "MIT",
@@ -137,7 +137,7 @@
     },
     {
       "name": "owasp-top10-2025",
-      "description": "Complete reference for OWASP Top 10 2025 web application security risks. Use when conducting threat modeling, code review, penetration testing, secure design, or when user asks about any AXX:2025 category, vulnerability explanations, or mitigation strategies.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/owasp-top10-2025",
       "license": "MIT",
@@ -145,15 +145,15 @@
     },
     {
       "name": "ptes-standard",
-      "description": "Penetration Testing Execution Standard (PTES) — comprehensive guide for conducting penetration tests across 7 phases: pre-engagement, intelligence gathering, threat modeling, vulnerability analysis, exploitation, post-exploitation, and reporting. Use when planning or executing penetration tests, security assessments, or when user asks about PTES methodology.",
-      "version": "2.0",
+      "description": "",
+      "version": "1.0.0",
       "source": "./skills/ptes-standard",
       "license": "MIT",
       "keywords": []
     },
     {
       "name": "risk-management-framework",
-      "description": "Panduan NIST Risk Management Framework (SP 800-37) untuk mengelola risiko keamanan dan privasi secara terstruktur, fleksibel, dan berkelanjutan di seluruh siklus hidup sistem",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/risk-management-framework",
       "license": "MIT",
@@ -161,7 +161,7 @@
     },
     {
       "name": "security-auditor",
-      "description": "Panduan mindset, metodologi, dan referensi untuk security auditor — mencakup audit lifecycle, framework comparison, control testing, evidence collection, dan certification path.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/security-auditor",
       "license": "MIT",
@@ -169,7 +169,7 @@
     },
     {
       "name": "security-documentation",
-      "description": "Membuat laporan pengujian keamanan dalam format LaTeX dan mengompilasi ke PDF, mengikuti template docs/laporan.txt",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/security-documentation",
       "license": "MIT",
@@ -177,7 +177,7 @@
     },
     {
       "name": "soc-analyst",
-      "description": "Pola pikir dan pendekatan untuk Security Analyst dan SOC Analyst dalam mentriage, menyelidiki, merespon insiden, dan berkomunikasi secara efektif.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/soc-analyst",
       "license": "MIT",
@@ -185,15 +185,15 @@
     },
     {
       "name": "threat-intelligence",
-      "description": "Cyber Threat Intelligence (CTI) — lifecycle, intelligence frameworks, IOC management, threat hunting, analyst tradecraft. Use when gathering threat intelligence, performing threat hunting, managing IOCs, conducting intelligence-driven analysis, or when user asks about CTI lifecycle, TIP platforms, STIX/TAXII, MISP, OpenCTI, or structured analytical techniques.",
-      "version": "1.0",
+      "description": "",
+      "version": "1.0.0",
       "source": "./skills/threat-intelligence",
       "license": "MIT",
       "keywords": []
     },
     {
       "name": "threat-modeling",
-      "description": "Panduan threat modeling untuk mengidentifikasi, menganalisis, dan memitigasi risiko keamanan pada sistem atau aplikasi secara general dan non-teknis",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/threat-modeling",
       "license": "MIT",
@@ -201,7 +201,7 @@
     },
     {
       "name": "waf-evasion-methodology",
-      "description": "Pola pikir dan metodologi sistematis untuk WAF evasion — memahami parsing discrepancies, encoding gaps, dan logic mismatches antara WAF dan backend application.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/waf-evasion-methodology",
       "license": "MIT",
@@ -209,15 +209,43 @@
     },
     {
       "name": "web-app-scan",
-      "description": "Melakukan vulnerability assessment pada web application secara sistematis seperti tools Nessus (deteksi kerentanan umum: SQLi, XSS, config leak, header keamanan, SSL/TLS, dsb) dengan pendekatan terstruktur dan non-teknis.",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/web-app-scan",
       "license": "MIT",
       "keywords": []
     },
     {
-      "name": "web-recon-simple",
-      "description": "Recon web sederhana: chunk file, network tab, API endpoint, localstorage/token/session, teknologi.",
+      "name": "web-pentest-payloads",
+      "description": "Payload dan teknik eksploitasi untuk web application penetration testing — SQLi, NoSQL, command injection, SSTI, XXE, XSS, CSRF, SSRF, LFI/RFI, file upload, deserialization, request smuggling, cache poisoning, JWT/OAuth/SAML, IDOR, business logic, API, dan prompt injection.",
+      "version": "1.0.0",
+      "source": "./skills/web-pentest-payloads",
+      "license": "MIT",
+      "keywords": [
+        "sqli",
+        "xss",
+        "ssrf",
+        "ssti",
+        "xxe",
+        "lfi",
+        "rfi",
+        "command-injection",
+        "nosql",
+        "deserialization",
+        "request-smuggling",
+        "cache-poisoning",
+        "jwt",
+        "oauth",
+        "saml",
+        "idor",
+        "business-logic",
+        "waf-bypass",
+        "payloads"
+      ]
+    },
+    {
+      "name": "web-reconnaissance",
+      "description": "",
       "version": "1.0.0",
       "source": "./skills/web-reconnaissance",
       "license": "MIT",

@@ -13,6 +13,60 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.2.0] — 2026-11-07 — Skill `web-pentest-payloads`
+
+**Commit dasar:** `69b436d` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** skill baru — payload web application pentest (39 reference)
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/web-pentest-payloads/SKILL.md` | file baru | router gejala → reference, workflow, proof standard, tooling | `node scripts/sync-skills.js` membaca frontmatter; 172 baris (<500) |
+| `skills/web-pentest-payloads/references/sql-injection.md`, `skills/web-pentest-payloads/references/nosql-injection.md`, `skills/web-pentest-payloads/references/command-injection.md`, `skills/web-pentest-payloads/references/ssti.md`, `skills/web-pentest-payloads/references/xxe.md`, `skills/web-pentest-payloads/references/ldap-xpath-injection.md`, `skills/web-pentest-payloads/references/graphql-attacks.md`, `skills/web-pentest-payloads/references/type-juggling.md`, `skills/web-pentest-payloads/references/injection-misc.md` | file baru | kelas injection & eksekusi | frontmatter tiga field; dibaca ulang |
+| `skills/web-pentest-payloads/references/ssrf.md`, `skills/web-pentest-payloads/references/file-inclusion-traversal.md`, `skills/web-pentest-payloads/references/file-upload.md`, `skills/web-pentest-payloads/references/insecure-deserialization.md`, `skills/web-pentest-payloads/references/prototype-pollution.md`, `skills/web-pentest-payloads/references/request-smuggling.md`, `skills/web-pentest-payloads/references/http-cache-deception-poisoning.md`, `skills/web-pentest-payloads/references/host-header-injection.md`, `skills/web-pentest-payloads/references/http-parameter-pollution.md`, `skills/web-pentest-payloads/references/crlf-injection.md`, `skills/web-pentest-payloads/references/race-condition.md`, `skills/web-pentest-payloads/references/websocket-attacks.md`, `skills/web-pentest-payloads/references/infra-misconfig.md` | file baru | kelas server-side & infrastruktur | frontmatter tiga field; dibaca ulang |
+| `skills/web-pentest-payloads/references/xss.md`, `skills/web-pentest-payloads/references/csrf.md`, `skills/web-pentest-payloads/references/clickjacking-tabnabbing.md`, `skills/web-pentest-payloads/references/dom-clobbering.md`, `skills/web-pentest-payloads/references/css-injection.md`, `skills/web-pentest-payloads/references/xs-leak.md`, `skills/web-pentest-payloads/references/open-redirect.md`, `skills/web-pentest-payloads/references/cors-misconfiguration.md`, `skills/web-pentest-payloads/references/client-side-path-traversal.md` | file baru | kelas client-side | frontmatter tiga field; dibaca ulang |
+| `skills/web-pentest-payloads/references/jwt-oauth-saml.md`, `skills/web-pentest-payloads/references/authentication-bypass.md`, `skills/web-pentest-payloads/references/access-control-idor.md`, `skills/web-pentest-payloads/references/business-logic.md`, `skills/web-pentest-payloads/references/api-security.md`, `skills/web-pentest-payloads/references/prompt-injection.md` | file baru | auth, logika bisnis, API, LLM | frontmatter tiga field; dibaca ulang |
+| `skills/web-pentest-payloads/references/payload-encoding-evasion.md`, `skills/web-pentest-payloads/references/oob-and-detection.md` | file baru | lintas kelas: encoding/WAF dan verifikasi OOB | frontmatter tiga field; dibaca ulang |
+
+### Diubah — artefak turunan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `manifest.json` | menambah entri `web-pentest-payloads` | registrasi skill | `node scripts/sync-skills.js` |
+| `skills/index.json` | menambah 40 file skill | index discovery | `node scripts/sync-skills.js` |
+| `.claude-plugin/plugin.json` | regenerasi | metadata plugin | `node scripts/sync-skills.js` |
+| `.claude-plugin/marketplace.json` | regenerasi | metadata marketplace | `node scripts/sync-skills.js` |
+| `.cursor-plugin/plugin.json` | regenerasi | metadata plugin Cursor | `node scripts/sync-skills.js` |
+| `README.md` | menambah baris di tabel Red Team dan tabel Referensi | README tidak punya marker sync, jadi manual | dibaca ulang; baris `web-pentest-payloads` ada di dua tabel |
+
+### Catatan
+
+- Sempat dibuat file probe `skills/web-pentest-payloads/.gitkeep` tanpa isi berguna; file dihapus pada sesi yang sama dan tidak pernah masuk git, sehingga tidak tercatat sebagai perubahan.
+- Baris `updated:` pada frontmatter 28 reference dihapus karena konvensi repo hanya mengizinkan tiga field (`name`, `description`, `tags`).
+
+### Verifikasi entri
+
+- `node scripts/sync-skills.js` → `Updated manifest.json`, `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.cursor-plugin/plugin.json`, `skills/index.json`.
+- `skills/index.json` berisi 40 file untuk skill ini; `.gitkeep` tidak terdaftar.
+- `node scripts/check-changelog.js` → exit 0.
+
+### Lampiran — audit eksplisit
+
+| File | Perubahan |
+|---|---|
+| `skills/web-pentest-payloads/SKILL.md` | file baru |
+| `skills/web-pentest-payloads/references/sql-injection.md` | file baru |
+| `skills/web-pentest-payloads/references/nosql-injection.md` | file baru |
+| `skills/web-pentest-payloads/references/command-injection.md` | file baru |
+| `skills/web-pentest-payloads/references/ssti.md` | file baru |
+| `skills/web-pentest-payloads/references/xxe.md` | file baru |
+| `skills/web-pentest-payloads/references/ldap-xpath-injection.md` | file baru |
+| `skills/web-pentest-payloads/references/graphql-attacks.md` | file baru |
+| `skills/web-pentest-payloads/references/type-juggling.md` | file baru |
+| `skills/web-pentest-payloads/references/injection-misc.md` | file baru |
+
 ## [0.1.0] — 2026-11-07 — Mekanisme changelog dan audit
 
 **Commit dasar:** `69b436d` (branch `dev`)

@@ -159,6 +159,7 @@ Baca *execution traces*, bukan cuma final output. Jika agent buang waktu di lang
 | [offsec-pen-300](./skills/offsec-pen-300) | 🔶 | OffSec PEN-300 / OSEP (Offensive Security Experienced Penetration Tester) — advanced evasion techniques and breaching defenses. AV/EDR evasion, AMSI/AppLocker/CLM bypass, process injection & hollowing, custom C# shellcode runners, MSSQL linked servers, AD exploitation, delegation attacks, ADCS, dan report writing. |
 | [offsec-web-300](./skills/offsec-web-300) | 🔶 | OffSec WEB-300 / OSWE (Offensive Security Web Expert) — advanced web application security assessment, white-box testing, source code review (Java, C#, PHP, Python, JavaScript), custom exploit development, .NET deserialization, PHP type juggling, SQLi, SSTI, SSRF, prototype pollution, dan authentication bypass. |
 | [waf-evasion-methodology](./skills/waf-evasion-methodology) | 🔶 | Pola pikir dan metodologi sistematis untuk WAF evasion — memahami parsing discrepancies, encoding gaps, dan logic mismatches antara WAF dan backend application. |
+| [web-pentest-payloads](./skills/web-pentest-payloads) | 🔶 | Payload dan teknik eksploitasi per kelas kerentanan web: SQLi, NoSQL, command injection, SSTI, XXE, XSS, CSRF, SSRF, LFI/RFI, file upload, deserialization, request smuggling, cache poisoning, JWT/OAuth/SAML, IDOR, business logic, API, prompt injection, plus bypass filter/WAF. |
 | [web-app-scan](./skills/web-app-scan) | ✅ | Vulnerability assessment pada web application secara sistematis (deteksi kerentanan umum: SQLi, XSS, config leak, header keamanan, SSL/TLS, dsb) dengan pendekatan terstruktur. |
 | [web-recon-simple](./skills/web-reconnaissance) | ✅ | Recon web sederhana: chunk file, network tab, API endpoint, localstorage/token/session, identifikasi teknologi. |
 
@@ -286,6 +287,7 @@ Proses ini (execute-then-revise) adalah cara paling efektif untuk meningkatkan k
 | [threat-intelligence](./skills/threat-intelligence) | CTI Lifecycle, MITRE ATT&CK, Cyber Kill Chain, Diamond Model, STIX/TAXII | https://attack.mitre.org |
 | [threat-modeling](./skills/threat-modeling) | STRIDE, DFD, NIST SP 800-154 | - |
 | [waf-evasion-methodology](./skills/waf-evasion-methodology) | OWASP CRS, MITRE ATT&CK | - |
+| [web-pentest-payloads](./skills/web-pentest-payloads) | PayloadsAllTheThings, PortSwigger WSA, OWASP WSTG | https://github.com/swisskyrepo/PayloadsAllTheThings |
 | [web-app-scan](./skills/web-app-scan) | OWASP WSTG, PTES | - |
 | [web-recon-simple](./skills/web-reconnaissance) | OSINT Framework, OWASP WSTG | - |
 

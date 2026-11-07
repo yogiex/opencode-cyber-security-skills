@@ -88,6 +88,17 @@ The SKILL.md should include:
 1. Add or edit reference files in `skills/<name>/references/`
 2. Update `SKILL.md` reference links if files were added/removed/renamed
 3. Run `node scripts/sync-skills.js` if SKILL.md frontmatter changed (updates manifest.json, platform plugin files, and index.json). README.md is manually maintained (categorized tables) — update it in the same commit.
+4. Record every added, modified, renamed, or deleted file in `CHANGELOG.md`, then run `node scripts/check-changelog.js` before committing.
+
+## Changelog (Audit Trail)
+
+Every file change must be recorded in [CHANGELOG.md](CHANGELOG.md) within the same change set.
+
+- One entry per change set: ISO date, scope, and a `File | Change | Reason | Verification` table.
+- Every added, modified, renamed, or deleted path must appear by name, in backticks.
+- Generated artifacts (`manifest.json`, `skills/index.json`, both `plugin.json` files, `marketplace.json`) must be listed too, with the generator command as verification.
+- Verify before commit: `node scripts/check-changelog.js` for the working tree, or `--base <ref>` for a commit range. It exits non-zero when a changed file is missing from the changelog.
+- Never rewrite or delete past entries; supersede them with a new entry.
 
 ## Development
 

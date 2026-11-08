@@ -2,7 +2,7 @@
 
 Angka ujian (durasi, jumlah soal, bobot, passing score) **hanya boleh** merujuk ke tabel ini. Jika sebuah skill perlu menyebut angka, salin dari sini dan sebutkan tanggal verifikasi.
 
-**Terakhir diverifikasi:** 2026-11-07
+**Terakhir diverifikasi:** 2026-11-08
 **Metode:** `web_fetch` ke domain resmi (tanpa `web_search`). URL yang gagal dicatat di bagian bawah.
 
 ## Aturan
@@ -25,6 +25,20 @@ Angka ujian (durasi, jumlah soal, bobot, passing score) **hanya boleh** merujuk 
 
 Masa berlaku: OffSec menyatakan sertifikasi **tidak kedaluwarsa kecuali** OSCC-SEC, OSCC-SJD, OSTH, OSIR, dan OSCP+ ([FAQ](https://help.offsec.com/hc/en-us/articles/4826237411732)). Durasi tahun untuk yang kedaluwarsa tidak dicantumkan di halaman tersebut — `[UNVERIFIED]`.
 
+### Report bukan komponen nilai terpisah
+
+Tidak ada ujian OffSec yang memberi bobot persentase khusus untuk report. Yang berlaku (dinyatakan di exam guide masing-masing):
+
+| Ujian | Kalimat resmi |
+|---|---|
+| OSCP+ | "Points are only awarded for objectives documented in your report" + "If you don't submit a report, you can't pass" ([FAQ](https://help.offsec.com/hc/en-us/articles/54589877508884)) |
+| OSEP | "failure to provide sufficient documentation will result in reduced or zero points"; urutan mesin di report = urutan penilaian; proof file tanpa screenshot + control panel = 0 poin untuk target ([Guide](https://help.offsec.com/hc/en-us/articles/360050293792-OSEP-Exam-Guide)) |
+| OSDA | 10 phase × 10 poin; tidak ada komponen report terpisah ([Guide](https://help.offsec.com/hc/en-us/articles/4410105675412-OSDA-Exam-Guide)) |
+| OSTH | 7 × 10 = 70; poin "based on submitting the correct answer and the completeness of your findings in the exam report" ([Guide](https://help.offsec.com/hc/en-us/articles/29141776768148-OSTH-Exam-Guide)) |
+| OSIR | 4×10 + 2×15 = 70; aturan dokumentasi sama ([Guide](https://help.offsec.com/hc/en-us/articles/30960007786900)) |
+
+Konsekuensi: klaim "report 50% nilai" atau "report = 70 points" **salah**. Report adalah gerbang: tanpa dokumentasi yang memadai, poin tidak diberikan.
+
 ## CompTIA / EC-Council
 
 | Sertifikasi | Versi berlaku | Format | Passing | Sumber |
@@ -33,7 +47,7 @@ Masa berlaku: OffSec menyatakan sertifikasi **tidak kedaluwarsa kecuali** OSCC-S
 | **CPENT** | **Blueprint V2** | **53 soal praktik, 8 domain** (13/13/14/12/13/11/11/13); 24 jam (1×24 atau 2×12) | cut score **60–85%** per form; ≥90% = CPENT + LPT Master | [EC-Council](https://cert.eccouncil.org/cpent.html) |
 | **ECIH** | 212-89 v3 | 100 MCQ, 3 jam; **9 domain** (11/11/11/12/12/11/10/11/11) | cut score **60–85%** | [EC-Council](https://cert.eccouncil.org/ecih.html) |
 
-CPENT: report ≤30 hari (perpanjangan 7 hari, USD100); validitas 3 tahun/120 ECE; biaya recert USD250. `[UNVERIFIED]` kebijakan retake resmi.
+CPENT: report ≤30 hari (perpanjangan 7 hari, USD100); validitas 3 tahun/120 ECE; biaya recert USD250. `[UNVERIFIED]` kebijakan retake resmi dan bobot report (~30% diklaim di skill, tidak ada halaman publik EC-Council yang mengonfirmasi angka itu).
 
 ## CNCF / Kubernetes
 
@@ -74,3 +88,5 @@ Prasyarat: **telah lulus CKA** (status aktif tidak disyaratkan eksplisit). Valid
 - ATT&CK "v15, 14 tactics, Defense Evasion" → **basi**; v20.1, 15 taktik, Stealth + Defense Impairment.
 - RMF "enam langkah"; CSF "5 fungsi" → **salah**; 7 langkah, 6 fungsi.
 - CPENT "5 soal"; ECIH "6 domain" → **salah**; 53 soal/8 domain, 9 domain.
+- "Report 50% nilai" (OSCP, OSEP, OSDA) dan "report = 70 points / 30 dari 70" (OSTH, OSIR) → **salah**; report tidak punya bobot persentase, hanya gerbang pemberian poin.
+- CPENT "submit 7 hari" → **salah**; deadline 30 hari (7 hari adalah perpanjangan berbayar).

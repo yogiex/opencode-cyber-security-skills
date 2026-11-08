@@ -13,6 +13,17 @@ metadata:
 
 Empat domain: Security Operations (34%), Vulnerability Management (26%), Incident Response and Management (24%), dan Reporting & Communication (16%). Ujian 165 menit, 85 soal, passing 750/900.
 
+## Decision Frame
+
+1. **CVE mana yang didahulukan?** — CVSS saja tidak cukup: urutkan dengan CVSS + EPSS + konteks bisnis (eksposur, data, kontrol kompensasi). CVSS 10 dengan EPSS 0,01% bisa kalah prioritas dari CVSS 7 dengan EPSS 90%.
+2. **Scan ini bisa dipercaya?** — Credentialed scan adalah default untuk akurasi; non-credentialed menghasilkan false positive dan blind spot. Jika hanya non-credentialed, validasi manual sebelum melaporkan.
+3. **Ini TLP atau klasifikasi?** — TLP adalah batas berbagi, bukan label kerahasiaan. Jangan memakai TLP sebagai pengganti klasifikasi data.
+4. **Hunting berbasis IOC atau TTP?** — IOC cepat basi; TTP bertahan. Untuk deteksi berkelanjutan, prioritaskan TTP dan gunakan IOC sebagai konfirmasi.
+5. **Bukti ini sah secara prosedur?** — Chain of custody, write blocker, dan pencatatan transfer. Tanpa itu, temuan tidak bisa dipakai secara legal maupun operasional.
+6. **Waktu ujian cukup?** — 85 soal / 165 menit ≈ 1,9 menit per soal. Jangan terjebak satu PBQ; tandai dan kembali.
+
+> Fakta ujian diverifikasi di [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) (2026-11-07).
+
 ## When to Use This Skill
 
 Invoke this skill when:

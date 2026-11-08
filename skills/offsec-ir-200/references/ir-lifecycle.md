@@ -72,7 +72,7 @@ LOW: Scan, failed login spike → scheduled
 ## Golden Rules OSIR
 
 1. **Follow the NIST 800-61r2 lifecycle** — Jangan loncat fase.
-2. **Document as you go** — Laporan adalah 30 dari 70 points. Screenshot setiap langkah dengan timestamp.
+2. **Document as you go** — Laporan bukan komponen nilai terpisah: total 70 poin = 4×10 (Phase 1) + 2×15 (Phase 2), dan poin hanya diberikan jika temuannya terdokumentasi lengkap. Screenshot setiap langkah dengan timestamp.
 3. **Splunk is your timeline** — Logs adalah sumber kebenaran utama.
 4. **Disk tells the story** — File system artifacts mengungkapkan apa yang tidak tercatat di SIEM.
 5. **Memory reveals the truth** — Malware in-memory tidak terlihat di disk.

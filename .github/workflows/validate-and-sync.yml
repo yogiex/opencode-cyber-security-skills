@@ -8,6 +8,10 @@ on:
       - "manifest.json"
       - ".claude-plugin/**"
       - ".cursor-plugin/**"
+      - "CHANGELOG.md"
+      - "README.md"
+      - "docs/**"
+      - "scripts/**"
   pull_request:
     branches: [main, dev]
     paths:
@@ -15,6 +19,10 @@ on:
       - "manifest.json"
       - ".claude-plugin/**"
       - ".cursor-plugin/**"
+      - "CHANGELOG.md"
+      - "README.md"
+      - "docs/**"
+      - "scripts/**"
 
 concurrency:
   group: skills-${{ github.ref }}
@@ -95,6 +103,30 @@ jobs:
           else
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
+
+  check-changelog:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft != true && github.actor != 'dependabot[bot]'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Verify CHANGELOG covers every changed file
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE=${{ github.event.pull_request.base.sha }}
+          else
+            BASE=${{ github.event.before }}
+          fi
+
+          if [ "$BASE" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$BASE" 2>/dev/null; then
+            echo "Initial or force push - skipping the changelog diff check"
+            exit 0
+          fi
+
+          node scripts/check-changelog.js --base "$BASE"
 
   validate-skills:
     needs: detect-changes

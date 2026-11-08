@@ -23,6 +23,16 @@ IR-200 (Foundational Incident Response) adalah sertifikasi OffSec yang mengajark
 | **Durasi exam** | 8 jam + 24h report | 23h45m | 23h45m |
 | **Passing** | 50/70 | 75/100 | 70/100 |
 
+## Decision Frame
+
+1. **Contain dulu atau akuisisi bukti dulu?** — Jika masih ada eksfiltrasi/enkripsi aktif, isolasi mendahului forensik. Jika serangan sudah berhenti, akuisisi dulu agar bukti tidak berubah. Tulis alasan pilihanmu di report.
+2. **Poin ini ada di Phase 1 atau Phase 2?** — 4×10 (Splunk) + 2×15 (forensik). Jangan habiskan 5 jam di Splunk lalu kehabisan waktu untuk disk/memory yang nilainya lebih besar per soal.
+3. **Sudah aman di ambang lulus?** — Lulus 50/70. Jalur minimal: 4/4 Phase 1 + 1/2 Phase 2. Jika satu soal Phase 1 macet, pindah.
+4. **Ini bagian insiden atau noise?** — Korelasikan waktu, host, dan user. Aktivitas administratif sah sering terlihat seperti serangan; sebutkan dasar pengecualiannya.
+5. **Bukti ini bisa direplikasi?** — Query SPL, perintah, dan output harus ada di report. Poin hanya diberikan untuk temuan yang terdokumentasi lengkap.
+
+> Fakta ujian diverifikasi di [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) (2026-11-07).
+
 ## Scoring & Exam Environment
 
 Phase 1 (Splunk Log Analysis): 4 exercises × 10 pts = **40 pts**. Phase 2 (Disk & Memory Forensics): 2 exercises × 15 pts = **30 pts**. Total: **70 pts**. Passing: **50/70**. Cert valid 3 tahun.

@@ -25,6 +25,16 @@ TH-200 (OSTH) adalah sertifikasi threat hunting OffSec — **proactive threat de
 | **Cert expires** | Ya (perlu recertification) | Tidak | Ya (perlu recertification) |
 | **Passing** | 50/70 | 75/100 | 50/70 |
 
+## Decision Frame
+
+1. **Apa hipotesis yang bisa dipalsukan?** — "Ada aktivitas jahat" bukan hipotesis. "Jika APT X memakai T1059.001, PowerShell ScriptBlock di host Y akan menunjukkan pola Z" adalah hipotesis. Tanpa bentuk yang bisa dipalsukan, hunt berubah jadi browsing.
+2. **Sudah triangulasi tiga sumber?** — Splunk (breadth), CrowdStrike (depth), Suricata (network). Temuan dari satu sumber adalah petunjuk, bukan jawaban.
+3. **"Tidak ditemukan" itu temuan atau belum terlihat?** — Bedakan: (a) tidak ada aktivitas, (b) data source tidak mencakup host/waktu itu, (c) log hilang. Hanya (a) yang boleh dilaporkan sebagai negatif.
+4. **Kapan berhenti hunt dan mulai menulis?** — 7 exercise × 10 poin. Sisakan 60 menit terakhir untuk menyapu exercise yang kosong: satu jawaban parsial yang terdokumentasi lebih bernilai daripada hunt yang menggantung.
+5. **Jawaban ini akan dapat poin penuh?** — Poin diberikan berdasarkan jawaban benar **dan** kelengkapan narasi: query, screenshot, timestamp, dampak. Jika bukti tidak bisa direplikasi pembaca, anggap poinnya hilang.
+
+> Fakta ujian diverifikasi di [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) (2026-11-07).
+
 ## Scoring & Exam Environment
 
 7 exercises × 10 pts = **70 pts**. Passing: **50/70**. Exam: Splunk Enterprise, CrowdStrike Falcon console, Suricata IDS logs, network PCAP. Input: Threat intelligence report (IOC list + TTP description + APT profile). Output: Hunt Narrative (timeline + IOC table + impacted systems + evidence). Open book (no AI chatbots).
@@ -62,7 +72,7 @@ Post-Exam (24h): Complete professional hunt report, submit via OffSec portal
 - **OSTH ≠ OSIR/OSDA**: OSTH menggunakan Splunk (bukan ELK) seperti OSIR, tapi fokus pada proactive hunting, bukan incident response. Juga menggunakan CrowdStrike Falcon CQL yang tidak ada di OSIR.
 - **Threat intel report is key**: Di awal exam, Anda mendapat threat intel report — baca dengan teliti. Semua jawaban exercises berdasarkan report ini.
 - **Three data sources**: OSTH exam mewajibkan korelasi antara Splunk (breadth), CrowdStrike (depth), dan Suricata (network). Jangan hanya menggunakan satu sumber.
-- **Report weight**: Report = 70 points (bukan 30 seperti OSIR). Screenshot setiap query + timestamp.
+- **Report bukan komponen nilai terpisah**: total 70 poin = 7 exercise × 10. Poin per exercise diberikan sebagian atau penuh berdasarkan jawaban benar **dan** kelengkapan temuan di report — dokumentasi kurang berakibat poin dikurangi atau nol. Screenshot setiap query + timestamp.
 - **CQL ≠ SPL**: Syntax CQL mirip Splunk tapi tidak identik. Perhatikan perbedaan operator (`IN`, `LIKE`) dan field naming (CamelCase).
 - **Hypotheses evolve**: Hipotesis awal hampir selalu berubah setelah menemukan bukti. Jangan terpaku pada hipotesis awal.
 - **Cert expires**: OSTH hanya valid 3 tahun, recertification diperlukan.

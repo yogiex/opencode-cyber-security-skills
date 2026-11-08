@@ -112,7 +112,7 @@ Latih ribuan machine sampai pattern langsung terlihat. Tapi pattern recognition 
 3. **Screenshot wajib dari terminal interaktif**: Screenshot lewat web shell atau RDP tidak diterima. Semua bukti harus dari command line dengan IP + hostname + flag di frame sama.
 4. **AD set bukan berarti ADCS selalu ada**: Jangan asumsi ADCS aktif. Prioritaskan BloodHound mapping sebelum mengejar specific attack path.
 5. **Kernel exploit = LAST RESORT**: Kernel exploit bisa crash target dan menghabiskan revert. Selalu cek sudo, SUID, capabilities, cron, dan credential hunting dulu.
-6. **Report adalah 50% nilai**: Reproducibility adalah kunci. Screenshot setiap langkah, sertakan exact commands dan output. Report yang buruk = fail meskipun compromise semua sistem.
+6. **Report bukan 50% nilai — report adalah gerbang**: Poin hanya diberikan untuk objective yang terdokumentasi di report, dan tanpa report tidak mungkin lulus. Reproducibility adalah kunci. Screenshot setiap langkah, sertakan exact commands dan output. Report yang buruk = poin hilang meskipun mesin sudah dikompromikan.
 
 ## Progressive Disclosure
 

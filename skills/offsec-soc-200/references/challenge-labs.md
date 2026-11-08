@@ -128,7 +128,7 @@ OffSec menyediakan video OSA-SOC-200 (Gervin's sessions):
 
 ## Best Practices
 
-- Documentation is 50% of your grade — report yang koheren adalah pembeda pass vs fail
+- Documentation bukan persentase nilai terpisah, tetapi menentukan poin: 10 phase × 10, dan temuan tanpa bukti terdokumentasi = poin dikurangi/nol
 - Challenge Labs 11-13 adalah simulasi exam terbaik — jangan skip
 - Jika stuck >30 menit: broaden query atau pindah phase
 - Anti-pattern checklist: cek sebelum submit report

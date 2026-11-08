@@ -37,6 +37,20 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=$IP LPORT=$PORT --encrypt xor --
 # 5. AMSI bypass → shellcode runner → C2 beacon
 ```
 
+## Decision Frame
+
+Lima keputusan yang menentukan hasil OSEP. Ambil sebelum menulis payload pertama.
+
+1. **Custom payload atau tool publik?** — Jika bypass yang sama gagal dua kali dalam 30 menit, berhenti menambal dan tulis loader sendiri. Yang dinilai adalah rantai yang kamu pahami, bukan tool yang kamu jalankan.
+2. **Sudah cukup foothold untuk bergerak?** — Sebelum exploit berikutnya, catat interfaces, user context, kredensial, dan host yang bisa dijangkau. Bergerak tanpa peta jaringan akan menghabiskan jam ke-30 untuk re-enumerasi.
+3. **Revert atau debug?** — Lebih dari 30 menit tanpa kemajuan pada satu mesin = revert (kuota 50, bisa di-reset sekali). Environment yang aneh bukan bahan belajar saat exam.
+4. **Bukti ini lolos grader?** — Proof file hanya sah dari remote interactive shell dengan `type`/`cat`, menampilkan isi file **dan** IP (`ipconfig`/`ifconfig`) di screenshot yang sama, lalu disubmit ke control panel. Web shell atau RDP = 0 poin.
+5. **Urutan report sudah final?** — Mesin dinilai sesuai urutan dokumentasi di report. Susun dari yang paling yakin ke paling lemah, jangan mengikuti urutan penemuan.
+
+Berhenti dan periksa ulang kalau target di luar scope Exam Control Panel, atau kamu akan memakai tool komersial (Metasploit Pro, Cobalt Strike, Burp Suite Pro) — itu otomatis 0 poin untuk target tersebut.
+
+> Fakta ujian diverifikasi di [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) (2026-11-07).
+
 ## OSEP Mindset
 
 "Bypass Deeper" — Anda sudah tahu cara exploit, sekarang pelajari cara melakukannya saat ada Defender, AMSI, AppLocker, dan EDR yang menghadang.
@@ -60,7 +74,7 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=$IP LPORT=$PORT --encrypt xor --
 | **MSSQL Attacks** | Linked servers, xp_cmdshell, PowerUpSQL, NTLM relay | [mssql-attacks.md](./references/mssql-attacks.md) |
 | **AD Exploitation** | Unconstrained/constrained/RBCD delegation, ADCS (ESC1-ESC8), forest trust | [ad-exploitation.md](./references/ad-exploitation.md) |
 | **C2 Frameworks** | Metasploit, Sliver, Mythic, StageListener bridge | [c2-strategy.md](./references/c2-strategy.md) |
-| **Exam Strategy** | 48h time management, challenge labs, checklists, report writing | [exam-strategy.md](./references/exam-strategy.md) |
+| **Exam Strategy** | 47h45m time management, challenge labs, checklists, report writing | [exam-strategy.md](./references/exam-strategy.md) |
 
 ## 16 Modules Overview
 
@@ -124,7 +138,7 @@ Detail lengkap: [modules-overview.md](./references/modules-overview.md)
 1. **AMSI bypass tidak universal**: Method `amsiInitFailed` sudah di-patch di Windows 11 23H2+. Selalu siapkan minimal 3 metode berbeda (AmsiScanBuffer patch, custom RunSpace, registry disable).
 2. **msfvenom default shellcode terdeteksi**: Jangan pernah pakai shellcode default dari msfvenom tanpa enkripsi. XOR/AES sederhana sudah cukup untuk bypass signature-based detection.
 3. **AppLocker tidak hanya di `C:\Windows\`**: Path like `C:\Program Files` juga di-allow. Manfaatkan `bginfo.exe` atau binary signed lain di path tersebut.
-4. **Report adalah 50% exam**: Screenshot harus valid (IP + hostname + flag via command line). Format PDF + .7z maks 200MB. Report buruk = fail meskipun dapat semua flag.
+4. **Urutan mesin di report = urutan penilaian**: OSEP menilai mesin sesuai urutan dokumentasi di report. Proof file (`local.txt`/`proof.txt`/`secret.txt`) wajib tampil di screenshot **dan** disubmit ke control panel — jika tidak, 0 poin untuk target itu. Screenshot hanya sah dari remote interactive shell (`type`/`cat`) dengan IP + hostname; web shell atau RDP tidak diterima. PDF dalam `.7z` maks 200MB.
 5. **Environment bisa broken**: Jika teknik kerja di lab tapi tidak di exam, revert environment. Jangan buang waktu >30 menit debugging environment.
 6. **Linked servers ≠ RCE langsung**: Tidak semua linked server memiliki xp_cmdshell enabled. Siapkan alternatif (Olé automation procedures, `sp_OACreate`).
 

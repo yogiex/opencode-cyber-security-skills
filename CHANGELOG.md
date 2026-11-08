@@ -13,6 +13,44 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.4.0] — 2026-11-08 — Tuning lapis 2: report weight, Decision Frame 7 skill, audit di CI
+
+**Commit dasar:** `62bc0ea` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menghapus klaim bobot report yang salah, menanam Decision Frame di 7 skill sertifikasi sisa, menegakkan changelog lewat CI, dan merapikan README.
+
+### Diubah — fakta (exam guide OffSec diverifikasi ulang 2026-11-08)
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/offsec-th-200/SKILL.md` | "Report = 70 points" → report bukan komponen nilai terpisah (70 = 7×10; poin tergantung kelengkapan dokumentasi); tambah Decision Frame | klaim lama menyesatkan alokasi waktu dan menyalahi aritmetika ujian | OSTH Exam Guide: 7 exercise × 10, lulus 50/70 |
+| `skills/offsec-th-200/references/th-mindset.md` | golden rule "report is worth 70 points" dikoreksi | idem | idem |
+| `skills/offsec-ir-200/references/ir-lifecycle.md` | "laporan 30 dari 70 points" → 4×10 + 2×15; report bukan komponen terpisah | bertabrakan dengan `SKILL.md` yang menyebut 30 poin = 2 exercise forensik | OSIR Exam Guide: Phase 1 4×10, Phase 2 2×15, lulus 50 |
+| `skills/offsec-ir-200/references/reporting.md` | idem | idem | idem |
+| `skills/oscp-methodology/SKILL.md` | "report 50% nilai" → report adalah gerbang pemberian poin, bukan persentase | OffSec tidak memberi bobot persentase pada report | OSCP+ FAQ: poin hanya untuk objective yang terdokumentasi |
+| `skills/offsec-pen-300/SKILL.md` | "report 50% exam" → aturan OSEP sebenarnya (urutan mesin di report = urutan penilaian, proof file wajib di screenshot + control panel, shell interaktif); 48h → 47j45m; Decision Frame | aturan penilaian inti tidak terwakili | OSEP Exam Guide |
+| `skills/offsec-pen-300/references/exam-strategy.md` | judul "48h Time Management" → "47h45m" | durasi resmi 47 jam 45 menit | idem |
+| `skills/offsec-soc-200/SKILL.md` | dua klaim "report 50% grade" dikoreksi; Decision Frame | klaim tidak berdasar; OSDA menilai 10 phase | OSDA Exam Guide: 10 phase × 10, lulus 75/100 |
+| `skills/offsec-soc-200/references/challenge-labs.md` | "Documentation is 50% of your grade" dikoreksi menjadi aturan poin per phase | klaim yang sama muncul lagi di reference, bukan hanya SKILL.md | idem |
+| `skills/cpent/SKILL.md` | deadline report 7 → 30 hari (7 hari = perpanjangan berbayar); bobot "30%" ditandai `[UNVERIFIED]`; Decision Frame | deadline tertukar dengan perpanjangan; bobot report tidak dikonfirmasi sumber publik | EC-Council CPENT: report ≤30 hari |
+| `skills/cpent/references/pivoting-report.md` | deadline 7 → 30 hari; bobot ~30% ditandai `[UNVERIFIED]` | idem | idem |
+| `skills/mitre-attack/SKILL.md` | label Data Components "v14+" → "v14+, kini v20.1" | versi terkini | attack.mitre.org |
+| `docs/CERTIFICATION-FACTS.md` | tanggal 2026-11-08; bagian "Report bukan komponen nilai terpisah" dengan kutipan resmi per ujian; bobot report CPENT → `[UNVERIFIED]`; riwayat koreksi baru | sumber kebenaran harus memuat aturan report, bukan hanya angka | 5 exam guide OffSec dibaca ulang |
+
+### Diubah — struktur & tata kelola
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `.github/workflows/validate-and-sync.yml` | job `check-changelog` menjalankan `node scripts/check-changelog.js --base`; path filter menambah CHANGELOG.md, README.md, docs/, dan scripts/ (ditulis tanpa backtick agar tidak dibaca validator sebagai wildcard) | aturan audit sebelumnya hanya kesepakatan sosial, tidak gagal di CI | job memakai merge-base diff; gagal saat ada file tak tercatat |
+| `README.md` | label `web-recon-simple` → `web-reconnaissance`; bagian "Audit & Code Security" untuk `security-auditor` dan `code-security-audit` | 2 skill tidak terdaftar, 1 label usang | 28/28 skill kini muncul di README |
+| `skills/offsec-web-300/SKILL.md` | Decision Frame (white-box: source→exploit→bukti) | melengkapi pola pikir 7 skill sisa | 7 skill sisa |
+| `skills/comptia-cysa/SKILL.md` | Decision Frame (prioritas CVE, scan, TLP, IOC vs TTP, chain of custody) | melengkapi pola pikir analyst | idem |
+| `CHANGELOG.md` | entri 0.4.0; **koreksi entri 0.1.0**: klaim "file pukul 18:39 mengandung mojibake `â€”`" salah — pemindaian UTF-8 hari ini menemukan 0 mojibake di seluruh `skills/`, satu kemunculan hanya di `CHANGELOG.md` sendiri | aturan 6: koreksi lewat entri baru, bukan menulis ulang sejarah | `node -e` pemindaian byte UTF-8 atas 193 file `.md` |
+
+### Artefak turunan
+
+`node scripts/sync-skills.js` selesai ("Skill Sync Complete", 28 skill), tetapi `manifest.json`, `skills/index.json`, `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, dan `.cursor-plugin/plugin.json` **tidak berubah** karena tidak ada deskripsi frontmatter yang disentuh — kelimanya tidak muncul di `git status` sehingga tidak perlu dicatat sebagai perubahan.
+
 ## [0.3.0] — 2026-11-07 — Tuning fondasi: generator, fakta, decision frame
 
 **Commit dasar:** `46a2ab2` (branch `dev`)

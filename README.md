@@ -161,7 +161,7 @@ Baca *execution traces*, bukan cuma final output. Jika agent buang waktu di lang
 | [waf-evasion-methodology](./skills/waf-evasion-methodology) | 🔶 | Pola pikir dan metodologi sistematis untuk WAF evasion — memahami parsing discrepancies, encoding gaps, dan logic mismatches antara WAF dan backend application. |
 | [web-pentest-payloads](./skills/web-pentest-payloads) | 🔶 | Payload dan teknik eksploitasi per kelas kerentanan web: SQLi, NoSQL, command injection, SSTI, XXE, XSS, CSRF, SSRF, LFI/RFI, file upload, deserialization, request smuggling, cache poisoning, JWT/OAuth/SAML, IDOR, business logic, API, prompt injection, plus bypass filter/WAF. |
 | [web-app-scan](./skills/web-app-scan) | ✅ | Vulnerability assessment pada web application secara sistematis (deteksi kerentanan umum: SQLi, XSS, config leak, header keamanan, SSL/TLS, dsb) dengan pendekatan terstruktur. |
-| [web-recon-simple](./skills/web-reconnaissance) | ✅ | Recon web sederhana: chunk file, network tab, API endpoint, localstorage/token/session, identifikasi teknologi. |
+| [web-reconnaissance](./skills/web-reconnaissance) | ✅ | Recon web sederhana: chunk file, network tab, API endpoint, localstorage/token/session, identifikasi teknologi. |
 
 ### 🔵 Blue Team (Defensif)
 
@@ -189,6 +189,13 @@ Baca *execution traces*, bukan cuma final output. Jika agent buang waktu di lang
 | [devsecops-mindset](./skills/devsecops-mindset) | ✅ | Panduan pola pikir dan mindset DevSecOps untuk mengintegrasikan keamanan dalam siklus pengembangan secara berkelanjutan, tanpa fokus pada alat/tools tertentu. |
 | [owasp-top10-2025](./skills/owasp-top10-2025) | 🔶 | Referensi lengkap OWASP Top 10 2025 untuk risiko keamanan web application. Gunakan saat threat modeling, code review, penetration testing, atau saat membahas kategori A01-A10. |
 | [threat-modeling](./skills/threat-modeling) | ✅ | Panduan threat modeling untuk mengidentifikasi, menganalisis, dan memitigasi risiko keamanan pada sistem atau aplikasi secara general dan non-teknis. |
+
+### 🟣 Audit & Code Security
+
+| Skill | Status | Deskripsi |
+| ----- | ------ | --------- |
+| [security-auditor](./skills/security-auditor) | ✅ | Mindset, metodologi, dan referensi untuk security auditor — audit lifecycle, perbandingan framework (ISO 27001, NIST, PCI DSS, SOC 2), kontrol testing, pengumpulan bukti, dan jalur sertifikasi. Fokus GRC/compliance, bukan hunting kerentanan kode. |
+| [code-security-audit](./skills/code-security-audit) | 🔶 | Audit keamanan kode berlapis untuk codebase, API, service, CLI, library, dan daemon: recon terstruktur, coverage ledger deterministik, hunting per-unit dengan subagent terisolasi, validasi adversarial, `findings.json` tervalidasi skema, dan laporan yang bisa diaudit ulang. |
 
 ## Instalasi
 

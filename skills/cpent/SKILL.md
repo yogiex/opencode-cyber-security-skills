@@ -50,7 +50,7 @@ CPENT berbeda dari OSCP. OSCP mengajarkan "Try Harder". CPENT mengajarkan **"Pen
 1. **CPENT is a marathon** — 24 jam. Jaga energi, makan, minum.
 2. **Pivoting is the core skill** — seberapa dalam Anda bisa menembus.
 3. **Double pivot mindset** — setiap shell baru, cek interfaces.
-4. **Document during the exam** — report adalah 30% dari nilai.
+4. **Document during the exam** — report adalah porsi besar nilai (~30%, `[UNVERIFIED]`).
 5. **Automation is allowed** — sqlmap, Metasploit, Burp Pro semua boleh.
 6. **Binary exploitation 64-bit** — pelajari calling convention x64.
 7. **IoT & SCADA are different beasts** — industrial protocols behave differently.
@@ -62,6 +62,16 @@ CPENT berbeda dari OSCP. OSCP mengajarkan "Try Harder". CPENT mengajarkan **"Pen
 - SCADA/PLC → Modbus enumeration → insecure protocol → control system
 - Windows AD → SMB → PtH → lateral movement → DC
 - Linux → SUID abuse → root → SSH key → pivot
+
+## Decision Frame
+
+1. **Tool gagal dua kali — lanjut atau manual?** — Automation boleh dan dianjurkan, tapi output tool yang tidak kamu pahami tidak bisa dipertahankan di report. Dua kegagalan beruntun = beralih ke manual.
+2. **Shell baru: sudah cek interfaces?** — Double pivot adalah inti CPENT. Setiap foothold: `ip a`/`ifconfig`, hostname, dan apakah host dual-homed. Ini yang membedakan skor zona pivot.
+3. **Zona mana dulu?** — 53 soal, 8 domain, cut score bervariasi per zona (60–85%). Selesaikan soal murah dan pasti dulu; zona eksotis hanya setelah target aman.
+4. **Jam ke berapa harus tidur?** — 24 jam nonstop bukan strategi. Jadwalkan tidur 2–3 jam dan tulis rencana sebelum tidur agar bisa langsung lanjut.
+5. **Report sudah jalan?** — Report ~30% nilai dan deadline 30 hari, tetapi screenshot tidak bisa dibuat ulang setelah exam. Dokumentasi real-time, bukan rekonstruksi.
+
+> Fakta ujian diverifikasi di [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) (2026-11-07).
 
 ## Key Techniques
 
@@ -99,7 +109,7 @@ CPENT berbeda dari OSCP. OSCP mengajarkan "Try Harder". CPENT mengajarkan **"Pen
 1. **CPENT vs OSCP mindset berbeda**: OSCP batasi Metasploit, CPENT malah encourage. Tapi tetap harus paham manual exploitation — jangan hanya andalkan automation.
 2. **Double pivot bukan single pivot × 2**: Dua lapis jaringan dengan host dual-home. Ligolo-ng TUN interface sangat membantu karena semua tool bisa langsung jalan.
 3. **Binary exploitation 64-bit ≠ 32-bit**: Calling convention berbeda (rcx, rdx, r8, r9). ROP chains diperlukan untuk bypass NX/DEP. Siapkan template exploit untuk kedua arsitektur.
-4. **Report adalah 30% nilai**: EC-Council sangat ketat tentang bukti screenshot. Setiap screenshot harus capture IP + hostname + flag. Submit dalam 7 hari — jangan ditunda.
+4. **Report adalah 30% nilai** `[UNVERIFIED — bobot ini tidak dikonfirmasi di halaman publik EC-Council]`: EC-Council sangat ketat tentang bukti screenshot. Setiap screenshot harus capture IP + hostname + flag. Submit dalam 30 hari (perpanjangan 7 hari, USD100) — jangan ditunda.
 5. **IoT/SCADA protokol non-standard**: Modbus (port 502), DNP3 (port 20000), BACnet (port 47808). Pelajari protocol dasar sebelum exam.
 6. **Exam environment bisa berubah per cycle**: Jumlah soal dan zonasi bisa berbeda. Fleksibel dan adaptif adalah kunci.
 

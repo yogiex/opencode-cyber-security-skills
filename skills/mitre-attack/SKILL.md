@@ -273,7 +273,7 @@ Setiap teknik mencantumkan platform yang terpengaruh:
 
 ## Data Sources & Components
 
-### Data Components (ATT&CK v14+)
+### Data Components (ATT&CK v14+, kini v20.1)
 
 ATT&CK kini menggunakan **Data Components** untuk mendefinisikan telemetry yang dibutuhkan:
 

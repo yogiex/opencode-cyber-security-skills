@@ -118,7 +118,7 @@ details are provided in the sections below.
 
 ## Gotchas
 
-- Report adalah 30 dari 70 points — jangan remehkan. Alokasikan waktu khusus untuk report setelah exam
+- Report bukan komponen nilai terpisah (total 70 = 4×10 + 2×15) — tetapi poin hanya diberikan untuk temuan yang terdokumentasi; dokumentasi kurang = poin dikurangi/nol. Alokasikan waktu khusus untuk report setelah exam
 - Executive summary harus bisa dipahami oleh non-technical stakeholder (management, legal)
 - Screenshot harus menyertakan timestamp yang terbaca — screenshot tanpa timestamp tidak berguna untuk report
 - Chain of custody adalah komponen yang sering dilupakan — pastikan diisi untuk setiap evidence item

@@ -15,6 +15,17 @@ metadata:
 
 SOC-200 (OSDA) adalah sertifikasi defensive OffSec yang mengajarkan **detection, analysis, dan incident investigation** menggunakan ELK SIEM. Fokus pada merekonstruksi serangan dari log — memahami bagaimana attacker bekerja untuk mendeteksi mereka dari behavioral signatures.
 
+## Decision Frame
+
+1. **Ini attempt atau success?** — Tool berjalan ≠ berhasil. Cari event berikutnya: service terinstall, proses baru, autentikasi berhasil. Menyimpulkan dari satu event adalah kesalahan paling mahal.
+2. **Cukup satu sumber?** — Klaim butuh minimal dua sumber (Security log + Sysmon, atau EDR + network). Satu event tanpa korelasi tetap hipotesis.
+3. **Gap log itu evasion, sumber mati, atau revert?** — Tiga penyebab, tiga kesimpulan. Cek apakah host lain di window yang sama juga kosong sebelum menyebut anti-forensics.
+4. **Pindah phase sekarang atau bertahan?** — 10 phase × 10 poin. Jika 45 menit tanpa progres: tulis hipotesis yang ada, tandai phase itu, lanjut — kembali hanya kalau ada petunjuk baru.
+5. **Timeline-nya logis atau kronologis?** — Susun report per phase dan alur serangan, bukan per timestamp. Attacker boleh out-of-order karena revert; grader menilai cerita.
+6. **Apakah buktinya akan bertahan?** — Screenshot query **dan** hasil, bukan hanya hasil. Query adalah bukti metode; tanpa query, temuan sulit diverifikasi.
+
+> Fakta ujian diverifikasi di [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) (2026-11-07).
+
 ## How to Use This Skill
 
 | When you need to... | Load this file |
@@ -41,7 +52,7 @@ SOC-200 (OSDA) adalah sertifikasi defensive OffSec yang mengajarkan **detection,
 
 4. **In-memory attacks are invisible to disk scans** — Jangan cari executable mencurigakan — cari **LOLBINs**, **PowerShell**, **WMI**, **service creation** patterns.
 
-5. **The report is 50% of your grade** — Bisa detect semua phases tapi report berantakan = fail. Ceritakan attack story yang koheren.
+5. **Report bukan 50% nilai — tapi tanpa dokumentasi poin tidak diberikan** — 10 phase × 10 poin; temuan yang tidak terdokumentasi berakibat poin dikurangi atau nol. Ceritakan attack story yang koheren.
 
 6. **Success vs Attempt** — Hanya karena attacker menjalankan tool, belum tentu berhasil. Cek apakah event yang diharapkan benar-benar terjadi.
 
@@ -68,7 +79,7 @@ SOC-200 (OSDA) adalah sertifikasi defensive OffSec yang mengajarkan **detection,
 ## Gotchas
 
 - Timelines are NOT linear — urutkan report berdasarkan phase, bukan timestamp
-- 50% grade dari report — detect semua phases tapi report berantakan = fail
+- Report bukan komponen nilai terpisah — poin per phase hanya sah jika temuannya terdokumentasi; klaim tanpa bukti = poin hilang
 - In-memory attacks tidak terlihat di disk — cari LOLBINs, PowerShell, WMI patterns
 - Success vs Attempt — attacker run tool belum tentu berhasil, verify via next event
 - OSQuery untuk active verification, KQL untuk primary detection

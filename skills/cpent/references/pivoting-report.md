@@ -29,7 +29,7 @@ Attacker → Pivot 1 (gateway) → Subnet A → Host dual-home → Subnet B → 
 - Selalu ada subnet lain di belakangnya
 - Double pivot adalah core skill CPENT
 
-## Report Writing (~30% Nilai)
+## Report Writing (porsi besar nilai; ~30% `[UNVERIFIED]`)
 
 **EC-Council Format:**
 1. Cover Page: Exam ID, name, date
@@ -51,11 +51,11 @@ Attacker → Pivot 1 (gateway) → Subnet A → Host dual-home → Subnet B → 
 - Setiap langkah reproducible
 - Remediation actionable
 - PDF test open sebelum submit
-- Submit sebelum deadline 7 hari
+- Submit sebelum deadline 30 hari (perpanjangan 7 hari, USD100)
 
 ## Best Practices
 
 - Dokumentasi selama exam — jangan menumpuk di akhir
 - Network diagram harus menunjukkan attack path jelas
 - Screenshots harus capture IP + hostname + flag
-- Report adalah 30% — jangan disepelekan
+- Report adalah porsi besar nilai (~30%, `[UNVERIFIED]`) — jangan disepelekan

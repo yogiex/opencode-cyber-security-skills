@@ -21,7 +21,7 @@ tags: [osep-exam, exam-strategy, challenge-labs, time-management, checklist]
 
 Kerjakan setiap lab minimal 2 kali dengan pendekatan berbeda.
 
-## 48h Time Management
+## 47h45m Time Management
 
 ```
 Day 1 (16-18 jam):

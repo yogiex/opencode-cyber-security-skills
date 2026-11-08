@@ -22,7 +22,7 @@ OSTH mengajarkan **"Hunt, Don't Just React"** — proactive security practice di
 4. **Document as you hunt** — Timeline should grow as you find evidence
 5. **Splunk is your timeline, Falcon is your microscope** — Splunk gives breadth, Falcon gives depth
 6. **Hypotheses evolve** — Your initial hypothesis will change as you find evidence
-7. **The report is worth 70 points** — Screenshot every query, result, and artifact
+7. **The report carries the 70 points, it is not a separate score** — Poin hanya diberikan untuk temuan yang terdokumentasi; Screenshot every query, result, and artifact
 
 ## PEAK Threat Hunting Framework (SANS)
 

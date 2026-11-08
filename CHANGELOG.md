@@ -13,6 +13,44 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.6.0] — 2026-11-08 — Decision Frame untuk 3 skill metodologi + ledger kualitas
+
+**Commit dasar:** `b63dc68` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** poin B — tiga skill inti yang belum punya kerangka keputusan, plus satu dokumen yang membuat cakupan tuning terlihat.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `docs/SKILL-QUALITY.md` | matriks 28 skill × 5 kriteria (Trigger, Frame, Provenance, Refs, Failure modes), ringkasan 12 selesai / 3 sebagian / 13 belum, backlog C–F, dan alasan penundaan enforcement Frame | cakupan tuning sebelumnya hanya terlihat lewat riwayat commit; checker Frame belum layak dibuat pada 15/28 skill | angka dihitung dengan `node` langsung dari 28 `SKILL.md`, bukan ditebak |
+
+### Diubah — Decision Frame
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/ptes-standard/SKILL.md` | frame 5 keputusan engagement: kriteria keluar fase, depth vs breadth, stop condition ROE, alokasi ≥20% waktu report, standar bukti yang bisa direproduksi | skill hanya memuat 7 fase dan 6 Gotchas; tidak ada logika kapan berhenti atau pindah | tiap butir dibandingkan dengan 6 Gotchas — tidak ada yang mengulang |
+| `skills/waf-evasion-methodology/SKILL.md` | frame 5 keputusan: membuktikan WAF yang memblokir (kontrol positif), aturan pivot setelah 2 teknik tanpa perubahan respons, batas noise/scope, WAF pihak ketiga, bukti minimum | Gotchas bersifat taktis (direct IP, `\/`, paranoia level) dan tidak menjawab kapan berhenti mencoba | idem, dibandingkan dengan 5 Gotchas |
+| `skills/threat-intelligence/SKILL.md` | frame 5 keputusan produk: audiens/produk (strategic/operational/tactical), bahasa keyakinan berbasis jumlah sumber, actionable vs konteks, berbagi vs keselamatan sumber, titik henti koleksi | Gotchas menutup PIR, TLP, YARA/Sigma/STIX, dan tools — bukan keputusan produk intelijen | idem, dibandingkan dengan 6 Gotchas |
+
+### Diubah — fakta
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/ptes-standard/references/legal-compliance.md` | "PCI DSS v4.0" → "PCI DSS v4.x" + catatan `[UNVERIFIED]` (v4.0.1 terbit Juni 2024) | nomor versi kemungkinan usang; `docs/CERTIFICATION-FACTS.md` sendiri menandai versi PCI DSS belum terverifikasi | dibaca ulang; kategori `[UNVERIFIED]` konsisten dengan fact sheet |
+
+### Diubah — audit
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `CHANGELOG.md` | entri 0.6.0 | aturan 1 | `node scripts/check-changelog.js` |
+
+### Artefak turunan
+
+`node scripts/sync-skills.js`: frontmatter tidak disentuh, sehingga `manifest.json`, `skills/index.json`, `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, dan `.cursor-plugin/plugin.json` tidak berubah.
+
+Catatan cakupan: setelah entri ini, **15 dari 28** skill punya `## Decision Frame`; provenance tetap 12 karena `ptes-standard`, `threat-intelligence`, dan `waf-evasion-methodology` sengaja belum didaftarkan ke `check-fact-notes.js` (fact sheet belum memuat PTES, STIX 2.1, TLP 2.0, OWASP CRS).
+
 ## [0.5.0] — 2026-11-08 — Provenance note untuk 12 skill fact-bearing + pemeriksa otomatis
 
 **Commit dasar:** `ad0afbe` (branch `dev`)

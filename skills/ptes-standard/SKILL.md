@@ -10,6 +10,16 @@ metadata:
 
 # PTES — Penetration Testing Execution Standard
 
+## Decision Frame
+
+1. **Cukup bukti untuk keluar dari fase ini?** — Recon selesai bila aset kritis dan jalur masuk sudah terpetakan, bukan bila waktu habis. Vulnerability analysis selesai bila temuan sudah diverifikasi manual, bukan bila scanner selesai.
+2. **Depth atau breadth?** — Buktikan dampak bisnis pada satu jalur penuh lebih dulu; perluas hanya bila ada temuan yang risikonya belum bisa dinilai tanpa bukti tambahan.
+3. **Lanjut eksploitasi atau berhenti?** — Stop condition: data sensitif nyata, sistem produksi, atau target di luar ROE. Hentikan, lapor, dan tunggu keputusan tertulis — jangan "selesaikan dulu".
+4. **Sudah siap menulis report?** — Sisakan minimal 20% waktu engagement. Report adalah deliverable yang dibayar klien, bukan sisa waktu setelah exploitation.
+5. **Bukti ini cukup untuk direproduksi?** — Command, output, timestamp, dan kondisi target. Screenshot tanpa perintah tidak bisa direproduksi oleh pembaca.
+
+Berhenti dan minta amandemen tertulis bila satu langkah berikutnya tidak tercakup di ROE.
+
 ## Prerequisites
 
 - Understanding of penetration testing concepts and phases

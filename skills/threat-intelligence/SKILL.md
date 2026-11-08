@@ -9,6 +9,16 @@ metadata:
 
 # Threat Intelligence — CTI Lifecycle, IOC Management & Threat Hunting
 
+## Decision Frame
+
+1. **Ini menjawab pertanyaan siapa?** — RFI ad-hoc, PIR, atau kebutuhan keputusan eksekutif menentukan produk: strategic (bulanan), operational (kampanye), tactical (TTP/IOC). Format mengikuti audiens, bukan selera analis.
+2. **Seberapa yakin, dan bagaimana mengatakannya?** — Satu sumber = "possible"; dua sumber independen = "likely"; sumber primer + corroboration = "high confidence". Jangan menaikkan keyakinan karena bahasanya terdengar meyakinkan.
+3. **Apakah ini bisa ditindaklanjuti?** — Setiap temuan wajib punya detection opportunity atau mitigation. Tanpa itu, output-nya konteks, bukan intelijen.
+4. **Bagikan atau tahan?** — Keputusan berbagi mempertimbangkan keselamatan sumber dan kewajiban hukum, bukan hanya label TLP.
+5. **Kapan berhenti mengumpulkan?** — Time-box + saturation: berhenti saat pertanyaan terjawab atau sumber baru tidak lagi mengubah penilaian.
+
+Berhenti bila satu-satunya dasar penilaian adalah satu vendor report yang tidak bisa diverifikasi.
+
 ## Prerequisites
 
 - Understanding of cybersecurity fundamentals (attacks, defenses, adversaries)

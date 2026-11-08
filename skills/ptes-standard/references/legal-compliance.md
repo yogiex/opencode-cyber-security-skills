@@ -1,12 +1,14 @@
 ---
 name: "Legal & Compliance Notes"
-description: "Compliance requirements for penetration testing including PCI DSS v4.0 (Req 11.4), HIPAA Security Rule, GDPR Article 32, SOC 2/ISO 27001, FedRAMP/FISMA, and cloud provider authorization policies for AWS, Azure, and GCP."
+description: "Compliance requirements for penetration testing including PCI DSS v4.x (Req 11.4), HIPAA Security Rule, GDPR Article 32, SOC 2/ISO 27001, FedRAMP/FISMA, and cloud provider authorization policies for AWS, Azure, and GCP."
 tags: [ptes, compliance, pci-dss, hipaa, gdpr, fedramp, legal, cloud-authorization]
 ---
 
 # Legal & Compliance Notes
 
-## PCI DSS v4.0 (Requirement 11.4)
+## PCI DSS v4.x (Requirement 11.4)
+
+> Versi PCI DSS yang berlaku belum terverifikasi di fact sheet (`[UNVERIFIED]`); v4.0.1 terbit Juni 2024 dan menggantikan v4.0. Periksa PCI SSC sebelum mengutip nomor versi atau tenggat kepatuhan.
 
 - Annual external + internal penetration testing required
 - Must follow industry-accepted methodology (PTES, OWASP, NIST SP 800-115)

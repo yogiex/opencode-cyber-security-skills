@@ -13,6 +13,16 @@ metadata:
 
 **WAF bukanlah tembok. WAF adalah filter.** Ia bergantung pada signature, aturan, dan pola yang dikenal. Jika Anda bisa membuat traffic berbahaya terlihat "normal," Anda menang.
 
+## Decision Frame
+
+1. **Apakah benar WAF yang memblokir?** — Uji diferensial: payload sama ke origin/endpoint lain, plus satu kontrol positif yang pasti diblokir. Tanpa kontrol, "bypass gagal" hanya berarti payload-nya tidak valid.
+2. **Kapan berhenti mencoba varian?** — Dua teknik berturut-turut tanpa perubahan respons (status, ukuran, isi body) = pindah kelas serangan. Menumpuk obfuscation tanpa umpan balik hanya menambah noise.
+3. **Berapa noise yang boleh saya buat?** — Tentukan batas request/rate dan konsekuensi reputasi IP sebelum mulai; pada program bug bounty, batas ini juga soal scope.
+4. **Apakah ini masih dalam scope?** — WAF pihak ketiga (CDN) sering di luar izin pengujian. Bypass ke origin tetangga bisa menjadi insiden, bukan temuan.
+5. **Bukti minimum apa yang harus dibawa?** — Payload final + respons backend yang membuktikan eksekusi + kondisi WAF saat itu (vendor, paranoia level, waktu). Tanpa ketiganya, temuan tidak bisa direproduksi.
+
+Berhenti bila keberhasilan hanya terlihat dari status code 200 tanpa efek apa pun di backend.
+
 ## When to Use This Skill
 
 Invoke this skill when:

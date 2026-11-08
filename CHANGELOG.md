@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.6.0] — 2026-11-08 — Decision Frame untuk 3 skill metodologi + ledger kualitas
 
 **Commit dasar:** `b63dc68` (branch `dev`)
-**Status:** pending
+**Status:** committed in `c16a2e3`
 **Ruang lingkup:** poin B — tiga skill inti yang belum punya kerangka keputusan, plus satu dokumen yang membuat cakupan tuning terlihat.
 
 ### Ditambahkan

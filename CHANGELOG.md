@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.3.0] — 2026-11-07 — Tuning fondasi: generator, fakta, decision frame
 
 **Commit dasar:** `46a2ab2` (branch `dev`)
-**Status:** pending
+**Status:** committed in `0c01fbb`
 **Ruang lingkup:** memperbaiki generator yang menghapus metadata, mengoreksi fakta sertifikasi dari sumber resmi, dan menanam decision frame.
 
 ### Diubah — generator

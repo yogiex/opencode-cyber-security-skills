@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.4.0] — 2026-11-08 — Tuning lapis 2: report weight, Decision Frame 7 skill, audit di CI
 
 **Commit dasar:** `62bc0ea` (branch `dev`)
-**Status:** pending
+**Status:** committed in `32935e5`
 **Ruang lingkup:** menghapus klaim bobot report yang salah, menanam Decision Frame di 7 skill sertifikasi sisa, menegakkan changelog lewat CI, dan merapikan README.
 
 ### Diubah — fakta (exam guide OffSec diverifikasi ulang 2026-11-08)

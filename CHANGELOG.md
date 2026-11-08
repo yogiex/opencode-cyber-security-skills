@@ -13,6 +13,43 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.5.0] — 2026-11-08 — Provenance note untuk 12 skill fact-bearing + pemeriksa otomatis
+
+**Commit dasar:** `ad0afbe` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** poin A — angka di skill fact-bearing harus bisa ditelusuri, dan pelanggarannya harus gagal otomatis, bukan bergantung ingatan.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `scripts/check-fact-notes.js` | pemeriksa 5 syarat: note ada tepat satu, memakai varian kalimat yang benar, menautkan `docs/CERTIFICATION-FACTS.md`, tanggalnya sama dengan fact sheet, dan posisinya di antara `## Decision Frame` dan H2 berikutnya; juga menolak skill tak terdaftar yang menautkan fact sheet | catatan provenance tanpa penjaga akan basi seperti tanggal 2026-11-07 yang sudah salah sehari | `node scripts/check-fact-notes.js` → 12/12 lolos; **uji negatif:** tanggal di `comptia-cysa` diubah ke 2026-11-07 → exit 1 dengan pesan `note is dated differently from the fact sheet`, lalu dipulihkan |
+
+### Diubah — skill (penanda baru)
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/oscp-methodology/SKILL.md`, `skills/lf-cks/SKILL.md`, `skills/ec-ecih/SKILL.md` | penanda provenance varian sertifikasi, tepat setelah Decision Frame | angka ujian tersebar di `SKILL.md` **dan** `references/` (oscp: `exam-architecture.md`, `enumeration-framework.md`; lf-cks: `compliance-hardening.md`), jadi penanda di satu file harus menyatakan cakupan seluruh skill | `node scripts/check-fact-notes.js` |
+| `skills/mitre-attack/SKILL.md`, `skills/nist-800-53/SKILL.md` | penanda provenance varian standar (ATT&CK v20.1; SP 800-53 Rev 5.2.0) | keduanya kerangka, bukan ujian — kalimat "fakta ujian" akan menyesatkan | idem |
+
+### Diubah — skill (penanda lama diseragamkan)
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/comptia-cysa/SKILL.md`, `skills/cpent/SKILL.md`, `skills/offsec-ir-200/SKILL.md`, `skills/offsec-pen-300/SKILL.md`, `skills/offsec-soc-200/SKILL.md`, `skills/offsec-th-200/SKILL.md`, `skills/offsec-web-300/SKILL.md` | kalimat "Fakta ujian diverifikasi ... (2026-11-07)" → varian baru, tanggal 2026-11-08, klausa cakupan `references/` dan klausa snapshot | tanggal lama sudah basi satu hari dan tidak menyebut cakupan; 7 file memuat 7 salinan tanggal yang bisa berbeda-beda | idem |
+
+### Diubah — tata kelola
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `.github/workflows/validate-and-sync.yml` | job `check-fact-notes` menjalankan pemeriksa | penjaga harus berjalan di CI, bukan hanya lokal | YAML dibaca ulang; job berdiri sendiri tanpa `needs` |
+| `AGENTS.md` | header "Symlink to CLAUDE.md" dihapus (file ini regular file, `CLAUDE.md` tidak ada); daftar skrip menambah `check-fact-notes.js`; langkah workflow baru | header menyatakan hal yang tidak benar; pemeriksa harus terdokumentasi agar dipakai | `git ls-files -s AGENTS.md` → mode `100644`, bukan symlink |
+| `CHANGELOG.md` | entri 0.5.0 | aturan 1 | `node scripts/check-changelog.js` |
+
+### Artefak turunan
+
+`node scripts/sync-skills.js` dijalankan ulang: frontmatter tidak disentuh, sehingga `manifest.json`, `skills/index.json`, `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, dan `.cursor-plugin/plugin.json` tidak berubah dan tidak muncul di `git status`.
+
 ## [0.4.1] — 2026-11-08 — Konsistensi prasyarat CKA di skill CKS
 
 **Commit dasar:** `b92d660` (branch `dev`)

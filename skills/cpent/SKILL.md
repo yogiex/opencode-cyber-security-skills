@@ -71,7 +71,7 @@ CPENT berbeda dari OSCP. OSCP mengajarkan "Try Harder". CPENT mengajarkan **"Pen
 4. **Jam ke berapa harus tidur?** — 24 jam nonstop bukan strategi. Jadwalkan tidur 2–3 jam dan tulis rencana sebelum tidur agar bisa langsung lanjut.
 5. **Report sudah jalan?** — Report ~30% nilai dan deadline 30 hari, tetapi screenshot tidak bisa dibuat ulang setelah exam. Dokumentasi real-time, bukan rekonstruksi.
 
-> Fakta ujian diverifikasi di [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) (2026-11-07).
+> Angka ujian di skill ini (termasuk di `references/`) disalin dari [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) — diverifikasi 2026-11-08. Jika dokumen itu tidak tersedia di lingkunganmu, perlakukan angka ini sebagai snapshot dan periksa ulang ke sumber resmi sebelum dipakai untuk keputusan berbayar.
 
 ## Key Techniques
 

@@ -22,7 +22,7 @@ Empat domain: Security Operations (34%), Vulnerability Management (26%), Inciden
 5. **Bukti ini sah secara prosedur?** — Chain of custody, write blocker, dan pencatatan transfer. Tanpa itu, temuan tidak bisa dipakai secara legal maupun operasional.
 6. **Waktu ujian cukup?** — 85 soal / 165 menit ≈ 1,9 menit per soal. Jangan terjebak satu PBQ; tandai dan kembali.
 
-> Fakta ujian diverifikasi di [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) (2026-11-07).
+> Angka ujian di skill ini (termasuk di `references/`) disalin dari [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) — diverifikasi 2026-11-08. Jika dokumen itu tidak tersedia di lingkunganmu, perlakukan angka ini sebagai snapshot dan periksa ulang ke sumber resmi sebelum dipakai untuk keputusan berbayar.
 
 ## When to Use This Skill
 

@@ -31,7 +31,7 @@ IR-200 (Foundational Incident Response) adalah sertifikasi OffSec yang mengajark
 4. **Ini bagian insiden atau noise?** — Korelasikan waktu, host, dan user. Aktivitas administratif sah sering terlihat seperti serangan; sebutkan dasar pengecualiannya.
 5. **Bukti ini bisa direplikasi?** — Query SPL, perintah, dan output harus ada di report. Poin hanya diberikan untuk temuan yang terdokumentasi lengkap.
 
-> Fakta ujian diverifikasi di [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) (2026-11-07).
+> Angka ujian di skill ini (termasuk di `references/`) disalin dari [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) — diverifikasi 2026-11-08. Jika dokumen itu tidak tersedia di lingkunganmu, perlakukan angka ini sebagai snapshot dan periksa ulang ke sumber resmi sebelum dipakai untuk keputusan berbayar.
 
 ## Scoring & Exam Environment
 

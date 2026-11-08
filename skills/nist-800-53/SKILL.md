@@ -20,6 +20,8 @@ metadata:
 
 Kontrol tanpa pernyataan risiko dan bukti hanyalah checklist. Bedakan dokumen final, draft, dan rilis minor — dan catat tanggal akses.
 
+> Versi dan angka framework di skill ini disalin dari [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) — diverifikasi 2026-11-08 (SP 800-53 Rev 5.2.0). Periksa rilis terbaru sebelum mengutip versi.
+
 ## Pendahuluan
 
 NIST SP 800-53 adalah katalog kontrol keamanan dan privasi untuk informasi sistem dan organisasi. Publikasi ini menyediakan **20 keluarga kontrol** yang mencakup aspek teknis, operasional, manajerial, dan privasi.

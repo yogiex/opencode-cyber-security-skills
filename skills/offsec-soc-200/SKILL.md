@@ -24,7 +24,7 @@ SOC-200 (OSDA) adalah sertifikasi defensive OffSec yang mengajarkan **detection,
 5. **Timeline-nya logis atau kronologis?** — Susun report per phase dan alur serangan, bukan per timestamp. Attacker boleh out-of-order karena revert; grader menilai cerita.
 6. **Apakah buktinya akan bertahan?** — Screenshot query **dan** hasil, bukan hanya hasil. Query adalah bukti metode; tanpa query, temuan sulit diverifikasi.
 
-> Fakta ujian diverifikasi di [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) (2026-11-07).
+> Angka ujian di skill ini (termasuk di `references/`) disalin dari [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) — diverifikasi 2026-11-08. Jika dokumen itu tidak tersedia di lingkunganmu, perlakukan angka ini sebagai snapshot dan periksa ulang ke sumber resmi sebelum dipakai untuk keputusan berbayar.
 
 ## How to Use This Skill
 

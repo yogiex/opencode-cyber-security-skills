@@ -34,6 +34,8 @@ Kubernetes security bukan tentang command kubectl — ini tentang **memahami tru
 
 Berhenti jika `apply` akan mengubah state tanpa backup manifest. Waktu ujian 2 jam untuk 15–20 task: kerjakan yang pasti dulu, verifikasi di pass ketiga.
 
+> Angka ujian di skill ini (termasuk di `references/`) disalin dari [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) — diverifikasi 2026-11-08. Jika dokumen itu tidak tersedia di lingkunganmu, perlakukan angka ini sebagai snapshot dan periksa ulang ke sumber resmi sebelum dipakai untuk keputusan berbayar.
+
 ## Exam Format
 
 Performance-based — 2 jam, 15–20 task, Kubernetes **v1.37**. Passing **67%**. Prasyarat: **telah lulus CKA** (status aktif tidak disyaratkan eksplisit). Biaya $445, valid 2 tahun, 1 retake. Dokumentasi: browser di VM (kubernetes.io/docs). Simulator: killer.sh (2 sesi × 36 jam, 17 soal/sesi).

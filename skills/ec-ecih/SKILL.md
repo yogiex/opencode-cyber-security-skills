@@ -23,6 +23,8 @@ metadata:
 
 Aturan: akuisisi bukti volatile dulu bila tidak ada penyebaran aktif; containment segera bila risiko tinggi; catat keputusan beserta alasannya.
 
+> Angka ujian di skill ini (termasuk di `references/`) disalin dari [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) — diverifikasi 2026-11-08. Jika dokumen itu tidak tersedia di lingkunganmu, perlakukan angka ini sebagai snapshot dan periksa ulang ke sumber resmi sebelum dipakai untuk keputusan berbayar.
+
 ## How to Use This Skill
 
 Load the right reference file based on what you need:

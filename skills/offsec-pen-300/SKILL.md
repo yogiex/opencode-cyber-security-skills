@@ -49,7 +49,7 @@ Lima keputusan yang menentukan hasil OSEP. Ambil sebelum menulis payload pertama
 
 Berhenti dan periksa ulang kalau target di luar scope Exam Control Panel, atau kamu akan memakai tool komersial (Metasploit Pro, Cobalt Strike, Burp Suite Pro) — itu otomatis 0 poin untuk target tersebut.
 
-> Fakta ujian diverifikasi di [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) (2026-11-07).
+> Angka ujian di skill ini (termasuk di `references/`) disalin dari [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) — diverifikasi 2026-11-08. Jika dokumen itu tidak tersedia di lingkunganmu, perlakukan angka ini sebagai snapshot dan periksa ulang ke sumber resmi sebelum dipakai untuk keputusan berbayar.
 
 ## OSEP Mindset
 

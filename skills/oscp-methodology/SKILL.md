@@ -25,6 +25,8 @@ Sebelum menyerang target, jawab eksplisit:
 
 Berhenti dan dokumentasikan sebelum pindah target; jangan menebak isi flag atau memakai AI chatbot.
 
+> Angka ujian di skill ini (termasuk di `references/`) disalin dari [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) — diverifikasi 2026-11-08. Jika dokumen itu tidak tersedia di lingkunganmu, perlakukan angka ini sebagai snapshot dan periksa ulang ke sumber resmi sebelum dipakai untuk keputusan berbayar.
+
 ## Prerequisites
 
 - Basic networking (TCP/IP, ports, protocols)

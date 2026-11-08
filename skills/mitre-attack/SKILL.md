@@ -20,6 +20,8 @@ metadata:
 
 Jangan memakai taktik sebagai urutan kill chain — taktik tidak berurutan. Pin versi ATT&CK saat menyimpan hasil mapping.
 
+> Versi dan angka framework di skill ini disalin dari [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) — diverifikasi 2026-11-08 (ATT&CK v20.1). Periksa rilis terbaru sebelum mengutip versi.
+
 ## Apa itu MITRE ATT&CK
 
 MITRE ATT&CK (Adversarial Tactics, Techniques, and Common Knowledge) adalah **knowledge base** yang mendokumentasikan TTP (Tactics, Techniques, and Procedures) adversary berdasarkan observasi dunia nyata.

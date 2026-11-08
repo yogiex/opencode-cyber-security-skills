@@ -1,5 +1,5 @@
 # cyber-security - Agent Skills Repository
-## AGENTS.md (Symlink to CLAUDE.md)
+## Agent Instructions
 
 This repo contains cyber-security Agent Skills — folders of instructions, references, scripts, and assets that AI agents use to work more accurately. For detailed architecture, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
@@ -82,13 +82,15 @@ The SKILL.md should include:
 
 - `node scripts/add-skill.js <name> "<description>"` — Scaffold a new skill
 - `node scripts/sync-skills.js` — Sync manifest.json, platform plugin files, marketplace.json, and skills/index.json with skills directory. README.md is now manually maintained (categorized tables) — update it separately when adding skills.
+- `node scripts/check-fact-notes.js` — Verify every fact-bearing skill carries a provenance note to `docs/CERTIFICATION-FACTS.md`, dated like the fact sheet, resolvable, and placed right after its Decision Frame.
 
 ## Workflow
 
 1. Add or edit reference files in `skills/<name>/references/`
 2. Update `SKILL.md` reference links if files were added/removed/renamed
 3. Run `node scripts/sync-skills.js` if SKILL.md frontmatter changed (updates manifest.json, platform plugin files, and index.json). README.md is manually maintained (categorized tables) — update it in the same commit.
-4. Record every added, modified, renamed, or deleted file in `CHANGELOG.md`, then run `node scripts/check-changelog.js` before committing.
+4. Run `node scripts/check-fact-notes.js` if the change touches exam facts, versions, or the fact sheet.
+5. Record every added, modified, renamed, or deleted file in `CHANGELOG.md`, then run `node scripts/check-changelog.js` before committing.
 
 ## Changelog (Audit Trail)
 

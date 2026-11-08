@@ -36,7 +36,7 @@ OSWE menilai exploit yang bisa dijelaskan dan dijalankan ulang, bukan temuan yan
 4. **Kapan berhenti menulis exploit dan mulai merapikan bukti?** — Report window 24 jam, tetapi screenshot tidak bisa dibuat ulang setelah exam. Sisakan minimal 3–4 jam terakhir.
 5. **Apakah alat ini dilarang?** — SQLmap, otomasi Burp Suite Pro, source analyzer, dan AI dilarang. Manual dan script sendiri adalah jalur yang dinilai.
 
-> Fakta ujian diverifikasi di [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) (2026-11-07).
+> Angka ujian di skill ini (termasuk di `references/`) disalin dari [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) — diverifikasi 2026-11-08. Jika dokumen itu tidak tersedia di lingkunganmu, perlakukan angka ini sebagai snapshot dan periksa ulang ke sumber resmi sebelum dipakai untuk keputusan berbayar.
 
 ## Daftar Isi
 

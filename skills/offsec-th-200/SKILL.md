@@ -33,7 +33,7 @@ TH-200 (OSTH) adalah sertifikasi threat hunting OffSec — **proactive threat de
 4. **Kapan berhenti hunt dan mulai menulis?** — 7 exercise × 10 poin. Sisakan 60 menit terakhir untuk menyapu exercise yang kosong: satu jawaban parsial yang terdokumentasi lebih bernilai daripada hunt yang menggantung.
 5. **Jawaban ini akan dapat poin penuh?** — Poin diberikan berdasarkan jawaban benar **dan** kelengkapan narasi: query, screenshot, timestamp, dampak. Jika bukti tidak bisa direplikasi pembaca, anggap poinnya hilang.
 
-> Fakta ujian diverifikasi di [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) (2026-11-07).
+> Angka ujian di skill ini (termasuk di `references/`) disalin dari [docs/CERTIFICATION-FACTS.md](../../docs/CERTIFICATION-FACTS.md) — diverifikasi 2026-11-08. Jika dokumen itu tidak tersedia di lingkunganmu, perlakukan angka ini sebagai snapshot dan periksa ulang ke sumber resmi sebelum dipakai untuk keputusan berbayar.
 
 ## Scoring & Exam Environment
 

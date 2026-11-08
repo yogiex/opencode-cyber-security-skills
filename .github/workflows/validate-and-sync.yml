@@ -128,6 +128,16 @@ jobs:
 
           node scripts/check-changelog.js --base "$BASE"
 
+  check-fact-notes:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft != true && github.actor != 'dependabot[bot]'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Verify provenance notes for fact-bearing skills
+        run: node scripts/check-fact-notes.js
+
   validate-skills:
     needs: detect-changes
     if: needs.detect-changes.outputs.skills_to_validate != '[]'

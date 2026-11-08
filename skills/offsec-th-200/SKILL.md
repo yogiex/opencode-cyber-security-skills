@@ -22,7 +22,7 @@ TH-200 (OSTH) adalah sertifikasi threat hunting OffSec — **proactive threat de
 | **Endpoint** | CrowdStrike Falcon (CQL) | OSQuery | Autopsy + Volatility |
 | **Network** | Suricata IDS/IPS | Tidak | Tidak |
 | **Pendekatan** | Proaktif — hypothesis-driven | Reaktif — alert-driven | Reaktif — incident-driven |
-| **Cert expires** | 3 tahun | Tidak | 3 tahun |
+| **Cert expires** | Ya (perlu recertification) | Tidak | Ya (perlu recertification) |
 | **Passing** | 50/70 | 75/100 | 50/70 |
 
 ## Scoring & Exam Environment

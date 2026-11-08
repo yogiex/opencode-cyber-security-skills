@@ -49,9 +49,9 @@ WEB-300 (Advanced Web Application Security Assessment) adalah sertifikasi **whit
 |-------|---------------|-----------------|----------------|
 | **Pendekatan** | **White-box** — source code diberikan | Black-box | Black-box |
 | **Fokus** | Source code review, custom exploit | Enumeration, exploitation | Evasion, EDR bypass |
-| **Durasi exam** | 47h45m | 24h | 47h45m |
+| **Durasi exam** | 47h45m | 23h45m | 47h45m |
 | **Report window** | 24 jam | 24 jam | 24 jam |
-| **Passing score** | **85/100** | 50/100 (Booster) | 85/100 |
+| **Passing score** | **85/100** | 70/100 raw (mulai 1 Des 2026: skala 100–500, lulus 400) | Min **100** poin |
 | **Languages** | Java, C#, PHP, Python, JavaScript | Semua umum | C#, PowerShell, C |
 
 ### Scoring & Passing
@@ -397,7 +397,7 @@ r = session.post(TARGET, data={"template": payload})
 
 ### OffSec Official
 - Course: https://www.offsec.com/courses/web-300/
-- Exam Guide: https://help.offsec.com/hc/en-us/articles/360049792232-OSWE-Exam-Guide
+- Exam Guide: https://help.offsec.com/hc/en-us/articles/360046869951-WEB-300-Advanced-Web-Attacks-and-Exploitation-OSWE-Exam-Guide
 
 ### Reference Files
 - `references/dotnet-deserialization.md` — .NET gadget chains, BinaryFormatter, LosFormatter
@@ -425,7 +425,7 @@ r = session.post(TARGET, data={"template": payload})
 > 1. **Kuasai source code review** — cari vulnerable patterns dengan cepat
 > 2. **Pahami gadget chains** — .NET deserialization, Java ysoserial, prototype pollution gadgets
 > 3. **Exploit Python harus clean** — fully automated, no hardcoded sessions
-> 4. **Report adalah 85/100 minimum** — dokumentasi setiap langkah exploit
+> 4. **Passing score 85/100** — PoC harus berjalan tanpa interaksi user; laporan yang lemah menggugurkan exploit yang benar
 > 5. **Praktik, praktik, praktik** — kerjakan semua Challenge Labs sampai exploit jalan tanpa error
 >
 > Ingat: "Source code is the ultimate documentation. Everything you need to exploit the application is right there."

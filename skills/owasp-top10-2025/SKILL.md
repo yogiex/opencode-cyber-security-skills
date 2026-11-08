@@ -62,8 +62,7 @@ Access control enforces policy such that users cannot act outside their intended
 ### A02:2025 – Security Misconfiguration
 
 **Description**  
-The most common issue – insecure default configurations, incomplete setups, open cloud storage, verbose error messages, missing security headers.
-
+The most common issue – insecure default configurations, incomplete setups, open cloud storage, verbose error messages, missing security headers. *(Catatan: A01 memiliki rata-rata insidensi lebih tinggi; A02 menonjol karena luas, bukan karena peringkat pertama.)*
 **Examples**
 - Default credentials (admin/admin) still active.
 - Directory listing enabled on web server.
@@ -263,7 +262,7 @@ Always prioritize **practical, fixable advice** over academic theory.
 |------|-----------|------|
 | OWASP Top 10:2025 — Official | Halaman resmi dengan data, metodologi, dan detail per kategori | [owasp.org](https://owasp.org/Top10/2025/) |
 | OWASP Top 10 GitHub Project | Repositori markdown resmi, data kontribusi kuesioner, rencana remediasi | [github.com](https://github.com/owasp/top10) |
-| OWASP ASVS v4.0 | Application Security Verification Standard — kerangka audit teknis mendalam | [owasp.org](https://owasp.org/www-project-application-security-verification-standard/) |
+| OWASP ASVS 5.0.0 | Application Security Verification Standard — kerangka audit teknis mendalam (rilis 30 Mei 2025) | [asvs.owasp.org](https://asvs.owasp.org) |
 | OWASP WSTG v4.2 | Web Security Testing Guide — panduan testing untuk setiap kerentanan | [owasp.org](https://owasp.org/www-project-web-security-testing-guide/) |
 | OWASP Cheat Sheet Series | Koleksi concise cheat sheet per topik keamanan | [cheatsheetseries.owasp.org](https://cheatsheetseries.owasp.org/) |
 | OWASP Juice Shop | Aplikasi sengaja rentan (Node.js/Angular) untuk training dan CTF | [owasp.org](https://owasp.org/www-project-juice-shop/) |

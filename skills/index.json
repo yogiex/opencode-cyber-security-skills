@@ -1,8 +1,34 @@
 {
   "skills": [
     {
+      "name": "code-security-audit",
+      "description": "Audit keamanan kode berlapis untuk codebase, API, service, CLI, library, dan daemon: recon terstruktur, coverage ledger deterministik, hunting per-unit dengan subagent terisolasi, validasi adversarial, findings.json tervalidasi skema, dan laporan yang bisa diaudit ulang. Berbeda dari security-auditor (GRC/compliance): skill ini mengejar kerentanan tingkat kode.",
+      "files": [
+        "SKILL.md",
+        "references/ATTACK-CLASSES.md",
+        "references/companions/AI-AND-LLM.md",
+        "references/companions/CLIENT-SIDE.md",
+        "references/companions/CLOUD-AND-DEPLOYMENT.md",
+        "references/companions/DATA-ISOLATION-AND-LIFECYCLE.md",
+        "references/companions/DESKTOP-MOBILE-AND-LOCAL-IPC.md",
+        "references/companions/MEMORY-SAFETY-AND-BINARY.md",
+        "references/companions/PROTOCOLS-RPC-AND-MESSAGING.md",
+        "references/companions/RESOURCE-EXHAUSTION-AND-AVAILABILITY.md",
+        "references/companions/SUPPLY-CHAIN-AND-RELEASE.md",
+        "references/companions/WEB-PROTOCOL-AND-AUTH.md",
+        "references/HUNTING.md",
+        "references/RECONNAISSANCE.md",
+        "references/VALIDATION-AND-REPORTING.md",
+        "scripts/report-schema.json",
+        "scripts/validate-coverage-ledger.cjs",
+        "scripts/validate-coverage-ledger.test.cjs",
+        "scripts/validate-findings.cjs",
+        "scripts/validate-findings.test.cjs"
+      ]
+    },
+    {
       "name": "comptia-cysa",
-      "description": "",
+      "description": "Panduan lengkap CompTIA CySA+ (CS0-004 V4) mencakup Security Operations, Vulnerability Management, Incident Response, dan Reporting & Communication untuk mempersiapkan sertifikasi Cybersecurity Analyst.",
       "files": [
         "SKILL.md",
         "references/domain1-security-operations.md",
@@ -15,7 +41,7 @@
     },
     {
       "name": "cpent",
-      "description": "",
+      "description": "EC-Council CPENT (Certified Penetration Testing Professional) — mindset, metodologi, dan strategi komprehensif untuk CPENT exam mencakup 14 modul inti, binary exploitation 32/64-bit, IoT/OT/SCADA, double pivoting, report writing, dan LPT Master pathway.",
       "files": [
         "SKILL.md",
         "references/binary-exploitation.md",
@@ -33,14 +59,14 @@
     },
     {
       "name": "devsecops-mindset",
-      "description": "",
+      "description": "Panduan pola pikir dan mindset DevSecOps untuk mengintegrasikan keamanan dalam siklus pengembangan secara berkelanjutan, tanpa fokus pada alat/tools tertentu.",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "ec-ecih",
-      "description": "",
+      "description": "EC-Council ECIH (Certified Incident Handler) v3 — incident handler mindset, IR lifecycle framework (NIST 800-61 + ECIH 9-stage IH&R), decision frameworks per incident type, forensic readiness, containment strategies, eradication methodology, recovery planning, post-incident lessons learned, dan komunikasi krisis. Berbasis ECIH 212-89 v3 curriculum.",
       "files": [
         "SKILL.md",
         "references/containment-evidence.md",
@@ -54,14 +80,14 @@
     },
     {
       "name": "incident-response-plan",
-      "description": "",
+      "description": "Panduan incident response non-teknis untuk organisasi: persiapan, deteksi, analisis, containment, eradikasi, recovery, dan pembelajaran. Cocok untuk tim manajemen, legal, PR, dan koordinator insiden.",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "lf-cks",
-      "description": "",
+      "description": "Certified Kubernetes Security Specialist (CKS) — Kubernetes security mindset, defense-in-depth framework, cluster isolation models, workload segmentation, supply chain trust, authentication & authorization philosophy, network security architecture, runtime protection, compliance posture, dan decision framework untuk securing container platforms. Berbasis CNCF CKS curriculum dan CIS Kubernetes Benchmark.",
       "files": [
         "SKILL.md",
         "references/auth-authz.md",
@@ -77,28 +103,28 @@
     },
     {
       "name": "log-management-nist-800-92",
-      "description": "",
+      "description": "Panduan log management berdasarkan NIST SP 800-92 untuk perencanaan, pengumpulan, penyimpanan, analisis, dan retensi log keamanan secara terstruktur.",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "mitre-attack",
-      "description": "",
+      "description": "Panduan MITRE ATT&CK framework untuk memahami adversary tactics, techniques, dan prosedur dalam threat intelligence, detection engineering, dan defensive gap analysis.",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "nist-800-53",
-      "description": "",
+      "description": "Panduan Security and Privacy Controls berdasarkan NIST SP 800-53 Rev 5 (Release 5.2.0) untuk pemilihan, implementasi, dan assessment kontrol keamanan dan privasi dalam Risk Management Framework.",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "offsec-ir-200",
-      "description": "",
+      "description": "OffSec IR-200 / OSIR (OffSec Incident Responder) — foundational incident response covering full IR lifecycle (NIST 800-61r2), Splunk SIEM analysis with SPL, digital forensics (Autopsy, Volatility 3, FTK Imager), malware triage with YARA, containment/eradication/recovery strategies, incident communication plans, and post-mortem reporting.",
       "files": [
         "SKILL.md",
         "assets/communication-template.md",
@@ -114,7 +140,7 @@
     },
     {
       "name": "offsec-pen-300",
-      "description": "",
+      "description": "OffSec PEN-300 / OSEP — advanced evasion techniques, AV/EDR bypass, AMSI/AppLocker/CLM evasion, process injection, custom shellcode runners, MSSQL attacks, AD exploitation, delegation, ADCS, and professional report writing.",
       "files": [
         "SKILL.md",
         "assets/exam-checklist.md",
@@ -132,7 +158,7 @@
     },
     {
       "name": "offsec-soc-200",
-      "description": "",
+      "description": "OffSec SOC-200 / OSDA (OffSec Defense Analyst) — security operations and defensive analysis. Covers SOC operations, Windows & Linux endpoint detection, SIEM analysis with ELK/Kibana/KQL, attacker methodology (Kill Chain, MITRE ATT&CK), Windows Event Log & Sysmon analysis, Active Directory threat detection, network detections, and incident investigation.",
       "files": [
         "SKILL.md",
         "assets/pre-exam-checklist.md",
@@ -148,7 +174,7 @@
     },
     {
       "name": "offsec-th-200",
-      "description": "",
+      "description": "OffSec TH-200 / OSTH (OffSec Threat Hunter) — foundational threat hunting covering proactive threat detection, behavioral analysis, threat actor profiling, Splunk SIEM analysis with SPL, CrowdStrike Falcon endpoint hunting, Suricata IDS/IPS, hypothesis-driven hunting methodologies (PEAK, SEARCH), MITRE ATT&CK mapping, ransomware & APT case studies, cyber threat intelligence integration, and professional hunt reporting.",
       "files": [
         "SKILL.md",
         "assets/report-template.md",
@@ -165,7 +191,7 @@
     },
     {
       "name": "offsec-web-300",
-      "description": "",
+      "description": "OffSec WEB-300 / OSWE (Offensive Security Web Expert) — advanced web application security assessment covering white-box testing methodology, source code review in Java, C#, PHP, Python, and JavaScript, custom exploit development for .NET deserialization, PHP type juggling, SQL injection, SSTI, SSRF, prototype pollution, authentication bypass, XXE, OS command injection, and professional exploit scripting in Python.",
       "files": [
         "SKILL.md",
         "references/dotnet-deserialization.md",
@@ -178,7 +204,7 @@
     },
     {
       "name": "oscp-methodology",
-      "description": "",
+      "description": "OSCP (Offensive Security Certified Professional) — mindset, metodologi, dan strategi komprehensif untuk PEN-200/OSCP+ mencakup filsafat Try Harder, 3 attack vectors, enumeration framework, privilege escalation AD/Linux/Windows, dan reporting.",
       "files": [
         "SKILL.md",
         "references/ad-attack-chain.md",
@@ -196,7 +222,7 @@
     },
     {
       "name": "owasp-top10-2025",
-      "description": "",
+      "description": "Complete reference for OWASP Top 10 2025 web application security risks. Use when conducting threat modeling, code review, penetration testing, secure design, or when user asks about any AXX:2025 category, vulnerability explanations, or mitigation strategies.",
       "files": [
         "SKILL.md",
         "references/payloads-cheatsheet.md"
@@ -204,7 +230,7 @@
     },
     {
       "name": "ptes-standard",
-      "description": "",
+      "description": "Penetration Testing Execution Standard (PTES) — comprehensive guide for conducting penetration tests across 7 phases: pre-engagement, intelligence gathering, threat modeling, vulnerability analysis, exploitation, post-exploitation, and reporting. Use when planning or executing penetration tests, security assessments, or when user asks about PTES methodology.",
       "files": [
         "SKILL.md",
         "references/exploitation.md",
@@ -222,35 +248,35 @@
     },
     {
       "name": "risk-management-framework",
-      "description": "",
+      "description": "Panduan NIST Risk Management Framework (SP 800-37) untuk mengelola risiko keamanan dan privasi secara terstruktur, fleksibel, dan berkelanjutan di seluruh siklus hidup sistem",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "security-auditor",
-      "description": "",
+      "description": "Panduan mindset, metodologi, dan referensi untuk security auditor — mencakup audit lifecycle, framework comparison, control testing, evidence collection, dan certification path.",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "security-documentation",
-      "description": "",
+      "description": "Membuat laporan pengujian keamanan dalam format LaTeX dan mengompilasi ke PDF, mengikuti template docs/laporan.txt",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "soc-analyst",
-      "description": "",
+      "description": "Pola pikir dan pendekatan untuk Security Analyst dan SOC Analyst dalam mentriage, menyelidiki, merespon insiden, dan berkomunikasi secara efektif.",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "threat-intelligence",
-      "description": "",
+      "description": "Cyber Threat Intelligence (CTI) — lifecycle, intelligence frameworks, IOC management, threat hunting, analyst tradecraft. Use when gathering threat intelligence, performing threat hunting, managing IOCs, conducting intelligence-driven analysis, or when user asks about CTI lifecycle, TIP platforms, STIX/TAXII, MISP, OpenCTI, or structured analytical techniques.",
       "files": [
         "SKILL.md",
         "references/analytic-frameworks.md",
@@ -265,14 +291,14 @@
     },
     {
       "name": "threat-modeling",
-      "description": "",
+      "description": "Panduan threat modeling untuk mengidentifikasi, menganalisis, dan memitigasi risiko keamanan pada sistem atau aplikasi secara general dan non-teknis",
       "files": [
         "SKILL.md"
       ]
     },
     {
       "name": "waf-evasion-methodology",
-      "description": "",
+      "description": "Pola pikir dan metodologi sistematis untuk WAF evasion — memahami parsing discrepancies, encoding gaps, dan logic mismatches antara WAF dan backend application.",
       "files": [
         "SKILL.md",
         "assets/checklist.md",
@@ -284,7 +310,7 @@
     },
     {
       "name": "web-app-scan",
-      "description": "",
+      "description": "Melakukan vulnerability assessment pada web application secara sistematis seperti tools Nessus (deteksi kerentanan umum: SQLi, XSS, config leak, header keamanan, SSL/TLS, dsb) dengan pendekatan terstruktur dan non-teknis.",
       "files": [
         "SKILL.md"
       ]
@@ -337,7 +363,7 @@
     },
     {
       "name": "web-reconnaissance",
-      "description": "",
+      "description": "Recon web/SPA: chunk JS, network tab, endpoint API, token di localStorage/cookie, teknologi, subdomain, wayback. Muat saat memetakan aplikasi sebelum scan atau pentest.",
       "files": [
         "SKILL.md"
       ]

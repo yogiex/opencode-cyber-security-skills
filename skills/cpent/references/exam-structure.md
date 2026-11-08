@@ -10,11 +10,11 @@ tags: [cpent, exam, scoring, time-management, proctoring]
 
 | Komponen | Detail |
 |----------|--------|
-| Total soal | 5 (3 standalone + 2 complex) |
-| CPENT passing | 70% |
+| Total soal | 53 soal praktik, 8 domain (13/13/14/12/13/11/11/13) |
+| CPENT passing | Cut score 60–85% per form (bukan 70% tetap) |
 | LPT Master | 90%+ otomatis |
-| Retake | 1 free retake (dalam 4 minggu) |
-| Report deadline | Maksimal 7 hari setelah exam |
+| Retake | Tidak ada free retake resmi; pembelian attempt melalui practicals@eccouncil.org |
+| Report deadline | Maksimal 30 hari setelah exam (perpanjangan 7 hari, USD100) |
 
 ## Exam Format Options
 

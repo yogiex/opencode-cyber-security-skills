@@ -18,13 +18,13 @@ OSDA adalah sertifikasi **100% praktikal** — Anda diberi logs pre-recorded di 
 |-------|----------------|---------------|---------------|
 | **Level** | 200 (foundational) | 200 | 200 |
 | **Fokus** | Detection & log analysis | Incident response process | Proactive threat hunting |
-| **Durasi exam** | 23h45m | 23h45m | 23h45m |
+| **Durasi exam** | 23h45m | 8 jam | 8 jam |
 | **Report window** | 24 jam | 24 jam | 24 jam |
-| **SIEM tool** | ELK Stack (Kibana + KQL) | ELK Stack | ELK Stack |
-| **Phases** | 10 phases | Multiple scenarios | Multiple hunts |
+| **SIEM tool** | ELK Stack (Kibana + KQL) | Splunk | Splunk + CrowdStrike Falcon + Suricata |
+| **Phases** | 10 phase | 2 phase (4×10 + 2×15) | 7 exercise (7×10) |
 | **Approach** | Reactive — detect attacker actions | Reactive — respond to incidents | Proactive — hunt for threats |
-| **Cert expires** | No (does not expire) | No | No |
-| **Passing** | 75/100 | 70/100 | 70/100 |
+| **Cert expires** | Tidak | Ya | Ya |
+| **Passing** | 75/100 | 50/70 | 50/70 |
 
 ### Scoring & Passing
 
@@ -35,8 +35,8 @@ OSDA adalah sertifikasi **100% praktikal** — Anda diberi logs pre-recorded di 
 | **Total phases** | 10 phases |
 | **Points per phase** | 10 points (varying flags per phase) |
 | **Passing score** | 75/100 |
-| **Format laporan** | PDF atau DOCX — structured report |
-| **Upload portal** | OffSec Learning Library |
+| **Format laporan** | PDF di dalam .7z (maks 200MB, tanpa password) |
+| **Upload portal** | upload.offsec.com (verifikasi MD5) |
 
 ### Exam Environment
 

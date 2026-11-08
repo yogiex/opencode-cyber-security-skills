@@ -24,9 +24,19 @@ Kubernetes security bukan tentang command kubectl — ini tentang **memahami tru
 | Supply Chain Security | 20% | Trust model dari dev sampai deploy |
 | Monitoring/Logging/Runtime | 20% | Deteksi anomali dan investigasi |
 
+## Decision Frame
+
+1. Apakah context cluster sudah benar sebelum menjalankan perintah?
+2. Apakah YAML sudah divalidasi dengan `kubectl apply --dry-run=server` sebelum diterapkan?
+3. Apakah field berada di level yang benar (pod vs container) dan nama field-nya tepat?
+4. Apakah ada jalur lebih cepat: `kubectl auth can-i --as`, `get events`, `crictl`, audit log?
+5. Jika ragu, bisakah dokumentasi resmi dibuka dalam 30 detik?
+
+Berhenti jika `apply` akan mengubah state tanpa backup manifest. Waktu ujian 2 jam untuk 15–20 task: kerjakan yang pasti dulu, verifikasi di pass ketiga.
+
 ## Exam Format
 
-Performance-based — 2 jam, 15-20 soal praktik, multiple cluster contexts. Passing 67%. Prasyarat: CKA aktif. Dokumentasi: docs.kubernetes.io. Simulator: killer.sh (2 sesi × 36 jam).
+Performance-based — 2 jam, 15–20 task, Kubernetes **v1.37**. Passing **67%**. Prasyarat: **telah lulus CKA** (status aktif tidak disyaratkan eksplisit). Biaya $445, valid 2 tahun, 1 retake. Dokumentasi: browser di VM (kubernetes.io/docs). Simulator: killer.sh (2 sesi × 36 jam, 17 soal/sesi).
 
 ## Strategi 3-Pass
 

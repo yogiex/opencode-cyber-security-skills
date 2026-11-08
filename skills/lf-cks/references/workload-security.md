@@ -90,7 +90,7 @@ Resource exhaustion adalah DoS vector — setiap pod harus punya resource bounda
 
 ## Best Practices
 
-- Selalu set `runAsNonRoot: true` dan `readOnlyRootRootFilesystem: true` sebagai default
+- Selalu set `runAsNonRoot: true` dan `readOnlyRootFilesystem: true` sebagai default (perhatikan nama field: bukan `readOnlyRootRootFilesystem`)
 - Drop ALL capabilities, add hanya yang diperlukan
 - Gunakan PSA labels di warn mode dulu sebelum enforce untuk lihat dampaknya
 - Untuk minimum baseline, set `allowPrivilegeEscalation: false` dan `seccompProfile: RuntimeDefault`

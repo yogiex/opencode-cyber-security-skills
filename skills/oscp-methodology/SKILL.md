@@ -13,6 +13,18 @@ metadata:
 
 # OSCP — Metodologi & Pola Pikir
 
+## Decision Frame
+
+Sebelum menyerang target, jawab eksplisit:
+
+1. Apakah scope dan bukti (local.txt/proof.txt) sudah jelas?
+2. Vektor mana yang paling murah: versi rentan, misconfiguration, atau kredensial?
+3. Apakah Metasploit sudah dipakai? Jika ya, target itu terkunci dan tidak boleh dipakai di mesin lain.
+4. Apakah screenshot diambil dari shell interaktif dengan IP + hostname dalam frame yang sama?
+5. Jika waktu habis, apa yang didokumentasikan lebih dulu?
+
+Berhenti dan dokumentasikan sebelum pindah target; jangan menebak isi flag atau memakai AI chatbot.
+
 ## Prerequisites
 
 - Basic networking (TCP/IP, ports, protocols)
@@ -95,7 +107,7 @@ Latih ribuan machine sampai pattern langsung terlihat. Tapi pattern recognition 
 
 ## Gotchas
 
-1. **Metasploit hanya untuk SATU machine**: Gunakan Metasploit hanya pada satu target. Untuk target lain, gunakan manual exploit atau searchsploit PoC yang diadaptasi. Auxiliary modules (scanner, fuzzer) tidak dihitung — gunakan bebas.
+1. **Metasploit hanya untuk SATU machine**: Gunakan Metasploit hanya pada satu target. Untuk target lain, gunakan manual exploit atau searchsploit PoC yang diadaptasi. **Auxiliary modules juga dihitung** — semua modul (Auxiliary/Exploit/Post) dan Meterpreter terkunci ke satu mesin; memakainya di mesin lain berakibat 0 poin. Metasploit juga tidak boleh dipakai untuk pivoting.
 2. **SQLMap dilarang**: Manual SQLi adalah keharusan. Latih UNION-based, blind, dan time-based injection tanpa automation tools.
 3. **Screenshot wajib dari terminal interaktif**: Screenshot lewat web shell atau RDP tidak diterima. Semua bukti harus dari command line dengan IP + hostname + flag di frame sama.
 4. **AD set bukan berarti ADCS selalu ada**: Jangan asumsi ADCS aktif. Prioritaskan BloodHound mapping sebelum mengejar specific attack path.

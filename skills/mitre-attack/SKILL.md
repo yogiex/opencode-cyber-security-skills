@@ -10,6 +10,16 @@ metadata:
 
 # MITRE ATT&CK Framework
 
+## Decision Frame
+
+1. Teknik mana yang relevan dengan threat model organisasi — bukan seluruh matrix?
+2. Data Component apa yang harus ada agar perilaku itu terlihat?
+3. Apakah Detection Strategy/Analytic sudah tersedia, atau rule ditulis dari nol?
+4. Bisakah adversary mematikan telemetri itu sendiri (Stealth, Defense Impairment)?
+5. Bagaimana coverage diukur: per sub-teknik, dengan rule yang diuji?
+
+Jangan memakai taktik sebagai urutan kill chain — taktik tidak berurutan. Pin versi ATT&CK saat menyimpan hasil mapping.
+
 ## Apa itu MITRE ATT&CK
 
 MITRE ATT&CK (Adversarial Tactics, Techniques, and Common Knowledge) adalah **knowledge base** yang mendokumentasikan TTP (Tactics, Techniques, and Procedures) adversary berdasarkan observasi dunia nyata.
@@ -19,7 +29,7 @@ MITRE ATT&CK (Adversarial Tactics, Techniques, and Common Knowledge) adalah **kn
 | Matrix | Fokus | Jumlah Tactics |
 |---|---|---|
 | **Enterprise** | Cloud, container, network, OS, SaaS | 15 tactics |
-| **Mobile** | Android, iOS | 14 tactics |
+| **Mobile** | Android, iOS | 12 tactics |
 | **ICS** | Industrial Control Systems | 12 tactics |
 
 Skill ini berfokus pada **Enterprise matrix** yang paling banyak digunakan.
@@ -102,7 +112,7 @@ Teknik spesifik di dalam technique. Format: `T1059.001`:
 Prosedur adalah **implementasi spesifik** dari teknik oleh threat group tertentu:
 
 - *APT29 menggunakan PowerShell untuk credential dumping* → Technique T1059.001 + T1003
-- *Lazarus menggunakan Living Off the Land Binaries* → Technique T1218
+- *Lazarus menggunakan Living Off the Land Binaries* → System Binary Proxy Execution (T1218); "LOLBins" adalah istilah umum, bukan nama teknik
 
 ### Groups, Software, Campaigns
 
@@ -257,8 +267,8 @@ Setiap teknik mencantumkan platform yang terpengaruh:
 |---|---|
 | Windows | T1059.001 (PowerShell), T1003 (Credential Dumping) |
 | Linux | T1059.004 (Unix Shell), T1552.001 (Credentials in Files) |
-| macOS | T1059.002 (AppleScript), T1561 (Disk Wipe) |
-| Cloud | T1525 (Cloud Infrastructure Discovery), T1613 (Container Discovery) |
+| macOS | T1059.002 (AppleScript), T1543.001 (Launch Agent) |
+| Cloud | T1580 (Cloud Infrastructure Discovery), T1613 (Container and Resource Discovery) |
 | Network | T1059.008 (Network Device CLI), T1557 (Adversary-in-the-Middle) |
 
 ## Data Sources & Components

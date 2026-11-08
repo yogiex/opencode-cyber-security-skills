@@ -13,6 +13,63 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.3.0] — 2026-11-07 — Tuning fondasi: generator, fakta, decision frame
+
+**Commit dasar:** `46a2ab2` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** memperbaiki generator yang menghapus metadata, mengoreksi fakta sertifikasi dari sumber resmi, dan menanam decision frame.
+
+### Diubah — generator
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `scripts/sync-skills.js` | normalisasi CRLF/BOM; `keywords` menerima array; `name` dipaksa = nama folder; menolak menulis `description` kosong | checkout Windows (CRLF) membuat parser gagal dan menghapus 26 deskripsi | `node scripts/sync-skills.js` exit 0; 28/28 deskripsi terisi |
+
+### Diubah — fakta sertifikasi (sumber resmi diverifikasi 2026-11-07)
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/oscp-methodology/SKILL.md` | auxiliary Metasploit tidak lagi "bebas"; semua modul terkunci satu mesin; tambah Decision Frame | klaim lama menuntun ke 0 poin/diskualifikasi | dibandingkan dengan OSCP+ Exam Guide |
+| `skills/oscp-methodology/references/exam-architecture.md` | catatan scaled scoring 100–500 (lulus 400) mulai 1 Des 2026; koreksi auxiliary | perubahan scoring resmi | OSCP+ Scaled Scoring FAQ |
+| `skills/offsec-web-300/SKILL.md` | OSCP 70/100 (bukan 50), OSEP min 100 (bukan 85), durasi OSCP 23j45m, URL exam guide yang benar, klaim "report 85/100" | tiga angka salah + link 404 | WEB-300 & PEN-200 Exam Guide |
+| `skills/offsec-soc-200/references/overview-exam.md` | OSIR 8 jam/Splunk/50-70/kedaluwarsa; OSTH 8 jam/50-70; format PDF dalam .7z via upload.offsec.com | profil OSIR/OSTH salah total | OSIR & OSTH Exam Guide |
+| `skills/offsec-th-200/SKILL.md` | status kedaluwarsa sertifikat tanpa angka tak bersumber | FAQ OffSec | FAQ sertifikasi |
+| `skills/offsec-ir-200/SKILL.md` | bobot report dijelaskan benar; pass path 55/60 | aritmetika lama salah | OSIR Exam Guide |
+| `skills/cpent/references/exam-structure.md` | 53 soal/8 domain; cut score 60–85%; report 30 hari; retake | struktur blueprint V2 | EC-Council CPENT blueprint |
+| `skills/ec-ecih/SKILL.md` | cut score 60–85%; catatan 9 domain resmi | blueprint ECIH v3 | EC-Council ECIH blueprint |
+| `skills/lf-cks/SKILL.md` | K8s v1.37; "telah lulus CKA"; biaya/validitas/retake; dokumen resmi | melengkapi fakta CKS | LF CKS + curriculum v1.37 |
+| `skills/lf-cks/references/workload-security.md` | perbaiki field `readOnlyRootRootFilesystem` → `readOnlyRootFilesystem` | typo memicu YAML invalid | cek schema |
+| `skills/threat-intelligence/references/analytic-frameworks.md` | ATT&CK v20.1; 15 taktik termasuk Stealth & Defense Impairment; 227 teknik/479 sub/106 DC | versi v15 dan "Defense Evasion" sudah usang | attack.mitre.org |
+| `skills/mitre-attack/SKILL.md` | T1525→T1580; Mobile 12 taktik; label LOLBins; contoh macOS; Decision Frame | ID teknik tertukar | attack.mitre.org |
+| `skills/nist-800-53/SKILL.md` | RMF 7 langkah; CSF 2.0 6 fungsi (Govern); Decision Frame | dua angka kerangka salah | CSRC 800-37 & CSF 2.0 |
+| `skills/owasp-top10-2025/SKILL.md` | ASVS 5.0.0; koreksi klaim A02 "paling umum" | versi & klaim tidak akurat | asvs.owasp.org, top10.owasp.org |
+| `skills/log-management-nist-800-92/SKILL.md` | ISO 27001 A.8.15/A.8.16 (2022), bukan A.12.4 (2013) | penomoran usang | ISO 27001:2022 |
+| `skills/web-reconnaissance/SKILL.md` | `name` = nama folder; deskripsi pemicu; metadata | nama drift `web-recon-simple` | 28/28 nama sinkron |
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `docs/CERTIFICATION-FACTS.md` | registry fakta 10 sertifikasi + 9 standar, dengan URL dan tanggal verifikasi | satu sumber kebenaran; mencegah drift angka | setiap baris punya URL resmi |
+| `.gitignore` | mengabaikan artefak sementara (`.acl-recovery/`, `.port.mjs`, `.t-node.txt`, `.upstream-tmp/`, berkas sementara berawalan `.changelog-tmp-`) | mencegah sampah masuk commit | `git status` bersih dari pola itu |
+
+### Diubah — artefak turunan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `manifest.json` | 28 skill; deskripsi terisi; nama = folder | regenerasi | `node scripts/sync-skills.js` |
+| `skills/index.json` | 28 skill, daftar file terbaru | regenerasi | idem |
+| `.claude-plugin/plugin.json` | regenerasi | metadata plugin | idem |
+| `.claude-plugin/marketplace.json` | regenerasi | metadata marketplace | idem |
+| `.cursor-plugin/plugin.json` | regenerasi | metadata plugin | idem |
+| `skills/code-security-audit/SKILL.md` | metadata `repository` disuntik generator | sinkronisasi author/repository | idem |
+
+### Perubahan eksternal diadopsi
+
+| File | Status | Catatan |
+|---|---|---|
+| `skills/code-security-audit/**` | ditambahkan ke git | dibuat proses lain pukul 21:15–21:38; sudah lolos sync dan memiliki validator + test; audit konten penuh belum dilakukan |
+
 ## [0.2.0] — 2026-11-07 — Skill `web-pentest-payloads`
 
 **Commit dasar:** `69b436d` (branch `dev`)

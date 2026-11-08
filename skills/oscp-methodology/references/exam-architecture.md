@@ -14,7 +14,7 @@ tags: [oscp, exam, scoring, restrictions, architecture]
 | Standalone 1 | 20 pts (10 local + 10 proof) | Initial access + privilege escalation |
 | Standalone 2 | 20 pts (10 local + 10 proof) | Initial access + privilege escalation |
 | Standalone 3 | 20 pts (10 local + 10 proof) | Initial access + privilege escalation |
-| **Passing** | **70/100** | Kombinasi partial credit dimungkinkan |
+| **Passing** | **70/100** (ujian sebelum 1 Des 2026) | Mulai 1 Des 2026 08:00 GMT: skala 100–500, lulus **400**; raw point per set bervariasi |
 
 ## Passing Combinations
 
@@ -43,4 +43,4 @@ tags: [oscp, exam, scoring, restrictions, architecture]
 - Prioritaskan AD set (40 pts — blok terbesar)
 - Parallel scan semua IP di 30 menit pertama
 - Simpan Metasploit untuk satu machine paling susah
-- Gunakan auxiliary modules (scanner, fuzzer) bebas — tidak dihitung sebagai Metasploit restriction
+- Auxiliary juga dibatasi: semua modul Metasploit (Auxiliary/Exploit/Post) dan Meterpreter hanya untuk satu mesin; pelanggaran = 0 poin untuk target tersebut

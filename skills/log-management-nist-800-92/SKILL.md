@@ -395,7 +395,7 @@ Pastikan infrastruktur log sendiri dimonitor:
 | NIST CSF 2.0 | Risk-based | Protect (PR.PT) + Detect (DE) logging controls |
 | FedRAMP | 90 hari online, archival per agency | NIST-derived, documented retention schedules |
 | CIS Controls v8 | 90-365 days | Control 8 — audit log management, time synchronization |
-| ISO 27001 | Defined per policy | A.12.4 — logging & monitoring, retention based on risk |
+| ISO 27001 | Defined per policy | **A.8.15 (logging) & A.8.16 (monitoring)** — penomoran 2022, bukan A.12.4 (2013) |
 | DORA (EU) | 5+ tahun (practical) | ICT operational logs, audit trails, incident records |
 | SOC 2 | Risk-based (typical 12 bulan) | Trust criteria — security monitoring & retention |
 

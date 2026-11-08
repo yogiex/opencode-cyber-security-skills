@@ -32,7 +32,28 @@ const CLAUDE_PLUGIN_PATH = join(ROOT_DIR, ".claude-plugin", "plugin.json");
 const CURSOR_PLUGIN_PATH = join(ROOT_DIR, ".cursor-plugin", "plugin.json");
 const INDEX_PATH = join(SKILLS_DIR, "index.json");
 
+// Frontmatter is parsed after newline normalization so a CRLF checkout
+// (Windows, core.autocrlf) does not silently wipe every skill's metadata.
 const FRONTMATTER_REGEX = /^---\n([\s\S]*?)\n---/;
+
+function normalizeNewlines(content) {
+  return content.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+}
+
+function parseKeywordList(rawKeywords) {
+  if (Array.isArray(rawKeywords)) {
+    return rawKeywords.map((keyword) => String(keyword).trim()).filter(Boolean);
+  }
+
+  if (typeof rawKeywords === "string") {
+    return rawKeywords
+      .split(",")
+      .map((keyword) => keyword.trim())
+      .filter(Boolean);
+  }
+
+  return [];
+}
 const WHITESPACE_REGEX = /\S/;
 const AUTHOR_REGEX = /^( {2}author:) .+$/m;
 const REPOSITORY_REGEX = /^ {2}repository: .+$/m;
@@ -123,24 +144,24 @@ async function discoverSkills() {
     const skillMdPath = join(skillDir, "SKILL.md");
 
     try {
-      const skillMd = await readFile(skillMdPath, "utf-8");
+      const skillMd = normalizeNewlines(await readFile(skillMdPath, "utf-8"));
       const frontmatter = parseFrontmatter(skillMd);
       const metadata = frontmatter.metadata || {};
-      const keywords =
-        typeof metadata.keywords === "string"
-          ? metadata.keywords
-              .split(",")
-              .map((k) => k.trim())
-              .filter(Boolean)
-          : [];
+      const declaredName = frontmatter.name || entry.name;
+
+      if (declaredName !== entry.name) {
+        console.warn(
+          `Warning: frontmatter name "${declaredName}" differs from directory "${entry.name}"; using the directory name.`
+        );
+      }
 
       skills.push({
         dirName: entry.name,
-        name: frontmatter.name || entry.name,
+        name: entry.name,
         description: frontmatter.description || "",
         license: frontmatter.license || "MIT",
         version: metadata.version || "1.0.0",
-        keywords,
+        keywords: parseKeywordList(metadata.keywords),
       });
     } catch (error) {
       console.warn(
@@ -389,6 +410,17 @@ async function main() {
     console.log(`  - ${skill.name}`);
   }
   console.log();
+
+  const missingDescriptions = skills.filter((skill) => !skill.description.trim());
+  if (missingDescriptions.length > 0) {
+    console.error(
+      "Refusing to write empty descriptions. Fix the frontmatter of:"
+    );
+    for (const skill of missingDescriptions) {
+      console.error(`  - skills/${skill.dirName}/SKILL.md`);
+    }
+    process.exit(1);
+  }
 
   const manifest = JSON.parse(await readFile(MANIFEST_PATH, "utf-8"));
 

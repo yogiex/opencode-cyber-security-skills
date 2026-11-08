@@ -13,6 +13,16 @@ metadata:
 
 # ECIH — Certified Incident Handler Mindset
 
+## Decision Frame
+
+1. Aset dan dampak bisnis apa yang dipertaruhkan?
+2. Apakah penyebaran masih aktif? (ini menentukan *contain* vs *acquire evidence*)
+3. Bukti volatile apa yang hilang jika aku bertindak sekarang?
+4. Siapa yang berwenang memutuskan: Incident Commander, legal, atau eksekutif?
+5. Apa konsekuensi jika keputusanku salah?
+
+Aturan: akuisisi bukti volatile dulu bila tidak ada penyebaran aktif; containment segera bila risiko tinggi; catat keputusan beserta alasannya.
+
 ## How to Use This Skill
 
 Load the right reference file based on what you need:
@@ -116,7 +126,7 @@ Incident Handler: Escalate → Contain → Evidence → Eradicate → Recover �
 
 | Item | Detail |
 |------|--------|
-| **Format** | 100 multiple-choice, 3 jam, passing 70% |
+| **Format** | 100 multiple-choice, 3 jam, cut score 60–85% per form (bukan 70% tetap) |
 | **Cost** | $449, ANAB accredited, DoD 8140, CREST CCIM |
 | **Validity** | 3 years (120 ECE credits) |
 | **Prerequisites** | 1 year cybersecurity experience recommended |
@@ -131,6 +141,8 @@ Incident Handler: Escalate → Contain → Evidence → Eradicate → Recover �
 | Containment & Eradication | 15% |
 | Recovery & Post-Incident | 10% |
 | Legal & Compliance | 10% |
+
+> **Catatan akurasi:** blueprint resmi ECIH 212-89 v3 memuat **9 domain** dengan bobot 11/11/11/12/12/11/10/11/11. Tabel di atas adalah pengelompokan belajar (6 area), bukan bobot ujian resmi. Verifikasi di [cert.eccouncil.org/ecih](https://cert.eccouncil.org/ecih.html) sebelum memakainya untuk perencanaan ujian.
 
 ### Strategi Ujian
 

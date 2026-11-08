@@ -12,13 +12,13 @@ Seven sequential stages: Reconnaissance → Weaponization → Delivery → Explo
 
 Defenders need to break the chain at any single point. Prioritize early-chain disruption.
 
-## MITRE ATT&CK (v15)
+## MITRE ATT&CK (v20.1 — rilis 13 Okt 2026)
 
-Non-linear matrix of 14 tactics, 200+ techniques, sub-techniques, and procedures:
-- **Tactics**: Initial Access, Execution, Persistence, Privesc, Defense Evasion, Credential Access, Discovery, Lateral Movement, Collection, C2, Exfiltration, Impact
+Non-linear matrix of 15 tactics, 227 techniques, 479 sub-techniques, 106 Data Components, and 703 Detection Strategies:
+- **Tactics (15)**: Reconnaissance, Resource Development, Initial Access, Execution, Persistence, Privilege Escalation, **Stealth** (TA0005), **Defense Impairment** (TA0112), Credential Access, Discovery, Lateral Movement, Collection, Command and Control, Exfiltration, Impact. "Defense Evasion" sudah tidak dipakai di v20+.
 - **Techniques**: T1133 External Remote Services, T1078 Valid Accounts, T1566 Phishing
-- **Groups**: 140+ named threat actors mapped to techniques
-- **Software**: 700+ tools and malware families
+- **Groups**: 178 named threat actors mapped to techniques
+- **Software**: 842 tools and malware families
 
 Use ATT&CK Navigator for detection coverage gap analysis.
 

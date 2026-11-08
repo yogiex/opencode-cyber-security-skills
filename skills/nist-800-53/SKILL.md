@@ -10,6 +10,16 @@ metadata:
 
 # NIST SP 800-53 — Security and Privacy Controls
 
+## Decision Frame
+
+1. Berapa impact level sistem (FIPS 199)?
+2. Kontrol ini menurunkan risiko apa, dan buktinya apa?
+3. Apakah baseline sudah di-tailor atau masih default?
+4. Siapa pemilik risiko yang menerima residual risk?
+5. Bukti apa (examine/interview/test) yang akan dilihat auditor?
+
+Kontrol tanpa pernyataan risiko dan bukti hanyalah checklist. Bedakan dokumen final, draft, dan rilis minor — dan catat tanggal akses.
+
 ## Pendahuluan
 
 NIST SP 800-53 adalah katalog kontrol keamanan dan privasi untuk informasi sistem dan organisasi. Publikasi ini menyediakan **20 keluarga kontrol** yang mencakup aspek teknis, operasional, manajerial, dan privasi.
@@ -256,7 +266,7 @@ Gunakan **Control Collaboration Index Template** dari NIST untuk mapping securit
 
 ## Control Selection Process
 
-Proses pemilihan kontrol mengikuti RMF (SP 800-37) enam langkah:
+Proses pemilihan kontrol mengikuti RMF (SP 800-37 Rev. 2) tujuh langkah (termasuk **Prepare**):
 
 ### Step 1: Categorize (FIPS 199)
 - Tentukan impact level (Low/Moderate/High) untuk C, I, A
@@ -341,7 +351,7 @@ Patch release dengan perubahan:
 
 | Framework | Hubungan |
 |---|---|
-| **NIST CSF** | 800-53 controls memetakan ke CSF functions (Identify, Protect, Detect, Respond, Recover) |
+| **NIST CSF 2.0** | 800-53 controls memetakan ke 6 CSF functions (Govern, Identify, Protect, Detect, Respond, Recover) — *Govern* ditambahkan di CSF 2.0 |
 | **ISO/IEC 27001:2022** | Crosswalk tersedia dari NIST — mapping Annex A controls ke 800-53 |
 | **FedRAMP** | Menggunakan Moderate baseline + tambahan kontrol cloud-specific |
 | **PCI DSS** | Mapping tidak resmi tapi banyak kontrol overlap (access control, logging, encryption) |

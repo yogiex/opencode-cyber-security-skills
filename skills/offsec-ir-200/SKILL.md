@@ -60,12 +60,12 @@ Post-Exam (24h): Complete IR report — executive summary, timeline, containment
 ## Gotchas
 
 - **Splunk vs ELK**: OSIR pakai Splunk (SPL), bukan ELK (KQL) seperti OSDA. Jangan tertukar sintaks query.
-- **Report weight**: Report adalah 30 dari 70 points — jangan fokus hanya pada technical analysis. Alokasikan waktu setelah exam untuk report.
+- **Report weight**: Tidak ada poin report terpisah. Phase 1 (4 task × 10) dan Phase 2 (2 task × 15) dinilai dari jawaban **dan** kelengkapan dokumentasi; total 70, lulus 50. Dokumentasi buruk mengurangi poin task.
 - **Autopsy ingest time**: Ingest modules bisa memakan 20-30 menit. Jangan tunggu pasif — kerjakan Phase 1 sambil menunggu.
 - **Volatility 3 ≠ Volatility 2**: Volatility 3 tidak memerlukan profile parameter. Cukup `windows.info` untuk identifikasi. Plugin names juga berbeda (gunakan `windows.pslist`, bukan `pslist`).
-- **Cert expires**: OSIR hanya valid 3 tahun — perlu recertification, berbeda dengan OSDA yang tidak expire.
+- **Cert expires**: OSIR termasuk sertifikasi OffSec yang **kedaluwarsa** (bersama OSTH, OSCP+, OSCC-SEC, OSCC-SJD) dan perlu recertification; OSDA tidak.
 - **Containment specificity**: Di report, containment strategy harus spesifik — "block IP 10.0.0.5 at firewall ACL", bukan "block the attacker".
-- **Pass paths**: Ada 2 cara lulus — kuasai Phase 1 (Splunk) hampir sempurna, lalu ambil 1 soal Phase 2. Atau 3/4 Phase 1 + 2/2 Phase 2.
+- **Pass paths**: Ambang 50/70. Contoh: 4/4 Phase 1 + 1/2 Phase 2 = 55; atau 3/4 Phase 1 + 2/2 Phase 2 = 60.
 
 ## Quick Reference — Key Exam Commands
 

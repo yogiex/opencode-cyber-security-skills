@@ -1,0 +1,6 @@
+# Artefak sementara dari sesi agen / sandbox
+.acl-recovery/
+.upstream-tmp/
+.port.mjs
+.t-node.txt
+.changelog-tmp-*

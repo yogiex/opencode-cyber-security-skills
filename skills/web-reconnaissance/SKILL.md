@@ -1,8 +1,12 @@
 ---
-name: web-recon-simple
-description: Recon web sederhana: chunk file, network tab, API endpoint, localstorage/token/session, teknologi.
+name: web-reconnaissance
+description: "Recon web/SPA: chunk JS, network tab, endpoint API, token di localStorage/cookie, teknologi, subdomain, wayback. Muat saat memetakan aplikasi sebelum scan atau pentest."
 license: MIT
 compatibility: opencode
+metadata:
+  audience: web-pentesters
+  workflow: reconnaissance
+  source: owasp-wstg
 ---
 
 # Web Recon Sederhana

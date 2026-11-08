@@ -149,12 +149,13 @@ function collectDocumentedPaths(content) {
     .filter((line) => line.trimStart().startsWith("|"))
     .join("\n");
   const pattern = /`([^`\n]+)`/g;
-  let match = pattern.exec(content);
+  let match = pattern.exec(tableRows);
 
   while (match !== null) {
     const candidate = normalize(match[1]);
     if (
       candidate.includes("/") ||
+      candidate.startsWith(".") ||
       /\.(md|js|mjs|json|ya?ml|py|ps1|sh|kql|spl|yara|txt)$/i.test(candidate)
     ) {
       documented.add(candidate);

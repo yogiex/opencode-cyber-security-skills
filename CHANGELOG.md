@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.5.0] — 2026-11-08 — Provenance note untuk 12 skill fact-bearing + pemeriksa otomatis
 
 **Commit dasar:** `ad0afbe` (branch `dev`)
-**Status:** pending
+**Status:** committed in `bbb0da9`
 **Ruang lingkup:** poin A — angka di skill fact-bearing harus bisa ditelusuri, dan pelanggarannya harus gagal otomatis, bukan bergantung ingatan.
 
 ### Ditambahkan

@@ -13,6 +13,17 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.4.1] — 2026-11-08 — Konsistensi prasyarat CKA di skill CKS
+
+**Commit dasar:** `b92d660` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menghapus kontradiksi internal di `lf-cks` yang ditemukan saat verifikasi akhir 0.4.0.
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/lf-cks/SKILL.md` | gotcha "tanpa CKA aktif" → "setelah lulus CKA; status aktif tidak dinyatakan eksplisit, konfirmasi ke LF" | bertabrakan dengan bagian Exam Format di file yang sama ("telah lulus CKA", status aktif tidak disyaratkan eksplisit) | dibaca ulang kedua bagian; `docs/CERTIFICATION-FACTS.md` |
+| `CHANGELOG.md` | entri 0.4.1 | aturan 1 & 4: setiap change set tercatat | `node scripts/check-changelog.js` |
+
 ## [0.4.0] — 2026-11-08 — Tuning lapis 2: report weight, Decision Frame 7 skill, audit di CI
 
 **Commit dasar:** `62bc0ea` (branch `dev`)

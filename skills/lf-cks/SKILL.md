@@ -62,7 +62,7 @@ Performance-based — 2 jam, 15–20 task, Kubernetes **v1.37**. Passing **67%**
 
 ## Gotchas
 
-- **Prasyarat CKA**: CKS tidak bisa diambil tanpa CKA aktif — pastikan sertifikasi CKA masih berlaku sebelum register.
+- **Prasyarat CKA**: CKS hanya bisa diambil setelah **lulus CKA**. Halaman resmi tidak menyatakan bahwa status CKA harus masih aktif saat mendaftar — konfirmasi ke Linux Foundation sebelum membeli voucher, jangan mengandalkan asumsi.
 - **Multiple contexts**: Soal tersebar di beberapa cluster — setiap soal menentukan context yang harus digunakan. Lupa switch context = jawaban di cluster salah.
 - **NetworkPolicy DNS trap**: Saat menerapkan default-deny egress, DNS ke CoreDNS harus diizinkan. Tanpa ini, pod tidak bisa resolve service names.
 - **PSA labels tidak retroaktif**: Label Pod Security Admission hanya berlaku untuk pod baru — pod existing tidak terpengaruh.

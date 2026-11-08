@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.4.1] — 2026-11-08 — Konsistensi prasyarat CKA di skill CKS
 
 **Commit dasar:** `b92d660` (branch `dev`)
-**Status:** pending
+**Status:** committed in `e3156ed`
 **Ruang lingkup:** menghapus kontradiksi internal di `lf-cks` yang ditemukan saat verifikasi akhir 0.4.0.
 
 | File | Perubahan | Alasan | Verifikasi |

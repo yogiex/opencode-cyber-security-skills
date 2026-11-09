@@ -13,6 +13,20 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.9.1] — 2026-11-09 — Koreksi hitungan pada entri 0.9.0
+
+**Commit dasar:** `660a253` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** dua angka pada entri [0.9.0] tidak cocok dengan isi berkasnya. Tidak ada berkas skill yang berubah; hanya entri koreksi ini yang ditambahkan.
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `CHANGELOG.md` | entri 0.9.0 menyebut "tabel 14 tool relevan" pada `chrome-devtools-mcp.md` dan "sembilan jebakan" pada `browser-storage.md`; angka yang benar adalah **15 baris tool** dan **8 butir jebakan** | keduanya ditulis tanpa dihitung ulang dari berkas, padahal kolom Verifikasi mensyaratkan pemeriksaan yang benar-benar dijalankan | hitung ulang: tabel pada `## 2. Tool yang Relevan untuk Recon` = 16 baris termasuk header, jadi 15 baris tool; butir pada `## 9. Jebakan` = 8 |
+
+Angka lain pada 0.9.0 — 234 dan 190 baris, lima flag, lima alur, tujuh batas, 155 → 196 baris, heading 11 → 12, Gotchas 9 → 15, Refs 3 → 5 — sudah dihitung dari berkas dan tidak berubah.
+
 ## [0.9.0] — 2026-11-09 — Web reconnaissance: storage browser dan Chrome DevTools MCP
 
 **Commit dasar:** `e0567ba` (branch `dev`)

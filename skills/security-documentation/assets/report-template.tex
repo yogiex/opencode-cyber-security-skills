@@ -1,0 +1,123 @@
+% report-template.tex — kerangka laporan pengujian keamanan
+% Compile: pdflatex report-template  (jalankan 3x agar ToC dan referensi stabil)
+% Catatan: template ini kerangka minimal. Ganti setiap <...> dan hapus komentar.
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{setspace}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{notes/}{assets/}}
+
+% --- Badge severity -------------------------------------------------
+\definecolor{sevcritical}{HTML}{8B0000}
+\definecolor{sevhigh}{HTML}{D9534F}
+\definecolor{sevmed}{HTML}{F0AD4E}
+\definecolor{sevlow}{HTML}{5BC0DE}
+\definecolor{sevinfo}{HTML}{777777}
+
+\newcommand{\severity}[2]{\colorbox{#1}{\color{white}\textbf{\small #2}}}
+\newcommand{\riskcritical}[1]{\severity{sevcritical}{#1}}
+\newcommand{\riskhigh}[1]{\severity{sevhigh}{#1}}
+\newcommand{\riskmed}[1]{\severity{sevmed}{#1}}
+\newcommand{\risklow}[1]{\severity{sevlow}{#1}}
+\newcommand{\riskinfo}[1]{\severity{sevinfo}{#1}}
+
+% --- Listing --------------------------------------------------------
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Laporan Pengujian Keamanan}
+\fancyfoot[C]{\thepage}
+
+\title{Laporan Pengujian Keamanan\\\large <Aplikasi / Target>}
+\author{<Tim>}
+\date{<dd MMMM yyyy>}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Ringkasan Pengujian}
+% Paragraf non-teknis: nomor tiket, tujuan, target, waktu, reverifikasi.
+
+\section{Ringkasan Temuan Keamanan}
+\begin{table}[h]
+\centering
+\begin{tabular}{lr}
+\toprule
+\textbf{Severity} & \textbf{Jumlah} \\
+\midrule
+CRITICAL & 0 \\
+HIGH     & 0 \\
+MEDIUM   & 0 \\
+LOW      & 0 \\
+INFO     & 0 \\
+\midrule
+\textbf{Total} & \textbf{0} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Ringkasan Teknis}
+\subsection{Waktu Pengujian}
+\subsection{Cakupan Poin Uji}
+% Sebutkan juga yang TIDAK diuji — lihat bagian Gotchas di SKILL.md.
+\subsection{Metode Pengujian}
+\subsection{Temuan Utama}
+\subsection{Rekomendasi Utama}
+
+\section{Detail Pengujian}
+% Satu subsection per temuan, urut dari severity tertinggi.
+\subsection{<Judul temuan>}
+
+\begin{longtable}{@{}p{3.4cm}p{11cm}@{}}
+\toprule
+\textbf{Severity}   & \riskhigh{HIGH} \\
+\textbf{CVSS v3.1}  & 8.8 (\texttt{AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H}) \\
+\textbf{CWE}        & CWE-639 \\
+\textbf{Komponen}   & \texttt{/api/v1/users/\{id\}} \\
+\bottomrule
+\end{longtable}
+
+\paragraph{Deskripsi.} <Apa yang terjadi, dalam dua sampai empat kalimat.>
+
+\paragraph{Dampak bisnis.} <Konsekuensi nyata bagi organisasi.>
+
+\paragraph{Bukti (reproducible).}
+\begin{lstlisting}
+curl -s -H "Authorization: Bearer $TOKEN" \
+  https://target.tld/api/v1/users/1042
+\end{lstlisting}
+
+\paragraph{Rekomendasi.} <Perbaikan spesifik, bukan "tingkatkan keamanan".>
+
+\section{Kesimpulan}
+
+\appendix
+\section{Lampiran}
+\subsection{Role dan Scope Mapping}
+\subsection{API Endpoint Mapping}
+\subsection{Daftar Hash Bukti}
+
+\end{document}

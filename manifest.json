@@ -184,7 +184,7 @@
     },
     {
       "name": "security-documentation",
-      "description": "Membuat laporan pengujian keamanan dalam format LaTeX dan mengompilasi ke PDF, mengikuti template docs/laporan.txt",
+      "description": "Menyusun laporan pengujian keamanan yang dapat diaudit: struktur baku, template LaTeX siap pakai, tabel CVSS v3.1/CWE, dan bukti reproducible. Muat saat hasil pengujian harus menjadi laporan formal (PDF) untuk klien atau manajemen.",
       "version": "1.0.0",
       "source": "./skills/security-documentation",
       "license": "MIT",
@@ -224,7 +224,7 @@
     },
     {
       "name": "web-app-scan",
-      "description": "Melakukan vulnerability assessment pada web application secara sistematis seperti tools Nessus (deteksi kerentanan umum: SQLi, XSS, config leak, header keamanan, SSL/TLS, dsb) dengan pendekatan terstruktur dan non-teknis.",
+      "description": "Penilaian keamanan web application bertahap seperti Nessus/Nikto tetapi manual dan dapat diaudit: fingerprint, config leak, injection, XSS, sesi, akses kontrol, TLS, CORS. Muat saat perlu audit web app terstruktur tanpa scanner otomatis.",
       "version": "1.0.0",
       "source": "./skills/web-app-scan",
       "license": "MIT",

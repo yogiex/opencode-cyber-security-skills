@@ -13,6 +13,43 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.8.0] — 2026-11-09 — Reporting dan web assessment: template nyata, frame, dan gotchas
+
+**Commit dasar:** `659d5ab` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** dua skill backlog D yang berpasangan dalam satu alur kerja — `web-app-scan` menghasilkan temuan, `security-documentation` menuliskannya. Keduanya sebelumnya tanpa Decision Frame dan tanpa Gotchas.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/security-documentation/assets/report-template.tex` | template LaTeX 123 baris: paket, badge severity (`\riskcritical` sampai `\riskinfo`), `longtable` metadata temuan, kerangka enam bagian, `\graphicspath`, perintah compile 3 pass | SKILL.md menyuruh "mengikuti template `docs/laporan.txt`" tetapi berkas itu tidak ada di repo; skill juga tidak membawa template apa pun sehingga tidak bisa dipakai setelah di-install | `Test-Path docs/laporan.txt` = `False`; berkas kini berada di dalam folder skill sehingga ikut tersalin saat instalasi |
+| `skills/security-documentation/references/finding-writeup.md` | anatomi 7 bagian temuan, tabel 6 vektor CVSS v3.1 lazim, tabel 16 pemetaan CWE, pola `curl` reproducible, tabel "bukti cukup vs tidak cukup", aturan redaksi, 6 anti-pola | standar penulisan temuan sebelumnya hanya 4 butir; tidak ada cara memilih vektor CVSS maupun membedakan bukti kuat dari lemah | skor vektor dicek terhadap nilai kanonik (9.8 / 8.8 / 7.5 / 6.5 / 6.1 / 5.3); dokumen tetap memerintahkan hitung ulang dengan kalkulator resmi |
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/security-documentation/SKILL.md` | rujukan `docs/laporan.txt` (3 tempat) diganti ke `assets/report-template.tex` dan `references/finding-writeup.md`; `## Decision Frame` 6 keputusan; `## Gotchas` 9 butir; bagian duplikat dihapus; alur kerja dan indeks referensi ditambahkan | berkas 117 baris ini memuat "LaTeX Conventions", "CVSS Scoring Standards", dan "Prioritas Rekomendasi" **dua kali** (satu sebagai `###`, satu sebagai `##`), tanpa frame, tanpa gotchas, dan menunjuk berkas yang tidak ada | `Select-String '^#+ (Konvensi LaTeX\|LaTeX Conventions\|CVSS\|Prioritas)'` = 3 hasil (sebelumnya 6); `Select-String 'laporan.txt'` = 0 |
+| `skills/web-app-scan/SKILL.md` | `## Decision Frame` 6 keputusan (izin, mode read-only, konfirmasi temuan, batas 2 varian, laju permintaan, cakupan terautentikasi); `## Gotchas` 9 butir; enam fase dirapikan; template output ditambah kolom Mode/Cakupan dan bagian "Tidak tereproduksi"; severity contoh diperbaiki (cookie tanpa HttpOnly → Medium) | prosedur 6 fase ada, tetapi tidak menjelaskan kapan berhenti, bagaimana membedakan kandidat dari temuan, atau bahwa header hilang bukan High | severity contoh dicocokkan dengan CWE-1004 di `references/finding-writeup.md` |
+
+### Artefak turunan dan dokumentasi
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `manifest.json` | deskripsi `security-documentation` dan `web-app-scan` diperbarui | deskripsi bersumber dari frontmatter `SKILL.md` | `node scripts/sync-skills.js` |
+| `skills/index.json` | dua deskripsi + `files` memuat template `.tex` dan `finding-writeup.md` | indeks harus mencantumkan berkas yang dapat dimuat | idem — 8 baris berubah |
+| `README.md` | baris 163 (`web-app-scan`) dan 176 (`security-documentation`) diperbarui | deskripsi lama tidak menyebut batas mode maupun template | dicocokkan dengan isi SKILL.md baru |
+| `docs/SKILL-QUALITY.md` | dua baris matriks → Sebagian; ringkasan Sebagian 4→6, Belum 12→10; paragraf provenance; backlog D menyisakan 4 skill; tanggal | ledger harus mencerminkan kondisi setelah 0.8.0 | dihitung ulang: Frame 18/28, Refs 18/28 |
+
+`.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, dan `.cursor-plugin/plugin.json` ditulis ulang generator dengan isi identik, sehingga tidak muncul di `git status`.
+
+### Catatan
+
+Template LaTeX **belum dikompilasi** di mesin ini — `pdflatex`, `xelatex`, `latexmk`, dan `tectonic` semuanya tidak terpasang. Kerangka ditulis mengikuti konvensi paket yang dipakai skill, tetapi kebenaran kompilasi harus diverifikasi di lingkungan yang memiliki TeX Live.
+
+Backlog D menyisakan empat skill: `threat-modeling`, `incident-response-plan`, `owasp-top10-2025`, `risk-management-framework`. Backlog C (lima skill monolitik), poin E (fact sheet standar non-sertifikasi), dan poin F (harness evaluasi) belum disentuh.
+
 ## [0.7.0] — 2026-11-09 — Web reconnaissance: chunk JS, traffic network, dan analisis bundle
 
 **Commit dasar:** `8a76c3c` (branch `dev`)

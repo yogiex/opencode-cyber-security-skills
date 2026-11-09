@@ -2,7 +2,7 @@
 
 Matriks status kualitas 28 skill. Tujuannya membuat pekerjaan tuning **terlihat** — bukan tersembunyi di riwayat commit — sampai cakupan cukup untuk ditegakkan lewat CI.
 
-Diperbarui: **2026-11-08** (setelah poin A dan B).
+Diperbarui: **2026-11-09** (setelah 0.7.0 — `web-reconnaissance`).
 
 ## Kriteria
 
@@ -47,24 +47,24 @@ Status: **Selesai** = Frame + Provenance. **Sebagian** = salah satu. **Belum** =
 | waf-evasion-methodology | ya | ya | — | 4 | ya | Sebagian |
 | web-app-scan | — | — | — | 0 | — | Belum |
 | web-pentest-payloads | — | — | — | 39 | — | Belum |
-| web-reconnaissance | — | — | — | 0 | — | Belum |
+| web-reconnaissance | ya | ya | — | 3 | ya | Sebagian |
 
 ## Ringkasan
 
 | Status | Jumlah |
 |---|---|
 | Selesai | 12 |
-| Sebagian | 3 |
-| Belum | 13 |
+| Sebagian | 4 |
+| Belum | 12 |
 
-Tiga "Sebagian" adalah hasil poin B: frame sudah ada, provenance sengaja tidak dipasang karena fact sheet belum memuat PTES, STIX 2.1, TLP 2.0, atau OWASP CRS.
+Tiga "Sebagian" berasal dari poin B: frame sudah ada, provenance sengaja tidak dipasang karena fact sheet belum memuat PTES, STIX 2.1, TLP 2.0, atau OWASP CRS. Yang keempat adalah `web-reconnaissance` (0.7.0): frame dan tiga referensi baru sudah ada, provenance belum karena versi OWASP WSTG yang menjadi sumbernya juga belum masuk fact sheet.
 
 ## Backlog
 
 | Poin | Isi | Alasan urutan |
 |---|---|---|
 | **C** | Pecah skill monolitik tanpa references: `security-auditor` (17,8 KB), `log-management-nist-800-92` (24,3 KB), `devsecops-mindset` (23,5 KB), `soc-analyst` (10,1 KB) | dampak terbesar pada kualitas jawaban, tapi paling mahal dan paling berisiko |
-| **D** | Skill kecil yang belum punya frame/gotchas: `threat-modeling`, `web-app-scan`, `incident-response-plan`, `security-documentation`, `web-reconnaissance`, `owasp-top10-2025`, `risk-management-framework` | murah, cepat, menaikkan cakupan |
+| **D** | Skill kecil yang belum punya frame/gotchas: `threat-modeling`, `web-app-scan`, `incident-response-plan`, `security-documentation`, `owasp-top10-2025`, `risk-management-framework` | murah, cepat, menaikkan cakupan |
 | **E** | Perluas fact sheet ke standar non-sertifikasi (PTES, STIX, TLP, OWASP CRS, PCI DSS) lalu daftarkan `ptes-standard`, `threat-intelligence`, `waf-evasion-methodology` ke `check-fact-notes.js` | membuka jalan agar 3 "Sebagian" menjadi "Selesai" |
 | **F** | Evaluasi perilaku: himpunan tugas aktifasi + A/B ablation | membuktikan tuning menaikkan performa, bukan hanya kerapian |
 

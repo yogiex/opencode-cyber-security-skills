@@ -161,7 +161,7 @@ Baca *execution traces*, bukan cuma final output. Jika agent buang waktu di lang
 | [waf-evasion-methodology](./skills/waf-evasion-methodology) | 🔶 | Pola pikir dan metodologi sistematis untuk WAF evasion — memahami parsing discrepancies, encoding gaps, dan logic mismatches antara WAF dan backend application. |
 | [web-pentest-payloads](./skills/web-pentest-payloads) | 🔶 | Payload dan teknik eksploitasi per kelas kerentanan web: SQLi, NoSQL, command injection, SSTI, XXE, XSS, CSRF, SSRF, LFI/RFI, file upload, deserialization, request smuggling, cache poisoning, JWT/OAuth/SAML, IDOR, business logic, API, prompt injection, plus bypass filter/WAF. |
 | [web-app-scan](./skills/web-app-scan) | ✅ | Vulnerability assessment pada web application secara sistematis (deteksi kerentanan umum: SQLi, XSS, config leak, header keamanan, SSL/TLS, dsb) dengan pendekatan terstruktur. |
-| [web-reconnaissance](./skills/web-reconnaissance) | ✅ | Recon web sederhana: chunk file, network tab, API endpoint, localstorage/token/session, identifikasi teknologi. |
+| [web-reconnaissance](./skills/web-reconnaissance) | ✅ | Recon web/SPA: inventarisasi chunk JS (manifest build, tabel chunk webpack, Coverage, source map), analisis bundle (endpoint, rute tersembunyi, GraphQL/WebSocket, triage kunci rahasia), pembacaan network tab/HAR, token & session storage, identifikasi teknologi, dan pemetaan CVE. |
 
 ### 🔵 Blue Team (Defensif)
 
@@ -296,7 +296,7 @@ Proses ini (execute-then-revise) adalah cara paling efektif untuk meningkatkan k
 | [waf-evasion-methodology](./skills/waf-evasion-methodology) | OWASP CRS, MITRE ATT&CK | - |
 | [web-pentest-payloads](./skills/web-pentest-payloads) | PayloadsAllTheThings, PortSwigger WSA, OWASP WSTG | https://github.com/swisskyrepo/PayloadsAllTheThings |
 | [web-app-scan](./skills/web-app-scan) | OWASP WSTG, PTES | - |
-| [web-recon-simple](./skills/web-reconnaissance) | OSINT Framework, OWASP WSTG | - |
+| [web-reconnaissance](./skills/web-reconnaissance) | OSINT Framework, OWASP WSTG | - |
 
 ## Ecosystem
 

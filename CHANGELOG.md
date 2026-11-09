@@ -13,6 +13,41 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.7.0] — 2026-11-09 — Web reconnaissance: chunk JS, traffic network, dan analisis bundle
+
+**Commit dasar:** `8a76c3c` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** permintaan langsung — `web-reconnaissance` harus benar-benar menjelaskan cara menemukan dan membaca chunk JS, cara membaca network situs, dan cara menganalisis isi chunk, bukan hanya menyebutkannya dalam tujuh butir.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/web-reconnaissance/references/js-chunk-discovery.md` | 9 bagian: titik masuk HTML, manifest build per tool, tabel chunk dari `__webpack_require__.u`, panel Coverage, pencarian global DevTools, source map, crawl (`katana -jc`, Wayback CDX, `gau`), format inventaris, ambang berhenti | SKILL.md lama menulis "cek chunk file: cari berkas .chunk.js di tab Sources" tanpa cara menemukan chunk yang tidak dimuat di halaman awal | probe manifest ditulis sebagai uji status 200/404, bukan jaminan keberadaan; pola `__webpack_require__.u`/`__vite__mapDeps` adalah nama simbol publik webpack/Vite |
+| `skills/web-reconnaissance/references/js-chunk-analysis.md` | 9 bagian: beautify, rekonstruksi `sourcesContent`, tabel 15 pola ekstraksi, triage kunci publik vs asli, protokol verifikasi 5 langkah, state framework (`__NEXT_DATA__`, `__NUXT__`, `__APOLLO_STATE__`), navigasi modul webpack, 6 false positive, time box, format temuan | bagian "scan isinya" hanya menyebut tiga substring dan tidak menjelaskan cara membedakan kunci publik dari kunci rahasia — sumber kesalahan laporan paling umum | 6 pola kunci diuji dengan `[regex]` .NET pada bundle contoh: `AKIA`, `pk_live_`, `AIza`, `/api/v2/`, `path:"/…"`, `wss://` semuanya cocok; string acak 60 karakter tidak memicu `AKIA` |
+| `skills/web-reconnaissance/references/network-analysis.md` | 12 bagian: setup capture (Preserve log, Disable cache, unregister SW), waterfall dan initiator, 6 resep filter, matriks endpoint, semantik status 401/403/404/405/429, GraphQL, WebSocket/SSE, sesi dan token, ekspor HAR + resep `jq`, replay dengan batas, serah terima, kebersihan data | langkah "Cek Network Tab" lama hanya meminta memfilter XHR tanpa menjelaskan kolom Initiator, semantik status, atau cara menyimpan bukti | resep `jq` ditulis tetapi **tidak dieksekusi** — `jq` tidak terpasang di mesin ini; kebenaran struktural diperiksa terhadap format HAR 1.2 |
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/web-reconnaissance/SKILL.md` | deskripsi menyebut source map/HAR/analisis bundle; tabel tiga sumber di pembuka; `## Decision Frame` 6 keputusan (scope, ambang berhenti chunk, source map, triage kunci, status endpoint, time box 90 menit); langkah 1–3 menunjuk referensi; `## Gotchas` 9 butir; output laporan diperluas (inventaris chunk, rute tersembunyi, kunci asli vs publik); tabel indeks referensi | skill hanya 114 baris tanpa frame, tanpa gotchas, tanpa referensi — status "Belum" di `docs/SKILL-QUALITY.md` | `grep -c '^## Decision Frame'` = 1; 114 → 155 baris (<500 sesuai README); `node scripts/check-fact-notes.js` exit 0 |
+| `README.md` | baris 164: deskripsi `web-reconnaissance` diperbarui; baris 299: label `web-recon-simple` → `web-reconnaissance` | label lama tidak cocok dengan nama folder; deskripsi lama tidak mencerminkan isi baru | dicocokkan dengan nama direktori `skills/web-reconnaissance` |
+| `docs/SKILL-QUALITY.md` | baris matriks `web-reconnaissance` → Trigger ya / Frame ya / Refs 3 / Failure modes ya / Sebagian; ringkasan Sebagian 3→4 dan Belum 13→12; paragraf "Sebagian" menjelaskan provenance yang sengaja ditunda; `web-reconnaissance` dihapus dari backlog D; tanggal diperbarui | ledger harus mencerminkan kondisi setelah 0.7.0, bukan sebelum | dihitung ulang dari `SKILL.md`: Frame 16/28, Refs 3, Provenance — |
+
+### Artefak turunan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `manifest.json` | deskripsi `web-reconnaissance` diperbarui | sumber deskripsi adalah frontmatter `SKILL.md` | `node scripts/sync-skills.js` — 1 baris berubah |
+| `skills/index.json` | deskripsi diperbarui + `files` memuat tiga referensi baru | indeks discovery harus mencantumkan berkas yang bisa dimuat | idem — 7 baris berubah |
+
+`.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, dan `.cursor-plugin/plugin.json` ditulis ulang oleh generator tetapi **isinya identik** (`git status --porcelain` tidak menampilkannya) karena ketiganya tidak menyimpan deskripsi per skill.
+
+### Catatan
+
+Pekerjaan ini sengaja dibatasi pada satu skill. Enam skill lain di backlog D (`threat-modeling`, `web-app-scan`, `incident-response-plan`, `security-documentation`, `owasp-top10-2025`, `risk-management-framework`) belum disentuh, dan cacat `security-documentation` yang menunjuk `docs/laporan.txt` (tidak ada di repo) masih terbuka.
+
 ## [0.6.0] — 2026-11-08 — Decision Frame untuk 3 skill metodologi + ledger kualitas
 
 **Commit dasar:** `b63dc68` (branch `dev`)

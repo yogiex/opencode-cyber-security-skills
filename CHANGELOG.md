@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.11.0] — 2026-11-09 — Web reconnaissance: fingerprint teknologi berkeyakinan
 
 **Commit dasar:** `8ff2289` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `dd8cfd3`
 **Ruang lingkup:** permintaan langsung — fase reconnaissance juga harus mencari informasi teknologi yang dipakai target. Sebelumnya bagian teknologi hanya tabel enam sinyal tanpa metode, tanpa cara mengambil versi, dan tanpa pembeda antara yang terbukti dan yang ditebak.
 
 ### Ditambahkan

@@ -99,7 +99,9 @@ function parseArgs(argv) {
 }
 
 function normalize(path) {
-  return path.replace(/\\/g, "/").trim();
+  // Strip a leading "./" so an entry written as `./LICENSE` still matches the
+  // repository-relative path `LICENSE`.
+  return path.replace(/\\/g, "/").replace(/^\.\//, "").trim();
 }
 
 // Collects committed, staged, unstaged, untracked, and renamed paths.
@@ -153,9 +155,13 @@ function collectDocumentedPaths(content) {
 
   while (match !== null) {
     const candidate = normalize(match[1]);
+    // Root files without an extension (LICENSE, CODEOWNERS, Dockerfile) are
+    // legitimate changed paths too, so accept an all-caps filename token.
+    const isRootFilename = /^[A-Z][A-Z0-9._-]{2,}$/.test(candidate);
     if (
       candidate.includes("/") ||
       candidate.startsWith(".") ||
+      isRootFilename ||
       /\.(md|js|mjs|json|ya?ml|py|ps1|sh|kql|spl|yara|txt)$/i.test(candidate)
     ) {
       documented.add(candidate);

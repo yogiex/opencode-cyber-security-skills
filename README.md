@@ -1,153 +1,105 @@
-# cyber-security Agent Skills
+# Cyber Security Agent Skills
 
-Koleksi agent skills untuk keamanan siber. Skills ini dirancang untuk meningkatkan kemampuan agen AI dengan menyediakan instruksi, referensi, dan panduan khusus domain keamanan.
+<p align="left">
+  <a href="https://github.com/yogiex/opencode-cyber-security-skills/actions/workflows/validate-and-sync.yml"><img alt="CI" src="https://github.com/yogiex/opencode-cyber-security-skills/actions/workflows/validate-and-sync.yml/badge.svg?branch=main"></a>
+  <img alt="Skills" src="https://img.shields.io/badge/skills-29-blue">
+  <img alt="Reference docs" src="https://img.shields.io/badge/reference%20docs-190%2B-informational">
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-green"></a>
+  <a href="https://github.com/yogiex/opencode-cyber-security-skills/commits/main"><img alt="Last commit" src="https://img.shields.io/github/last-commit/yogiex/opencode-cyber-security-skills"></a>
+  <a href=".github/CONTRIBUTING.md"><img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen"></a>
+</p>
+
+Kumpulan **Agent Skills** untuk keamanan siber: 29 skill dan 190+ dokumen referensi yang memberi agen AI cara kerja, batas keputusan, dan prosedur yang bisa diaudit untuk pekerjaan red team, blue team, audit, dan rekayasa keamanan.
+
+Repo ini bukan kumpulan prompt. Setiap skill adalah unit terstruktur berisi persona, *decision frame*, referensi bertingkat, dan *gotchas* yang membuat agen berhenti pada batas yang benar — bukan sekadar menghasilkan jawaban yang terdengar meyakinkan.
+
+---
+
+## Daftar Isi
+
+- [Apa itu Agent Skills?](#apa-itu-agent-skills)
+- [Mulai Cepat](#mulai-cepat)
+- [Available Skills](#available-skills)
+- [Struktur Repositori](#struktur-repositori)
+- [Kualitas Skill](#kualitas-skill)
+- [Menambah Skill Baru](#menambah-skill-baru)
+- [Scripts](#scripts)
+- [Penggunaan yang Sah](#penggunaan-yang-sah)
+- [Referensi dan Sumber](#referensi-dan-sumber)
+- [Ekosistem](#ekosistem)
+- [Kontribusi](#kontribusi)
+- [Lisensi](#lisensi)
 
 ## Apa itu Agent Skills?
 
-Agent Skills adalah format open standard (dibuat oleh [Anthropic](https://www.anthropic.com/), diadopsi oleh 20+ agent products) untuk memperluas kemampuan agen AI dengan pengetahuan dan workflow khusus domain.
+Agent Skills adalah format open standard (dibuat oleh [Anthropic](https://www.anthropic.com/), diadopsi oleh 20+ produk agen) untuk memperluas kemampuan agen AI dengan pengetahuan dan workflow khusus domain.
 
 Setiap skill adalah folder dengan struktur:
 
-```
+```text
 my-skill/
-├── SKILL.md          # Required: metadata (YAML frontmatter) + instructions
-├── references/       # Optional: detailed reference documentation
-├── scripts/          # Optional: executable code (exploit templates, automation)
-└── assets/           # Optional: templates, checklists, resources
+├── SKILL.md          # Wajib: metadata (YAML frontmatter) + instruksi
+├── references/       # Opsional: dokumentasi referensi bertingkat
+├── scripts/          # Opsional: kode eksekusi (templat exploit, otomasi)
+└── assets/           # Opsional: templat, checklist, sumber daya
 ```
 
-Agen AI memuat skill melalui **progressive disclosure** dalam 3 tahap:
+Agen memuat skill melalui **progressive disclosure** dalam tiga tahap:
 
-1. **Discovery** — Saat startup, agen hanya membaca `name` + `description` dari setiap skill (cukup untuk tahu kapan skill relevan).
-2. **Activation** — Ketika task cocok dengan deskripsi skill, agen membaca full `SKILL.md`.
-3. **Execution** — Agen mengikuti instruksi, opsional memuat file `references/`, mengeksekusi `scripts/`, atau menggunakan template dari `assets/`.
+1. **Discovery** — saat startup, agen hanya membaca `name` + `description` setiap skill.
+2. **Activation** — ketika task cocok dengan deskripsi, agen membaca `SKILL.md` secara penuh.
+3. **Execution** — agen mengikuti instruksi, lalu memuat `references/`, menjalankan `scripts/`, atau memakai templat dari `assets/` sesuai kebutuhan.
 
-Full instructions hanya dimuat saat diperlukan, sehingga agen bisa menyimpan banyak skill dengan context footprint minimal.
+Instruksi lengkap hanya dimuat saat diperlukan, sehingga puluhan skill dapat aktif tanpa membebani context window.
 
-## Best Practices untuk Skill Creators
+## Mulai Cepat
 
-Panduan ini untuk kontributor dan skill creators. Berdasarkan [Agent Skills Best Practices](https://agentskills.io/skill-creation/best-practices).
+### Instal via skills CLI
 
-### 1. Spending Context Wisely
+```bash
+# Instal semua skill
+npx skills add yogiex/opencode-cyber-security-skills
 
-Setiap token dalam skill Anda bersaing dengan conversation history dan skill lain di context window.
+# Instal satu skill saja
+npx skills add yogiex/opencode-cyber-security-skills --skill owasp-top10-2025
 
-**Add what agent lacks, omit what it knows.** Jangan jelaskan konsep umum (apa itu HTTP, PDF, SQL injection). Fokus ke domain-specific knowledge, non-obvious edge cases, dan project conventions yang agent tidak tahu.
-
-```markdown
-<!-- Terlalu panjang — agent sudah tahu apa itu PDF -->
-## Extract PDF text
-PDF (Portable Document Format) files are a common file format...
-
-<!-- Lebih baik — langsung ke yang agent belum tahu -->
-## Extract PDF text
-Use pdfplumber for text extraction. For scanned documents, fall back to
-pdf2image with pytesseract.
+# Lihat daftar skill yang tersedia
+npx skills add yogiex/opencode-cyber-security-skills --list
 ```
 
-Tanyakan pada diri sendiri untuk setiap konten: *"Akankah agent salah tanpa instruksi ini?"* Jika jawabannya tidak, potong.
+### Claude Code Plugin
 
-**Design coherent units.** Skill terlalu sempit → multiple skills perlu di-load untuk satu task (overhead). Skill terlalu luas → sulit diaktivasi secara presisi.
+```bash
+# Daftarkan marketplace dari repo ini
+/plugin marketplace add yogiex/opencode-cyber-security-skills
 
-**Aim for moderate detail.** Comprehensive documentation bisa kontraproduktif — agent kesulitan mengekstrak yang relevan. Concise, stepwise guidance + working example > exhaustive docs.
-
-**Structure large skills with progressive disclosure.** SKILL.md wajib <500 lines / 5K tokens. Detail pindahkan ke `references/`. Beri instruksi spesifik: "Read `references/api-errors.md` if the API returns non-200" lebih berguna dari "see references/ for details."
-
-### 2. Favor Procedures over Declarations
-
-Ajarkan *how to approach* suatu masalah kelas tertentu, bukan *what to produce* untuk satu instance.
-
-```markdown
-<!-- Specific answer — hanya berguna untuk task ini -->
-Join the `orders` table to `customers` on `customer_id`, filter where
-`region = 'EMEA'`, and sum the `amount` column.
-
-<!-- Reusable method — work for any analytical query -->
-1. Read the schema from `references/schema.yaml` to find relevant tables
-2. Join tables using the `_id` foreign key convention
-3. Apply any filters from the user's request as WHERE clauses
-4. Aggregate numeric columns as needed and format as a markdown table
+# Instal plugin (berisi seluruh skill)
+/plugin install cyber-security-agent-skills@cyber-security-agent-skills
 ```
 
-### 3. Provide Defaults, Not Menus
+> Plugin Claude Code juga didukung di Factory [Droid](https://docs.factory.ai/cli/configuration/plugins#claude-code-compatibility).
 
-Pilih satu default, sebut alternatif secara singkat.
+### Metode lain
 
-```markdown
-<!-- Terlalu banyak pilihan -->
-You can use pypdf, pdfplumber, PyMuPDF, or pdf2image...
+Skill juga dapat dipasang lewat [Playbooks](https://playbooks.com/skills) atau [Context7](https://context7.com/docs/skills):
 
-<!-- Default jelas dengan escape hatch -->
-Use pdfplumber for text extraction. For scanned PDFs requiring OCR,
-use pdf2image with pytesseract instead.
+```bash
+# Playbooks
+npx playbooks add skill yogiex/opencode-cyber-security-skills
+
+# Context7
+npx ctx7 skills install /yogiex/opencode-cyber-security-skills
 ```
 
-### 4. Calibrate Control — Match Specificity to Fragility
+## Available Skills
 
-**Fleksibel** untuk task yang toleran variasi — beri tujuan tanpa langkah rigid.
-
-```markdown
-## Code review process
-1. Check all database queries for SQL injection (use parameterized queries)
-2. Verify authentication checks on every endpoint
-3. Look for race conditions in concurrent code paths
-```
-
-**Preskriptif** untuk fragile operations — urutan spesifik, jangan modifikasi.
-
-```markdown
-## Database migration
-Run exactly this sequence:
-python scripts/migrate.py --verify --backup
-Do not modify the command or add additional flags.
-```
-
-### 5. Instruction Patterns yang Efektif
-
-**Gotchas** — lingkungan-spesifik yang melawan asumsi umum. Simpan di SKILL.md (bukan references/) agar terbaca sebelum agent menemui situasi.
-
-```markdown
-## Gotchas
-- The `users` table uses soft deletes. Queries must include
-  `WHERE deleted_at IS NULL`.
-- The `/health` endpoint returns 200 even if DB is down. Use `/ready`.
-```
-
-> Saat agent membuat mistake, tambahkan koreksinya ke gotchas section. Ini cara paling langsung untuk iterative improvement.
-
-**Templates** — pendek inline di SKILL.md, panjang di `assets/`.
-
-**Checklists** — untuk multi-step workflows, bantu agent track progress.
-
-```markdown
-Progress:
-- [ ] Step 1: Analyze the form (run `scripts/analyze_form.py`)
-- [ ] Step 2: Create field mapping
-- [ ] Step 3: Validate mapping (run `scripts/validate_fields.py`)
-```
-
-**Validation loops** — do → validate → fix → repeat until pass.
-
-**Plan-validate-execute** — untuk destructive operations: buat intermediate plan → validate → baru execute.
-
-### 6. Refine dengan Real Execution
-
-First draft hampir selalu perlu refinement. Jalankan skill terhadap task nyata, lalu feed hasilnya (kegagalan maupun keberhasilan) kembali ke proses pembuatan. Minimal 1 pass execute-then-revise.
-
-Baca *execution traces*, bukan cuma final output. Jika agent buang waktu di langkah tidak produktif, cari sebab:
-- Instruksi terlalu vague → agent coba beberapa pendekatan
-- Instruksi tidak relevan → agent ikuti saja
-- Terlalu banyak opsi tanpa default jelas
-
-## Status Struktur Skill
+Legenda status struktur:
 
 | Status | Arti |
 |--------|------|
-| ✅ Lean | SKILL.md <500 lines, konten mandiri tanpa references/ (adekuat untuk topik ringan) |
-| 🔶 Structured | SKILL.md <500 lines + references/ terorganisir untuk progressive disclosure |
-| 📦 Monolithic | SKILL.md >500 lines, belum dipecah — perlu direfactor |
-
-## Available Skills
+| ✅ Lean | `SKILL.md` <500 baris, mandiri tanpa `references/` — memadai untuk topik ringan |
+| 🔶 Structured | `SKILL.md` <500 baris + `references/` terorganisir untuk progressive disclosure |
+| 📦 Monolithic | `SKILL.md` >500 baris dan belum dipecah — perlu direfaktor |
 
 ### 🔴 Red Team (Offensif)
 
@@ -155,27 +107,28 @@ Baca *execution traces*, bukan cuma final output. Jika agent buang waktu di lang
 | ----- | ------ | --------- |
 | [oscp-methodology](./skills/oscp-methodology) | 🔶 | OSCP (Offensive Security Certified Professional) — mindset, metodologi, dan strategi komprehensif untuk PEN-200/OSCP+ mencakup filsafat Try Harder, 3 attack vectors, enumeration framework, privilege escalation (Linux, Windows, AD), dan reporting. |
 | [ptes-standard](./skills/ptes-standard) | 🔶 | Penetration Testing Execution Standard (PTES) — panduan komprehensif untuk penetration testing meliputi 7 fase: pre-engagement, intelligence gathering, threat modeling, vulnerability analysis, exploitation, post-exploitation, dan reporting. |
-| [cpent](./skills/cpent) | 🔶 | Persona penetration tester bersertifikat EC-Council CPENT — doktrin operasional untuk menembus jaringan berlapis (double pivoting), jalur serangan Active Directory, binary exploitation x86/x64, wireless/IoT/OT-SCADA, dan laporan kelas klien. Dipakai untuk engagement nyata, bukan persiapan ujian. |
+| [cpent](./skills/cpent) | 🔶 | Persona pengguna bersertifikat EC-Council CPENT — aturan operasional yang mengikat, dua belas hukum mindset, doktrin kedalaman (double pivoting), jalur serangan Active Directory, eksploitasi binary x86/x64, wireless/IoT/OT-SCADA, dan laporan kelas klien. Dipakai untuk engagement nyata, bukan persiapan ujian. |
 | [offsec-pen-300](./skills/offsec-pen-300) | 🔶 | OffSec PEN-300 / OSEP (Offensive Security Experienced Penetration Tester) — advanced evasion techniques and breaching defenses. AV/EDR evasion, AMSI/AppLocker/CLM bypass, process injection & hollowing, custom C# shellcode runners, MSSQL linked servers, AD exploitation, delegation attacks, ADCS, dan report writing. |
 | [offsec-web-300](./skills/offsec-web-300) | 🔶 | OffSec WEB-300 / OSWE (Offensive Security Web Expert) — advanced web application security assessment, white-box testing, source code review (Java, C#, PHP, Python, JavaScript), custom exploit development, .NET deserialization, PHP type juggling, SQLi, SSTI, SSRF, prototype pollution, dan authentication bypass. |
 | [waf-evasion-methodology](./skills/waf-evasion-methodology) | 🔶 | Pola pikir dan metodologi sistematis untuk WAF evasion — memahami parsing discrepancies, encoding gaps, dan logic mismatches antara WAF dan backend application. |
 | [web-pentest-payloads](./skills/web-pentest-payloads) | 🔶 | Payload dan teknik eksploitasi per kelas kerentanan web: SQLi, NoSQL, command injection, SSTI, XXE, XSS, CSRF, SSRF, LFI/RFI, file upload, deserialization, request smuggling, cache poisoning, JWT/OAuth/SAML, IDOR, business logic, API, prompt injection — dengan syarat otorisasi, decision frame (baseline, dua varian, kanal blind), gotchas, dan bypass filter/WAF. |
 | [web-app-scan](./skills/web-app-scan) | ✅ | Penilaian keamanan web application bertahap seperti Nessus/Nikto tetapi manual: fingerprint, config leak, injection, XSS, sesi, akses kontrol, TLS, CORS — dengan batas mode (pasif/aktif), kriteria konfirmasi temuan, dan template output. |
-| [web-reconnaissance](./skills/web-reconnaissance) | ✅ | Recon web/SPA: inventarisasi chunk JS (manifest build, tabel chunk webpack, Coverage, source map), alur data dari aksi UI ke endpoint, analisis bundle, rekam network tab lewat Chrome DevTools MCP atau HAR manual, baca storage browser (localStorage, cookie termasuk HttpOnly, IndexedDB, Cache Storage, OPFS), peta rute frontend + API backend, konfigurasi auth (JWT, cookie, OAuth/OIDC, SAML), identifikasi teknologi dan versi berkeyakinan (header, cookie, jalur aset, banner bundle), triage token, dan CVE. |
+| [web-reconnaissance](./skills/web-reconnaissance) | 🔶 | Recon web/SPA: inventarisasi chunk JS (manifest build, tabel chunk webpack, Coverage, source map), alur data dari aksi UI ke endpoint, analisis bundle, rekam network tab lewat Chrome DevTools MCP atau HAR manual, baca storage browser (localStorage, cookie termasuk HttpOnly, IndexedDB, Cache Storage, OPFS), peta rute frontend + API backend, konfigurasi auth (JWT, cookie, OAuth/OIDC, SAML), identifikasi teknologi dan versi berkeyakinan (header, cookie, jalur aset, banner bundle), triage token, dan CVE. |
 
 ### 🔵 Blue Team (Defensif)
 
 | Skill | Status | Deskripsi |
 | ----- | ------ | --------- |
-| [ec-ecih](./skills/ec-ecih) | 🔶 | EC-Council ECIH (Certified Incident Handler) v3 — incident handler mindset, IR lifecycle (NIST 800-61 + ECIH 9-stage IH&R), decision frameworks per incident type, forensic readiness, containment strategies, eradication methodology, recovery planning, post-incident lessons learned, dan krisis communication. Berbasis ECIH 212-89 v3 curriculum. |
+| [ec-ecih](./skills/ec-ecih) | 🔶 | EC-Council ECIH (Certified Incident Handler) v3 — incident handler mindset, IR lifecycle (NIST 800-61 + ECIH 9-stage IH&R), decision frameworks per incident type, forensic readiness, containment strategies, eradication methodology, recovery planning, post-incident lessons learned, dan komunikasi krisis. Berbasis ECIH 212-89 v3 curriculum. |
+| [ec-cnd](./skills/ec-cnd) | 🔶 | Persona pengguna yang sudah memegang sertifikasi EC-Council CND — profil, gaya bicara, dan doktrin operasional untuk memilih kontrol jaringan yang tepat, mengelola perubahan berisiko, membaca telemetri, dan merespons insiden di tingkat jaringan. Persona injection pengguna bersertifikat, bukan tutor ujian. |
 | [incident-response-plan](./skills/incident-response-plan) | ✅ | Panduan incident response non-teknis untuk organisasi: persiapan, deteksi, analisis, containment, eradikasi, recovery, dan pembelajaran. Cocok untuk tim manajemen, legal, PR, dan koordinator insiden. |
 | [log-management-nist-800-92](./skills/log-management-nist-800-92) | ✅ | Panduan log management berdasarkan NIST SP 800-92 untuk perencanaan, pengumpulan, penyimpanan, analisis, dan retensi log keamanan secara terstruktur. |
 | [mitre-attack](./skills/mitre-attack) | ✅ | Panduan MITRE ATT&CK framework untuk memahami adversary tactics, techniques, dan prosedur dalam threat intelligence, detection engineering, dan defensive gap analysis. |
 | [nist-800-53](./skills/nist-800-53) | ✅ | Panduan Security and Privacy Controls berdasarkan NIST SP 800-53 Rev 5 (Release 5.2.0) untuk pemilihan, implementasi, dan assessment kontrol keamanan dan privasi dalam Risk Management Framework. |
 | [risk-management-framework](./skills/risk-management-framework) | ✅ | Panduan NIST Risk Management Framework (SP 800-37) untuk mengelola risiko keamanan dan privasi secara terstruktur, fleksibel, dan berkelanjutan di seluruh siklus hidup sistem. |
-| [security-documentation](./skills/security-documentation) | ✅ | Menyusun laporan pengujian keamanan yang dapat diaudit: struktur baku, template LaTeX siap pakai (`assets/report-template.tex`), anatomi temuan dengan CVSS v3.1/CWE, bukti `curl` reproducible, dan aturan redaksi. |
-| [offsec-ir-200](./skills/offsec-ir-200) | 🔶 | OffSec IR-200 / OSIR (OffSec Incident Responder) — foundational incident response covering full IR lifecycle (NIST 800-61r2), Splunk SIEM analysis with SPL, digital forensics (Autopsy, Volatility 3, FTK Imager), malware triage with YARA, containment/eradication/recovery, and post-mortem reporting. |
-| [offsec-th-200](./skills/offsec-th-200) | 🔶 | OffSec TH-200 / OSTH (OffSec Threat Hunter) — foundational threat hunting covering proactive threat detection, Splunk SPL, CrowdStrike Falcon CQL, Suricata IDS/IPS, hypothesis-driven hunting (PEAK, SEARCH), MITRE ATT&CK mapping, ransomware & APT case studies, CTI integration, and professional hunt reporting. |
+| [security-documentation](./skills/security-documentation) | 🔶 | Menyusun laporan pengujian keamanan yang dapat diaudit: struktur baku, template LaTeX siap pakai (`assets/report-template.tex`), anatomi temuan dengan CVSS v3.1/CWE, bukti `curl` reproducible, dan aturan redaksi. |
+| [offsec-ir-200](./skills/offsec-ir-200) | 🔶 | OffSec IR-200 / OSIR (OffSec Incident Responder) — foundational incident response covering full IR lifecycle (NIST 800-61r2), Splunk SIEM analysis with SPL, digital forensics (Autopsy, Volatility 3, FTK Imager), malware triage with YARA, containment/eradication/recovery, dan post-mortem reporting. |
+| [offsec-th-200](./skills/offsec-th-200) | 🔶 | OffSec TH-200 / OSTH (OffSec Threat Hunter) — foundational threat hunting covering proactive threat detection, Splunk SPL, CrowdStrike Falcon CQL, Suricata IDS/IPS, hypothesis-driven hunting (PEAK, SEARCH), MITRE ATT&CK mapping, ransomware & APT case studies, CTI integration, dan professional hunt reporting. |
 | [offsec-soc-200](./skills/offsec-soc-200) | 🔶 | OffSec SOC-200 / OSDA (OffSec Defense Analyst) — security operations and defensive analysis. SIEM/ELK/KQL, Windows & Linux endpoint detection, attacker methodology, incident investigation, dan SOC analyst framework. |
 | [lf-cks](./skills/lf-cks) | 🔶 | Certified Kubernetes Security Specialist (CKS) — Kubernetes security mindset, defense-in-depth framework, cluster isolation models, workload segmentation, supply chain trust, authentication & authorization philosophy, network security architecture, runtime protection, compliance posture, dan decision framework untuk securing container platforms. |
 | [soc-analyst](./skills/soc-analyst) | ✅ | Pola pikir dan pendekatan untuk Security Analyst dan SOC Analyst dalam mentriage, menyelidiki, merespon insiden, dan berkomunikasi secara efektif. |
@@ -187,7 +140,7 @@ Baca *execution traces*, bukan cuma final output. Jika agent buang waktu di lang
 | ----- | ------ | --------- |
 | [comptia-cysa](./skills/comptia-cysa) | 🔶 | Panduan lengkap CompTIA CySA+ (CS0-004 V4) mencakup Security Operations, Vulnerability Management, Incident Response, dan Reporting & Communication untuk mempersiapkan sertifikasi Cybersecurity Analyst. |
 | [devsecops-mindset](./skills/devsecops-mindset) | ✅ | Panduan pola pikir dan mindset DevSecOps untuk mengintegrasikan keamanan dalam siklus pengembangan secara berkelanjutan, tanpa fokus pada alat/tools tertentu. |
-| [owasp-top10-2025](./skills/owasp-top10-2025) | 🔶 | Referensi lengkap OWASP Top 10 2025 untuk risiko keamanan web application. Gunakan saat threat modeling, code review, penetration testing, atau saat membahas kategori A01-A10. |
+| [owasp-top10-2025](./skills/owasp-top10-2025) | 🔶 | Referensi lengkap OWASP Top 10 2025 untuk risiko keamanan web application. Gunakan saat threat modeling, code review, penetration testing, atau saat membahas kategori A01–A10. |
 | [threat-modeling](./skills/threat-modeling) | ✅ | Panduan threat modeling untuk mengidentifikasi, menganalisis, dan memitigasi risiko keamanan pada sistem atau aplikasi secara general dan non-teknis. |
 
 ### 🟣 Audit & Code Security
@@ -197,136 +150,155 @@ Baca *execution traces*, bukan cuma final output. Jika agent buang waktu di lang
 | [security-auditor](./skills/security-auditor) | ✅ | Mindset, metodologi, dan referensi untuk security auditor — audit lifecycle, perbandingan framework (ISO 27001, NIST, PCI DSS, SOC 2), kontrol testing, pengumpulan bukti, dan jalur sertifikasi. Fokus GRC/compliance, bukan hunting kerentanan kode. |
 | [code-security-audit](./skills/code-security-audit) | 🔶 | Audit keamanan kode berlapis untuk codebase, API, service, CLI, library, dan daemon: recon terstruktur, coverage ledger deterministik, hunting per-unit dengan subagent terisolasi, validasi adversarial, `findings.json` tervalidasi skema, dan laporan yang bisa diaudit ulang. |
 
-## Instalasi
+## Struktur Repositori
 
-### Skills
-
-Gunakan [skills](https://skills.sh/) untuk menginstal skills secara langsung:
-
-```bash
-# Install semua skills
-npx skills add cyber-security/agent-skills
-
-# Install skill spesifik
-npx skills add cyber-security/agent-skills --skill owasp-top10-2025
-
-# Lihat daftar skills yang tersedia
-npx skills add cyber-security/agent-skills --list
+```text
+.
+├── manifest.json                  # Sumber kebenaran — konfigurasi global + daftar skill
+├── skills/
+│   ├── index.json                 # Dibuat otomatis — indeks agent-skills-discovery
+│   └── <skill-name>/
+│       ├── SKILL.md               # Titik masuk — frontmatter + instruksi + indeks referensi
+│       ├── references/            # Dokumentasi referensi bertingkat
+│       ├── scripts/               # Skrip pendukung
+│       └── assets/                # Aset statis (templat, gambar, CSS)
+├── scripts/
+│   ├── add-skill.js               # Scaffold skill baru
+│   ├── sync-skills.js             # Sinkronisasi manifest, plugin, indeks, marketplace
+│   ├── check-changelog.js         # Pastikan setiap perubahan file tercatat
+│   └── check-fact-notes.js        # Pastikan klaim faktual punya provenance
+├── .claude-plugin/                # Dibuat otomatis — plugin + marketplace Claude Code
+├── .cursor-plugin/                # Dibuat otomatis — plugin Cursor
+├── .github/
+│   ├── workflows/validate-and-sync.yml  # CI — validasi skill/plugin, cek changelog, sync
+│   └── CONTRIBUTING.md            # Panduan kontribusi
+├── docs/
+│   ├── CERTIFICATION-FACTS.md     # Fact sheet — sumber angka dan versi
+│   └── SKILL-QUALITY.md           # Ledger kualitas per skill
+├── AGENTS.md                      # Instruksi proyek untuk agen AI
+├── ARCHITECTURE.md                # Arsitektur dan alur data repo
+├── CHANGELOG.md                   # Jejak audit setiap perubahan file
+├── LICENSE
+└── README.md
 ```
 
-### Claude Code Plugin
+Alur data: `SKILL.md` frontmatter → `manifest.json` → `sync-skills.js` → `plugin.json`, `marketplace.json`, `skills/index.json`. Detail lengkap ada di [ARCHITECTURE.md](ARCHITECTURE.md).
 
-Instal melalui plugin system Claude Code:
+## Kualitas Skill
 
-```bash
-# Tambahkan plugin (termasuk semua skills)
-/plugin add cyber-security/agent-skills
-```
+Kualitas tidak dinilai dari panjang dokumen, melainkan dari ada tidaknya empat hal:
 
-> Claude Code plugins juga didukung di Factory [Droid](https://docs.factory.ai/cli/configuration/plugins#claude-code-compatibility).
+| Dimensi | Yang diperiksa | Cara diperiksa |
+|---------|----------------|----------------|
+| **Trigger** | Kondisi pemakaian eksplisit di `description` atau bagian "Kapan Digunakan" | pemeriksaan struktur |
+| **Decision Frame** | Bagian `## Decision Frame` berisi aturan keputusan, bukan pertanyaan retoris | `grep '^## Decision Frame'` |
+| **Provenance** | Angka dan versi tertaut ke fact sheet | `node scripts/check-fact-notes.js` |
+| **Failure modes** | Bagian `Gotchas` berisi koreksi dari eksekusi nyata | `grep '^## .*Gotcha'` |
 
-### Metode Instalasi Lain
-
-Agent skills juga bisa diinstal melalui perintah berikut dari [Playbooks](https://playbooks.com/skills) atau [Context7](https://context7.com/docs/skills):
-
-```bash
-# Playbooks
-npx playbooks add skill cyber-security/agent-skills
-
-# Context7
-npx ctx7 skills install /cyber-security/agent-skills
-```
+Matriks status per skill, backlog, dan ringkasan cakupan dipelihara di [docs/SKILL-QUALITY.md](docs/SKILL-QUALITY.md). Klaim faktual bersumber dari [docs/CERTIFICATION-FACTS.md](docs/CERTIFICATION-FACTS.md) dan diverifikasi otomatis di CI.
 
 ## Menambah Skill Baru
 
-Gunakan script scaffold:
-
 ```bash
+# 1. Scaffold
 node scripts/add-skill.js <nama-skill> "<deskripsi>"
-```
 
-Contoh:
+# 2. Sinkronkan manifest, plugin, dan indeks
+node scripts/sync-skills.js
 
-```bash
-node scripts/add-skill.js owasp-top10-2025 "OWASP Top 10 2025 vulnerability knowledge and guidance"
+# 3. Verifikasi provenance dan changelog sebelum commit
+node scripts/check-fact-notes.js
+node scripts/check-changelog.js
 ```
 
 Setelah scaffold, lakukan refinement:
 
-1. **Jalankan terhadap task nyata** — catat koreksi yang muncul saat agent membuat mistake
-2. **Tambahkan gotchas** — masukkan koreksi ke `## Gotchas` di SKILL.md
-3. **Terapkan progressive disclosure** — jika SKILL.md >500 lines, pindahkan detail ke `references/`
-4. **Validasi** — jalankan `node scripts/sync-skills.js` setelah perubahan
+1. **Jalankan terhadap task nyata** — catat koreksi yang muncul saat agen membuat kesalahan.
+2. **Tambahkan gotchas** — masukkan setiap koreksi ke `## Gotchas` di `SKILL.md`.
+3. **Terapkan progressive disclosure** — jika `SKILL.md` >500 baris atau >5K token, pindahkan detail ke `references/`.
+4. **Pasang decision frame** — nyatakan kapan skill dipakai, kapan berhenti, dan bukti minimum yang harus dikumpulkan.
+5. **Catat di CHANGELOG** — setiap file yang ditambah, diubah, atau dihapus wajib disebut namanya.
 
-Proses ini (execute-then-revise) adalah cara paling efektif untuk meningkatkan kualitas skill.
+Panduan lengkap pola dan pitfall ada di [CONTRIBUTING.md](.github/CONTRIBUTING.md). Proses execute-then-revise ini adalah cara paling efektif untuk menaikkan kualitas skill.
 
 ## Scripts
 
 | Script | Deskripsi |
 | ------ | --------- |
-| `node scripts/add-skill.js` | Scaffold skill baru |
-| `node scripts/sync-skills.js` | Sinkronisasi manifest.json, plugin files, index.json, dan README |
+| `node scripts/add-skill.js` | Scaffold skill baru beserta `SKILL.md` |
+| `node scripts/sync-skills.js` | Sinkronisasi `manifest.json`, plugin files, `marketplace.json`, dan `skills/index.json` |
+| `node scripts/check-changelog.js` | Pastikan setiap file yang berubah tercatat di `CHANGELOG.md` |
+| `node scripts/check-fact-notes.js` | Pastikan klaim faktual punya provenance ke fact sheet |
 
-## Referensi
+## Penggunaan yang Sah
+
+Skill ofensif di repo ini ditujukan untuk pengujian keamanan yang **berizin**, laboratorium, CTF, dan riset defensif. Gunakan hanya terhadap sistem yang Anda miliki atau yang Anda punya izin tertulis untuk menguji. Setiap skill ofensif menyertakan syarat otorisasi dan batas berhenti; patuhi keduanya. Penulis tidak bertanggung jawab atas penyalahgunaan.
+
+## Referensi dan Sumber
 
 | Skill | Sumber/Standar | Link |
-|------|---------------|------|
+|-------|----------------|------|
 | [comptia-cysa](./skills/comptia-cysa) | CompTIA CySA+ CS0-004 | https://www.comptia.org/certifications/cybersecurity-analyst |
 | [cpent](./skills/cpent) | EC-Council CPENT | https://www.eccouncil.org/train-certify/certified-penetration-testing-professional-cpent/ |
-| [offsec-pen-300](./skills/offsec-pen-300) | OffSec PEN-300, OSEP Exam Guide | https://help.offsec.com/hc/en-us/articles/360050293792-OSEP-Exam-Guide |
-| [offsec-web-300](./skills/offsec-web-300) | OffSec WEB-300, OSWE Exam Guide | https://help.offsec.com/hc/en-us/articles/360049792232-OSWE-Exam-Guide |
-| [offsec-ir-200](./skills/offsec-ir-200) | OffSec IR-200, OSIR Exam Guide | https://help.offsec.com/hc/en-us/articles/30960007786900 |
-| [offsec-th-200](./skills/offsec-th-200) | OffSec TH-200, OSTH Exam Guide | https://help.offsec.com/hc/en-us/articles/29141776768148-OSTH-Exam-Guide |
-| [offsec-soc-200](./skills/offsec-soc-200) | OffSec SOC-200, OSDA Exam Guide | https://help.offsec.com/hc/en-us/articles/4410105675412-OSDA-Exam-Guide |
-| [oscp-methodology](./skills/oscp-methodology) | OffSec PEN-200, OSCP+ Exam Guide | https://help.offsec.com/hc/en-us/articles/360040165632-OSCP-Exam-Guide |
-| [devsecops-mindset](./skills/devsecops-mindset) | DevSecOps Principles | - |
-| [lf-cks](./skills/lf-cks) | Linux Foundation CKS, CNCF CKS Curriculum, CIS Kubernetes Benchmark | https://training.linuxfoundation.org/certification/certified-kubernetes-security-specialist/ |
+| [ec-cnd](./skills/ec-cnd) | EC-Council CND | https://www.eccouncil.org/train-certify/certified-network-defender-cnd/ |
 | [ec-ecih](./skills/ec-ecih) | EC-Council ECIH v3 (212-89), NIST SP 800-61, ISO 27035 | https://www.eccouncil.org/train-certify/certified-incident-handler-ecih/ |
-| [incident-response-plan](./skills/incident-response-plan) | NIST SP 800-61, SANS PICERL | - |
+| [devsecops-mindset](./skills/devsecops-mindset) | DevSecOps Principles | — |
+| [incident-response-plan](./skills/incident-response-plan) | NIST SP 800-61, SANS PICERL | — |
+| [lf-cks](./skills/lf-cks) | Linux Foundation CKS, CNCF CKS Curriculum, CIS Kubernetes Benchmark | https://training.linuxfoundation.org/certification/certified-kubernetes-security-specialist/ |
 | [log-management-nist-800-92](./skills/log-management-nist-800-92) | NIST SP 800-92 | https://csrc.nist.gov/pubs/sp/800/92 |
 | [mitre-attack](./skills/mitre-attack) | MITRE ATT&CK | https://attack.mitre.org |
 | [nist-800-53](./skills/nist-800-53) | NIST SP 800-53 Rev 5 (5.2.0) | https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final |
+| [offsec-ir-200](./skills/offsec-ir-200) | OffSec IR-200, OSIR Exam Guide | https://help.offsec.com/hc/en-us/articles/30960007786900 |
+| [offsec-pen-300](./skills/offsec-pen-300) | OffSec PEN-300, OSEP Exam Guide | https://help.offsec.com/hc/en-us/articles/360050293792-OSEP-Exam-Guide |
+| [offsec-soc-200](./skills/offsec-soc-200) | OffSec SOC-200, OSDA Exam Guide | https://help.offsec.com/hc/en-us/articles/4410105675412-OSDA-Exam-Guide |
+| [offsec-th-200](./skills/offsec-th-200) | OffSec TH-200, OSTH Exam Guide | https://help.offsec.com/hc/en-us/articles/29141776768148-OSTH-Exam-Guide |
+| [offsec-web-300](./skills/offsec-web-300) | OffSec WEB-300, OSWE Exam Guide | https://help.offsec.com/hc/en-us/articles/360049792232-OSWE-Exam-Guide |
+| [oscp-methodology](./skills/oscp-methodology) | OffSec PEN-200, OSCP+ Exam Guide | https://help.offsec.com/hc/en-us/articles/360040165632-OSCP-Exam-Guide |
 | [owasp-top10-2025](./skills/owasp-top10-2025) | OWASP Top 10 2025 | https://owasp.org/Top10/ |
 | [ptes-standard](./skills/ptes-standard) | PTES | http://www.pentest-standard.org/ |
 | [risk-management-framework](./skills/risk-management-framework) | NIST SP 800-37 Rev 2 | https://csrc.nist.gov/pubs/sp/800/37/r2 |
-| [security-documentation](./skills/security-documentation) | OWASP WSTG, PTES | - |
-| [soc-analyst](./skills/soc-analyst) | MITRE ATT&CK, NIST SP 800-61 | - |
+| [security-documentation](./skills/security-documentation) | OWASP WSTG, PTES | — |
+| [soc-analyst](./skills/soc-analyst) | MITRE ATT&CK, NIST SP 800-61 | — |
 | [threat-intelligence](./skills/threat-intelligence) | CTI Lifecycle, MITRE ATT&CK, Cyber Kill Chain, Diamond Model, STIX/TAXII | https://attack.mitre.org |
-| [threat-modeling](./skills/threat-modeling) | STRIDE, DFD, NIST SP 800-154 | - |
-| [waf-evasion-methodology](./skills/waf-evasion-methodology) | OWASP CRS, MITRE ATT&CK | - |
+| [threat-modeling](./skills/threat-modeling) | STRIDE, DFD, NIST SP 800-154 | — |
+| [waf-evasion-methodology](./skills/waf-evasion-methodology) | OWASP CRS, MITRE ATT&CK | — |
+| [web-app-scan](./skills/web-app-scan) | OWASP WSTG, PTES | — |
 | [web-pentest-payloads](./skills/web-pentest-payloads) | PayloadsAllTheThings, PortSwigger WSA, OWASP WSTG | https://github.com/swisskyrepo/PayloadsAllTheThings |
-| [web-app-scan](./skills/web-app-scan) | OWASP WSTG, PTES | - |
-| [web-reconnaissance](./skills/web-reconnaissance) | OSINT Framework, OWASP WSTG | - |
+| [web-reconnaissance](./skills/web-reconnaissance) | OSINT Framework, OWASP WSTG | — |
 
-## Ecosystem
+## Ekosistem
 
 Agent Skills didukung oleh 20+ agent tools dan platform. Lihat [Client Showcase](https://agentskills.io/clients) untuk daftar lengkap.
 
 Beberapa yang kompatibel: OpenCode, Claude Code, Cursor, GitHub Copilot, Gemini CLI, VS Code, OpenAI Codex, Goose, Roo Code, Factory, dan banyak lagi.
 
-## Resources
+Dokumentasi ekosistem:
 
 - [Agent Skills Specification](https://agentskills.io/specification) — Format spesifikasi lengkap
-- [Agent Skills Quickstart](https://agentskills.io/skill-creation/quickstart) — Buat skill pertama kamu
-- [Agent Skills Best Practices](https://agentskills.io/skill-creation/best-practices) — Skill creation patterns dan panduan lengkap
-- [Evaluating Skill Output Quality](https://agentskills.io/skill-creation/evaluating-skills) — Test cases, assertions, dan grading
-- [Optimizing Skill Descriptions](https://agentskills.io/skill-creation/optimizing-descriptions) — Discovery optimization dan description testing
-- [Using Scripts in Skills](https://agentskills.io/skill-creation/using-scripts) — Panduan bundling reusable scripts
+- [Agent Skills Quickstart](https://agentskills.io/skill-creation/quickstart) — Membuat skill pertama
+- [Agent Skills Best Practices](https://agentskills.io/skill-creation/best-practices) — Pola dan panduan pembuatan skill
+- [Evaluating Skill Output Quality](https://agentskills.io/skill-creation/evaluating-skills) — Test case, assertion, dan grading
+- [Optimizing Skill Descriptions](https://agentskills.io/skill-creation/optimizing-descriptions) — Optimasi discovery
+- [Using Scripts in Skills](https://agentskills.io/skill-creation/using-scripts) — Panduan bundling skrip
 - [npx skills](https://skills.sh/) — CLI untuk mengelola skills
 - [Validate Agent Skill](https://github.com/marketplace/actions/validate-skill) — GitHub Action untuk validasi
-- [Playbooks](https://playbooks.com/skills)
-- [Context7 Skills](https://context7.com/docs/skills)
 
 ## Kontribusi
 
-Kontribusi sangat diterima! Sebelum menambah atau mengedit skill, baca panduan berikut:
+Kontribusi sangat diterima. Sebelum mengirim PR:
 
-- [Best Practices untuk Skill Creators](#best-practices-untuk-skill-creators) di atas
-- [Agent Skills Best Practices](https://agentskills.io/skill-creation/best-practices) — Panduan lengkap patterns dan pitfalls
-- [Evaluating Skill Output Quality](https://agentskills.io/skill-creation/evaluating-skills) — Cara sistematis ngetes dan nge-grade skill
-- [Optimizing Skill Descriptions](https://agentskills.io/skill-creation/optimizing-descriptions) — Optimasi discovery biar skill ke-trigger di prompt yang tepat
-- [Panduan Kontribusi](.github/CONTRIBUTING.md)
+1. Baca [CONTRIBUTING.md](.github/CONTRIBUTING.md) — pola penulisan skill yang terbukti efektif.
+2. Pahami [ARCHITECTURE.md](ARCHITECTURE.md) — alur data dan apa yang boleh diedit manual.
+3. Catat setiap perubahan file di [CHANGELOG.md](CHANGELOG.md).
+4. Jalankan pemeriksaan lokal:
+
+```bash
+node scripts/check-changelog.js --base origin/main
+node scripts/check-fact-notes.js
+```
+
+CI menjalankan tiga pemeriksaan: validasi setiap skill yang berubah, validasi plugin terhadap JSON Schema, dan verifikasi changelog. Gunakan **conventional commit** (`feat:`, `fix:`, `docs:`) dan buka PR ke `dev` atau `main` sesuai alur repo.
 
 ## Lisensi
 
-MIT
+Dirilis di bawah [MIT License](LICENSE).

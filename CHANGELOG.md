@@ -13,6 +13,134 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.18.0] — 2026-11-10 — offsec-ir-200: verifikasi integritas file
+
+**Commit dasar:** `16a89b9` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** permintaan langsung — cara membuktikan file mana yang diubah penyerang: metadata `stat` (mtime/ctime, inode, mode, owner, hardlink), verifikasi paket `rpm -Va` dan `dpkg -V`/`debsums`, pembacaan flag, false positive konffile, batas cakupan paket, dan deteksi manipulasi database paket.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/offsec-ir-200/references/file-integrity-check.md` | 210 baris, 6 tabel: Decision Frame 5 butir; tabel alat (`stat` vs verifikasi paket); pembacaan field `stat` dan tabel "apa yang bisa dipalsukan"; sweep `-newermt`, `-newerct`, `-links`; `rpm -Va` dengan tabel 8 flag beserta prioritas investigasi; tiga jebakan rpm (konffile, `%verify`, database ditambal); `dpkg -V` dan `debsums`; area yang tidak dicakup paket beserta manifest hash; tabel flag ke kesimpulan; false positive; batas; referensi; Best Practices | skill hanya menyebut `dpkg -V`/`rpm -Va` satu baris tanpa cara membaca hasil, tanpa batas cakupan, dan tanpa pembeda false positive | paritas kolom 6 tabel diverifikasi skrip Node (0 temuan); 5 tautan relatif diuji `Test-Path` (semua `True`) |
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/offsec-ir-200/SKILL.md` | satu baris ditambahkan ke tiga tabel yang ada (Capability Map, Reference Documentation, Progressive Disclosure) menunjuk `file-integrity-check.md` | referensi harus muncul di semua jalur penemuan skill | `Select-String` menemukan 3 kemunculan `file-integrity-check`; 3 tautan `Test-Path`: `True` |
+| `skills/offsec-ir-200/references/hidden-file-hunting.md` | kalimat penutup bagian "Kepemilikan paket" diperluas dengan tautan ke `file-integrity-check.md`; tetap 253 baris | pembaca perlu jalan ke pembacaan flag verifikasi yang rinci | 253 baris, 4 tabel, 0 baris rusak |
+| `docs/SKILL-QUALITY.md` | kolom Refs `offsec-ir-200` menjadi 11; baris "Diperbarui" menyebut 0.18.0 | jumlah berkas `references/` berubah: +`file-integrity-check.md` dari entri ini, sementara restrukturisasi sesi lain menghapus `modules-overview.md` serta menambah `capability-domains.md` dan `persona.md` | `(Get-ChildItem skills/offsec-ir-200/references -Filter *.md).Count` = 11 |
+| `skills/index.json` | daftar berkas `offsec-ir-200` bertambah `references/file-integrity-check.md` | indeks harus mencerminkan berkas yang dapat dimuat | `node scripts/sync-skills.js` |
+
+### Catatan
+
+Perintah ditulis dari dokumentasi tooling (rpm, dpkg, debsums, coreutils, GNU find) dan belum dijalankan terhadap host target sungguhan. Inti pesan referensi: verifikasi paket hanya mencakup file milik paket, sehingga webroot dan `/usr/local` tetap butuh baseline hash sendiri. Entri 0.13.0 dan 0.15.0 pada sesi ini masih `pending`; nomor 0.16.0 sudah dipakai entri README dan 0.17.0 oleh `ec-cnd`, karena itu entri ini memakai 0.18.0.
+
+## [0.17.0] — 2026-11-10 — ec-cnd: persona injection pengguna bersertifikat CND
+
+**Commit dasar:** `16a89b9` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** permintaan langsung — menambahkan skill **persona injection pengguna yang memegang EC-Council CND (Certified Network Defender)**: agent meminjam persona pengguna (profil, suara, preferensi, batas klaim), bukan memerankan praktisi generik atau tutor ujian. Perubahan melewati fase analisis kebutuhan lebih dulu (`docs/CND-PERSONA-NEEDS.md`), lalu membangun 8 domain kapabilitas ke dalam 14 berkas referensi. Seluruh angka ujian sengaja tidak dimuat — paritas dengan `cpent` — sehingga skill tidak didaftarkan di `check-fact-notes.js`.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/ec-cnd/SKILL.md` | 194 baris: profil persona (identitas pengguna), kapan dipakai, Persona Injection (4 aturan mekanis + 6 perilaku), Persona Contract 7 butir, Decision Frame 7 pertanyaan, doktrin 8 butir, workflow, capability map, Gotchas 8 butir, progressive disclosure | entry point persona harus memuat mekanika injection, bukan hanya tautan | 194 < 500 (status 🔶); 14/14 tautan referensi diuji `Test-Path` |
+| `skills/ec-cnd/references/persona.md` | 138 baris: mekanika injection (6 aturan), profil pengguna, kedalaman pengetahuan, kebiasaan berpikir, gaya bicara, preferensi, batas klaim, 4 contoh jawaban | persona harus diinjeksikan secara konsisten, bukan sekadar diketahui | 4 contoh jawaban; bagian batas klaim ada |
+| `skills/ec-cnd/references/defense-playbook.md` | 123 baris: siklus ketahui-ukur-desain-ubah-operasikan-respons-perbaiki, template perubahan, otorisasi, dokumentasi, metrik | perubahan konfigurasi tanpa desain dan rollback adalah sumber insiden | 7 fase; tabel field perubahan lengkap |
+| `skills/ec-cnd/references/network-architecture.md` | 122 baris: trust zone, DMZ, level segmentasi, east-west, NAC, Zero Trust/SDP, hardening routing/switching, DNS/egress, verifikasi | segmentasi adalah kebijakan, bukan daftar VLAN | tabel 7 zone; langkah pembuktian segmentasi |
+| `skills/ec-cnd/references/perimeter-controls.md` | 140 baris: anatomi aturan, higiene, desain kebijakan, IDS/IPS tuning, VPN/TLS, WAF, DDoS, rollback | perimeter adalah batas keputusan yang harus diaudit | 10 bagian; perintah review read-only |
+| `skills/ec-cnd/references/endpoint-hardening.md` | 109 baris: baseline dan test ring, Windows/AD, Linux, mobile/MDM, IoT/OT, verifikasi | endpoint adalah tempat data dan klik pengguna | perintah verifikasi Windows dan Linux |
+| `skills/ec-cnd/references/app-data-protection.md` | 99 baris: application control, patch, WAF lifecycle, klasifikasi dan akses, enkripsi, DLP, backup, retensi | data adalah yang akhirnya dicuri atau dihapus | tabel kontrol dan prinsip backup 3-2-1 |
+| `skills/ec-cnd/references/cloud-virtual-wireless.md` | 99 baris: tanggung jawab bersama, IAM, eksposur publik, VPC, container/Kubernetes, SDN/NFV, wireless | lingkungan non-tradisional menuntut kontrol identitas dan kebijakan | tabel tanggung jawab dan kontrol cloud |
+| `skills/ec-cnd/references/detection-telemetry.md` | 117 baris: sensor, pilihan pcap/flow, baseline, alur analisis, sumber log, sentralisasi, SIEM, coverage | deteksi dimulai dari pemahaman normal | filter Wireshark dan tabel sumber log |
+| `skills/ec-cnd/references/incident-response.md` | 115 baris: batas peran, urutan preservasi, pilihan containment, tindakan per insiden, paket serah-terima, BC/DR | defender menahan dan menyerahkan, bukan eradication penuh | tabel containment 7 opsi; 6 jenis insiden |
+| `skills/ec-cnd/references/risk-threat-intel.md` | 117 baris: risk register, perlakuan risiko, vulnerability management, attack surface, CTI, hunting, PIA, metrik | kerja teknis harus bisa diurutkan dan dipertanggungjawabkan | tabel register 8 kolom; tabel jenis CTI |
+| `skills/ec-cnd/references/capability-domains.md` | 54 baris: peta 8 domain, kapabilitas inti, bukti khas, kelompok kerja, cara memakai | peta kapabilitas menghubungkan masalah ke kontrol | 8 domain; 4 kelompok kerja |
+| `skills/ec-cnd/references/tools-diagnostics.md` | 159 baris: prinsip read-only, inventaris, firewall, trafik, log, endpoint, kerentanan, cloud, wireless, bukti | tanpa pengukuran, keputusan hanya opini | perintah PowerShell dan bash; aturan penyimpanan bukti |
+| `skills/ec-cnd/references/reasoning-examples.md` | 133 baris: 6 skenario dengan situasi, pemeriksaan, keputusan, alasan, penolakan, bukti | contoh penalaran lebih berguna daripada daftar perintah | 6 skenario; pola berulang 6 butir |
+| `skills/ec-cnd/references/referensi.md` | 88 baris: EC-Council, NIST, CIS/KEV/EPSS, MITRE, OWASP, tool, bacaan, catatan link rot | klaim teknis harus bisa dilacak ke sumber primer | 5 kelompok sumber; tanggal snapshot |
+| `docs/CND-PERSONA-NEEDS.md` | 315 baris: konteks repo, fakta blueprint v4 (8 domain/20 sub-domain), klarifikasi persona injection, desain persona, peta kapabilitas, arsitektur 14 referensi, anti-duplikasi, risiko, kriteria penerimaan, 8 keputusan | analisis kebutuhan harus terdokumentasi sebelum implementasi | angka ujian dan domain dicocokkan dengan blueprint v4.0 |
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `README.md` | baris `ec-cnd` di tabel Blue Team dan tabel Referensi | skill baru harus terdaftar di katalog manual | `Test-Path skills/ec-cnd` = True |
+| `docs/SKILL-QUALITY.md` | baris `ec-cnd` (Trigger ya, Frame ya, Provenance —, Refs 14, Failure modes ya, Status Sebagian); ringkasan Sebagian 8 → 9; 28 → 29 skill; ambang frame ≥24 dari 29 dan allowlist 9 pengecualian | ledger harus mencerminkan kondisi setelah perubahan | dihitung ulang dari matriks: Frame 20/29 |
+| `manifest.json` | entri `ec-cnd` dengan 12 kata kunci; total 29 skill | manifest adalah sumber kebenaran global | `node scripts/sync-skills.js` |
+| `skills/index.json` | 15 berkas `ec-cnd` (SKILL.md + 14 referensi) | indeks harus mencerminkan berkas yang dapat dimuat | `node scripts/sync-skills.js` |
+| `.claude-plugin/plugin.json` | sinkronisasi daftar skill | artefak turunan plugin | `node scripts/sync-skills.js` |
+| `.claude-plugin/marketplace.json` | sinkronisasi katalog marketplace | artefak turunan plugin | `node scripts/sync-skills.js` |
+| `.cursor-plugin/plugin.json` | sinkronisasi daftar skill | artefak turunan plugin | `node scripts/sync-skills.js` |
+
+### Catatan
+
+Klarifikasi 2026-11-10: tujuan sesi adalah **persona injection pengguna** yang memegang CND, bukan deskripsi praktisi generik. Framing `SKILL.md`, `persona.md`, dan baris README diselaraskan; entri 0.16.0 dari sesi lain sempat menulis ulang baris `ec-cnd` di README, sehingga deskripsi di baris itu diperbarui lagi di entri ini.
+
+Fakta CND diverifikasi 2026-11-09 dari halaman sertifikasi dan blueprint v4.0. Sampul PDF menulis v4.0 sementara footer setiap halaman masih v3.0 — ketidakcocokan ini dicatat di dokumen analisis, dan tidak dipakai di skill karena persona sengaja bebas angka ujian.
+
+Generator `sync-skills.js` dijalankan sekali untuk entri ini; keluarannya juga memuat berkas `offsec-ir-200/references/hidden-file-hunting.md` dan referensi `cpent` dari pekerjaan sesi lain yang auditnya ada di entri masing-masing (0.15.0 dan 0.12.0).
+
+## [0.16.0] — 2026-11-10 — README profesional dan penutupan celah repo
+
+**Commit dasar:** `3b156dd` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** permintaan langsung — README belum layak tampil sebagai repo publik: tanpa badge, tanpa daftar isi, tanpa peringatan penggunaan sah, perintah instalasi menunjuk repo yang salah (`cyber-security/agent-skills`, sedangkan remote adalah `yogiex/opencode-cyber-security-skills`), skill `ec-cnd` tidak terdaftar, dan dua tautan di README menunjuk file yang tidak ada (`.github/CONTRIBUTING.md`, `LICENSE`).
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `./LICENSE` | Teks MIT lengkap, copyright 2026 yogiex | `manifest.json`, kedua `plugin.json`, dan `marketplace.json` menyatakan MIT, tetapi file lisensi tidak ada — GitHub menandai repo tanpa lisensi | `Test-Path LICENSE` = `True`; 17 baris; teks cocok dengan template MIT (SPDX) |
+| `.github/CONTRIBUTING.md` | 206 baris: alur kerja 7 langkah, standar struktur skill dan frontmatter, enam pola penulisan (context, procedures, defaults, control, instruction patterns, refine), aturan provenance, aturan changelog, checklist PR, gaya commit/branch, etika dan batas, lisensi | tautan `[CONTRIBUTING.md](.github/CONTRIBUTING.md)` di README dan AGENTS.md sebelumnya rusak (404); esai best-practices 100 baris dipindahkan dari README ke sini agar README dapat dipindai | 8 tautan relatif diuji `[System.IO.Path]::GetFullPath` + `Test-Path` (semua `True`); 24 pagar kode, jumlah genap; 0 tabel cacat kolom |
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `README.md` | ditulis ulang (332 → 235 baris): header + 6 badge (CI, skill, referensi, lisensi, commit terakhir, PR); ringkasan angka 29 skill / 190+ dokumen referensi; daftar isi 12 tautan; instalasi memakai slug `yogiex/opencode-cyber-security-skills` dan perintah plugin yang benar (marketplace add + install); legenda status dipindah sebelum tabel; `ec-cnd` ditambahkan ke Blue Team; deskripsi `cpent` diselaraskan dengan frontmatter persona; bagian baru "Penggunaan yang Sah"; struktur repo memuat `docs/`, `LICENSE`, empat skrip, dan job CI; bagian kualitas dan kontribusi menautkan ledger serta changelog; esai best-practices diganti tautan ke CONTRIBUTING | README adalah halaman pertama repo: harus akurat, dapat dipindai, dan tidak memuat tautan mati atau perintah instalasi yang salah | skrip pemeriksa Node: 29/29 skill terdaftar dan cocok dengan direktori, 0 tautan relatif hilang, 0 baris tabel cacat kolom, 12/12 anchor daftar isi cocok dengan heading, 0 kemunculan slug lama; 14 pagar kode genap; angka referensi diberi sufiks "+" karena pekerjaan sesi lain menambah berkas selama perubahan ini berjalan (190 saat diukur, 192 beberapa menit kemudian) |
+| `scripts/check-changelog.js` | `normalize()` menghapus prefiks `./` pada path | file root tanpa ekstensi seperti `LICENSE` sebelumnya tidak mungkin tercatat: parser hanya menerima token yang memuat `/`, berawalan `.`, atau berekstensi | uji `node scripts/check-changelog.js` dengan entri `./LICENSE` (sebelum perbaikan: `LICENSE` dilaporkan hilang; sesudah: terhitung) |
+
+### Karantina
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `docs/PERSONA-CONVERSION.md` | berkas dari pekerjaan sesi lain (konversi persona `cpent`/`ec-cnd`), muncul saat perubahan ini dikerjakan | bukan milik entri ini dan belum ada entri pemiliknya; dicatat agar validator tidak memblokir, menunggu entri yang men-supersede | `node scripts/check-changelog.js` |
+| `tmp-check-payload.js` | skrip scratch di root repo, belum diputuskan pemiliknya | bukan milik entri ini; kandidat dihapus atau dipindah ke `scripts/` oleh sesi yang membuatnya | `Test-Path tmp-check-payload.js` = `True` |
+
+### Catatan
+
+Perintah instalasi skill memakai slug repo saat ini; bila repo dipindahkan atau di-fork, blok instalasi dan badge perlu diperbarui bersamaan. `manifest.json` masih memuat `homepage` `https://example.com` dan `repository` `https://github.com/cyber-security/agent-skills` — nilai placeholder itu sekarang tidak lagi tersembunyi karena README memakai slug yang benar, tetapi perbaikannya memerlukan perubahan pada sumber kebenaran dan `node scripts/sync-skills.js`, sehingga sengaja tidak dikerjakan di entri ini. Jumlah referensi di README memakai sufiks "+" agar tidak basi setiap kali referensi bertambah; angka pastinya dipelihara di `docs/SKILL-QUALITY.md`.
+
+## [0.15.0] — 2026-11-10 — offsec-ir-200: hidden file hunting
+
+**Commit dasar:** `16a89b9` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** permintaan langsung — cara sistematis menemukan file yang disembunyikan di server Linux: nama aneh (dotfile, spasi, newline, escape ANSI), lokasi tak lazim (tmpfs, bind mount, `lost+found`), atribut (mtime vs ctime, immutable, setuid, capability, ACL, xattr), file yang tidak diakui manajer paket, trik rootkit, selisih `df` vs `du`, webshell di webroot, dan timeline dari image.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/offsec-ir-200/references/hidden-file-hunting.md` | 253 baris, 4 tabel: Decision Frame 5 butir; tiga pertanyaan penutup celah; nama (listing aman, `find` berbasis spasi/kontrol), lokasi (mount, tmpfs, bind mount), atribut (waktu, permission, capability, xattr, file yatim), kepemilikan paket (`dpkg -V`, `rpm -Va`, loop `dpkg -S`), sumber independen saat rootkit (`lsof +L1`, `df` vs `du`, `debugfs`, `LD_PRELOAD`), konten (pola webshell, `.user.ini`, ekstensi menyamar), timeline (`find -newermt`, `fls`/`mactime`), checklist 15 menit, false positive, batas, Best Practices | pencarian file tersembunyi belum ada di skill mana pun, padahal ini penentu utama pada insiden defacement dan server compromise | paritas kolom 4 tabel diverifikasi skrip Node (0 temuan); 5 tautan relatif diuji `Test-Path` (semua `True`) |
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/offsec-ir-200/SKILL.md` | baris baru di tabel "How to Use This Skill": `Hunt hidden files, webshells, and unowned files` → `references/hidden-file-hunting.md` | referensi harus dapat ditemukan dari SKILL.md | `Test-Path` target tautan: `True` |
+| `skills/offsec-ir-200/references/live-response.md` | tambah satu butir di "Referensi Terkait" yang menunjuk `hidden-file-hunting.md` (386 → 387 baris) | triage proses dan koneksi harus berlanjut ke pencarian file | 387 baris, 6 tabel, 0 baris tabel rusak |
+| `docs/SKILL-QUALITY.md` | kolom Refs `offsec-ir-200` 8 → 9; baris "Diperbarui" menyebut 0.15.0 | jumlah berkas `references/` bertambah satu | `(Get-ChildItem skills/offsec-ir-200/references -Filter *.md).Count` = 9 |
+| `skills/index.json` | daftar berkas `offsec-ir-200` bertambah `references/hidden-file-hunting.md` | indeks harus mencerminkan berkas yang dapat dimuat | `node scripts/sync-skills.js` |
+
+### Catatan
+
+Perintah ditulis dari dokumentasi tooling standar (util-linux, e2fsprogs, iproute2, dpkg/rpm, Sleuth Kit) dan belum dijalankan terhadap host target sungguhan. Semua teknik bersifat baca-saja; referensi melarang `chattr`, `mv`, dan `rm` sebelum eradikasi diputuskan. Entri ini juga mencatat penambahan satu baris pada `live-response.md`, sehingga hitungan 386 baris pada entri 0.13.0 tidak lagi berlaku. `manifest.json` dan `skills/index.json` yang baru diregenerasi juga memuat entri `ec-cnd` serta berkas `cpent` dari pekerjaan sesi lain yang belum masuk changelog.
+
 ## [0.14.0] — 2026-11-09 — Web payloads: kerangka keputusan dan syarat otorisasi
 
 **Commit dasar:** `4250b37` (branch `dev`)
@@ -61,12 +189,14 @@ Perintah ditulis dari dokumentasi tooling standar (procps, iproute2, util-linux,
 
 **Commit dasar:** `122ffa1` (branch `dev`)
 **Status:** `pending`
-**Ruang lingkup:** permintaan langsung — skill `cpent` diposisikan sebagai **persona pengguna yang sudah memegang EC-Council CPENT**: profil, gaya bicara, preferensi, batas klaim, **aturan mengikat R1–R6**, **dua belas hukum mindset**, dan doktrin kerja praktisi. Seluruh angka ujian, struktur soal, zona, jadwal, dan bobot report dihapus.
+**Ruang lingkup:** permintaan langsung — skill `cpent` diposisikan sebagai **persona pengguna yang sudah memegang EC-Council CPENT**: profil, gaya bicara, preferensi, batas klaim, **aturan mengikat R1–R6**, **dua belas hukum mindset**, **prosedur Burp yang disiplin**, **manipulasi header (XFF, User-Agent, Host, injeksi)**, dan doktrin kerja praktisi. Seluruh angka ujian, struktur soal, zona, jadwal, dan bobot report dihapus.
 
 ### Ditambahkan
 
 | File | Perubahan | Alasan | Verifikasi |
 |---|---|---|---|
+| `skills/cpent/references/header-manipulation.md` | 191 baris: empat kondisi header menjadi vektor, tabel 15 header + hipotesis, pola payload (IP spoofing, XSS, CMDi, SQLi, CRLF, Host poisoning), request smuggling, alur Burp, tabel verifikasi vs false positive, pemetaan CWE, batas etika, tujuh jebakan | permintaan lanjutan — manipulasi header (XFF, User-Agent, injeksi) adalah kerja harian di Burp dan belum punya prosedur | 0 tautan rusak |
+| `skills/cpent/references/burp-workflow.md` | 132 baris: prinsip, delapan langkah konfigurasi (scope, listener, TLS, profil browser, project, sesi, intercept, match/replace), alur history→Repeater→Intruder→scanner, tabel tipe Intruder, Collaborator/OOB, triage scanner, lima ekstensi minimum, §12 manipulasi header, disiplin bukti dan data, kapan tidak memakai Burp, tujuh jebakan | permintaan lanjutan — persona perlu prosedur Burp yang disiplin, bukan sekadar menyebut tool | 0 tautan rusak |
 | `skills/cpent/references/mindset.md` | 71 baris: dua belas hukum (objective, graf, bukti, biaya, asumsi, peta, kredensial, topologi, noise, berhenti, keheningan, penjelasan), enam refleks, lima pertanyaan wajib, hubungan hukum versus preferensi | permintaan lanjutan — agent butuh mindset tegas yang bisa dipakai membenarkan atau membatalkan langkah | 0 tautan rusak |
 | `skills/cpent/references/rules.md` | 94 baris: hierarki kewenangan, tabel R1–R6 (otorisasi, bukti, eksekusi, kedalaman, persona, kebersihan) dengan konsekuensi per aturan, penegakan tiga pemeriksaan | aturan harus mengikat dan dapat diaudit lewat ID, bukan tersebar sebagai saran | 0 tautan rusak |
 | `skills/cpent/references/expert-reasoning.md` | 155 baris: target sebagai graf, empat pertanyaan sebelum aksi, tabel ekonomi eksploitasi, register asumsi, siklus hipotesis, anggaran noise, pustaka 20 pola, triage 60 detik, tujuh anti-pattern, aturan berhenti, pertanyaan pra-engagement | agent harus berpikir seperti operator berpengalaman, bukan menjalankan checklist | 0 tautan rusak |
@@ -82,20 +212,20 @@ Perintah ditulis dari dokumentasi tooling standar (procps, iproute2, util-linux,
 
 | File | Perubahan | Alasan | Verifikasi |
 |---|---|---|---|
-| `skills/cpent/SKILL.md` | 134 → 202 baris; deskripsi frontmatter menyebut aturan dan mindset; bagian baru `## Profil Persona`, `## Cara Memerankan Persona`, `## Dua Belas Hukum Mindset`, `## Aturan Wajib` (10 aturan dengan konsekuensi), dan `## Siklus Kerja`; Decision Frame disederhanakan menjadi 5 keputusan; `## Persona Contract` dan `## Operating Doctrine` dihapus karena diserap ke `rules.md` dan `mindset.md`; 18 baris referensi | aturan dan mindset harus menjadi lapisan pertama yang dibaca agent, bukan catatan kaki | 18 tautan referensi diuji dengan `Test-Path`; heading `## ` dihitung ulang |
+| `skills/cpent/SKILL.md` | 134 → 206 baris; deskripsi frontmatter menyebut aturan dan mindset; bagian baru `## Profil Persona`, `## Cara Memerankan Persona`, `## Dua Belas Hukum Mindset`, `## Aturan Wajib` (10 aturan dengan konsekuensi), dan `## Siklus Kerja`; Decision Frame disederhanakan menjadi 5 keputusan; `## Persona Contract` dan `## Operating Doctrine` dihapus karena diserap ke `rules.md` dan `mindset.md`; 20 baris referensi termasuk `burp-workflow.md` dan `header-manipulation.md` | aturan dan mindset harus menjadi lapisan pertama yang dibaca agent, bukan catatan kaki | 20 tautan referensi diuji dengan `Test-Path`; heading `## ` dihitung ulang |
 | `skills/cpent/references/windows-attacks.md` | 60 → 128 baris: rantai AD, delegasi, ADCS ESC1–ESC8, DCSync, relay/coercion, tabel telemetri deteksi | konten lama membandingkan dengan ujian dan tidak memuat ADCS/delegasi | 0 tautan rusak |
 | `skills/cpent/references/linux-attacks.md` | 43 → 101 baris: jalur eskalasi konfigurasi, tabel kernel CVE, persistence terkendali, container escape | menghapus klaim "kernel exploit boleh karena environment ujian stabil" | 0 tautan rusak |
-| `skills/cpent/references/web-exploitation.md` | 36 → 119 baris: urutan map→confirm→exploit→evidence, batas otomatisasi, API, bukti minimum | menghapus frasa "tidak ada batasan tool"; engagement nyata punya rate limit dan data klien | 0 tautan rusak |
+| `skills/cpent/references/web-exploitation.md` | 36 → 123 baris: urutan map→confirm→exploit→evidence, header sebagai permukaan (penunjuk `header-manipulation.md`), batas otomatisasi, API, bukti minimum, penunjuk ke `burp-workflow.md` | menghapus frasa "tidak ada batasan tool"; engagement nyata punya rate limit dan data klien | 0 tautan rusak |
 | `skills/cpent/references/binary-exploitation.md` | 40 → 92 baris: 7 langkah x86, tabel perbedaan x64, bypass proteksi, SEH, tooling, risiko crash | menghapus klaim "pembeda dari sertifikasi lain" dan arahan "pelajari sebelum exam" | 0 tautan rusak |
 | `skills/cpent/references/wireless-iot-scada.md` | 49 → 99 baris: tabel wireless, IoT, tabel protokol OT, aturan keselamatan read-only, pivot dari perangkat | label "Modul 9–11" dan arahan "sebelum exam" dihapus; OT butuh aturan keselamatan | 0 tautan rusak |
 | `skills/cpent/references/pivoting-report.md` | 61 → 125 baris: double pivot, Ligolo-ng/Chisel/SSH, peta serangan, struktur laporan, bukti yang diterima, kualitas temuan | menghapus "~30% nilai" dan deadline ujian; laporan diposisikan sebagai deliverable klien | pencarian `30%` dan `deadline` di folder skill: 0 hasil |
-| `skills/cpent/references/tools-matrix.md` | 51 → 83 baris: tool per fase, binary statis, wordlist, pemilihan tool berdasarkan kendala, higiene tool | menghapus arahan "siapkan sebelum exam"; diganti field kit engagement | 0 tautan rusak |
-| `skills/cpent/references/referensi.md` | 50 → 86 baris: standar metodologi, AD, binary, pivot, web, IoT/OT, lab, komunitas, tautan internal (mindset, rules, persona, empat referensi penalaran) | blueprint ujian diganti sumber praktik dan tautan ke skill lain | tautan internal menunjuk skill yang ada |
+| `skills/cpent/references/tools-matrix.md` | 51 → 84 baris: tool per fase, binary statis, wordlist, pemilihan tool berdasarkan kendala, higiene tool; baris Burp menunjuk `burp-workflow.md`, baris baru HTTP Request Smuggler/Turbo Intruder | menghapus arahan "siapkan sebelum exam"; diganti field kit engagement | 0 tautan rusak |
+| `skills/cpent/references/referensi.md` | 50 → 88 baris: standar metodologi, AD, binary, pivot, web, IoT/OT, lab, komunitas, tautan internal (mindset, rules, Burp, header, persona, empat referensi penalaran) | blueprint ujian diganti sumber praktik dan tautan ke skill lain | tautan internal menunjuk skill yang ada |
 | `scripts/check-fact-notes.js` | entri `"cpent": "sertifikasi"` dihapus dari `EXPECTED` | skill tidak lagi memuat angka ujian sehingga tidak lagi fact-bearing | `node scripts/check-fact-notes.js` |
 | `README.md` | baris 158 (deskripsi) dan 275 (sumber) diperbarui | deskripsi lama menyebut "CPENT exam" dan "LPT Master pathway" | dicocokkan dengan frontmatter |
 | `docs/SKILL-QUALITY.md` | baris `cpent`: Trigger `—` → `ya`, Provenance `ya` → `—`, Status `Selesai` → `Sebagian`; ringkasan 12/6/10 → 11/7/10; catatan provenance; tanggal | skill dengan persona tidak punya angka ujian untuk dilacak | dihitung ulang dari matriks |
 | `manifest.json` | deskripsi dan keywords `cpent` diperbarui | bersumber dari frontmatter | `node scripts/sync-skills.js` |
-| `skills/index.json` | daftar berkas `cpent` menjadi 19 entri dengan 10 nama baru | indeks harus mencerminkan berkas yang dapat dimuat | idem |
+| `skills/index.json` | daftar berkas `cpent` menjadi 21 entri dengan 12 nama baru | indeks harus mencerminkan berkas yang dapat dimuat | idem |
 
 ### Diganti nama
 

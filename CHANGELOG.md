@@ -13,17 +13,37 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.14.0] — 2026-11-09 — Web payloads: kerangka keputusan dan syarat otorisasi
+
+**Commit dasar:** `4250b37` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** `web-pentest-payloads` adalah satu-satunya skill dengan 39 referensi tanpa trigger, decision frame, dan gotchas — perpustakaan serangan tanpa aturan kapan dipakai dan kapan berhenti.
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/web-pentest-payloads/SKILL.md` | 172 → 209 baris; `## Kapan Digunakan` (5 kondisi pakai + 2 pengecualian); `## Decision Frame` 6 keputusan (izin, penandaan payload destruktif, baseline, dua varian per hipotesis, urutan kanal blind, bukti minimum); `## Gotchas` 12 butir; langkah "0" pada `## Cara pakai` | katalog 39 berkas tanpa kerangka membuat payload dapat dipakai tanpa baseline dan tanpa batas berhenti | 39 path `references/` yang disebut semuanya ada (0 hilang); 0 tautan markdown rusak; 0 masalah tabel; butir frame 6; butir gotchas 12 |
+| `README.md` | baris 162 diperbarui | deskripsi lama tidak menyebut syarat otorisasi dan kerangka keputusan | dicocokkan dengan SKILL.md |
+| `docs/SKILL-QUALITY.md` | baris `web-pentest-payloads` menjadi Trigger ya, Frame ya, Failure modes ya, Status Sebagian; ringkasan Sebagian 7 → 8 dan Belum 10 → 9; paragraf provenance menambah "yang kedelapan"; baris tanggal | ledger harus mencerminkan kondisi setelah perubahan | dihitung ulang dari matriks: Frame 19/28, Sebagian 8, Belum 9 |
+
+### Catatan
+
+Tidak ada payload yang dijalankan pada perubahan ini. Frame mengatur napas pengujian — izin, baseline, batas varian, urutan kanal blind — bukan menambah muatan serangan.
+
+Status tetap Sebagian karena provenance belum dipasang: katalog ini dikurasi ulang dari PayloadsAllTheThings, PortSwigger Academy, dan HackTricks, dan tidak satu pun ada di fact sheet sertifikasi.
+
 ## [0.13.0] — 2026-11-09 — offsec-ir-200: live response host triage
 
 **Commit dasar:** `122ffa1` (branch `dev`)
 **Status:** `pending`
-**Ruang lingkup:** permintaan langsung — menambahkan perilaku operasional untuk tiga pemeriksaan saat host diduga terkompromi: seluruh proses berjalan, cron/penjadwal semua user, dan koneksi jaringan keluar. Sebelumnya skill ini hanya menyebut "network connections, process table" di order of volatility tanpa satu pun perintah.
+**Ruang lingkup:** permintaan langsung — menambahkan perilaku operasional untuk tiga pemeriksaan saat host diduga terkompromi: seluruh proses berjalan, cron/penjadwal semua user, dan koneksi jaringan keluar. Sebelumnya skill ini hanya menyebut "network connections, process table" di order of volatility tanpa satu pun perintah. Menyusul tinjauan kedua, ditambahkan rantai penelusuran dari proses ke file yang dieksekusi, pencarian file itu di disk, lalu pemeriksaan isi dan perilaku binary-nya.
 
 ### Ditambahkan
 
 | File | Perubahan | Alasan | Verifikasi |
 |---|---|---|---|
-| `skills/offsec-ir-200/references/live-response.md` | 292 baris: Decision Frame 5 butir, aturan main (root, UTC, output ke file), tiga bagian utama (proses + korelasi per PID, cron/penjadwal semua user, koneksi keluar), indikator, tabel false positive per bagian, batas tiap teknik, urutan eksekusi 10 menit, higiene bukti, padanan Windows, referensi terkait, Best Practices | tiga pemeriksaan yang diminta belum punya perintah, cara baca hasil, maupun batas false positive di skill mana pun | paritas kolom 5 tabel diverifikasi dua linter independen (0 temuan); 5 tautan relatif diuji `Test-Path` |
+| `skills/offsec-ir-200/references/live-response.md` | 386 baris: Decision Frame 5 butir, aturan main (root, UTC, output ke file), rantai proses → file → isi (`Lacak File yang Dijalankan`, `Temukan File di Disk`, `Periksa Isi & Perilaku File`), cron/penjadwal semua user, koneksi keluar, indikator, tabel false positive per bagian, batas tiap teknik, urutan eksekusi 10 menit, higiene bukti, padanan Windows, referensi terkait, Best Practices | tiga pemeriksaan yang diminta belum punya perintah, cara baca hasil, maupun batas false positive di skill mana pun; ditambah kebutuhan menelusuri file yang dieksekusi sebuah proses sampai isi binary-nya | paritas kolom 6 tabel diverifikasi skrip Node (0 temuan); 5 tautan relatif diuji `Test-Path` |
 
 ### Diubah
 
@@ -41,13 +61,19 @@ Perintah ditulis dari dokumentasi tooling standar (procps, iproute2, util-linux,
 
 **Commit dasar:** `122ffa1` (branch `dev`)
 **Status:** `pending`
-**Ruang lingkup:** permintaan langsung — skill `cpent` diposisikan sebagai **persona pengguna yang sudah memegang EC-Council CPENT**: profil, gaya bicara, preferensi, batas klaim, dan doktrin kerja praktisi. Seluruh angka ujian, struktur soal, zona, jadwal, dan bobot report dihapus.
+**Ruang lingkup:** permintaan langsung — skill `cpent` diposisikan sebagai **persona pengguna yang sudah memegang EC-Council CPENT**: profil, gaya bicara, preferensi, batas klaim, **aturan mengikat R1–R6**, **dua belas hukum mindset**, dan doktrin kerja praktisi. Seluruh angka ujian, struktur soal, zona, jadwal, dan bobot report dihapus.
 
 ### Ditambahkan
 
 | File | Perubahan | Alasan | Verifikasi |
 |---|---|---|---|
-| `skills/cpent/references/persona.md` | 113 baris: profil peran, kedalaman pengetahuan, tujuh kebiasaan berpikir, aturan voice, tabel preferensi, batas klaim, tiga contoh jawaban orang pertama | inti permintaan — agent harus memerankan pengguna bersertifikat, bukan sekadar menguasai materi | 0 tautan rusak; contoh jawaban adalah ilustrasi, bukan transkrip |
+| `skills/cpent/references/mindset.md` | 71 baris: dua belas hukum (objective, graf, bukti, biaya, asumsi, peta, kredensial, topologi, noise, berhenti, keheningan, penjelasan), enam refleks, lima pertanyaan wajib, hubungan hukum versus preferensi | permintaan lanjutan — agent butuh mindset tegas yang bisa dipakai membenarkan atau membatalkan langkah | 0 tautan rusak |
+| `skills/cpent/references/rules.md` | 94 baris: hierarki kewenangan, tabel R1–R6 (otorisasi, bukti, eksekusi, kedalaman, persona, kebersihan) dengan konsekuensi per aturan, penegakan tiga pemeriksaan | aturan harus mengikat dan dapat diaudit lewat ID, bukan tersebar sebagai saran | 0 tautan rusak |
+| `skills/cpent/references/expert-reasoning.md` | 155 baris: target sebagai graf, empat pertanyaan sebelum aksi, tabel ekonomi eksploitasi, register asumsi, siklus hipotesis, anggaran noise, pustaka 20 pola, triage 60 detik, tujuh anti-pattern, aturan berhenti, pertanyaan pra-engagement | agent harus berpikir seperti operator berpengalaman, bukan menjalankan checklist | 0 tautan rusak |
+| `skills/cpent/references/decision-trees.md` | 141 baris: delapan pohon keputusan (Windows, Linux, web→RCE, jalur AD, eskalasi vs lateral, pemilihan tunnel, go/no-go binary, OT) dan aturan berhenti | keputusan lapangan butuh bentuk yang bisa diikuti saat informasi belum lengkap | 0 tautan rusak |
+| `skills/cpent/references/field-diagnostics.md` | 73 baris: tabel 19 gejala → penyebab → cek → tindakan, cara membaca keheningan, stabilisasi shell, lima prinsip diagnosis | kegagalan tool adalah titik paling sering menghabiskan waktu; perlu prosedur diagnosis | 0 tautan rusak |
+| `skills/cpent/references/reasoning-examples.md` | 98 baris: empat skenario dengan penalaran orang pertama dan kontras respons junior (scan tanpa web, upload vs LFI vs IDOR, dua hop pivot, kerberoast vs ADCS) | contoh penalaran mengajarkan prioritas lebih baik daripada daftar aturan | 0 tautan rusak |
+| `skills/cpent/references/persona.md` | 115 baris: profil peran, kedalaman pengetahuan, tujuh kebiasaan berpikir, aturan voice, tabel preferensi, batas klaim, tiga contoh jawaban orang pertama; tautan ke referensi penalaran | inti permintaan — agent harus memerankan pengguna bersertifikat, bukan sekadar menguasai materi | 0 tautan rusak; contoh jawaban adalah ilustrasi, bukan transkrip |
 | `skills/cpent/references/engagement-playbook.md` | 106 baris: scoping, rules of engagement, fase kerja, disiplin bukti, kriteria berhenti, eskalasi temuan kritis, metrik kedalaman, anatomi deliverable | pengganti `exam-structure.md`; operator butuh aturan kontrak, bukan aturan ujian | 0 tautan rusak; link checker PowerShell atas seluruh folder |
 | `skills/cpent/references/network-topologies.md` | 126 baris: enam arketipe segmen, discovery per host baru, deteksi dual-homed, bukti reachability, pemilihan tunnel, peta kedalaman, level Purdue, enam jebakan | pengganti `exam-zones.md`; pertanyaan sebenarnya "segmen mana yang dapat dijangkau", bukan "zona ujian mana" | 0 tautan rusak |
 | `skills/cpent/references/capability-domains.md` | 59 baris: tabel 14 domain kapabilitas beserta bukti khas, kelompok kerja, cara memakai peta | pengganti `modules-overview.md`; silabus kursus diganti peta kompetensi praktisi | 0 tautan rusak |
@@ -56,7 +82,7 @@ Perintah ditulis dari dokumentasi tooling standar (procps, iproute2, util-linux,
 
 | File | Perubahan | Alasan | Verifikasi |
 |---|---|---|---|
-| `skills/cpent/SKILL.md` | 134 → 169 baris; deskripsi frontmatter menyebut persona pengguna; bagian baru `## Profil Persona` dan `## Cara Memerankan Persona` (aktivasi, voice, ketidakpastian eksplisit, struktur jawaban, kejujuran keluar peran); `## Kapan Skill Ini Dipakai`, `## Persona Contract`, dan `## Operating Doctrine` menggantikan bagian mindset ujian; Decision Frame 6 butir (scope, pemetaan foothold, blast radius, manual fallback, bukti, kapan berhenti); 8 Gotchas operasional; 12 baris referensi | agent harus memerankan orang yang memegang sertifikat, bukan hanya tahu materinya | 12 tautan referensi diuji dengan `Test-Path`; heading `## ` dihitung ulang |
+| `skills/cpent/SKILL.md` | 134 → 202 baris; deskripsi frontmatter menyebut aturan dan mindset; bagian baru `## Profil Persona`, `## Cara Memerankan Persona`, `## Dua Belas Hukum Mindset`, `## Aturan Wajib` (10 aturan dengan konsekuensi), dan `## Siklus Kerja`; Decision Frame disederhanakan menjadi 5 keputusan; `## Persona Contract` dan `## Operating Doctrine` dihapus karena diserap ke `rules.md` dan `mindset.md`; 18 baris referensi | aturan dan mindset harus menjadi lapisan pertama yang dibaca agent, bukan catatan kaki | 18 tautan referensi diuji dengan `Test-Path`; heading `## ` dihitung ulang |
 | `skills/cpent/references/windows-attacks.md` | 60 → 128 baris: rantai AD, delegasi, ADCS ESC1–ESC8, DCSync, relay/coercion, tabel telemetri deteksi | konten lama membandingkan dengan ujian dan tidak memuat ADCS/delegasi | 0 tautan rusak |
 | `skills/cpent/references/linux-attacks.md` | 43 → 101 baris: jalur eskalasi konfigurasi, tabel kernel CVE, persistence terkendali, container escape | menghapus klaim "kernel exploit boleh karena environment ujian stabil" | 0 tautan rusak |
 | `skills/cpent/references/web-exploitation.md` | 36 → 119 baris: urutan map→confirm→exploit→evidence, batas otomatisasi, API, bukti minimum | menghapus frasa "tidak ada batasan tool"; engagement nyata punya rate limit dan data klien | 0 tautan rusak |
@@ -64,12 +90,12 @@ Perintah ditulis dari dokumentasi tooling standar (procps, iproute2, util-linux,
 | `skills/cpent/references/wireless-iot-scada.md` | 49 → 99 baris: tabel wireless, IoT, tabel protokol OT, aturan keselamatan read-only, pivot dari perangkat | label "Modul 9–11" dan arahan "sebelum exam" dihapus; OT butuh aturan keselamatan | 0 tautan rusak |
 | `skills/cpent/references/pivoting-report.md` | 61 → 125 baris: double pivot, Ligolo-ng/Chisel/SSH, peta serangan, struktur laporan, bukti yang diterima, kualitas temuan | menghapus "~30% nilai" dan deadline ujian; laporan diposisikan sebagai deliverable klien | pencarian `30%` dan `deadline` di folder skill: 0 hasil |
 | `skills/cpent/references/tools-matrix.md` | 51 → 83 baris: tool per fase, binary statis, wordlist, pemilihan tool berdasarkan kendala, higiene tool | menghapus arahan "siapkan sebelum exam"; diganti field kit engagement | 0 tautan rusak |
-| `skills/cpent/references/referensi.md` | 50 → 80 baris: standar metodologi, AD, binary, pivot, web, IoT/OT, lab, komunitas, tautan internal (termasuk `persona.md`) | blueprint ujian diganti sumber praktik dan tautan ke skill lain | tautan internal menunjuk skill yang ada |
+| `skills/cpent/references/referensi.md` | 50 → 86 baris: standar metodologi, AD, binary, pivot, web, IoT/OT, lab, komunitas, tautan internal (mindset, rules, persona, empat referensi penalaran) | blueprint ujian diganti sumber praktik dan tautan ke skill lain | tautan internal menunjuk skill yang ada |
 | `scripts/check-fact-notes.js` | entri `"cpent": "sertifikasi"` dihapus dari `EXPECTED` | skill tidak lagi memuat angka ujian sehingga tidak lagi fact-bearing | `node scripts/check-fact-notes.js` |
 | `README.md` | baris 158 (deskripsi) dan 275 (sumber) diperbarui | deskripsi lama menyebut "CPENT exam" dan "LPT Master pathway" | dicocokkan dengan frontmatter |
 | `docs/SKILL-QUALITY.md` | baris `cpent`: Trigger `—` → `ya`, Provenance `ya` → `—`, Status `Selesai` → `Sebagian`; ringkasan 12/6/10 → 11/7/10; catatan provenance; tanggal | skill dengan persona tidak punya angka ujian untuk dilacak | dihitung ulang dari matriks |
 | `manifest.json` | deskripsi dan keywords `cpent` diperbarui | bersumber dari frontmatter | `node scripts/sync-skills.js` |
-| `skills/index.json` | daftar berkas `cpent` menjadi 13 entri dengan 4 nama baru | indeks harus mencerminkan berkas yang dapat dimuat | idem |
+| `skills/index.json` | daftar berkas `cpent` menjadi 19 entri dengan 10 nama baru | indeks harus mencerminkan berkas yang dapat dimuat | idem |
 
 ### Diganti nama
 
@@ -87,16 +113,10 @@ Isi baru adalah doktrin dan prosedur, bukan hasil engagement nyata. Tidak ada ta
 
 `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, dan `.cursor-plugin/plugin.json` ditulis ulang generator dengan isi identik, sehingga tidak muncul di `git status`.
 
-### Karantina
-
-| File | Perubahan | Alasan | Verifikasi |
-|---|---|---|---|
-| `skills/offsec-ir-200/**` | berkas baru dari sesi paralel | bukan bagian entri ini dan belum diputuskan; wildcard hanya agar validator tidak gagal, bukan audit | `node scripts/check-changelog.js` (muncul sebagai peringatan wildcard) |
-
 ## [0.11.1] — 2026-11-09 — Perbaikan tabel: pipe tak ter-escape menggeser kolom
 
 **Commit dasar:** `122ffa1` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `4250b37`
 **Ruang lingkup:** delapan baris tabel di lima berkas berisi karakter `|` tanpa escape, atau kekurangan satu sel. Pada renderer markdown, pipe di dalam sel memotong baris menjadi kolom tambahan sehingga isi sel bergeser — persis gejala yang terlihat pada laporan pengguna.
 
 ### Diubah

@@ -2,7 +2,7 @@
 
 Matriks status kualitas 28 skill. Tujuannya membuat pekerjaan tuning **terlihat** — bukan tersembunyi di riwayat commit — sampai cakupan cukup untuk ditegakkan lewat CI.
 
-Diperbarui: **2026-11-09** (setelah 0.12.0 — `cpent` menjadi persona praktisi; 0.11.0 — `web-reconnaissance`: fingerprint teknologi berkeyakinan).
+Diperbarui: **2026-11-09** (setelah 0.14.0 — `web-pentest-payloads`: decision frame, gotchas, dan syarat otorisasi; 0.13.0 — `offsec-ir-200`: referensi live response host triage; 0.12.0 — `cpent` menjadi persona praktisi; 0.11.0 — `web-reconnaissance`: fingerprint teknologi berkeyakinan).
 
 ## Kriteria
 
@@ -22,7 +22,7 @@ Status: **Selesai** = Frame + Provenance. **Sebagian** = salah satu. **Belum** =
 |---|---|---|---|---|---|---|
 | code-security-audit | — | — | — | 4 | — | Belum |
 | comptia-cysa | ya | ya | ya | 6 | ya | Selesai |
-| cpent | ya | ya | — | 11 | ya | Sebagian |
+| cpent | ya | ya | — | 18 | ya | Sebagian |
 | devsecops-mindset | — | — | — | 0 | — | Belum |
 | ec-ecih | — | ya | ya | 7 | ya | Selesai |
 | incident-response-plan | — | — | — | 0 | — | Belum |
@@ -30,7 +30,7 @@ Status: **Selesai** = Frame + Provenance. **Sebagian** = salah satu. **Belum** =
 | log-management-nist-800-92 | ya | — | — | 0 | — | Belum |
 | mitre-attack | ya | ya | ya | 0 | — | Selesai |
 | nist-800-53 | ya | ya | ya | 0 | — | Selesai |
-| offsec-ir-200 | — | ya | ya | 7 | ya | Selesai |
+| offsec-ir-200 | — | ya | ya | 9 | ya | Selesai |
 | offsec-pen-300 | — | ya | ya | 9 | ya | Selesai |
 | offsec-soc-200 | — | ya | ya | 6 | ya | Selesai |
 | offsec-th-200 | — | ya | ya | 8 | ya | Selesai |
@@ -46,7 +46,7 @@ Status: **Selesai** = Frame + Provenance. **Sebagian** = salah satu. **Belum** =
 | threat-modeling | ya | — | — | 0 | — | Belum |
 | waf-evasion-methodology | ya | ya | — | 4 | ya | Sebagian |
 | web-app-scan | ya | ya | — | 0 | ya | Sebagian |
-| web-pentest-payloads | — | — | — | 39 | — | Belum |
+| web-pentest-payloads | ya | ya | — | 39 | ya | Sebagian |
 | web-reconnaissance | ya | ya | — | 9 | ya | Sebagian |
 
 ## Ringkasan
@@ -54,10 +54,10 @@ Status: **Selesai** = Frame + Provenance. **Sebagian** = salah satu. **Belum** =
 | Status | Jumlah |
 |---|---|
 | Selesai | 11 |
-| Sebagian | 7 |
-| Belum | 10 |
+| Sebagian | 8 |
+| Belum | 9 |
 
-Tiga "Sebagian" berasal dari poin B: frame sudah ada, provenance sengaja tidak dipasang karena fact sheet belum memuat PTES, STIX 2.1, TLP 2.0, atau OWASP CRS. Tiga sisanya menyusul: `web-reconnaissance` (0.7.0, diperluas 0.9.0, 0.10.0, dan 0.11.0), lalu `security-documentation` dan `web-app-scan` (0.8.0) — frame dan referensi sudah ada, provenance belum karena versi OWASP WSTG/PTES yang menjadi sumbernya juga belum masuk fact sheet. Yang ketujuh adalah `cpent` (0.12.0): skill itu sengaja diposisikan sebagai persona praktisi bersertifikat, sehingga seluruh angka ujian — dan provenance-nya — dihapus.
+Tiga "Sebagian" berasal dari poin B: frame sudah ada, provenance sengaja tidak dipasang karena fact sheet belum memuat PTES, STIX 2.1, TLP 2.0, atau OWASP CRS. Tiga sisanya menyusul: `web-reconnaissance` (0.7.0, diperluas 0.9.0, 0.10.0, dan 0.11.0), lalu `security-documentation` dan `web-app-scan` (0.8.0) — frame dan referensi sudah ada, provenance belum karena versi OWASP WSTG/PTES yang menjadi sumbernya juga belum masuk fact sheet. Yang ketujuh adalah `cpent` (0.12.0): skill itu sengaja diposisikan sebagai persona praktisi bersertifikat, sehingga seluruh angka ujian — dan provenance-nya — dihapus. Yang kedelapan adalah `web-pentest-payloads` (0.14.0): frame, gotchas, dan syarat otorisasi sudah ada, tetapi provenance tidak dipasang karena katalognya dikurasi ulang dari PayloadsAllTheThings, PortSwigger Academy, dan HackTricks — bukan dari standar bersertifikasi yang tercatat di fact sheet.
 
 ## Backlog
 

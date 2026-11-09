@@ -85,6 +85,18 @@ Fakta CND diverifikasi 2026-11-09 dari halaman sertifikasi dan blueprint v4.0. S
 
 Generator `sync-skills.js` dijalankan sekali untuk entri ini; keluarannya juga memuat berkas `offsec-ir-200/references/hidden-file-hunting.md` dan referensi `cpent` dari pekerjaan sesi lain yang auditnya ada di entri masing-masing (0.15.0 dan 0.12.0).
 
+## [0.16.1] — 2026-11-10 — Koreksi hitungan baris pada entri 0.16.0
+
+**Commit dasar:** `1ec45fd` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** entri 0.16.0 mencantumkan jumlah baris dengan metode baris tak kosong (`Measure-Object -Line`), sehingga `LICENSE` tercatat 17, CONTRIBUTING 206, dan README 235. Konvensi repo adalah jumlah baris total — entri 0.15.0 mencatat 253 baris untuk berkas yang totalnya memang 253. Angka yang benar: 21, 287, dan 304 (dari 332).
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `CHANGELOG.md` | entri 0.16.0 dikoreksi lewat entri ini: `./LICENSE` 17 → 21 baris, `.github/CONTRIBUTING.md` 206 → 287 baris, dan `README.md` 332 → 235 menjadi 332 → 304 baris | hitungan pada 0.16.0 memakai baris tak kosong, tidak konsisten dengan konvensi total baris repo | `(Get-Content LICENSE).Count` = 21; `(Get-Content .github/CONTRIBUTING.md).Count` = 287; `(Get-Content README.md).Count` = 304 |
+
 ## [0.16.0] — 2026-11-10 — README profesional dan penutupan celah repo
 
 **Commit dasar:** `3b156dd` (branch `dev`)
@@ -189,13 +201,14 @@ Perintah ditulis dari dokumentasi tooling standar (procps, iproute2, util-linux,
 
 **Commit dasar:** `122ffa1` (branch `dev`)
 **Status:** `pending`
-**Ruang lingkup:** permintaan langsung — skill `cpent` diposisikan sebagai **persona pengguna yang sudah memegang EC-Council CPENT**: profil, gaya bicara, preferensi, batas klaim, **aturan mengikat R1–R6**, **dua belas hukum mindset**, **prosedur Burp yang disiplin**, **manipulasi header (XFF, User-Agent, Host, injeksi)**, dan doktrin kerja praktisi. Seluruh angka ujian, struktur soal, zona, jadwal, dan bobot report dihapus.
+**Ruang lingkup:** permintaan langsung — skill `cpent` diposisikan sebagai **persona pengguna yang sudah memegang EC-Council CPENT**: profil, gaya bicara, preferensi, batas klaim, **aturan mengikat R1–R6**, **dua belas hukum mindset**, **prosedur Burp yang disiplin**, **manipulasi header (XFF, User-Agent, Host, injeksi)**, **bypass WAF dan encoding**, dan doktrin kerja praktisi. Seluruh angka ujian, struktur soal, zona, jadwal, dan bobot report dihapus.
 
 ### Ditambahkan
 
 | File | Perubahan | Alasan | Verifikasi |
 |---|---|---|---|
-| `skills/cpent/references/header-manipulation.md` | 191 baris: empat kondisi header menjadi vektor, tabel 15 header + hipotesis, pola payload (IP spoofing, XSS, CMDi, SQLi, CRLF, Host poisoning), request smuggling, alur Burp, tabel verifikasi vs false positive, pemetaan CWE, batas etika, tujuh jebakan | permintaan lanjutan — manipulasi header (XFF, User-Agent, injeksi) adalah kerja harian di Burp dan belum punya prosedur | 0 tautan rusak |
+| `skills/cpent/references/waf-evasion.md` | 194 baris: tiga pertanyaan sebelum bypass, tabel identifikasi WAF, bypass header (case/spasi/duplikasi, Content-Type/charset, path override, HTTP/2), tabel encoding berlapis, fragmentasi SQLi/XSS/CMDi/traversal, smuggling sebagai bypass, alur Burp (Hackvertor, Turbo Intruder, Collaborator), tabel bukti vs status code, batas etika, tujuh jebakan; menautkan skill `waf-evasion-methodology` | permintaan lanjutan — persona perlu prosedur bypass WAF dan encoding header yang bisa dipertanggungjawabkan | 0 tautan rusak |
+| `skills/cpent/references/header-manipulation.md` | 192 baris: empat kondisi header menjadi vektor, tabel 15 header + hipotesis, pola payload (IP spoofing, XSS, CMDi, SQLi, CRLF, Host poisoning), request smuggling, alur Burp, tabel verifikasi vs false positive, pemetaan CWE, batas etika, tujuh jebakan; penunjuk ke `waf-evasion.md` | permintaan lanjutan — manipulasi header (XFF, User-Agent, injeksi) adalah kerja harian di Burp dan belum punya prosedur | 0 tautan rusak |
 | `skills/cpent/references/burp-workflow.md` | 132 baris: prinsip, delapan langkah konfigurasi (scope, listener, TLS, profil browser, project, sesi, intercept, match/replace), alur history→Repeater→Intruder→scanner, tabel tipe Intruder, Collaborator/OOB, triage scanner, lima ekstensi minimum, §12 manipulasi header, disiplin bukti dan data, kapan tidak memakai Burp, tujuh jebakan | permintaan lanjutan — persona perlu prosedur Burp yang disiplin, bukan sekadar menyebut tool | 0 tautan rusak |
 | `skills/cpent/references/mindset.md` | 71 baris: dua belas hukum (objective, graf, bukti, biaya, asumsi, peta, kredensial, topologi, noise, berhenti, keheningan, penjelasan), enam refleks, lima pertanyaan wajib, hubungan hukum versus preferensi | permintaan lanjutan — agent butuh mindset tegas yang bisa dipakai membenarkan atau membatalkan langkah | 0 tautan rusak |
 | `skills/cpent/references/rules.md` | 94 baris: hierarki kewenangan, tabel R1–R6 (otorisasi, bukti, eksekusi, kedalaman, persona, kebersihan) dengan konsekuensi per aturan, penegakan tiga pemeriksaan | aturan harus mengikat dan dapat diaudit lewat ID, bukan tersebar sebagai saran | 0 tautan rusak |
@@ -212,20 +225,20 @@ Perintah ditulis dari dokumentasi tooling standar (procps, iproute2, util-linux,
 
 | File | Perubahan | Alasan | Verifikasi |
 |---|---|---|---|
-| `skills/cpent/SKILL.md` | 134 → 206 baris; deskripsi frontmatter menyebut aturan dan mindset; bagian baru `## Profil Persona`, `## Cara Memerankan Persona`, `## Dua Belas Hukum Mindset`, `## Aturan Wajib` (10 aturan dengan konsekuensi), dan `## Siklus Kerja`; Decision Frame disederhanakan menjadi 5 keputusan; `## Persona Contract` dan `## Operating Doctrine` dihapus karena diserap ke `rules.md` dan `mindset.md`; 20 baris referensi termasuk `burp-workflow.md` dan `header-manipulation.md` | aturan dan mindset harus menjadi lapisan pertama yang dibaca agent, bukan catatan kaki | 20 tautan referensi diuji dengan `Test-Path`; heading `## ` dihitung ulang |
+| `skills/cpent/SKILL.md` | 134 → 208 baris; deskripsi frontmatter menyebut aturan dan mindset; bagian baru `## Profil Persona`, `## Cara Memerankan Persona`, `## Dua Belas Hukum Mindset`, `## Aturan Wajib` (10 aturan dengan konsekuensi), dan `## Siklus Kerja`; Decision Frame disederhanakan menjadi 5 keputusan; `## Persona Contract` dan `## Operating Doctrine` dihapus karena diserap ke `rules.md` dan `mindset.md`; 21 baris referensi termasuk Burp, header, dan WAF | aturan dan mindset harus menjadi lapisan pertama yang dibaca agent, bukan catatan kaki | 21 tautan referensi diuji dengan `Test-Path`; heading `## ` dihitung ulang |
 | `skills/cpent/references/windows-attacks.md` | 60 → 128 baris: rantai AD, delegasi, ADCS ESC1–ESC8, DCSync, relay/coercion, tabel telemetri deteksi | konten lama membandingkan dengan ujian dan tidak memuat ADCS/delegasi | 0 tautan rusak |
 | `skills/cpent/references/linux-attacks.md` | 43 → 101 baris: jalur eskalasi konfigurasi, tabel kernel CVE, persistence terkendali, container escape | menghapus klaim "kernel exploit boleh karena environment ujian stabil" | 0 tautan rusak |
-| `skills/cpent/references/web-exploitation.md` | 36 → 123 baris: urutan map→confirm→exploit→evidence, header sebagai permukaan (penunjuk `header-manipulation.md`), batas otomatisasi, API, bukti minimum, penunjuk ke `burp-workflow.md` | menghapus frasa "tidak ada batasan tool"; engagement nyata punya rate limit dan data klien | 0 tautan rusak |
+| `skills/cpent/references/web-exploitation.md` | 36 → 125 baris: urutan map→confirm→exploit→evidence, header sebagai permukaan (penunjuk `header-manipulation.md`), uji perilaku WAF (penunjuk `waf-evasion.md`), batas otomatisasi, API, bukti minimum, penunjuk ke `burp-workflow.md` | menghapus frasa "tidak ada batasan tool"; engagement nyata punya rate limit dan data klien | 0 tautan rusak |
 | `skills/cpent/references/binary-exploitation.md` | 40 → 92 baris: 7 langkah x86, tabel perbedaan x64, bypass proteksi, SEH, tooling, risiko crash | menghapus klaim "pembeda dari sertifikasi lain" dan arahan "pelajari sebelum exam" | 0 tautan rusak |
 | `skills/cpent/references/wireless-iot-scada.md` | 49 → 99 baris: tabel wireless, IoT, tabel protokol OT, aturan keselamatan read-only, pivot dari perangkat | label "Modul 9–11" dan arahan "sebelum exam" dihapus; OT butuh aturan keselamatan | 0 tautan rusak |
 | `skills/cpent/references/pivoting-report.md` | 61 → 125 baris: double pivot, Ligolo-ng/Chisel/SSH, peta serangan, struktur laporan, bukti yang diterima, kualitas temuan | menghapus "~30% nilai" dan deadline ujian; laporan diposisikan sebagai deliverable klien | pencarian `30%` dan `deadline` di folder skill: 0 hasil |
-| `skills/cpent/references/tools-matrix.md` | 51 → 84 baris: tool per fase, binary statis, wordlist, pemilihan tool berdasarkan kendala, higiene tool; baris Burp menunjuk `burp-workflow.md`, baris baru HTTP Request Smuggler/Turbo Intruder | menghapus arahan "siapkan sebelum exam"; diganti field kit engagement | 0 tautan rusak |
-| `skills/cpent/references/referensi.md` | 50 → 88 baris: standar metodologi, AD, binary, pivot, web, IoT/OT, lab, komunitas, tautan internal (mindset, rules, Burp, header, persona, empat referensi penalaran) | blueprint ujian diganti sumber praktik dan tautan ke skill lain | tautan internal menunjuk skill yang ada |
+| `skills/cpent/references/tools-matrix.md` | 51 → 86 baris: tool per fase, binary statis, wordlist, pemilihan tool berdasarkan kendala, higiene tool; baris Burp menunjuk `burp-workflow.md`, baris HTTP Request Smuggler/Turbo Intruder, WAFW00F/whatwaf, dan Hackvertor | menghapus arahan "siapkan sebelum exam"; diganti field kit engagement | 0 tautan rusak |
+| `skills/cpent/references/referensi.md` | 50 → 92 baris: standar metodologi, AD, binary, pivot, web, IoT/OT, lab, komunitas, tautan internal (mindset, rules, Burp, header, WAF, persona, empat referensi penalaran) dan tautan ke skill `waf-evasion-methodology` | blueprint ujian diganti sumber praktik dan tautan ke skill lain | tautan internal menunjuk skill yang ada |
 | `scripts/check-fact-notes.js` | entri `"cpent": "sertifikasi"` dihapus dari `EXPECTED` | skill tidak lagi memuat angka ujian sehingga tidak lagi fact-bearing | `node scripts/check-fact-notes.js` |
 | `README.md` | baris 158 (deskripsi) dan 275 (sumber) diperbarui | deskripsi lama menyebut "CPENT exam" dan "LPT Master pathway" | dicocokkan dengan frontmatter |
 | `docs/SKILL-QUALITY.md` | baris `cpent`: Trigger `—` → `ya`, Provenance `ya` → `—`, Status `Selesai` → `Sebagian`; ringkasan 12/6/10 → 11/7/10; catatan provenance; tanggal | skill dengan persona tidak punya angka ujian untuk dilacak | dihitung ulang dari matriks |
 | `manifest.json` | deskripsi dan keywords `cpent` diperbarui | bersumber dari frontmatter | `node scripts/sync-skills.js` |
-| `skills/index.json` | daftar berkas `cpent` menjadi 21 entri dengan 12 nama baru | indeks harus mencerminkan berkas yang dapat dimuat | idem |
+| `skills/index.json` | daftar berkas `cpent` menjadi 22 entri dengan 13 nama baru | indeks harus mencerminkan berkas yang dapat dimuat | idem |
 
 ### Diganti nama
 

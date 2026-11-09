@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.7.0] — 2026-11-09 — Web reconnaissance: chunk JS, traffic network, dan analisis bundle
 
 **Commit dasar:** `8a76c3c` (branch `dev`)
-**Status:** pending
+**Status:** committed in `eeb49aa`
 **Ruang lingkup:** permintaan langsung — `web-reconnaissance` harus benar-benar menjelaskan cara menemukan dan membaca chunk JS, cara membaca network situs, dan cara menganalisis isi chunk, bukan hanya menyebutkannya dalam tujuh butir.
 
 ### Ditambahkan

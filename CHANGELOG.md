@@ -88,7 +88,7 @@ Generator `sync-skills.js` dijalankan sekali untuk entri ini; keluarannya juga m
 ## [0.16.0] — 2026-11-10 — README profesional dan penutupan celah repo
 
 **Commit dasar:** `3b156dd` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `dc2ffa7`
 **Ruang lingkup:** permintaan langsung — README belum layak tampil sebagai repo publik: tanpa badge, tanpa daftar isi, tanpa peringatan penggunaan sah, perintah instalasi menunjuk repo yang salah (`cyber-security/agent-skills`, sedangkan remote adalah `yogiex/opencode-cyber-security-skills`), skill `ec-cnd` tidak terdaftar, dan dua tautan di README menunjuk file yang tidak ada (`.github/CONTRIBUTING.md`, `LICENSE`).
 
 ### Ditambahkan

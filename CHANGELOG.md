@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.9.1] — 2026-11-09 — Koreksi hitungan pada entri 0.9.0
 
 **Commit dasar:** `660a253` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `4ae7335`
 **Ruang lingkup:** dua angka pada entri [0.9.0] tidak cocok dengan isi berkasnya. Tidak ada berkas skill yang berubah; hanya entri koreksi ini yang ditambahkan.
 
 ### Diubah

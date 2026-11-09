@@ -10,6 +10,8 @@ Storage adalah tempat aplikasi menaruh apa pun yang tidak ingin ia minta ulang k
 
 Satu hal yang tidak boleh salah: **storage hanya berisi apa yang ditulis klien**. Token yang hidup di memori (state React, variabel modul) tidak akan muncul di sini — untuk itu Anda perlu traffic. Storage dan Network saling melengkapi, bukan menggantikan.
 
+> Untuk membaca *bagaimana* token itu diperbarui dan diakhiri — rotasi refresh, pencabutan, CSRF, OAuth — lanjutkan ke [auth-configuration.md](auth-configuration.md).
+
 ## 1. Enam Storage, Enam Pertanyaan
 
 | Storage | Terbaca dari JS? | Isi khas | Yang dicari |

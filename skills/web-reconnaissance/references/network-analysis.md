@@ -8,7 +8,7 @@ tags: [network, devtools, har, graphql, websocket, api, waterfall, initiator, jq
 
 Tab Network adalah sumber kebenaran tentang apa yang **benar-benar** dikirim aplikasi ke server — termasuk endpoint yang tidak disebut di kode mana pun yang berhasil Anda baca. Chunk JS memberi tahu apa yang *mungkin* dipanggil; Network membuktikan apa yang *dipanggil*, dengan header, urutan, dan status sebenarnya.
 
-> Prosedur di bawah ini manual. Bila MCP `chrome-devtools-mcp` aktif, langkah yang sama dapat dijalankan lewat `list_network_requests` dan `get_network_request` — lihat [chrome-devtools-mcp.md](chrome-devtools-mcp.md). Untuk membaca cookie dan storage yang muncul di request, lihat [browser-storage.md](browser-storage.md).
+> Prosedur di bawah ini manual. Bila MCP `chrome-devtools-mcp` aktif, langkah yang sama dapat dijalankan lewat `list_network_requests` dan `get_network_request` — lihat [chrome-devtools-mcp.md](chrome-devtools-mcp.md). Untuk membaca cookie dan storage yang muncul di request, lihat [browser-storage.md](browser-storage.md). Untuk menyusun traffic menjadi peta rute dan endpoint, lihat [architecture-mapping.md](architecture-mapping.md); untuk membaca skema autentikasinya, lihat [auth-configuration.md](auth-configuration.md).
 
 ## 1. Setup Capture yang Benar
 

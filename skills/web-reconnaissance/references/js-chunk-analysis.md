@@ -10,6 +10,8 @@ Tujuan analisis bukan "membaca semua kode" — kode produksi bisa puluhan ribu b
 
 Kerjakan berurutan. Setiap langkah mempersempit langkah berikutnya.
 
+> Berkas ini menjawab *apa isinya*. Untuk menghubungkan isi itu menjadi **alur** — aksi UI mana memanggil endpoint mana, lewat state apa — lanjutkan ke [data-flow-analysis.md](data-flow-analysis.md). Untuk menyusun rute dan endpoint menjadi peta arsitektur, lihat [architecture-mapping.md](architecture-mapping.md).
+
 ## 1. Siapkan Salinan Lokal
 
 Analisis di DevTools itu menyakitkan: panel tertutup, pencarian lambat, dan tidak bisa memakai grep, diff, atau `jq`.

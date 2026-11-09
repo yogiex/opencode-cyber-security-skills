@@ -13,6 +13,51 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.10.0] — 2026-11-09 — Web reconnaissance: alur data, peta arsitektur, dan konfigurasi auth
+
+**Commit dasar:** `11d94c9` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** permintaan langsung — fase reconnaissance juga harus bisa (1) membaca alur data aplikasi dari chunk JS, (2) mencari seluruh endpoint lalu memetakan arsitektur URL frontend dan REST API backend, dan (3) melihat konfigurasi autentikasinya seperti JWT atau cookie.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/web-reconnaissance/references/data-flow-analysis.md` | 205 baris: tiga tingkat kedalaman (statis, semi-statis, dinamis), pencarian lapisan API client dan interceptor, pembacaan graf modul webpack, pola pemuatan data per framework, pemetaan state, logpoint dan instrumentasi `fetch`/`XHR` lewat `evaluate_script`, tabel alur, jalur source ke sink, aturan berhenti tiga hop, delapan jebakan | sebelumnya skill hanya bisa menjawab "endpoint apa yang ada", bukan "aksi UI mana memanggil endpoint mana"; tanpa itu daftar endpoint tidak bisa diprioritaskan | blok JavaScript instrumentasi lolos uji parse dengan `new Function`; 0 tautan rusak |
+| `skills/web-reconnaissance/references/architecture-mapping.md` | 186 baris: peta rute frontend per framework (React Router v5/v6, Next.js Pages dan App Router, Nuxt, Angular, SvelteKit, Vue Router), rute berpagar peran, arsitektur URL (host, versi, locale, tenant, hash route), sumber endpoint backend, normalisasi path, tabel inventaris API, gabungan rute ke endpoint, diagram, pernyataan cakupan | skill sebelumnya punya matriks endpoint tanpa peta rute dan tanpa normalisasi, sehingga jumlah endpoint tidak bisa dipertanggungjawabkan | 0 tautan rusak; tabel dan contoh normalisasi diperiksa manual |
+| `skills/web-reconnaissance/references/auth-configuration.md` | 200 baris: deteksi skema, klaim JWT yang dicatat, perilaku cookie (rotasi, pencabutan, prefiks), alur OAuth2/OIDC dan SAML, perbandingan sesi dan token, pola CSRF, MFA, mesin keadaan autentikasi, tabel observasi ke prioritas, delapan jebakan | skill hanya menyebut token di storage; tidak ada cara membaca skema, alur refresh, atau pencabutan sesi | 0 tautan rusak; klaim yang tidak dapat disimpulkan dari recon ditandai eksplisit |
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/web-reconnaissance/SKILL.md` | 195 → 250 baris; deskripsi frontmatter menambah alur data, peta arsitektur, dan auth; paragraf pembuka menunjuk tiga artefak; `## Decision Frame` 6 → 7 keputusan (kedalaman alur data, peta arsitektur dan status endpoint digabung); bagian baru `## 5. Alur Data` dan `## 7. Konfigurasi Autentikasi`; `## 6. Petakan dan Uji Endpoint` menjadi `## 8. Peta Arsitektur` dengan aturan normalisasi dan pernyataan cakupan; teknologi dan CVE digabung menjadi `## 9`; Gotchas 15 → 18; template output menambah peta rute, peta API, alur data, konfigurasi auth, dan cakupan; indeks 8 referensi | kebutuhan baru tidak cukup ditampung dengan menambah butir; strukturnya harus berubah agar alur data dan peta arsitektur punya tempat sendiri | heading `## ` 12 → 13; butir Decision Frame 7; butir Gotchas 18; berkas di `references/` 5 → 8; baris tabel referensi 8 |
+| `skills/web-reconnaissance/references/js-chunk-analysis.md` | 209 → 211 baris; blockquote penunjuk ke `data-flow-analysis.md` dan `architecture-mapping.md` | analisis isi bundle adalah titik masuk alur data, bukan tujuan akhir | 0 tautan rusak |
+| `skills/web-reconnaissance/references/browser-storage.md` | 234 → 236 baris; blockquote penunjuk ke `auth-configuration.md` | storage menjawab "di mana", bukan "bagaimana skemanya bekerja" | 0 tautan rusak |
+| `skills/web-reconnaissance/references/chrome-devtools-mcp.md` | 190 → 192 baris; penunjuk ke `data-flow-analysis.md` pada bagian logpoint | logpoint adalah alat utama konfirmasi alur, bukan sekadar pengambilan data | 0 tautan rusak |
+| `skills/web-reconnaissance/references/network-analysis.md` | 199 baris (jumlah baris tetap, isi blockquote diperluas); penunjuk ke `architecture-mapping.md` dan `auth-configuration.md` | traffic adalah bahan mentah kedua peta tersebut | 0 tautan rusak |
+
+### Artefak turunan dan dokumentasi
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `manifest.json` | deskripsi `web-reconnaissance` diperbarui | deskripsi bersumber dari frontmatter `SKILL.md` | `node scripts/sync-skills.js` |
+| `skills/index.json` | deskripsi dan daftar `files` diperbarui menjadi 9 entri | indeks harus mencantumkan berkas yang dapat dimuat | idem |
+| `README.md` | baris 164 diperbarui | deskripsi lama belum menyebut alur data, peta arsitektur, dan auth | dicocokkan dengan frontmatter |
+| `docs/SKILL-QUALITY.md` | kolom Refs baris `web-reconnaissance` 5 → 8; tanggal dan catatan provenance | ledger harus mencerminkan jumlah referensi sebenarnya | dihitung ulang dari isi `references/` |
+
+`.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, dan `.cursor-plugin/plugin.json` ditulis ulang generator dengan isi identik, sehingga tidak muncul di `git status`.
+
+### Catatan
+
+Ketiga referensi baru adalah **prosedur**, bukan hasil eksekusi. Tidak ada aplikasi nyata yang dipetakan pada perubahan ini: peta rute, peta API, alur data, dan alur autentikasi belum pernah dijalankan pada target sungguhan. Pola per framework ditulis dari pengetahuan umum ekosistem, bukan dari verifikasi terhadap aplikasi berjalan.
+
+Sembilan blok JavaScript di seluruh folder skill lolos uji **parse** dengan `new Function`; tidak ada yang dijalankan di halaman. MCP `chrome-devtools-mcp` tetap tidak terpasang di mesin ini, sehingga `evaluate_script`, `set_logpoints`, dan instrumentasi `fetch` belum pernah dipakai sungguhan.
+
+### Koreksi metode hitung
+
+Entri [0.9.0] menulis "155 → 196 baris" untuk `skills/web-reconnaissance/SKILL.md`. Dengan metode yang dipakai entri ini — baris terakhir yang diakhiri newline tidak dihitung sebagai baris tambahan — berkas yang sama berukuran **195 baris** setelah 0.9.0 dan **250 baris** sekarang. Selisih satu itu berasal dari perbedaan cara menghitung, bukan dari perubahan berkas; angka pada entri 0.9.0 tidak diubah.
+
 ## [0.9.1] — 2026-11-09 — Koreksi hitungan pada entri 0.9.0
 
 **Commit dasar:** `660a253` (branch `dev`)

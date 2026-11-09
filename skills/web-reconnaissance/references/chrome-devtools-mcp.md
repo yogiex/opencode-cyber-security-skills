@@ -139,6 +139,8 @@ Keluarannya muncul di `list_console_messages`. Ini teknik recon yang jarang dipa
 
 Bila aplikasi tidak punya source map, `set_logpoints` tetap bisa menunjuk berkas hasil build selama URL-nya diketahui dari daftar request.
 
+> Untuk alur lengkap dari aksi UI ke endpoint — termasuk instrumentasi `fetch`/`XHR` bila sumber asli tidak tersedia — lihat [data-flow-analysis.md](data-flow-analysis.md).
+
 ## 8. Batas dan Cara Mengakalinya
 
 | Batas | Dampak | Mitigasi |

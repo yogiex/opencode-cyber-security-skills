@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.14.0] — 2026-11-09 — Web payloads: kerangka keputusan dan syarat otorisasi
 
 **Commit dasar:** `4250b37` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `16a89b9`
 **Ruang lingkup:** `web-pentest-payloads` adalah satu-satunya skill dengan 39 referensi tanpa trigger, decision frame, dan gotchas — perpustakaan serangan tanpa aturan kapan dipakai dan kapan berhenti.
 
 ### Diubah

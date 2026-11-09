@@ -260,7 +260,7 @@
     },
     {
       "name": "web-reconnaissance",
-      "description": "Recon web/SPA: inventarisasi dan analisis chunk JS (source map, bundle, endpoint dan rute tersembunyi), baca network tab/HAR dan traffic API, token di localStorage/cookie, teknologi, subdomain, wayback. Muat saat memetakan aplikasi sebelum scan atau pentest.",
+      "description": "Recon web/SPA: inventarisasi dan analisis chunk JS (source map, bundle, endpoint dan rute tersembunyi), rekam network tab lewat Chrome DevTools MCP atau HAR manual, baca storage browser (localStorage, sessionStorage, cookie, IndexedDB, Cache Storage), triage token dan sesi, teknologi, subdomain, wayback. Muat saat memetakan aplikasi sebelum scan atau pentest.",
       "version": "1.0.0",
       "source": "./skills/web-reconnaissance",
       "license": "MIT",

@@ -13,6 +13,46 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.9.0] — 2026-11-09 — Web reconnaissance: storage browser dan Chrome DevTools MCP
+
+**Commit dasar:** `e0567ba` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** permintaan langsung — fase reconnaissance harus benar-benar bisa (1) membaca chunk JS, (2) membaca storage yang ada di browser, dan (3) membaca network tab lewat MCP Chrome DevTools untuk menyadap seluruh informasi situs. Sebelumnya skill hanya menyebut storage dalam satu blok `console.log` dan tidak punya cara merekam apa pun secara otomatis.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/web-reconnaissance/references/browser-storage.md` | 234 baris: tabel enam storage dan tiga tempat lain (service worker, `window.name`, WebSQL), satu skrip dump yang aman untuk `evaluate_script`, empat lokasi kebenaran cookie, pembacaan IndexedDB per object store, Cache Storage, OPFS, triage lima jenis token, decode JWT tanpa verifikasi, pemetaan storage ke temuan, aturan redaksi, sembilan jebakan | `document.cookie` hanya membaca cookie non-`HttpOnly`, dan skrip lama tidak menyentuh IndexedDB maupun Cache Storage — dua tempat yang paling sering memuat data pengguna lain | lima blok JavaScript lolos uji parse dengan `new Function`; 0 tautan rusak |
+| `skills/web-reconnaissance/references/chrome-devtools-mcp.md` | 190 baris: konfigurasi MCP dan lima flag, tabel 14 tool relevan beserta parameter, lima alur kerja (rekam traffic, dump storage, kumpulkan chunk, sesi terautentikasi, logpoint lewat source map), tabel tujuh batas, fallback manual, checklist | skill hanya menjelaskan DevTools manual; tidak ada cara memfilter per tipe resource, menyimpan body ke disk, atau menyisipkan header auth secara berulang | nama tool dan parameter dicocokkan satu per satu dengan `docs/tool-reference.md` paket `chrome-devtools-mcp` (diakses 2026-11-09); MCP tidak terpasang di mesin ini sehingga tidak ada alur yang dieksekusi |
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/web-reconnaissance/SKILL.md` | 155 → 196 baris; deskripsi frontmatter menyebut MCP dan storage; tabel pembuka 3 → 4 sumber; `## Decision Frame` tetap 6 keputusan dengan dua yang baru (MCP vs manual, kedalaman pembacaan storage); bagian baru `## 1. Siapkan Sesi`; `## 5. Storage, Token, dan Sesi` ditulis ulang (tabel enam storage, tiga pemeriksaan sinkron, aturan `HttpOnly`); Gotchas 9 → 15 butir; template output menambah baris alat capture dan storage; indeks 5 referensi | bagian storage sebelumnya hanya tiga butir dan satu `console.log`; tidak ada panduan kapan memakai MCP dan kapan harus manual | heading `## ` 11 → 12; butir Decision Frame 6; butir Gotchas 9 → 15; berkas di `references/` 3 → 5 |
+| `skills/web-reconnaissance/references/js-chunk-discovery.md` | 215 → 216 baris; urutan kerja 3 → 4 langkah dengan penunjuk ke MCP dan browser-storage | langkah penemuan chunk tidak menyebut jalan otomatis maupun kelanjutan ke pembacaan storage | 0 tautan rusak |
+| `skills/web-reconnaissance/references/network-analysis.md` | 197 → 199 baris; blockquote penunjuk ke `chrome-devtools-mcp.md` dan `browser-storage.md` | pembaca perlu tahu prosedur ini manual dan ada padanan otomatisnya | 0 tautan rusak |
+
+### Artefak turunan dan dokumentasi
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `manifest.json` | deskripsi `web-reconnaissance` diperbarui | deskripsi bersumber dari frontmatter `SKILL.md` | `node scripts/sync-skills.js` |
+| `skills/index.json` | deskripsi diperbarui; daftar `files` memuat `browser-storage.md` dan `chrome-devtools-mcp.md` | indeks harus mencantumkan berkas yang dapat dimuat | idem — `files` kini 6 entri |
+| `README.md` | baris 164 diperbarui | deskripsi lama tidak menyebut storage browser maupun MCP | dicocokkan dengan frontmatter |
+| `docs/SKILL-QUALITY.md` | kolom Refs baris `web-reconnaissance` 3 → 5; tanggal dan catatan provenance | ledger harus mencerminkan jumlah referensi sebenarnya | dihitung ulang dari isi `references/` |
+
+`.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, dan `.cursor-plugin/plugin.json` ditulis ulang generator dengan isi identik, sehingga tidak muncul di `git status`.
+
+### Catatan
+
+MCP `chrome-devtools-mcp` **tidak terpasang** di mesin ini dan tidak ada satu pun tool `list_network_requests` atau `evaluate_script` yang tersedia. Seluruh alur di `chrome-devtools-mcp.md` karena itu **belum pernah dijalankan** — bukan "sudah diuji". Nama tool, parameter, dan flag disalin dari `docs/tool-reference.md` dan README paket tersebut pada 2026-11-09; dokumen itu sendiri menyuruh memeriksa ulang setelah upgrade karena nama tool berubah antar versi.
+
+Lima blok JavaScript di `browser-storage.md` lolos uji **parse** dengan `new Function`, bukan uji jalan. Tidak ada browser yang dibuka dan tidak ada storage nyata yang dibaca.
+
+Angka 90 menit, dua varian path, dan tiga navigasi preserved adalah aturan prosedur di skill ini, bukan hasil pengukuran.
+
 ## [0.8.0] — 2026-11-09 — Reporting dan web assessment: template nyata, frame, dan gotchas
 
 **Commit dasar:** `659d5ab` (branch `dev`)

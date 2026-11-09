@@ -2,7 +2,7 @@
 
 Matriks status kualitas 28 skill. Tujuannya membuat pekerjaan tuning **terlihat** — bukan tersembunyi di riwayat commit — sampai cakupan cukup untuk ditegakkan lewat CI.
 
-Diperbarui: **2026-11-09** (setelah 0.8.0 — `security-documentation` dan `web-app-scan`).
+Diperbarui: **2026-11-09** (setelah 0.9.0 — `web-reconnaissance`: storage browser dan Chrome DevTools MCP).
 
 ## Kriteria
 
@@ -47,7 +47,7 @@ Status: **Selesai** = Frame + Provenance. **Sebagian** = salah satu. **Belum** =
 | waf-evasion-methodology | ya | ya | — | 4 | ya | Sebagian |
 | web-app-scan | ya | ya | — | 0 | ya | Sebagian |
 | web-pentest-payloads | — | — | — | 39 | — | Belum |
-| web-reconnaissance | ya | ya | — | 3 | ya | Sebagian |
+| web-reconnaissance | ya | ya | — | 5 | ya | Sebagian |
 
 ## Ringkasan
 
@@ -57,7 +57,7 @@ Status: **Selesai** = Frame + Provenance. **Sebagian** = salah satu. **Belum** =
 | Sebagian | 6 |
 | Belum | 10 |
 
-Tiga "Sebagian" berasal dari poin B: frame sudah ada, provenance sengaja tidak dipasang karena fact sheet belum memuat PTES, STIX 2.1, TLP 2.0, atau OWASP CRS. Tiga sisanya menyusul: `web-reconnaissance` (0.7.0), lalu `security-documentation` dan `web-app-scan` (0.8.0) — frame dan referensi sudah ada, provenance belum karena versi OWASP WSTG/PTES yang menjadi sumbernya juga belum masuk fact sheet.
+Tiga "Sebagian" berasal dari poin B: frame sudah ada, provenance sengaja tidak dipasang karena fact sheet belum memuat PTES, STIX 2.1, TLP 2.0, atau OWASP CRS. Tiga sisanya menyusul: `web-reconnaissance` (0.7.0, diperluas 0.9.0), lalu `security-documentation` dan `web-app-scan` (0.8.0) — frame dan referensi sudah ada, provenance belum karena versi OWASP WSTG/PTES yang menjadi sumbernya juga belum masuk fact sheet.
 
 ## Backlog
 

@@ -10,9 +10,10 @@ Build modern tidak mengirim satu `bundle.js`. Entry point hanya memuat sebagian 
 
 Urutan kerja yang benar:
 
-1. Kumpulkan daftar chunk (file ini).
+1. Kumpulkan daftar chunk (file ini) — manual lewat Coverage, atau otomatis lewat `list_network_requests` dengan `resourceTypes: ["Script"]` ([chrome-devtools-mcp.md](chrome-devtools-mcp.md)).
 2. Baca traffic saat chunk itu dipakai ([network-analysis.md](network-analysis.md)).
 3. Analisis isinya ([js-chunk-analysis.md](js-chunk-analysis.md)).
+4. Baca storage yang ditulis kode itu ([browser-storage.md](browser-storage.md)).
 
 Jangan mulai dari analisis. Analisis satu chunk yang salah membuang waktu lebih banyak daripada 10 menit menginventarisasi.
 

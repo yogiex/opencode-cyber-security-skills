@@ -13,6 +13,110 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.13.0] — 2026-11-09 — offsec-ir-200: live response host triage
+
+**Commit dasar:** `122ffa1` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** permintaan langsung — menambahkan perilaku operasional untuk tiga pemeriksaan saat host diduga terkompromi: seluruh proses berjalan, cron/penjadwal semua user, dan koneksi jaringan keluar. Sebelumnya skill ini hanya menyebut "network connections, process table" di order of volatility tanpa satu pun perintah.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/offsec-ir-200/references/live-response.md` | 292 baris: Decision Frame 5 butir, aturan main (root, UTC, output ke file), tiga bagian utama (proses + korelasi per PID, cron/penjadwal semua user, koneksi keluar), indikator, tabel false positive per bagian, batas tiap teknik, urutan eksekusi 10 menit, higiene bukti, padanan Windows, referensi terkait, Best Practices | tiga pemeriksaan yang diminta belum punya perintah, cara baca hasil, maupun batas false positive di skill mana pun | paritas kolom 5 tabel diverifikasi dua linter independen (0 temuan); 5 tautan relatif diuji `Test-Path` |
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/offsec-ir-200/SKILL.md` | baris baru di tabel "How to Use This Skill": `Triage a live host (processes, cron, outbound connections)` → `references/live-response.md` | referensi harus dapat ditemukan dari SKILL.md | `Test-Path` pada target tautan: `True` |
+| `docs/SKILL-QUALITY.md` | kolom Refs `offsec-ir-200` 7 → 8; baris "Diperbarui" menyebut 0.13.0 | jumlah berkas `references/` bertambah satu | `(Get-ChildItem skills/offsec-ir-200/references -Filter *.md).Count` = 8 |
+| `skills/index.json` | daftar berkas `offsec-ir-200` bertambah `references/live-response.md` | indeks harus mencerminkan berkas yang dapat dimuat | `node scripts/sync-skills.js` |
+
+### Catatan
+
+Perintah ditulis dari dokumentasi tooling standar (procps, iproute2, util-linux, cron, systemd) dan belum dijalankan terhadap host target sungguhan. Semua perintah bersifat baca-saja, kecuali penulisan output ke direktori kerja yang diperintahkan secara eksplisit di dalam referensi.
+
+## [0.12.0] — 2026-11-09 — CPENT: persona praktisi, bukan persiapan ujian
+
+**Commit dasar:** `122ffa1` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** permintaan langsung — skill `cpent` diposisikan sebagai **persona pengguna yang sudah memegang EC-Council CPENT**: profil, gaya bicara, preferensi, batas klaim, dan doktrin kerja praktisi. Seluruh angka ujian, struktur soal, zona, jadwal, dan bobot report dihapus.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/cpent/references/persona.md` | 113 baris: profil peran, kedalaman pengetahuan, tujuh kebiasaan berpikir, aturan voice, tabel preferensi, batas klaim, tiga contoh jawaban orang pertama | inti permintaan — agent harus memerankan pengguna bersertifikat, bukan sekadar menguasai materi | 0 tautan rusak; contoh jawaban adalah ilustrasi, bukan transkrip |
+| `skills/cpent/references/engagement-playbook.md` | 106 baris: scoping, rules of engagement, fase kerja, disiplin bukti, kriteria berhenti, eskalasi temuan kritis, metrik kedalaman, anatomi deliverable | pengganti `exam-structure.md`; operator butuh aturan kontrak, bukan aturan ujian | 0 tautan rusak; link checker PowerShell atas seluruh folder |
+| `skills/cpent/references/network-topologies.md` | 126 baris: enam arketipe segmen, discovery per host baru, deteksi dual-homed, bukti reachability, pemilihan tunnel, peta kedalaman, level Purdue, enam jebakan | pengganti `exam-zones.md`; pertanyaan sebenarnya "segmen mana yang dapat dijangkau", bukan "zona ujian mana" | 0 tautan rusak |
+| `skills/cpent/references/capability-domains.md` | 59 baris: tabel 14 domain kapabilitas beserta bukti khas, kelompok kerja, cara memakai peta | pengganti `modules-overview.md`; silabus kursus diganti peta kompetensi praktisi | 0 tautan rusak |
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/cpent/SKILL.md` | 134 → 169 baris; deskripsi frontmatter menyebut persona pengguna; bagian baru `## Profil Persona` dan `## Cara Memerankan Persona` (aktivasi, voice, ketidakpastian eksplisit, struktur jawaban, kejujuran keluar peran); `## Kapan Skill Ini Dipakai`, `## Persona Contract`, dan `## Operating Doctrine` menggantikan bagian mindset ujian; Decision Frame 6 butir (scope, pemetaan foothold, blast radius, manual fallback, bukti, kapan berhenti); 8 Gotchas operasional; 12 baris referensi | agent harus memerankan orang yang memegang sertifikat, bukan hanya tahu materinya | 12 tautan referensi diuji dengan `Test-Path`; heading `## ` dihitung ulang |
+| `skills/cpent/references/windows-attacks.md` | 60 → 128 baris: rantai AD, delegasi, ADCS ESC1–ESC8, DCSync, relay/coercion, tabel telemetri deteksi | konten lama membandingkan dengan ujian dan tidak memuat ADCS/delegasi | 0 tautan rusak |
+| `skills/cpent/references/linux-attacks.md` | 43 → 101 baris: jalur eskalasi konfigurasi, tabel kernel CVE, persistence terkendali, container escape | menghapus klaim "kernel exploit boleh karena environment ujian stabil" | 0 tautan rusak |
+| `skills/cpent/references/web-exploitation.md` | 36 → 119 baris: urutan map→confirm→exploit→evidence, batas otomatisasi, API, bukti minimum | menghapus frasa "tidak ada batasan tool"; engagement nyata punya rate limit dan data klien | 0 tautan rusak |
+| `skills/cpent/references/binary-exploitation.md` | 40 → 92 baris: 7 langkah x86, tabel perbedaan x64, bypass proteksi, SEH, tooling, risiko crash | menghapus klaim "pembeda dari sertifikasi lain" dan arahan "pelajari sebelum exam" | 0 tautan rusak |
+| `skills/cpent/references/wireless-iot-scada.md` | 49 → 99 baris: tabel wireless, IoT, tabel protokol OT, aturan keselamatan read-only, pivot dari perangkat | label "Modul 9–11" dan arahan "sebelum exam" dihapus; OT butuh aturan keselamatan | 0 tautan rusak |
+| `skills/cpent/references/pivoting-report.md` | 61 → 125 baris: double pivot, Ligolo-ng/Chisel/SSH, peta serangan, struktur laporan, bukti yang diterima, kualitas temuan | menghapus "~30% nilai" dan deadline ujian; laporan diposisikan sebagai deliverable klien | pencarian `30%` dan `deadline` di folder skill: 0 hasil |
+| `skills/cpent/references/tools-matrix.md` | 51 → 83 baris: tool per fase, binary statis, wordlist, pemilihan tool berdasarkan kendala, higiene tool | menghapus arahan "siapkan sebelum exam"; diganti field kit engagement | 0 tautan rusak |
+| `skills/cpent/references/referensi.md` | 50 → 80 baris: standar metodologi, AD, binary, pivot, web, IoT/OT, lab, komunitas, tautan internal (termasuk `persona.md`) | blueprint ujian diganti sumber praktik dan tautan ke skill lain | tautan internal menunjuk skill yang ada |
+| `scripts/check-fact-notes.js` | entri `"cpent": "sertifikasi"` dihapus dari `EXPECTED` | skill tidak lagi memuat angka ujian sehingga tidak lagi fact-bearing | `node scripts/check-fact-notes.js` |
+| `README.md` | baris 158 (deskripsi) dan 275 (sumber) diperbarui | deskripsi lama menyebut "CPENT exam" dan "LPT Master pathway" | dicocokkan dengan frontmatter |
+| `docs/SKILL-QUALITY.md` | baris `cpent`: Trigger `—` → `ya`, Provenance `ya` → `—`, Status `Selesai` → `Sebagian`; ringkasan 12/6/10 → 11/7/10; catatan provenance; tanggal | skill dengan persona tidak punya angka ujian untuk dilacak | dihitung ulang dari matriks |
+| `manifest.json` | deskripsi dan keywords `cpent` diperbarui | bersumber dari frontmatter | `node scripts/sync-skills.js` |
+| `skills/index.json` | daftar berkas `cpent` menjadi 13 entri dengan 4 nama baru | indeks harus mencerminkan berkas yang dapat dimuat | idem |
+
+### Diganti nama
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/cpent/references/exam-structure.md` | dihapus; isi diganti `skills/cpent/references/engagement-playbook.md` | nama lama menyiratkan persiapan ujian | `git status` menampilkan `D` untuk path lama |
+| `skills/cpent/references/exam-zones.md` | dihapus; isi diganti `skills/cpent/references/network-topologies.md` | idem | idem |
+| `skills/cpent/references/modules-overview.md` | dihapus; isi diganti `skills/cpent/references/capability-domains.md` | idem | idem |
+
+### Catatan
+
+Isi baru adalah doktrin dan prosedur, bukan hasil engagement nyata. Tidak ada target sungguhan yang diuji pada perubahan ini; contoh command ditulis dari pengetahuan tooling dan belum dijalankan pada host target.
+
+`README.md` sudah masuk ke commit `dd8cfd3` — sesi paralel yang mengerjakan `web-reconnaissance` men-stage working tree yang sama. `docs/SKILL-QUALITY.md` ikut commit itu untuk perubahan pertama, lalu diperbarui lagi di working tree ini (Refs `cpent` 11 → 12) ketika `persona.md` ditambahkan.
+
+`.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, dan `.cursor-plugin/plugin.json` ditulis ulang generator dengan isi identik, sehingga tidak muncul di `git status`.
+
+### Karantina
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/offsec-ir-200/**` | berkas baru dari sesi paralel | bukan bagian entri ini dan belum diputuskan; wildcard hanya agar validator tidak gagal, bukan audit | `node scripts/check-changelog.js` (muncul sebagai peringatan wildcard) |
+
+## [0.11.1] — 2026-11-09 — Perbaikan tabel: pipe tak ter-escape menggeser kolom
+
+**Commit dasar:** `122ffa1` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** delapan baris tabel di lima berkas berisi karakter `|` tanpa escape, atau kekurangan satu sel. Pada renderer markdown, pipe di dalam sel memotong baris menjadi kolom tambahan sehingga isi sel bergeser — persis gejala yang terlihat pada laporan pengguna.
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/web-pentest-payloads/references/command-injection.md` | tiga baris: `` `\|id` ``, `echo aWQ=\|base64 -d\|sh`, dan `` `\|` `` di sel pembatas — seluruh pipe di dalam sel di-escape | baris ke-17 terbaca 3 sel, ke-92 terbaca 4 sel, dan ke-95 terbaca 3 sel pada tabel dua kolom | pemindai tabel: 0 temuan setelah perbaikan |
+| `skills/web-pentest-payloads/references/ldap-xpath-injection.md` | dua baris: pipe di dalam payload LDAP di-escape menjadi `\|` | tabel dua kolom terbaca empat sel karena payload memuat tanda kurung dan karakter pipe | idem |
+| `skills/web-pentest-payloads/references/ssti.md` | satu baris: Handlebars `as \|string\|` — pipe di-escape | payload `\|string\|` memotong baris menjadi empat sel pada tabel dua kolom | idem |
+| `skills/web-pentest-payloads/references/payload-encoding-evasion.md` | satu baris: sel "Encoding" yang hilang diisi "entity tanpa titik koma" | baris ke-28 hanya punya dua sel pada tabel tiga kolom, sehingga contoh `&#60script` jatuh ke kolom yang salah | idem |
+| `skills/waf-evasion-methodology/references/evasion-techniques.md` | satu baris: `` `\|\| 1=1` `` — pipe ganda di-escape | `OR 1=1` → `\|\| 1=1` terbaca empat sel pada tabel dua kolom | idem |
+
+### Catatan
+
+Bug ini ditemukan dengan memeriksa seluruh 207 berkas markdown (skills, docs, README, CHANGELOG) memakai skrip sementara yang mendeteksi baris tabel dengan jumlah sel berbeda dari header, judul markdown di dalam sel, dan baris tabel tanpa blank line sesudahnya. Hasil awal: 8 temuan, semuanya "ragged row"; setelah perbaikan: 0 temuan. Tidak ada judul markdown di dalam sel dan tidak ada tabel yang menempel ke heading tanpa baris kosong.
+
+Gambar yang dilaporkan pengguna **bukan berasal dari repo ini**: teks "What problem does it solve?" dan "SYSTEM DOCUMENTATION & REQUIREMENTS" tidak ada di working tree, tidak ada di seluruh riwayat git (`git log -S`), dan tidak ada di berkas sesi DSH tiga hari terakhir. Gejala pada gambar itu — `## Quick Start` dan tanda `-` tercetak harfiah di dalam sel — disebabkan isi markdown dimasukkan mentah ke sel tabel oleh alat pembuat dokumen, bukan oleh markdown repo ini.
+
+Teks `â†’` yang muncul di konsol bukan kerusakan berkas: shell pada mesin ini PowerShell 5.1 yang membaca UTF-8 sebagai cp1252. Berkasnya berisi U+2192 yang sah; pemindaian dengan pembaca UTF-8 menemukan nol urutan mojibake di seluruh repo.
+
 ## [0.11.0] — 2026-11-09 — Web reconnaissance: fingerprint teknologi berkeyakinan
 
 **Commit dasar:** `8ff2289` (branch `dev`)

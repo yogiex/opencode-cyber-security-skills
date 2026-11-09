@@ -98,7 +98,7 @@ Eksploitasi keterbatasan buffer WAF.
 | Version Comments | `/*!12345UNION*/ SELECT` |
 | Null Bytes | `SEL%00ECT` |
 | Case Variation | `UnIoN SeLeCt` |
-| Alternative Operators | `OR 1=1` → `|| 1=1` |
+| Alternative Operators | `OR 1=1` → `\|\| 1=1` |
 
 **XSS:**
 | Teknik | Contoh |

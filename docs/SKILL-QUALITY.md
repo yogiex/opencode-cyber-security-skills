@@ -1,8 +1,8 @@
 # Skill Quality Ledger
 
-Matriks status kualitas 28 skill. Tujuannya membuat pekerjaan tuning **terlihat** — bukan tersembunyi di riwayat commit — sampai cakupan cukup untuk ditegakkan lewat CI.
+Matriks status kualitas 29 skill. Tujuannya membuat pekerjaan tuning **terlihat** — bukan tersembunyi di riwayat commit — sampai cakupan cukup untuk ditegakkan lewat CI.
 
-Diperbarui: **2026-11-09** (setelah 0.14.0 — `web-pentest-payloads`: decision frame, gotchas, dan syarat otorisasi; 0.13.0 — `offsec-ir-200`: referensi live response host triage; 0.12.0 — `cpent` menjadi persona praktisi; 0.11.0 — `web-reconnaissance`: fingerprint teknologi berkeyakinan).
+Diperbarui: **2026-11-10** (setelah 0.19.0 — `ec-cnd`: penyelesaian berkas skill; 0.17.0 — `ec-cnd`: persona injection pengguna; 0.14.0 — `web-pentest-payloads`: decision frame, gotchas, dan syarat otorisasi; 0.13.0 — `offsec-ir-200`: referensi live response host triage; 0.12.0 — `cpent` menjadi persona praktisi; 0.11.0 — `web-reconnaissance`: fingerprint teknologi berkeyakinan).
 
 ## Kriteria
 
@@ -24,6 +24,7 @@ Status: **Selesai** = Frame + Provenance. **Sebagian** = salah satu. **Belum** =
 | comptia-cysa | ya | ya | ya | 6 | ya | Selesai |
 | cpent | ya | ya | — | 18 | ya | Sebagian |
 | devsecops-mindset | — | — | — | 0 | — | Belum |
+| ec-cnd | ya | ya | — | 14 | ya | Sebagian |
 | ec-ecih | — | ya | ya | 7 | ya | Selesai |
 | incident-response-plan | — | — | — | 0 | — | Belum |
 | lf-cks | — | ya | ya | 9 | ya | Selesai |
@@ -54,10 +55,10 @@ Status: **Selesai** = Frame + Provenance. **Sebagian** = salah satu. **Belum** =
 | Status | Jumlah |
 |---|---|
 | Selesai | 11 |
-| Sebagian | 8 |
+| Sebagian | 9 |
 | Belum | 9 |
 
-Tiga "Sebagian" berasal dari poin B: frame sudah ada, provenance sengaja tidak dipasang karena fact sheet belum memuat PTES, STIX 2.1, TLP 2.0, atau OWASP CRS. Tiga sisanya menyusul: `web-reconnaissance` (0.7.0, diperluas 0.9.0, 0.10.0, dan 0.11.0), lalu `security-documentation` dan `web-app-scan` (0.8.0) — frame dan referensi sudah ada, provenance belum karena versi OWASP WSTG/PTES yang menjadi sumbernya juga belum masuk fact sheet. Yang ketujuh adalah `cpent` (0.12.0): skill itu sengaja diposisikan sebagai persona praktisi bersertifikat, sehingga seluruh angka ujian — dan provenance-nya — dihapus. Yang kedelapan adalah `web-pentest-payloads` (0.14.0): frame, gotchas, dan syarat otorisasi sudah ada, tetapi provenance tidak dipasang karena katalognya dikurasi ulang dari PayloadsAllTheThings, PortSwigger Academy, dan HackTricks — bukan dari standar bersertifikasi yang tercatat di fact sheet.
+Tiga "Sebagian" berasal dari poin B: frame sudah ada, provenance sengaja tidak dipasang karena fact sheet belum memuat PTES, STIX 2.1, TLP 2.0, atau OWASP CRS. Tiga sisanya menyusul: `web-reconnaissance` (0.7.0, diperluas 0.9.0, 0.10.0, dan 0.11.0), lalu `security-documentation` dan `web-app-scan` (0.8.0) — frame dan referensi sudah ada, provenance belum karena versi OWASP WSTG/PTES yang menjadi sumbernya juga belum masuk fact sheet. Yang ketujuh adalah `cpent` (0.12.0): skill itu sengaja diposisikan sebagai persona praktisi bersertifikat, sehingga seluruh angka ujian — dan provenance-nya — dihapus. Yang kedelapan adalah `web-pentest-payloads` (0.14.0): frame, gotchas, dan syarat otorisasi sudah ada, tetapi provenance tidak dipasang karena katalognya dikurasi ulang dari PayloadsAllTheThings, PortSwigger Academy, dan HackTricks — bukan dari standar bersertifikasi yang tercatat di fact sheet. Yang kesembilan adalah `ec-cnd` (0.19.0): persona pengguna yang memegang CND — seperti `cpent` — sengaja tidak memuat angka ujian, sehingga provenance tidak dipasang.
 
 ## Backlog
 
@@ -70,7 +71,7 @@ Tiga "Sebagian" berasal dari poin B: frame sudah ada, provenance sengaja tidak d
 
 ## Kapan enforcement dibuat
 
-`check-fact-notes.js` sudah menegakkan provenance. Enforcement untuk **Frame** sengaja ditunda sampai cakupan ≥80% (≥23 dari 28), karena checker sekarang butuh allowlist 13 pengecualian — rapuh dan menyembunyikan pekerjaan tersisa.
+`check-fact-notes.js` sudah menegakkan provenance. Enforcement untuk **Frame** sengaja ditunda sampai cakupan ≥80% (≥24 dari 29), karena checker sekarang butuh allowlist 9 pengecualian — rapuh dan menyembunyikan pekerjaan tersisa.
 
 ## Cara memperbarui
 

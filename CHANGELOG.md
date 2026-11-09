@@ -13,6 +13,35 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.19.0] — 2026-11-10 — ec-cnd: penyelesaian berkas dan sinkronisasi registry
+
+**Commit dasar:** `04c4e1a` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** koreksi untuk 0.17.0. Entri itu sudah tercatat di riwayat (`dc2ffa7`) tetapi 15 berkas `skills/ec-cnd/` dan `docs/CND-PERSONA-NEEDS.md` belum ikut ter-commit, sehingga changelog pada commit tersebut menunjuk berkas yang belum ada. Entri ini menambahkan berkas tersebut, memperbarui quality ledger, dan meregenerasi registry. Isi skill tidak berubah dibanding 0.17.0; deskripsi README sudah memakai framing persona injection.
+
+### Ditambahkan
+
+Berkas yang ditambahkan pada commit ini adalah 15 berkas `skills/ec-cnd/` (SKILL.md + 14 referensi) dan `docs/CND-PERSONA-NEEDS.md`, seluruhnya sudah terdaftar di tabel entri 0.17.0. Tidak ada berkas baru di luar daftar itu.
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `docs/SKILL-QUALITY.md` | baris `ec-cnd` (Trigger ya, Frame ya, Provenance —, Refs 14, Failure modes ya, Status Sebagian); ringkasan Sebagian 8 → 9; 28 → 29 skill; ambang frame ≥24 dari 29 dan allowlist 9 pengecualian; baris tanggal menyebut 0.19.0 dan 0.17.0 | ledger harus mencerminkan skill yang sudah ada di pohon | dihitung ulang dari matriks: Frame 20/29 |
+| `manifest.json` | entri `ec-cnd` dengan 12 kata kunci; total 29 skill | manifest adalah sumber kebenaran global | `node scripts/sync-skills.js` |
+| `skills/index.json` | 15 berkas `ec-cnd` | indeks harus mencerminkan berkas yang dapat dimuat | `node scripts/sync-skills.js` |
+| `.claude-plugin/plugin.json` | sinkronisasi daftar skill | artefak turunan plugin | `node scripts/sync-skills.js` |
+| `.claude-plugin/marketplace.json` | sinkronisasi katalog marketplace | artefak turunan plugin | `node scripts/sync-skills.js` |
+| `.cursor-plugin/plugin.json` | sinkronisasi daftar skill | artefak turunan plugin | `node scripts/sync-skills.js` |
+
+### Catatan
+
+Koreksi mengikuti aturan 6 changelog: entri 0.17.0 tidak ditulis ulang. Nomor 0.19.0 dipakai karena 0.18.0 sudah terpakai di commit `1ec45fd`.
+
+Fakta CND (blueprint v4.0, 8 domain, 20 sub-domain) tetap hanya berada di dokumen analisis; skill persona tidak memuat angka ujian dan tidak didaftarkan di `check-fact-notes.js`.
+
+Panjang berkas: `SKILL.md` 194 baris, `persona.md` 138 baris, dokumen analisis 315 baris.
+
 ## [0.18.0] — 2026-11-10 — offsec-ir-200: verifikasi integritas file
 
 **Commit dasar:** `16a89b9` (branch `dev`)

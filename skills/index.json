@@ -65,6 +65,27 @@
       ]
     },
     {
+      "name": "ec-cnd",
+      "description": "Persona pengguna yang sudah memegang sertifikasi EC-Council CND — profil, gaya bicara, kebiasaan kerja, dan doktrin operasional untuk memilih kontrol jaringan yang tepat, mengelola perubahan berisiko, membaca telemetri, dan merespons insiden di tingkat jaringan. Pakai saat agent harus berperan sebagai pengguna bersertifikat CND pada pekerjaan nyata — bukan untuk persiapan ujian.",
+      "files": [
+        "SKILL.md",
+        "references/app-data-protection.md",
+        "references/capability-domains.md",
+        "references/cloud-virtual-wireless.md",
+        "references/defense-playbook.md",
+        "references/detection-telemetry.md",
+        "references/endpoint-hardening.md",
+        "references/incident-response.md",
+        "references/network-architecture.md",
+        "references/perimeter-controls.md",
+        "references/persona.md",
+        "references/reasoning-examples.md",
+        "references/referensi.md",
+        "references/risk-threat-intel.md",
+        "references/tools-diagnostics.md"
+      ]
+    },
+    {
       "name": "ec-ecih",
       "description": "EC-Council ECIH (Certified Incident Handler) v3 — incident handler mindset, IR lifecycle framework (NIST 800-61 + ECIH 9-stage IH&R), decision frameworks per incident type, forensic readiness, containment strategies, eradication methodology, recovery planning, post-incident lessons learned, dan komunikasi krisis. Berbasis ECIH 212-89 v3 curriculum.",
       "files": [

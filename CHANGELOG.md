@@ -88,7 +88,7 @@ Generator `sync-skills.js` dijalankan sekali untuk entri ini; keluarannya juga m
 ## [0.16.1] — 2026-11-10 — Koreksi hitungan baris pada entri 0.16.0
 
 **Commit dasar:** `1ec45fd` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `eefad04`
 **Ruang lingkup:** entri 0.16.0 mencantumkan jumlah baris dengan metode baris tak kosong (`Measure-Object -Line`), sehingga `LICENSE` tercatat 17, CONTRIBUTING 206, dan README 235. Konvensi repo adalah jumlah baris total — entri 0.15.0 mencatat 253 baris untuk berkas yang totalnya memang 253. Angka yang benar: 21, 287, dan 304 (dari 332).
 
 ### Diubah

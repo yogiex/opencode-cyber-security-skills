@@ -365,7 +365,7 @@
     },
     {
       "name": "web-reconnaissance",
-      "description": "Recon web/SPA: inventarisasi dan analisis chunk JS (source map, bundle, endpoint dan rute tersembunyi), alur data dari aksi UI ke endpoint, rekam network tab lewat Chrome DevTools MCP atau HAR manual, baca storage browser (localStorage, sessionStorage, cookie, IndexedDB, Cache Storage), peta rute frontend dan API backend, konfigurasi auth (JWT, cookie, OAuth), teknologi, subdomain, wayback. Muat saat memetakan aplikasi sebelum scan atau pentest.",
+      "description": "Recon web/SPA: inventarisasi dan analisis chunk JS (source map, bundle, endpoint dan rute tersembunyi), alur data dari aksi UI ke endpoint, rekam network tab lewat Chrome DevTools MCP atau HAR manual, baca storage browser (localStorage, sessionStorage, cookie, IndexedDB, Cache Storage), peta rute frontend dan API backend, konfigurasi auth (JWT, cookie, OAuth), identifikasi teknologi dan versi (header, cookie, jalur aset, banner bundle) beserta keyakinannya, subdomain, wayback. Muat saat memetakan aplikasi sebelum scan atau pentest.",
       "files": [
         "SKILL.md",
         "references/architecture-mapping.md",
@@ -375,7 +375,8 @@
         "references/data-flow-analysis.md",
         "references/js-chunk-analysis.md",
         "references/js-chunk-discovery.md",
-        "references/network-analysis.md"
+        "references/network-analysis.md",
+        "references/technology-fingerprinting.md"
       ]
     }
   ]

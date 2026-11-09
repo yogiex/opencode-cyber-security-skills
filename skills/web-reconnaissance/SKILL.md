@@ -1,6 +1,6 @@
 ---
 name: web-reconnaissance
-description: "Recon web/SPA: inventarisasi dan analisis chunk JS (source map, bundle, endpoint dan rute tersembunyi), alur data dari aksi UI ke endpoint, rekam network tab lewat Chrome DevTools MCP atau HAR manual, baca storage browser (localStorage, sessionStorage, cookie, IndexedDB, Cache Storage), peta rute frontend dan API backend, konfigurasi auth (JWT, cookie, OAuth), teknologi, subdomain, wayback. Muat saat memetakan aplikasi sebelum scan atau pentest."
+description: "Recon web/SPA: inventarisasi dan analisis chunk JS (source map, bundle, endpoint dan rute tersembunyi), alur data dari aksi UI ke endpoint, rekam network tab lewat Chrome DevTools MCP atau HAR manual, baca storage browser (localStorage, sessionStorage, cookie, IndexedDB, Cache Storage), peta rute frontend dan API backend, konfigurasi auth (JWT, cookie, OAuth), identifikasi teknologi dan versi (header, cookie, jalur aset, banner bundle) beserta keyakinannya, subdomain, wayback. Muat saat memetakan aplikasi sebelum scan atau pentest."
 license: MIT
 compatibility: opencode
 metadata:
@@ -33,7 +33,7 @@ Bila MCP `chrome-devtools-mcp` aktif, keempat sumber itu dapat diambil tanpa kli
 - **Berhenti mengumpulkan chunk** bila tiga rute utama sudah terpetakan **dan** satu putaran crawl tidak menambah nama chunk baru. Source map: `.map` membalas 200 = jalur utama, baca kode aslinya; bila tidak ada, beautify entry chunk + chunk bernama sensitif, lewati vendor chunk.
 - **Kedalaman alur data** — tiga hop dari aksi UI ke endpoint, satu alur per domain (auth, data utama, admin) dikonfirmasi dinamis. Alur yang belum tersambung ditandai "tidak terlacak", bukan ditebak. Kode tanpa pemanggil tidak dijadikan dasar prioritas.
 - **Storage dibaca berlapis** — nama kunci lebih dulu, nilai hanya bila bentuknya mencurigakan. Kunci publik (`pk_`, `AIza`, DSN Sentry) dicatat sebagai konteks, bukan temuan. Token tidak pernah ditulis utuh di laporan, dan data pengguna nyata disamarkan.
-- **Peta arsitektur dan status endpoint** — peta dianggap cukup bila setiap rute punya minimal satu endpoint atau ditandai statis, dan setiap endpoint punya status yang dibuktikan. 403 = kandidat otorisasi terkuat, 401 = kandidat setelah login, 404 = berhenti. Maksimal dua varian path per endpoint tanpa persetujuan.
+- **Inventaris, keyakinan, dan status** — tiga inventaris (rute, endpoint, teknologi) dianggap cukup bila setiap barisnya punya bukti: rute punya minimal satu endpoint atau ditandai statis; endpoint punya status yang dibuktikan (403 = kandidat otorisasi terkuat, 401 = kandidat setelah login, 404 = berhenti); teknologi punya minimal dua sinyal independen atau ditandai "terduga". Maksimal dua varian path per endpoint tanpa persetujuan.
 - **Batas waktu** — 90 menit untuk satu target kecil. Bila lewat, tulis laporan dengan bukti yang sudah ada daripada mengejar kelengkapan.
 
 ## 1. Siapkan Sesi
@@ -184,20 +184,36 @@ Aturan yang membuat peta bisa dipercaya:
 
 > Baca [architecture-mapping.md](references/architecture-mapping.md) untuk pola rute tiap framework, rute berpagar peran, arsitektur URL (host, versi, locale, tenant), gRPC-web, gabungan rute ke endpoint, diagram, dan contoh pernyataan cakupan.
 
-## 9. Teknologi, Versi, dan CVE
+## 9. Identifikasi Teknologi dan Versi
 
-| Sinyal | Teknologi |
-|---|---|
-| `Server`, `X-Powered-By` | Web server / bahasa |
-| `__NEXT_DATA__` | Next.js |
-| `window.__NUXT__` | Nuxt |
-| `ng-version`, `ng-reflect-*` | Angular (versi ikut terbaca) |
-| `PHPSESSID`, `JSESSIONID` | PHP, Java |
-| `meta name="generator"` | CMS (WordPress, Drupal) |
+Empat lapis, dan setiap lapis menjelaskan lapis berikutnya:
 
-Ambil versi bila memungkinkan — versi tanpa patch adalah dasar pencarian CVE. Cari per teknologi + versi: `nginx 1.25.0 CVE`, `Next.js 14.0.0 CVE`, `WordPress 6.4 CVE`. Sumber: NVD (by product/version), pencarian web untuk laporan terbaru, `searchsploit --cve <teknologi>` (hanya membaca daftar).
+| Lapis | Sinyal utama | Catatan |
+|---|---|---|
+| **Infrastruktur** | `CF-Ray`, `x-vercel-id`, `x-amz-cf-id`, `Via`, TLS issuer, CNAME | CDN menimpa `Server` — jawab ini lebih dulu |
+| **Server dan bahasa** | `Server`, `X-Powered-By`, nama cookie sesi, format `ETag` | `PHPSESSID` → PHP, `JSESSIONID` → Java |
+| **Framework frontend** | jalur aset, atribut root, variabel global | `/_next/`, `/_nuxt/`, `/assets/index-`, `ng-version` |
+| **Pihak ketiga** | domain di traffic, cookie SDK | analytics, IdP, pembayaran, error tracking |
 
-Catat **CVE ID**, **CVSS**, **versi terpengaruh**, status (Published/Reserved/Rejected). Jangan menyertakan exploit atau PoC — cukup identifikasi.
+Versi dicari di bundle, bukan hanya nama framework:
+
+```bash
+curl -sSI https://target.tld | tee headers.txt        # header + versi server
+grep -oE '/\*![^*]{0,80}\*/' main.pretty.js | head    # banner lisensi: /*! React v18.2.0 */
+grep -oiE '(react|vue|angular|jquery|bootstrap|axios)[^0-9]{0,12}[0-9]+\.[0-9]+\.[0-9]+' main.pretty.js | sort -u
+```
+
+Setiap baris inventaris wajib punya **kolom keyakinan**: tinggi bila ≥2 sinyal independen sepakat, sedang bila satu sinyal eksplisit, rendah bila hanya inferensi. Hanya keyakinan tinggi yang boleh dipakai memilih CVE.
+
+> Baca [technology-fingerprinting.md](references/technology-fingerprinting.md) untuk tabel header dan cookie, jalur aset per build tool, ekstraksi versi (banner lisensi, konstanta, source map), TLS dan CT logs, halaman error, kolom keyakinan, dan sepuluh jebakan.
+
+## 10. CVE yang Relevan
+
+Cari per teknologi + versi yang berkeyakinan tinggi: `nginx 1.25.0 CVE`, `Next.js 14.0.0 CVE`, `WordPress 6.4 CVE`.
+
+Sumber: NVD (by product/version), advisory vendor, pencarian web untuk laporan terbaru, `searchsploit --cve <teknologi>` (hanya membaca daftar).
+
+Catat **CVE ID**, **CVSS**, **versi terpengaruh**, status (Published/Reserved/Rejected), dan apakah versi target termasuk. Jangan menyertakan exploit atau PoC — cukup identifikasi.
 
 ## Gotchas
 
@@ -219,10 +235,13 @@ Catat **CVE ID**, **CVSS**, **versi terpengaruh**, status (Published/Reserved/Re
 - **Nama fungsi hasil minifikasi tidak berarti apa-apa.** `c()` bisa jadi apa saja; hanya string, graf modul, dan jejak runtime yang dapat dipercaya.
 - **Rute klien bukan bukti otorisasi server.** `/admin` yang dibalas 200 oleh SPA tidak membuktikan apa pun; yang menentukan adalah endpoint yang dipanggil setelah render.
 - **Payload JWT selalu terbaca.** Itu desain, bukan kerentanan — yang menentukan severity adalah lokasi penyimpanan, masa berlaku, dan pencabutan. Satu aplikasi bisa memakai dua skema sekaligus; periksa keduanya.
+- **`X-Powered-By` dan `Server` bisa dipalsukan, dan CDN menimpa keduanya.** Satu header tidak pernah cukup untuk menyimpulkan teknologi; minta sinyal kedua sebelum memetakan CVE.
+- **Versi di bundle adalah versi saat build.** Ia bisa lebih lama atau lebih baru dari yang berjalan sekarang, dan banner lisensi bisa berasal dari library yang tidak dimuat. Periksa di chunk yang benar-benar dipakai.
+- **Probe jalur khas (`/wp-login.php`, `/_next/`) membalas 200 pada hampir semua SPA.** Periksa isi dan `Content-Type`, bukan hanya status.
 
 ## Output Laporan
 
-- **Teknologi**: [backend, frontend, server, versi]
+- **Teknologi**: [lapis, nama, versi, bukti, tingkat keyakinan per baris]
 - **Alat capture**: [MCP / manual, HAR disimpan di mana]
 - **Inventaris chunk**: [jumlah, entry, chunk bernama sensitif, ada/tidak source map]
 - **Peta rute frontend**: [jumlah, rute berpagar peran, rute tak tertaut]
@@ -247,4 +266,5 @@ Catat **CVE ID**, **CVSS**, **versi terpengaruh**, status (Published/Reserved/Re
 | [browser-storage.md](references/browser-storage.md) | Perlu dump localStorage/cookie/IndexedDB/Cache Storage, decode JWT, atau mengubah storage menjadi temuan |
 | [auth-configuration.md](references/auth-configuration.md) | Perlu memetakan JWT, cookie, OAuth/OIDC, SAML, refresh dan pencabutan, CSRF, atau MFA |
 | [architecture-mapping.md](references/architecture-mapping.md) | Perlu menyusun peta rute frontend dan API backend, normalisasi, atau pernyataan cakupan |
+| [technology-fingerprinting.md](references/technology-fingerprinting.md) | Perlu mengenali infrastruktur, server, framework, atau versi — dan memisahkan yang terbukti dari yang terduga |
 | [chrome-devtools-mcp.md](references/chrome-devtools-mcp.md) | Perlu otomasi: daftar request per tipe, simpan body ke disk, header auth, logpoint, atau fallback manual |

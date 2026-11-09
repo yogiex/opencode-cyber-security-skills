@@ -10,7 +10,7 @@ Tujuan analisis bukan "membaca semua kode" — kode produksi bisa puluhan ribu b
 
 Kerjakan berurutan. Setiap langkah mempersempit langkah berikutnya.
 
-> Berkas ini menjawab *apa isinya*. Untuk menghubungkan isi itu menjadi **alur** — aksi UI mana memanggil endpoint mana, lewat state apa — lanjutkan ke [data-flow-analysis.md](data-flow-analysis.md). Untuk menyusun rute dan endpoint menjadi peta arsitektur, lihat [architecture-mapping.md](architecture-mapping.md).
+> Berkas ini menjawab *apa isinya*. Untuk menghubungkan isi itu menjadi **alur** — aksi UI mana memanggil endpoint mana, lewat state apa — lanjutkan ke [data-flow-analysis.md](data-flow-analysis.md). Untuk menyusun rute dan endpoint menjadi peta arsitektur, lihat [architecture-mapping.md](architecture-mapping.md). Untuk membaca **versi** dari banner lisensi, konstanta, dan source map, lihat [technology-fingerprinting.md](technology-fingerprinting.md).
 
 ## 1. Siapkan Salinan Lokal
 

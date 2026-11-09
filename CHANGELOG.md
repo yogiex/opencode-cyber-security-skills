@@ -13,6 +13,42 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.11.0] — 2026-11-09 — Web reconnaissance: fingerprint teknologi berkeyakinan
+
+**Commit dasar:** `8ff2289` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** permintaan langsung — fase reconnaissance juga harus mencari informasi teknologi yang dipakai target. Sebelumnya bagian teknologi hanya tabel enam sinyal tanpa metode, tanpa cara mengambil versi, dan tanpa pembeda antara yang terbukti dan yang ditebak.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/web-reconnaissance/references/technology-fingerprinting.md` | 219 baris: empat lapis (infrastruktur, server dan bahasa, framework frontend, pihak ketiga), tabel 20 header dan artinya, tabel cookie ke stack, jalur aset per build tool, ekstraksi versi (banner lisensi, konstanta, atribut `ng-version`, source map, `package.json` terpapar), TLS dan CT logs, tanda halaman error, kolom keyakinan tiga tingkat, alur versi ke CVE, tabel tujuh batas, sepuluh jebakan | versi tanpa keyakinan adalah dasar CVE yang tidak bisa dipertanggungjawabkan; skill hanya menyebut `Server` dan `X-Powered-By` sebagai sinyal tanpa menjelaskan bahwa keduanya dapat dipalsukan dan ditimpa CDN | 0 tautan rusak; tabel disusun dari pengetahuan ekosistem, bukan dari pengukuran target nyata |
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/web-reconnaissance/SKILL.md` | 250 → 270 baris; deskripsi frontmatter menyebut identifikasi teknologi dan versi beserta keyakinannya; `## Decision Frame` butir keenam menjadi "Inventaris, keyakinan, dan status" yang mencakup rute, endpoint, dan teknologi (2 sinyal independen atau ditandai terduga); `## 9. Teknologi, Versi, dan CVE` dipecah menjadi `## 9. Identifikasi Teknologi dan Versi` (tabel empat lapis + perintah pengambilan versi + aturan keyakinan) dan `## 10. CVE yang Relevan`; Gotchas 18 → 21 butir; baris Teknologi pada template output menyebut tingkat keyakinan; indeks 9 referensi | satu tabel enam baris tidak cukup untuk menampung empat lapis fingerprinting, dan CVE butuh aturan sendiri karena hanya boleh didasarkan pada keyakinan tinggi | heading `## ` 13 → 14; butir Decision Frame 7; butir Gotchas 21; berkas di `references/` 8 → 9; baris tabel referensi 9 |
+| `skills/web-reconnaissance/references/js-chunk-analysis.md` | 211 baris (jumlah tetap, isi blockquote diperluas); penunjuk ke `technology-fingerprinting.md` untuk pembacaan versi dari banner lisensi dan source map | versi paling sering terbaca justru saat analisis bundle, bukan di langkah terpisah | 0 tautan rusak |
+
+### Artefak turunan dan dokumentasi
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `manifest.json` | deskripsi `web-reconnaissance` diperbarui | deskripsi bersumber dari frontmatter `SKILL.md` | `node scripts/sync-skills.js` |
+| `skills/index.json` | deskripsi dan daftar `files` diperbarui menjadi 10 entri | indeks harus mencantumkan berkas yang dapat dimuat | idem |
+| `README.md` | baris 164 diperbarui | deskripsi lama hanya menyebut "teknologi" tanpa versi dan keyakinan | dicocokkan dengan frontmatter |
+| `docs/SKILL-QUALITY.md` | kolom Refs baris `web-reconnaissance` 8 → 9; tanggal dan catatan provenance | ledger harus mencerminkan jumlah referensi sebenarnya | dihitung ulang dari isi `references/` |
+
+`.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, dan `.cursor-plugin/plugin.json` ditulis ulang generator dengan isi identik, sehingga tidak muncul di `git status`.
+
+### Catatan
+
+Referensi baru ini adalah **prosedur dan tabel rujukan**, bukan hasil pengukuran. Tidak ada satu pun target yang di-fingerprint pada perubahan ini: tabel header, cookie, jalur aset, dan tanda halaman error disusun dari pengetahuan ekosistem, bukan dari pengamatan aplikasi sungguhan.
+
+Sembilan blok JavaScript yang sudah ada tetap lolos uji parse dengan `new Function`; referensi baru tidak memuat blok JavaScript, hanya blok `bash`. MCP `chrome-devtools-mcp` tetap tidak terpasang di mesin ini.
+
 ## [0.10.0] — 2026-11-09 — Web reconnaissance: alur data, peta arsitektur, dan konfigurasi auth
 
 **Commit dasar:** `11d94c9` (branch `dev`)

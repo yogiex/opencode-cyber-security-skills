@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.10.0] — 2026-11-09 — Web reconnaissance: alur data, peta arsitektur, dan konfigurasi auth
 
 **Commit dasar:** `11d94c9` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `ef7e325`
 **Ruang lingkup:** permintaan langsung — fase reconnaissance juga harus bisa (1) membaca alur data aplikasi dari chunk JS, (2) mencari seluruh endpoint lalu memetakan arsitektur URL frontend dan REST API backend, dan (3) melihat konfigurasi autentikasinya seperti JWT atau cookie.
 
 ### Ditambahkan

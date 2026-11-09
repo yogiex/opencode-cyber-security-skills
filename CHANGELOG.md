@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.9.0] — 2026-11-09 — Web reconnaissance: storage browser dan Chrome DevTools MCP
 
 **Commit dasar:** `e0567ba` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `000b60c`
 **Ruang lingkup:** permintaan langsung — fase reconnaissance harus benar-benar bisa (1) membaca chunk JS, (2) membaca storage yang ada di browser, dan (3) membaca network tab lewat MCP Chrome DevTools untuk menyadap seluruh informasi situs. Sebelumnya skill hanya menyebut storage dalam satu blok `console.log` dan tidak punya cara merekam apa pun secara otomatis.
 
 ### Ditambahkan

@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.8.0] — 2026-11-09 — Reporting dan web assessment: template nyata, frame, dan gotchas
 
 **Commit dasar:** `659d5ab` (branch `dev`)
-**Status:** pending
+**Status:** committed in `f3c7ec7`
 **Ruang lingkup:** dua skill backlog D yang berpasangan dalam satu alur kerja — `web-app-scan` menghasilkan temuan, `security-documentation` menuliskannya. Keduanya sebelumnya tanpa Decision Frame dan tanpa Gotchas.
 
 ### Ditambahkan

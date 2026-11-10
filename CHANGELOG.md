@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.22.0] — 2026-11-10 — Analisis kebutuhan publikasi ke direktori eksternal
 
 **Commit dasar:** `7e45850` (branch `dev`)
-**Status:** pending
+**Status:** committed in `5ac52ee`
 **Ruang lingkup:** permintaan langsung — analisis kebutuhan sebelum implementasi, menindaklanjuti pertanyaan "apakah `git push` ke GitHub memperbarui skills.rest". Hasil pemeriksaan: tidak, dan tidak bisa, karena skills.rest mengindeks sekali saat submit lalu membekukan hasilnya. Repo tidak punya catatan status publikasi, tidak punya prosedur rilis yang memuat langkah publikasi, dan tidak punya kriteria kapan sebuah rilis dinyatakan terbit. Dokumen ini mengisi ketiga kekosongan itu sekaligus menetapkan apa yang sengaja tidak dikerjakan. Tidak ada berkas skill, `manifest.json`, `skills/index.json`, maupun artefak plugin yang disentuh — ini murni dokumen analisis.
 
 ### Ditambahkan

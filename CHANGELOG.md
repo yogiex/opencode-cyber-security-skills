@@ -13,10 +13,27 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.19.1] — 2026-11-10 — Perbaikan: `cpent` tetap terdaftar sampai refactor-nya di-commit
+
+**Commit dasar:** `d6279b9` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** 0.19.0 mencabut `cpent` dari `check-fact-notes.js` karena working tree sudah tidak memuat catatan provenance. Itu keliru: `skills/cpent/SKILL.md` yang **sudah di-commit** masih memuat blockquote lama, sehingga commit `d6279b9` meninggalkan repo dengan checker yang gagal. Entri ini mengembalikan pendaftaran itu sampai refactor `cpent` (didokumentasikan pada 0.12.0) ikut di-commit.
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `scripts/check-fact-notes.js` | `EXPECTED` memuat kembali `cpent` (3 entri), dengan komentar bahwa pendaftaran hanya berlaku sampai refactor `cpent` di-commit | repo harus lulus checker pada setiap commit, bukan hanya di working tree | `node scripts/check-fact-notes.js` exit 0 |
+| `CHANGELOG.md` | entri 0.19.0 ditandai `committed in d6279b9`; entri 0.19.1 ditambahkan | status tidak boleh dibiarkan `pending` lebih dari satu commit | `git log -- CHANGELOG.md` |
+
+### Catatan
+
+Ketika refactor `cpent` di-commit, blockquote provenance ikut hilang dan pendaftaran ini **wajib** dicabut pada commit yang sama. Urutannya tidak bisa dibalik: mencabut lebih dulu membuat commit sebelumnya gagal, sedangkan membiarkan terlalu lama membuat commit berikutnya gagal.
+
 ## [0.19.0] — 2026-11-10 — Sembilan skill bersertifikat menjadi persona praktisi
 
 **Commit dasar:** `04c4e1a` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `d6279b9`
 **Ruang lingkup:** permintaan langsung — skill yang tujuannya lulus ujian sertifikasi bukan lagi tempat yang tepat untuk repo ini; tujuannya persona injection agar agent paham cybersecurity. Audit 2026-11-10 menemukan **sembilan** skill dengan sinyal tujuan-ujian (description, artefak ujian, atau Decision Frame berisi taktik ujian). Kesembilan dikonversi ke bentuk persona: identitas peran, mandat, batas klaim, Persona Contract, Decision Frame operasional, doktrin, suara, dan contoh penalaran. Seluruh angka ujian dihapus dan dipusatkan di `docs/CERTIFICATION-FACTS.md`. Standar kerja: `docs/PERSONA-CONVERSION.md`; analisis kebutuhan: `docs/PERSONA-INJECTION-NEEDS.md`.
 
 ### Ditambahkan — persona (9 berkas)

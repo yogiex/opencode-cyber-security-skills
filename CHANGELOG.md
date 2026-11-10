@@ -265,7 +265,7 @@ Verifikasi yang dijalankan: `node scripts/check-fact-notes.js` (exit 0, 2 skill)
 ## [0.18.0] — 2026-11-10 — offsec-ir-200: verifikasi integritas file
 
 **Commit dasar:** `16a89b9` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `d6279b9`
 **Ruang lingkup:** permintaan langsung — cara membuktikan file mana yang diubah penyerang: metadata `stat` (mtime/ctime, inode, mode, owner, hardlink), verifikasi paket `rpm -Va` dan `dpkg -V`/`debsums`, pembacaan flag, false positive konffile, batas cakupan paket, dan deteksi manipulasi database paket.
 
 ### Ditambahkan
@@ -290,7 +290,7 @@ Perintah ditulis dari dokumentasi tooling (rpm, dpkg, debsums, coreutils, GNU fi
 ## [0.17.0] — 2026-11-10 — ec-cnd: persona injection pengguna bersertifikat CND
 
 **Commit dasar:** `16a89b9` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `abae7be`
 **Ruang lingkup:** permintaan langsung — menambahkan skill **persona injection pengguna yang memegang EC-Council CND (Certified Network Defender)**: agent meminjam persona pengguna (profil, suara, preferensi, batas klaim), bukan memerankan praktisi generik atau tutor ujian. Perubahan melewati fase analisis kebutuhan lebih dulu (`docs/CND-PERSONA-NEEDS.md`), lalu membangun 8 domain kapabilitas ke dalam 14 berkas referensi. Seluruh angka ujian sengaja tidak dimuat — paritas dengan `cpent` — sehingga skill tidak didaftarkan di `check-fact-notes.js`.
 
 ### Ditambahkan
@@ -380,7 +380,7 @@ Perintah instalasi skill memakai slug repo saat ini; bila repo dipindahkan atau 
 ## [0.15.0] — 2026-11-10 — offsec-ir-200: hidden file hunting
 
 **Commit dasar:** `16a89b9` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `d6279b9`
 **Ruang lingkup:** permintaan langsung — cara sistematis menemukan file yang disembunyikan di server Linux: nama aneh (dotfile, spasi, newline, escape ANSI), lokasi tak lazim (tmpfs, bind mount, `lost+found`), atribut (mtime vs ctime, immutable, setuid, capability, ACL, xattr), file yang tidak diakui manajer paket, trik rootkit, selisih `df` vs `du`, webshell di webroot, dan timeline dari image.
 
 ### Ditambahkan
@@ -425,7 +425,7 @@ Status tetap Sebagian karena provenance belum dipasang: katalog ini dikurasi ula
 ## [0.13.0] — 2026-11-09 — offsec-ir-200: live response host triage
 
 **Commit dasar:** `122ffa1` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `d6279b9`
 **Ruang lingkup:** permintaan langsung — menambahkan perilaku operasional untuk tiga pemeriksaan saat host diduga terkompromi: seluruh proses berjalan, cron/penjadwal semua user, dan koneksi jaringan keluar. Sebelumnya skill ini hanya menyebut "network connections, process table" di order of volatility tanpa satu pun perintah. Menyusul tinjauan kedua, ditambahkan rantai penelusuran dari proses ke file yang dieksekusi, pencarian file itu di disk, lalu pemeriksaan isi dan perilaku binary-nya.
 
 ### Ditambahkan

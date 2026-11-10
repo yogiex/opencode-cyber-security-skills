@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.20.1] — 2026-11-10 — Koreksi hitungan baris pada entri 0.20.0
 
 **Commit dasar:** `cd8a471` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `09cf100`
 **Ruang lingkup:** entri 0.20.0 mencatat jumlah baris dari `split(/\r?\n/).length` di skrip Node, yang menambahkan satu elemen kosong untuk baris baru di akhir berkas. Konvensi repo — dikoreksi pada 0.16.1 — adalah `(Get-Content <path>).Count`. Semua angka pada entri 0.20.0 karena itu lebih tinggi satu. Entri ini mencatat angka yang benar tanpa mengubah entri 0.20.0.
 
 ### Diubah

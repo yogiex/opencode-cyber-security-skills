@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.20.0] — 2026-11-10 — Katalog sertifikasi dibersihkan, Decision Frame mencapai 82%
 
 **Commit dasar:** `62fc03d` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `cd8a471`
 **Ruang lingkup:** dua pekerjaan yang saling menutup. **Pertama**, sisa materi ujian lapis B dihapus: empat skill non-sertifikasi masih memuat katalog sertifikasi beserta harga, vendor latihan soal, dan "exam guide", dan satu skill standar masih memuat daftar sertifikasi. **Kedua**, empat skill yang belum punya `## Decision Frame` kini memilikinya, sehingga cakupan frame naik dari 19/28 (68%) ke **23/28 (82%)** — melewati ambang yang `docs/SKILL-QUALITY.md` tetapkan sendiri sejak 0.6.0 untuk menyalakan penegakan Frame.
 
 ### Diubah — katalog sertifikasi dihapus

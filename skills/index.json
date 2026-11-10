@@ -75,6 +75,27 @@
       ]
     },
     {
+      "name": "ec-cnd",
+      "description": "Persona pengguna yang sudah memegang sertifikasi EC-Council CND — profil, gaya bicara, kebiasaan kerja, dan doktrin operasional untuk memilih kontrol jaringan yang tepat, mengelola perubahan berisiko, membaca telemetri, dan merespons insiden di tingkat jaringan. Pakai saat agent harus berperan sebagai pengguna bersertifikat CND pada pekerjaan nyata — bukan untuk persiapan ujian.",
+      "files": [
+        "SKILL.md",
+        "references/app-data-protection.md",
+        "references/capability-domains.md",
+        "references/cloud-virtual-wireless.md",
+        "references/defense-playbook.md",
+        "references/detection-telemetry.md",
+        "references/endpoint-hardening.md",
+        "references/incident-response.md",
+        "references/network-architecture.md",
+        "references/perimeter-controls.md",
+        "references/persona.md",
+        "references/reasoning-examples.md",
+        "references/referensi.md",
+        "references/risk-threat-intel.md",
+        "references/tools-diagnostics.md"
+      ]
+    },
+    {
       "name": "ec-ecih",
       "description": "Persona incident handler bersertifikat EC-Council ECIH — menjalankan satu insiden dari alert pertama sampai post-mortem: triage dan prioritas, keputusan contain-versus-evidence, chain of custody, eradikasi, recovery, serta koordinasi legal dan komunikasi krisis. Pakai saat agent harus berperan sebagai incident handler yang memegang insiden nyata — bukan untuk persiapan ujian.",
       "files": [
@@ -277,7 +298,7 @@
     },
     {
       "name": "security-auditor",
-      "description": "Panduan mindset, metodologi, dan referensi untuk security auditor — mencakup audit lifecycle, framework comparison, control testing, evidence collection, dan certification path.",
+      "description": "Panduan mindset, metodologi, dan referensi untuk security auditor — mencakup audit lifecycle, framework comparison, control testing, evidence collection, dan pelaporan temuan yang bisa ditindaklanjuti.",
       "files": [
         "SKILL.md"
       ]

@@ -1,6 +1,6 @@
 ---
 name: security-auditor
-description: Panduan mindset, metodologi, dan referensi untuk security auditor — mencakup audit lifecycle, framework comparison, control testing, evidence collection, dan certification path.
+description: Panduan mindset, metodologi, dan referensi untuk security auditor — mencakup audit lifecycle, framework comparison, control testing, evidence collection, dan pelaporan temuan yang bisa ditindaklanjuti.
 license: MIT
 compatibility: opencode
 metadata:
@@ -187,43 +187,12 @@ Setiap workpaper harus mencakup:
 | CAATs | ACL reports, SQL queries | Medium-tinggi |
 | Third-party confirmation | SOC 2 report vendor | Tinggi |
 
-## Certification Path
-
-| Sertifikasi | Penerbit | Fokus | Harga | Prasyarat | Ideal Untuk |
-|-------------|----------|------|-------|-----------|-------------|
-| CISA | ISACA | IT audit, controls, governance | $575-$760 | 5yr IS audit experience | IT auditor, compliance |
-| CISSP | (ISC)² | Security leadership, broad | ~$749 | 5yr in 2+ domains | Security manager, CISO track |
-| ISO 27001 Lead Auditor | PECB / berbagai | ISMS audit spesifik | ~$3,000 | None formal | ISO 27001 auditor |
-| CRISC | ISACA | Risk management, control | $575-$760 | 5yr risk/control exp | Risk manager, GRC |
-| CISM | ISACA | Security management | $575-$760 | 5yr security mgmt | Security manager, CISO |
-| CompTIA Security+ | CompTIA | Entry-level security | ~$392 | None | Entry point sebelum auditor |
-
-### CISA vs ISO 27001 Lead Auditor
-
-| Aspek | CISA | ISO 27001 Lead Auditor |
-|-------|------|------------------------|
-| Scope | Broad — IT audit across systems, governance, security | Specialized — ISMS audit based on ISO 27001 |
-| Recognition | Very high, enterprise/government | High, ISO-certified environments |
-| Career path | IT auditor, risk, compliance, governance | ISO audit, ISMS consultancy |
-| Cost | $575-$760 | ~$3,000 |
-| Renewal | 20 CPE/year, 120/3yr | Varies by certifying body |
-
-### Career Progression
-
-```
-IT Auditor (junior) → Senior IT Auditor → Audit Manager → Director of Audit
-                                    ↓
-                          IT Risk & Assurance → GRC Lead → CISO
-```
-
-Start dengan **IT audit entry-level** atau **compliance analyst**. Dapatkan Security+ atau CISA untuk mempercepat.
-
 ## Ketika Menggunakan Skill Ini
 
 **Gunakan ketika:**
 - Merencanakan atau menjalankan audit keamanan
 - Membandingkan compliance frameworks
-- Menentukan certification path
+- Menyusun rencana pengujian kontrol dan bukti yang diperlukan
 - Menyusun audit program atau workpaper
 - Mereview evidence collection strategy
 - Mempersiapkan SOC 2, ISO 27001, PCI DSS, atau HIPAA audit
@@ -254,9 +223,6 @@ Start dengan **IT audit entry-level** atau **compliance analyst**. Dapatkan Secu
 
 | Judul | Penulis | Fokus |
 |-------|---------|-------|
-| CISA Review Manual | ISACA | Official CISA exam guide — 5 domains, audit process |
-| CISA Questions, Answers & Explanations | ISACA | CISA practice questions database |
-| ISO 27001:2022 Lead Auditor Course Materials | PECB | Full ISMS audit training materials |
 | Information Security Auditing: A Comprehensive Guide | David W. Baker | Practical IT audit methodology |
 | Auditing IT Infrastructures for Compliance | Robert Johnson | Compliance-driven IT auditing approach |
 | The Security Auditor's Handbook | Stephen A. Hess | Day-to-day security audit practices |
@@ -264,17 +230,6 @@ Start dengan **IT audit entry-level** atau **compliance analyst**. Dapatkan Secu
 | Cybersecurity Auditing for Dummies | ServiceNow | Introduction to cybersecurity auditing |
 | Audit and Trace Log Management | Phillip Q. Moore | Log management dari perspektif audit |
 | Security Risk Management: Building an Information Security Risk Management Program | Evan Wheeler | Risk management framework untuk auditor |
-
-### Sertifikasi Detail
-
-| Sertifikasi | Biaya Exam | CPE/Year | Renewal Cycle | Global Holders (approx) |
-|-------------|-----------|----------|---------------|------------------------|
-| CISA | $575 (member) / $760 (non) | 20 | 3 tahun (120 CPE) | ~150,000+ |
-| CISSP | $749 | 40 | 3 tahun (120 CPE) | ~150,000+ |
-| ISO 27001 Lead Auditor | ~$3,000 (includes training) | Varies | 3 tahun (some lifetime) | ~100,000+ |
-| CRISC | $575 (member) / $760 (non) | 20 | 3 tahun | ~50,000+ |
-| CISM | $575 (member) / $760 (non) | 20 | 3 tahun | ~50,000+ |
-| CompTIA Security+ | $392 | None required | 3 tahun (CE program) | ~500,000+ |
 
 ### Audit Tools
 
@@ -297,18 +252,6 @@ Start dengan **IT audit entry-level** atau **compliance analyst**. Dapatkan Secu
 - **Archer (RSA)** — Mature enterprise GRC platform
 - **OneTrust** — Privacy + security GRC
 - **SAP GRC** — ERP-focused SoD and access controls
-
-### Training & Courses
-
-| Nama | Provider | Level | Fokus |
-|------|----------|-------|-------|
-| CISA Exam Preparation | ISACA / Infosec / Cybrary | Advanced | Full 5 domains, exam prep |
-| ISO 27001 Lead Auditor (5-day) | PECB / BSI / TÜV SÜD | Advanced | ISMS audit methodology |
-| CISSP Bootcamp | (ISC)² / SANS / Infosec | Advanced | 8 domains, exam prep |
-| SEC440: Security Essentials | SANS | Intermediate | Foundation for audit |
-| CompTIA Security+ | CompTIA / Udemy / PluralSight | Beginner | Entry-level security |
-| SOC 2 and ISO 27001 Compliance Bootcamp | Various (Udemy, LinkedIn) | Beginner-Medium | Practical compliance |
-| NIST CSF Workshop | NIST / SANS | Intermediate | CSF implementation |
 
 ### Komunitas & Curated Lists
 

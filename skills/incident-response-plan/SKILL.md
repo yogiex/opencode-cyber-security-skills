@@ -9,6 +9,17 @@ compatibility: opencode
 
 Gunakan sebagai kerangka kerja untuk menangani insiden keamanan informasi dari sisi proses, komunikasi, dan bisnis. Tidak berisi langkah teknis (seperti perintah terminal), tetapi berfokus pada alur keputusan dan koordinasi.
 
+## Decision Frame
+
+Sebelum mengaktifkan rencana, jawab eksplisit:
+
+1. **Ini insiden atau gangguan biasa?** — Tiga penanda: data keluar, integritas berubah, atau layanan tidak tersedia di luar SLA. Tanpa salah satunya, jalankan jalur gangguan biasa.
+2. **Siapa yang berwenang menghentikan layanan?** — Putuskan sebelum insiden, bukan saat tekanan. Bila belum ada, eskalasi ke pemilik layanan dan catat waktunya.
+3. **Tahan dulu atau amankan bukti dulu?** — Bila penyebaran masih aktif, isolasi mendahului forensik. Bila sudah berhenti, amankan bukti sebelum pemulihan.
+4. **Apa kewajiban notifikasi dan tenggatnya?** — Regulator, pelanggan, dan asuransi punya tenggat dalam jam, bukan hari. Tetapkan satu orang yang memegang daftar ini.
+5. **Siapa satu-satunya suara ke luar?** — Satu juru bicara, satu pesan. Spekulasi dari staf lain adalah kerusakan kedua.
+6. **Kapan naik ke eksekutif, dan kapan dinyatakan pulih?** — Tetapkan ambangnya sekarang: dampak finansial, jumlah pelanggan terdampak, atau durasi layanan mati.
+
 ## 1. Persiapan (Sebelum Insiden)
 
 - Bentuk tim IR: manajer insiden, komunikasi (PR/legal), teknis (1 orang koordinator), HR jika terkait.

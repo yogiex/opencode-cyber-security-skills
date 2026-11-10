@@ -1,6 +1,6 @@
 ---
 name: "Referensi Lengkap — PTES External Resources"
-description: "Curated collection of 125+ PTES external resources including official documentation, standards comparisons, threat modeling references, reporting guides, cloud adaptation guides, mobile/API guides, post-exploitation references, legal/compliance resources, certifications, books, and academic papers."
+description: "Curated collection of 125+ PTES external resources including official documentation, standards comparisons, threat modeling references, reporting guides, cloud adaptation guides, mobile/API guides, post-exploitation references, legal/compliance resources, books, and academic papers."
 tags: [referensi, ptes, resources, standards, threat-modeling, cloud, legal, books]
 ---
 
@@ -59,9 +59,3 @@ tags: [referensi, ptes, resources, standards, threat-modeling, cloud, legal, boo
 - Nuclei — https://docs.projectdiscovery.io/
 - BloodHound CE — https://github.com/SpecterOps/BloodHound
 - Prowler — https://docs.prowler.cloud/
-
-## Certifications
-
-- OffSec OSCP/OSCP+ — https://www.offsec.com/courses/pen-200/
-- GIAC GPEN — https://www.giac.org/certifications/penetration-tester-gpen/
-- CompTIA PenTest+ — https://www.comptia.org/certifications/pentest/

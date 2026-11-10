@@ -399,19 +399,6 @@ Pastikan infrastruktur log sendiri dimonitor:
 | DORA (EU) | 5+ tahun (practical) | ICT operational logs, audit trails, incident records |
 | SOC 2 | Risk-based (typical 12 bulan) | Trust criteria — security monitoring & retention |
 
-### Sertifikasi & Training
-
-| Nama | Penerbit | Fokus | Biaya |
-|------|----------|------|-------|
-| GIAC Certified Detection Analyst (GCDA) | GIAC/SANS SEC555 | Detection engineering, SIEM analytics, SOF-ELK | ~$8,780 (includes SEC555) |
-| GIAC Certified Forensic Examiner (GCFE) | GIAC | Windows forensics, event log analysis, browser forensics | ~$8,780 |
-| GIAC Security Essentials (GSEC) | GIAC | Log management & SIEM (1 domain dari 12) | ~$8,780 |
-| PECB Certified Lead Forensics Examiner (CLFE) | PECB | Computer forensics, evidence recovery, multi-platform | ~$3,000 |
-| Certified Log & Forensics Security Professional (CLFSP) | SecureSphere Foundation | SOC operations, log analysis, SIEM fundamentals, threat detection | ~$500 |
-| SANS SEC540: Cloud Native Security & DevSecOps | SANS | Cloud logging, SIEM, compliance automation | ~$8,780 |
-| Splunk Certified Architect | Splunk | Splunk deployment, architecture, SPL | ~$2,500 (exam only) |
-| Microsoft Certified: Security Operations Analyst Associate | Microsoft | Microsoft Sentinel, KQL, detection | ~$165 (exam) |
-
 ### Komunitas & Curated Lists
 
 | Nama | Deskripsi | Link |

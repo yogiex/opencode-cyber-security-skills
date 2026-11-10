@@ -45,6 +45,17 @@ Saya membantu kamu melakukan threat modeling secara sistematis tanpa perlu menja
    - Rencana aksi dengan penanggung jawab dan tenggat waktu
    - Rekomendasi untuk threat modeling ulang di masa mendatang
 
+## Decision Frame
+
+Sebelum memulai sesi, jawab eksplisit:
+
+1. **Apakah sistem ini layak dimodelkan sekarang?** — Modelkan bila ada aliran data baru, aset baru, atau perubahan trust boundary. Tanpa perubahan, pengulangan hanya menghasilkan dokumen.
+2. **Siapa yang berwenang menerima risiko?** — Jika pemilik bisnis tidak ada dalam diskusi, hasilnya daftar keinginan tanpa pemilik.
+3. **Sedalam apa yang cukup?** — Berhenti saat setiap aliran data yang melintasi trust boundary punya ancaman bernama dan satu keputusan: kontrol, transfer, hindari, atau terima.
+4. **Ancaman ini bisa dijelaskan jalurnya?** — Jika jalur serangan tidak bisa diuraikan dalam tiga langkah, turunkan prioritasnya; itu spekulasi, bukan temuan.
+5. **Mitigasi ini proporsional?** — Bila biaya kontrol melebihi dampak kali kemungkinan, terima atau transfer. Menambah kontrol demi kelengkapan daftar adalah pemborosan.
+6. **Apakah hasilnya bisa ditindaklanjuti?** — Setiap risiko butuh pemilik, tenggat, dan cara verifikasi. Tanpa tiga itu, laporan hanya arsip.
+
 ## When to use me
 
 Gunakan saya di situasi-situasi berikut:

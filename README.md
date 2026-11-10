@@ -147,7 +147,7 @@ Legenda status struktur:
 
 | Skill | Status | Deskripsi |
 | ----- | ------ | --------- |
-| [security-auditor](./skills/security-auditor) | ✅ | Mindset, metodologi, dan referensi untuk security auditor — audit lifecycle, perbandingan framework (ISO 27001, NIST, PCI DSS, SOC 2), kontrol testing, pengumpulan bukti, dan jalur sertifikasi. Fokus GRC/compliance, bukan hunting kerentanan kode. |
+| [security-auditor](./skills/security-auditor) | ✅ | Mindset, metodologi, dan referensi untuk security auditor — audit lifecycle, perbandingan framework (ISO 27001, NIST, PCI DSS, SOC 2), kontrol testing, pengumpulan bukti, dan pelaporan temuan yang bisa ditindaklanjuti. Fokus GRC/compliance, bukan hunting kerentanan kode. |
 | [code-security-audit](./skills/code-security-audit) | 🔶 | Audit keamanan kode berlapis untuk codebase, API, service, CLI, library, dan daemon: recon terstruktur, coverage ledger deterministik, hunting per-unit dengan subagent terisolasi, validasi adversarial, `findings.json` tervalidasi skema, dan laporan yang bisa diaudit ulang. |
 
 ## Struktur Repositori

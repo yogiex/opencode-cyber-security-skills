@@ -2,7 +2,7 @@
 
 Matriks status kualitas 28 skill. Tujuannya membuat pekerjaan tuning **terlihat** — bukan tersembunyi di riwayat commit — sampai cakupan cukup untuk ditegakkan lewat CI.
 
-Diperbarui: **2026-11-10** (setelah 0.19.0 — sembilan skill bersertifikat menjadi persona praktisi; 0.18.0 — `offsec-ir-200` verifikasi integritas file; 0.17.0 — `ec-cnd`; 0.16.0 — README dan penutupan celah repo).
+Diperbarui: **2026-11-10** (setelah 0.20.0 — katalog sertifikasi dibersihkan dan Decision Frame mencapai 23/28; 0.19.0 — sembilan skill bersertifikat menjadi persona praktisi).
 
 > `ec-cnd` (persona network defender) berada di cabang `feat/ec-cnd-persona-injection`, belum di `dev`. Barisnya ditambahkan ke matriks ini saat cabang itu digabung. Karena itu jumlah skill di sini 28, bukan 29.
 
@@ -30,7 +30,7 @@ Alasan dua jalur: skill bersertifikat memilih **persona** (tanpa angka ujian, ja
 | cpent | ya | ya | — | ya | 21 | ya | Selesai |
 | devsecops-mindset | — | — | — | — | 0 | — | Belum |
 | ec-ecih | ya | ya | — | ya | 8 | ya | Selesai |
-| incident-response-plan | — | — | — | — | 0 | — | Belum |
+| incident-response-plan | — | ya | — | — | 0 | — | Sebagian |
 | lf-cks | ya | ya | — | ya | 10 | ya | Selesai |
 | log-management-nist-800-92 | ya | — | — | — | 0 | — | Belum |
 | mitre-attack | ya | ya | ya | — | 0 | — | Selesai |
@@ -41,14 +41,14 @@ Alasan dua jalur: skill bersertifikat memilih **persona** (tanpa angka ujian, ja
 | offsec-th-200 | ya | ya | — | ya | 10 | ya | Selesai |
 | offsec-web-300 | ya | ya | — | ya | 11 | ya | Selesai |
 | oscp-methodology | ya | ya | — | ya | 11 | ya | Selesai |
-| owasp-top10-2025 | ya | — | — | — | 1 | ya | Belum |
+| owasp-top10-2025 | ya | ya | — | — | 1 | ya | Sebagian |
 | ptes-standard | ya | ya | — | — | 11 | ya | Sebagian |
-| risk-management-framework | ya | — | — | — | 0 | — | Belum |
+| risk-management-framework | ya | ya | — | — | 0 | — | Sebagian |
 | security-auditor | — | — | — | — | 0 | — | Belum |
 | security-documentation | ya | ya | — | — | 1 | ya | Sebagian |
 | soc-analyst | ya | — | — | — | 0 | — | Belum |
 | threat-intelligence | ya | ya | — | — | 8 | ya | Sebagian |
-| threat-modeling | ya | — | — | — | 0 | — | Belum |
+| threat-modeling | ya | ya | — | — | 0 | — | Sebagian |
 | waf-evasion-methodology | ya | ya | — | — | 4 | ya | Sebagian |
 | web-app-scan | ya | ya | — | — | 0 | ya | Sebagian |
 | web-pentest-payloads | ya | ya | — | — | 39 | ya | Sebagian |
@@ -59,27 +59,30 @@ Alasan dua jalur: skill bersertifikat memilih **persona** (tanpa angka ujian, ja
 | Status | Jumlah |
 |---|---|
 | Selesai | 12 |
-| Sebagian | 7 |
-| Belum | 9 |
+| Sebagian | 11 |
+| Belum | 5 |
 
-Sembilan skill berpindah dari "provenance" ke "persona" pada 0.19.0 tanpa kehilangan status: `comptia-cysa`, `ec-ecih`, `lf-cks`, `offsec-ir-200`, `offsec-pen-300`, `offsec-soc-200`, `offsec-th-200`, `offsec-web-300`, `oscp-methodology`. Provenance ikut dicabut karena angka ujian memang dihapus — bukan karena note-nya hilang.
+Cakupan **Frame 23/28 (82%)**, naik dari 19/28 pada 0.19.0 setelah `threat-modeling`, `incident-response-plan`, `risk-management-framework`, dan `owasp-top10-2025` mendapat Decision Frame operasional pada 0.20.0.
 
-Tujuh "Sebagian" tersisa karena provenance belum bisa dipasang, bukan karena frame belum ada: fact sheet belum memuat PTES, STIX 2.1, TLP 2.0, OWASP CRS, dan versi WSTG. Rinciannya: `ptes-standard`, `security-documentation`, `threat-intelligence`, `waf-evasion-methodology`, `web-app-scan`, `web-pentest-payloads`, `web-reconnaissance`.
+Lima "Belum" yang tersisa bukan kekurangan frame semata: `security-auditor`, `log-management-nist-800-92`, `devsecops-mindset`, dan `soc-analyst` adalah skill monolitik tanpa berkas referensi (backlog C), sedangkan `code-security-audit` sudah punya 4 referensi tetapi belum punya frame.
 
 ## Backlog
 
 | Poin | Isi | Alasan urutan |
 |---|---|---|
-| **G** | Bersihkan lampiran sertifikasi (tabel biaya ujian, vendor latihan soal, "exam guide"): `security-auditor` (paling parah), `log-management-nist-800-92`, `devsecops-mindset`, `owasp-top10-2025` | murah, menghapus isi yang cepat basi, tanpa menyentuh pengetahuan teknis |
-| **D** | Skill kecil yang belum punya frame/gotchas: `threat-modeling`, `incident-response-plan`, `owasp-top10-2025`, `risk-management-framework` | cepat, menaikkan cakupan frame |
-| **C** | Pecah skill monolitik tanpa references: `security-auditor`, `log-management-nist-800-92`, `devsecops-mindset`, `soc-analyst` | dampak terbesar pada kualitas jawaban, tapi paling mahal |
+| **C** | Pecah skill monolitik tanpa references: `security-auditor` (282 baris), `log-management-nist-800-92` (415), `devsecops-mindset` (350), `soc-analyst` | empat "Belum" terakhir ada di sini |
+| **D2** | Tambahkan `Gotchas` pada `threat-modeling`, `incident-response-plan`, `risk-management-framework` | frame sudah ada, failure modes belum |
 | **E** | Perluas fact sheet ke standar non-sertifikasi (PTES, STIX, TLP, OWASP CRS, PCI DSS), lalu daftarkan tiga skill "Sebagian" ke `check-fact-notes.js` | membuka jalan 3 "Sebagian" menjadi "Selesai" |
-| **H** | Putuskan tautan lapis-C: blueprint ujian di `ec-cnd`, katalog sertifikasi di `ptes-standard`; pertahankan halaman sertifikasi `cpent` sebagai jangkar identitas | konsistensi dengan aturan persona (nol materi ujian) |
+| **H** | Sisa tautan tingkat-3: exam blueprint di `ec-cnd` (cabang), halaman sertifikasi `cpent` dipertahankan sebagai jangkar identitas | `ptes-standard` sudah dibersihkan pada 0.20.0 |
 | **F** | Evaluasi perilaku: himpunan tugas aktivasi + A/B ablation | membuktikan tuning menaikkan performa, bukan hanya kerapian |
 
 ## Kapan enforcement dibuat
 
-`check-fact-notes.js` kini hanya menegakkan **2** skill (keduanya standar: `mitre-attack`, `nist-800-53`). Enforcement untuk **Frame** sengaja ditunda sampai cakupan ≥80% (≥23 dari 28), karena checker sekarang masih butuh allowlist 9 pengecualian — rapuh dan menyembunyikan pekerjaan tersisa.
+Cakupan Frame kini **23/28 (82%)**, melewati ambang yang ditetapkan dokumen ini sejak 0.6.0 (≥80%). Artinya penegakan Frame di CI sudah bisa dinyalakan: 5 pengecualian (`security-auditor`, `log-management-nist-800-92`, `devsecops-mindset`, `soc-analyst`, `code-security-audit`) jauh lebih kecil dan lebih mudah dipertahankan daripada 9 pengecualian sebelumnya.
+
+Keputusan menyalakannya sengaja ditunda ke pekerjaan tersendiri, karena checker baru butuh allowlist yang ditulis eksplisit dan diuji terhadap working tree yang juga dipegang sesi lain.
+
+`check-fact-notes.js` menegakkan **2** skill (keduanya standar: `mitre-attack`, `nist-800-53`).
 
 ## Cara memperbarui
 

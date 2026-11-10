@@ -311,38 +311,6 @@ Tanyakan ini pada diri sendiri saat bekerja:
 - Legitify — detect misconfigurations in GitHub/GitLab assets
 - Tekton Chains — K8s-native supply chain security
 
-### Sertifikasi DevSecOps
-
-| Sertifikasi | Penerbit | Format | Fokus | Biaya |
-|-------------|----------|--------|------|-------|
-| Certified DevSecOps Professional (CDP) | Practical DevSecOps | 6 jam praktikal (task-based, report) | CI/CD pipeline, SCA/SAST/DAST, IaC, CaC | $899 |
-| GIAC Cloud Security Automation (GCSA) | SANS/GIAC | MCQ (via SEC540, $8,780 with course) | Cloud-native, DevSecOps automation, K8s | $8,780 (includes training) |
-| EC-Council DevSecOps Engineer (ECDE) | EC-Council | MCQ (100 questions, 4 jam) | Comprehensive DevSecOps, multi-cloud | $1,749/6mo |
-| DevSecOps Foundation (DSOF) | DevOps Institute/PeopleCert | MCQ (40 questions, 60 min) | Foundational, conceptual DevSecOps | $263 |
-| DevSecOps Practitioner | DevOps Institute/PeopleCert | MCQ | Advanced DevSecOps practices | $279 |
-| CISSP | (ISC)² | Adaptive MCQ | Broad cybersecurity leadership | $749 |
-| CSSLP | (ISC)² | MCQ (125 questions) | Secure software development lifecycle | $599 |
-| CCSP | (ISC)² | MCQ | Cloud security architecture | $599 |
-| CompTIA Security+ | CompTIA | MCQ | Entry-level cybersecurity foundation | $392 |
-| AWS Certified Security - Specialty | AWS | MCQ | AWS-specific security engineering | $300 |
-| Azure Security Engineer (AZ-500) | Microsoft | MCQ | Azure security implementation | $165 |
-| Google Cloud Security Engineer | Google | MCQ | GCP security | $200 |
-
-### Training & Courses
-
-| Nama | Provider | Level | Hands-on |
-|------|----------|-------|----------|
-| SEC540: Cloud Native Security & DevSecOps Automation | SANS Institute | Advanced | 35+ labs |
-| Certified DevSecOps Professional (CDP) | Practical DevSecOps | Intermediate | 100+ labs |
-| Certified DevSecOps Expert (CDE) | Practical DevSecOps | Advanced | Advanced labs |
-| Application Security & DevSecOps (CSP-104) | Security Compass | Intermediate | Concept-driven labs |
-| DevSecOps Professional | AppSecEngineer | Intermediate | Lab-based |
-| DevSecOps Foundation | DevOps Institute | Beginner | Minimal |
-| TryHackMe DevSecOps Path | TryHackMe | Beginner | 18+ labs |
-| OWASP Web Security Training | OWASP | Various | Free |
-| AWS DevSecOps Workshop | AWS | Intermediate | Hands-on workshop |
-| Secure Code Warrior | SCW | All levels | Gamified secure coding |
-
 ### Komunitas & Curated Lists
 
 | Nama | Deskripsi | Link |

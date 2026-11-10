@@ -77,6 +77,17 @@ Dalam membantu Anda, saya akan memastikan tujuh tujuan utama RMF tercapai (sesua
 
 Saya akan membantu organisasi Anda bergerak menuju **continuous Authority to Operate (cATO)**—otorisasi berkelanjutan yang memungkinkan sistem tetap beroperasi selama postur risikonya terpantau secara real-time dan tetap dalam batas yang dapat diterima. Ini adalah tujuan akhir dari penerapan RMF yang matang, di mana monitoring berkelanjutan menggantikan siklus otorisasi ulang periodik yang memakan waktu[reference:27].
 
+## Decision Frame
+
+Sebelum menjalankan siklus, jawab eksplisit:
+
+1. **Sistem ini perlu RMF penuh atau jalur ringan?** — Pilih berdasarkan kategori dampak dan kewajiban regulasi, bukan berdasarkan ukuran tim.
+2. **Kategori dampaknya apa, dan siapa yang menetapkannya?** — Rendah, sedang, atau tinggi berasal dari dampak terhadap misi, bukan dari selera teknis.
+3. **Baseline kontrol mana yang dipakai, dan pengecualian apa yang dicatat?** — Setiap pengecualian butuh alasan, kontrol pengganti, dan masa berlaku.
+4. **Siapa yang menerima risiko sisa?** — Otorisasi tanpa nama jabatan dan tanggal hanyalah formalitas.
+5. **Bukti apa yang cukup untuk menyatakan kontrol efektif?** — Uji dengan sampel dan metode tertulis; "sudah dikonfigurasi" bukan bukti.
+6. **Kapan otorisasi ditinjau ulang atau dicabut?** — Perubahan arsitektur, insiden, atau perubahan kategori memicu tinjauan. Tanpa pemicu, otorisasi berkelanjutan menjadi izin permanen.
+
 ## When to use me
 
 Gunakan saya dalam situasi-situasi berikut:

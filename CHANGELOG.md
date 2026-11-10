@@ -13,6 +13,52 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.20.0] — 2026-11-10 — Katalog sertifikasi dibersihkan, Decision Frame mencapai 82%
+
+**Commit dasar:** `62fc03d` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** dua pekerjaan yang saling menutup. **Pertama**, sisa materi ujian lapis B dihapus: empat skill non-sertifikasi masih memuat katalog sertifikasi beserta harga, vendor latihan soal, dan "exam guide", dan satu skill standar masih memuat daftar sertifikasi. **Kedua**, empat skill yang belum punya `## Decision Frame` kini memilikinya, sehingga cakupan frame naik dari 19/28 (68%) ke **23/28 (82%)** — melewati ambang yang `docs/SKILL-QUALITY.md` tetapkan sendiri sejak 0.6.0 untuk menyalakan penegakan Frame.
+
+### Diubah — katalog sertifikasi dihapus
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/security-auditor/SKILL.md` | 339 → 282 baris: `## Certification Path` (tabel 6 sertifikasi + harga + prasyarat), `### CISA vs ISO 27001 Lead Auditor`, `### Career Progression`, `### Sertifikasi Detail` (biaya exam, CPE, renewal, jumlah pemegang), `### Training & Courses` (4 baris `exam prep`/bootcamp), dan 3 baris buku produk ujian dihapus; description dan satu butir "kapan dipakai" diganti | skill ini mengajarkan audit, bukan cara lulus sertifikasi | `grep` `\bexams?\b\|bootcamp\|practice question\|CPE\|passing score` = 0 hasil |
+| `skills/log-management-nist-800-92/SKILL.md` | 428 → 415 baris: `### Sertifikasi & Training` (7 sertifikasi dengan label `(exam only)` dan `(exam)`) dihapus | harga ujian bukan pengetahuan log management | idem |
+| `skills/devsecops-mindset/SKILL.md` | 382 → 350 baris: `### Sertifikasi DevSecOps` (13 sertifikasi) dan `### Training & Courses` (10 kursus sertifikasi) dihapus | katalog vendor bukan pola pikir DevSecOps | idem |
+| `skills/owasp-top10-2025/SKILL.md` | 376 → 365 baris: `### Certifications` (6 sertifikasi + harga) dihapus; `### Training & Courses` dipertahankan karena isinya pelatihan praktik, bukan ujian | bedakan pelatihan praktik dari katalog ujian | idem |
+| `skills/ptes-standard/references/referensi.md` | 68 → 62 baris: `## Certifications` (OSCP, GPEN, PenTest+) dihapus; description tidak lagi menyebut `certifications` | PTES adalah standar, bukan jalur sertifikasi | `grep` `certificat` = 0 hasil |
+
+### Diubah — Decision Frame ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/threat-modeling/SKILL.md` | 76 → 87 baris; 6 keputusan operasional: kelayakan waktu, pemilik risiko, kedalaman yang cukup, jalur yang bisa dijelaskan, proporsionalitas mitigasi, hasil yang bisa ditindaklanjuti | tanpa frame, sesi threat modeling berhenti sebagai daftar ancaman | `grep '^## Decision Frame'` = 1 |
+| `skills/incident-response-plan/SKILL.md` | 92 → 103 baris; 6 keputusan: insiden vs gangguan, kewenangan menghentikan layanan, containment vs bukti, tenggat notifikasi, satu juru bicara, ambang eskalasi dan pemulihan | rencana IR non-teknis tanpa ambang hanya upacara | idem |
+| `skills/risk-management-framework/SKILL.md` | 107 → 118 baris; 6 keputusan: kedalaman RMF, kategori dampak, baseline dan pengecualian, penerima risiko sisa, bukti efektivitas, pemicu tinjauan otorisasi | RMF tanpa pemicu tinjauan menjadi izin permanen | idem |
+| `skills/owasp-top10-2025/SKILL.md` | 365 → 376 baris; 6 keputusan: kategori yang berlaku, urutan akses kontrol, salah konfigurasi vs salah desain, eksploitabilitas, bukti klaim, gerbang minimum sebelum rilis | sepuluh kategori adalah kerangka, bukan checklist | idem |
+
+### Diubah — katalog dan ledger
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `docs/SKILL-QUALITY.md` | status 4 skill Belum → Sebagian; ringkasan Selesai 12 / Sebagian 11 / Belum 5; cakupan Frame 19/28 → 23/28; backlog D dan G ditutup, D2 ditambahkan; bagian enforcement diperbarui | ledger harus mencerminkan keadaan setelah perubahan | dihitung ulang dari matriks |
+| `README.md` | baris `security-auditor` tidak lagi menyebut "jalur sertifikasi" | deskripsi katalog harus sejalan dengan skill | 0 kemunculan "sertifikasi" pada baris itu |
+| `skills/index.json` | deskripsi `security-auditor` diperbarui | indeks harus mencerminkan frontmatter | `node scripts/sync-skills.js` |
+| `manifest.json` | deskripsi `security-auditor` diperbarui | manifest adalah sumber kebenaran global | `node scripts/sync-skills.js` |
+
+### Catatan
+
+Yang **tidak** dihapus, dan alasannya: tabel biaya framework di `security-auditor` (SOC 2 $30K–$150K, ISO 27001, PCI DSS) adalah biaya audit dan sertifikasi *organisasi* — informasi kerja bagi auditor, bukan biaya ujian perorangan. Baris `Certification` pada ISO 27001 dan HITRUST adalah status sertifikasi organisasi, juga bukan materi ujian.
+
+`### Training & Courses` di `owasp-top10-2025` dipertahankan karena berisi pelatihan praktik (PortSwigger Web Security Academy, TCM Practical Web Defense), bukan bimbingan ujian. `### CTF & Practice Platforms` juga dipertahankan.
+
+Empat skill masih `Belum`: `security-auditor`, `log-management-nist-800-92`, `devsecops-mindset`, `soc-analyst` — keempatnya monolitik tanpa `references/` (backlog C). Ketiga yang pertama sudah bersih dari materi ujian pada entri ini, tetapi belum punya Decision Frame.
+
+Verifikasi yang dijalankan: `node scripts/check-fact-notes.js`, `node scripts/check-changelog.js --base 62fc03d` di worktree terpisah, `grep` pola materi ujian pada kelima berkas, hitung ulang cakupan `## Decision Frame` (23/28), dan paritas sel tabel pada kelima berkas.
+
+**Tidak dijalankan:** tes perilaku dan A/B ablation (backlog F).
+
 ## [0.19.2] — 2026-11-10 — `cpent` dicabut lagi setelah refactor-nya mendarat
 
 **Commit dasar:** `62c4606` (branch `dev`)

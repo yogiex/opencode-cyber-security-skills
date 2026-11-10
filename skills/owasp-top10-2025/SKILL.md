@@ -20,6 +20,17 @@ Invoke this skill when:
 - Performing threat modeling, security code review, penetration testing, or secure architecture design.
 - User needs mitigation guidance, real-world examples, or ranking changes between 2021 and 2025.
 
+## Decision Frame
+
+Sebelum memakai daftar ini, jawab eksplisit:
+
+1. **Kategori mana yang benar-benar berlaku?** — Sepuluh kategori bukan checklist. Tiga sampai empat yang cocok dengan arsitektur biasanya menentukan sebagian besar risiko.
+2. **Kontrol akses sudah diperiksa lebih dulu?** — A01 memberi dampak terbesar pada sebagian besar aplikasi; memulai dari injeksi sering salah urutan.
+3. **Ini salah konfigurasi atau salah desain?** — Perbaikannya berbeda: konfigurasi bisa ditambal hari ini, desain butuh perubahan yang disetujui.
+4. **Temuan ini bisa dieksploitasi sekarang?** — Tanpa jalur yang bisa ditunjukkan, itu pola kode, bukan kerentanan.
+5. **Bukti apa yang menopang klaim kategori?** — Request dan respons nyata, bukan kutipan kode tanpa konteks.
+6. **Kontrol minimum apa yang harus ada sebelum rilis?** — Autentikasi, otorisasi per objek, validasi input, dan logging kegagalan adalah gerbang, bukan saran.
+
 ## The 2025 List (At a Glance)
 
 | Rank | ID | Category | Change from 2021 |
@@ -336,17 +347,6 @@ Always prioritize **practical, fixable advice** over academic theory.
 | Web Security Academy | PortSwigger | All levels | Ratusan lab interaktif terintegrasi OWASP |
 | WeSecureApp OWASP Training | WeSecureApp | Intermediate | OWASP Top 10 hands-on training |
 | Application Security & Secure Coding | Codecademy / Cybrary | Beginner-Intermediate | Secure coding fundamentals |
-
-### Certifications
-
-| Sertifikasi | Penerbit | Fokus | Biaya |
-|-------------|----------|------|-------|
-| GIAC GWEB | SANS | Web application defense, defensive techniques | ~$8,780 (incl. SEC522) |
-| Certified DevSecOps Professional (CDP) | Practical DevSecOps | CI/CD security automation, SAST/DAST/SCA | $899 |
-| Offensive Security Web Exploitation (OSWE) | Offensive Security | White-box code analysis, advanced manual exploitation | $1,599 |
-| Burp Suite Certified Practitioner | PortSwigger | Burp Suite proficiency, web security testing | ~$200 |
-| Certified Application Security Engineer (CASE) | EC-Council | Secure SDLC, OWASP Top 10 | ~$1,049 |
-| eWPTX (Web Application Pentesting eXtreme) | eLearnSecurity | Advanced web pentesting, multi-stage attacks | ~$850 |
 
 ### CTF & Practice Platforms
 

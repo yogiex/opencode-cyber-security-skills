@@ -13,6 +13,29 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.22.0] — 2026-11-10 — Analisis kebutuhan publikasi ke direktori eksternal
+
+**Commit dasar:** `7e45850` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** permintaan langsung — analisis kebutuhan sebelum implementasi, menindaklanjuti pertanyaan "apakah `git push` ke GitHub memperbarui skills.rest". Hasil pemeriksaan: tidak, dan tidak bisa, karena skills.rest mengindeks sekali saat submit lalu membekukan hasilnya. Repo tidak punya catatan status publikasi, tidak punya prosedur rilis yang memuat langkah publikasi, dan tidak punya kriteria kapan sebuah rilis dinyatakan terbit. Dokumen ini mengisi ketiga kekosongan itu sekaligus menetapkan apa yang sengaja tidak dikerjakan. Tidak ada berkas skill, `manifest.json`, `skills/index.json`, maupun artefak plugin yang disentuh — ini murni dokumen analisis.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `docs/PUBLISHING-NEEDS.md` | dokumen baru 214 baris: 9 temuan terukur (T1–T9), 9 definisi operasional, ruang lingkup beserta 3 keterbatasan yang diterima (LI-1–LI-3), 8 kebutuhan fungsional (FR-1–FR-8), 6 non-fungsional (NFR-1–NFR-6), matriks 3 opsi, 6 kriteria penerimaan (AC-1–AC-6), 5 risiko, 6 antipattern (AP-1–AP-6), prosedur rilis 7 langkah, 4 keputusan terbuka (D1–D4), 5 metrik | pertanyaan pengguna tidak bisa dijawab dengan "ya/tidak" saja: tanpa definisi "terbit" dan kriteria penerimaan, status publikasi tidak dapat diverifikasi maupun diaudit | `(Get-Content docs/PUBLISHING-NEEDS.md).Count` = 214; paritas kolom tabel 0 ketidakcocokan (skrip PowerShell menghitung pipa tak ter-escape per baris, melewati blok kode berpagar); kedua tautan relatif menunjuk berkas yang ada di `docs/` |
+| `CHANGELOG.md` | entri 0.22.0 ini | setiap perubahan berkas wajib tercatat (Aturan 1) | `node scripts/check-changelog.js --base 7e45850` |
+
+### Catatan
+
+Inti temuan ada pada dua baris tabel dokumen. **T6**: tanggal "Updated" di skills.rest sama dengan `created_at` repo GitHub, bukan `pushed_at` — diperiksa pada dua repo berbeda (`obra/superpowers`: created 2025-10-09, pushed 2026-11-03, tayang "Oct 9, 2025"; repo ini: created 2026-06-05, pushed 2026-11-10, tayang "Jun 5, 2026"). **T7**: `grep -r "skills.rest"` atas seluruh repo menghasilkan 0 kecocokan dan workflow CI tidak punya langkah publish, sehingga tidak ada jalur apa pun dari repo ke skills.rest.
+
+Rekomendasi dokumen adalah submit ulang lewat `/contribute` (opsi B), bukan membuat cabang `main` (opsi A). Alasannya bukan biaya, melainkan bahwa `main` tidak menciptakan crawler: yang berubah hanya resolusi tautan `/tree/main/`, sementara pemicu ingest tetap tidak ada. Opsi A disimpan sebagai fallback bersyarat yang hanya dijalankan bila submit ulang terbukti tidak menghasilkan ingest dalam 3 hari.
+
+Klaim bahwa ringkasan dan FAQ di skills.rest ditulis model mereka — bukan salinan `SKILL.md` — didasarkan pada perbandingan isi halaman dengan berkas skill, bukan pada dokumentasi resmi mereka. Karena itu dokumen ini menetapkan keterbatasan LI-2: kriteria penerimaan hanya memeriksa ketiadaan kata ujian, tidak menuntut kecocokan kata per kata.
+
+Belum ada implementasi apa pun. Empat keputusan pada §11 dokumen (D1–D4) masih terbuka dan menunggu persetujuan.
+
 ## [0.21.0] — 2026-11-10 — menggabungkan cabang `feat/ec-cnd-persona-injection` ke `dev`
 
 **Commit dasar:** `c8f9376` (branch `dev`)

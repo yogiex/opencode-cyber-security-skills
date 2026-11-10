@@ -387,7 +387,7 @@ Perintah ditulis dari dokumentasi tooling standar (procps, iproute2, util-linux,
 ## [0.12.0] — 2026-11-09 — CPENT: persona praktisi, bukan persiapan ujian
 
 **Commit dasar:** `122ffa1` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `87500a8`
 **Ruang lingkup:** permintaan langsung — skill `cpent` diposisikan sebagai **persona pengguna yang sudah memegang EC-Council CPENT**: profil, gaya bicara, preferensi, batas klaim, **aturan mengikat R1–R6**, **dua belas hukum mindset**, **prosedur Burp yang disiplin**, **manipulasi header (XFF, User-Agent, Host, injeksi)**, **bypass WAF dan encoding**, dan doktrin kerja praktisi. Seluruh angka ujian, struktur soal, zona, jadwal, dan bobot report dihapus.
 
 ### Ditambahkan

@@ -13,6 +13,22 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.20.1] — 2026-11-10 — Koreksi hitungan baris pada entri 0.20.0
+
+**Commit dasar:** `cd8a471` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** entri 0.20.0 mencatat jumlah baris dari `split(/\r?\n/).length` di skrip Node, yang menambahkan satu elemen kosong untuk baris baru di akhir berkas. Konvensi repo — dikoreksi pada 0.16.1 — adalah `(Get-Content <path>).Count`. Semua angka pada entri 0.20.0 karena itu lebih tinggi satu. Entri ini mencatat angka yang benar tanpa mengubah entri 0.20.0.
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `CHANGELOG.md` | entri 0.20.0 dikoreksi lewat entri ini: `security-auditor` 339→282 menjadi 338→281; `log-management-nist-800-92` 428→415 menjadi 427→414; `devsecops-mindset` 382→350 menjadi 381→349; `owasp-top10-2025` 376→365→376 menjadi 375→364→375; `ptes-standard/references/referensi.md` 68→62 menjadi 67→61; `threat-modeling` 76→87 menjadi 75→86; `incident-response-plan` 92→103 menjadi 91→102; `risk-management-framework` 107→118 menjadi 106→117 | metode hitung harus konsisten dengan konvensi repo | `(Get-Content <path>).Count` untuk tiap berkas |
+
+### Catatan
+
+Yang salah adalah metodenya, bukan besar perubahannya: selisih setiap angka tepat satu, dan arah perubahan tetap sama. Angka pada entri 0.19.0 tidak terpengaruh karena diukur dengan `(Get-Content).Count`.
+
 ## [0.20.0] — 2026-11-10 — Katalog sertifikasi dibersihkan, Decision Frame mencapai 82%
 
 **Commit dasar:** `62fc03d` (branch `dev`)

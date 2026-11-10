@@ -13,10 +13,29 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.19.2] — 2026-11-10 — `cpent` dicabut lagi setelah refactor-nya mendarat
+
+**Commit dasar:** `62c4606` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** 0.19.1 mengembalikan `cpent` ke `check-fact-notes.js` dengan asumsi refactor `cpent` masih belum di-commit. Asumsi itu salah pada saat commit dibuat: `87500a8` (refactor `cpent`) sudah mendarat di antara `d6279b9` dan `62c4606`, sehingga versi `cpent` yang di-commit sudah tidak memuat blockquote provenance. Hasilnya checker gagal dengan alasan yang berlawanan. Entri ini mencabut pendaftaran itu untuk kedua kalinya, dan kali ini sesuai keadaan repo.
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `scripts/check-fact-notes.js` | `cpent` dicabut dari `EXPECTED`; kembali menjadi 2 entri (`mitre-attack`, `nist-800-53`) | `skills/cpent/SKILL.md` pada `87500a8` tidak lagi memuat catatan provenance | `node scripts/check-fact-notes.js` exit 0 |
+| `CHANGELOG.md` | entri 0.19.1 ditandai `committed in 62c4606`; entri 0.19.2 ditambahkan | status tidak boleh dibiarkan `pending` lebih dari satu commit | `git log -- CHANGELOG.md` |
+
+### Catatan
+
+Dua entri berturut-turut (0.19.1 dan 0.19.2) saling membatalkan. Keduanya dipertahankan, tidak ditulis ulang, karena aturan 6 melarang menulis ulang sejarah: yang terjadi adalah repo bergerak di antara dua commit, dan jejaknya justru bukti bahwa pemeriksaan dijalankan.
+
+Pelajaran untuk kerja paralel: status checker tidak boleh disimpulkan dari working tree ketika direktori itu juga dipegang sesi lain. Sumber kebenaran adalah `git show HEAD:<path>`.
+
 ## [0.19.1] — 2026-11-10 — Perbaikan: `cpent` tetap terdaftar sampai refactor-nya di-commit
 
 **Commit dasar:** `d6279b9` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `62c4606`
 **Ruang lingkup:** 0.19.0 mencabut `cpent` dari `check-fact-notes.js` karena working tree sudah tidak memuat catatan provenance. Itu keliru: `skills/cpent/SKILL.md` yang **sudah di-commit** masih memuat blockquote lama, sehingga commit `d6279b9` meninggalkan repo dengan checker yang gagal. Entri ini mengembalikan pendaftaran itu sampai refactor `cpent` (didokumentasikan pada 0.12.0) ikut di-commit.
 
 ### Diubah

@@ -28,13 +28,7 @@ const FACTS_LINK = "../../docs/CERTIFICATION-FACTS.md";
 // variant each one must use. Certification skills are persona-only: they carry
 // no exam numbers, so they are deliberately absent from this list. Only
 // standards still publish versions that must stay traceable.
-//
-// cpent is the exception, and only while its persona rewrite is uncommitted:
-// the committed SKILL.md still carries the old exam-note blockquote, so the
-// registration must stay until that rewrite lands. Remove it together with the
-// blockquote, or this checker fails with "registered but no provenance note".
 const EXPECTED = {
-  "cpent": "sertifikasi",
   "mitre-attack": "standar",
   "nist-800-53": "standar",
 };

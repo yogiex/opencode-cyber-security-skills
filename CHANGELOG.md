@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.19.2] — 2026-11-10 — `cpent` dicabut lagi setelah refactor-nya mendarat
 
 **Commit dasar:** `62c4606` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `434b672`
 **Ruang lingkup:** 0.19.1 mengembalikan `cpent` ke `check-fact-notes.js` dengan asumsi refactor `cpent` masih belum di-commit. Asumsi itu salah pada saat commit dibuat: `87500a8` (refactor `cpent`) sudah mendarat di antara `d6279b9` dan `62c4606`, sehingga versi `cpent` yang di-commit sudah tidak memuat blockquote provenance. Hasilnya checker gagal dengan alasan yang berlawanan. Entri ini mencabut pendaftaran itu untuk kedua kalinya, dan kali ini sesuai keadaan repo.
 
 ### Diubah

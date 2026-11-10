@@ -13,6 +13,27 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.21.0] — 2026-11-10 — menggabungkan cabang `feat/ec-cnd-persona-injection` ke `dev`
+
+**Commit dasar:** `c8f9376` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** permintaan langsung — menggabungkan cabang `feat/ec-cnd-persona-injection` (satu commit, `1c51abc`) ke `dev` agar riwayat `ec-cnd` hanya punya satu jalur. Berkas skill-nya sendiri sudah identik dan sudah ada di `dev` sejak `abae7be`, jadi merge tidak mengubah isi `skills/ec-cnd/`, `manifest.json`, maupun `skills/index.json`. Yang berubah hanya dokumen: baris `ec-cnd` akhirnya masuk matriks kualitas, dan entri `0.19.0` versi cabang tidak dipakai karena nomor itu sudah terpakai di `dev` untuk refactor sembilan persona.
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `docs/SKILL-QUALITY.md` | baris `ec-cnd` (ya/ya/—/ya/14/ya/Selesai) masuk matriks; total 28 → 29; Selesai 12 → 13; cakupan Frame 23/28 → 24/29 (83%); catatan "berada di cabang" diganti catatan merge; backlog H menunjuk `ec-cnd/references/referensi.md` alih-alih "(cabang)" | ledger harus mencerminkan skill yang sudah ada di pohon | dihitung ulang dari matriks: 29 baris, Frame 24, Selesai 13/Sebagian 11/Belum 5; jumlah berkas `skills/ec-cnd/references/*.md` = 14 |
+| `CHANGELOG.md` | entri 0.21.0 ini; blok konflik `0.19.0` versi cabang dibuang | merge menghasilkan konflik teks di berkas ini dan penomoran cabang tidak bisa dipakai | `node scripts/check-changelog.js --base c8f9376` |
+
+### Catatan
+
+Merge dijalankan dengan `git merge --no-ff origin/feat/ec-cnd-persona-injection`. `manifest.json` dan `skills/index.json` auto-merge tanpa selisih terhadap `dev` — `git diff HEAD --` kosong dan `JSON.parse` sukses dengan 29 skill — sehingga tidak ada artefak turunan yang perlu diregenerasi.
+
+Entri `0.19.0` milik cabang sengaja tidak dinaikkan ke `dev`: nomor itu sudah dipakai entri "Sembilan skill bersertifikat menjadi persona praktisi", dan isi entri cabang tersebut — 15 berkas `skills/ec-cnd/` plus `docs/CND-PERSONA-NEEDS.md` yang belum ikut ter-commit — sudah dibereskan oleh `abae7be` dan tercatat pada entri 0.17.0.
+
+Berkas `tmp-check-payload.js` yang masih untracked tidak ikut di-commit.
+
 ## [0.20.1] — 2026-11-10 — Koreksi hitungan baris pada entri 0.20.0
 
 **Commit dasar:** `cd8a471` (branch `dev`)

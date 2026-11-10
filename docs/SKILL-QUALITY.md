@@ -1,10 +1,10 @@
 # Skill Quality Ledger
 
-Matriks status kualitas 28 skill. Tujuannya membuat pekerjaan tuning **terlihat** — bukan tersembunyi di riwayat commit — sampai cakupan cukup untuk ditegakkan lewat CI.
+Matriks status kualitas 29 skill. Tujuannya membuat pekerjaan tuning **terlihat** — bukan tersembunyi di riwayat commit — sampai cakupan cukup untuk ditegakkan lewat CI.
 
-Diperbarui: **2026-11-10** (setelah 0.20.0 — katalog sertifikasi dibersihkan dan Decision Frame mencapai 23/28; 0.19.0 — sembilan skill bersertifikat menjadi persona praktisi).
+Diperbarui: **2026-11-10** (setelah 0.21.0 — cabang `feat/ec-cnd-persona-injection` digabung dan `ec-cnd` masuk matriks; 0.20.0 — katalog sertifikasi dibersihkan dan Decision Frame mencapai 23/28; 0.19.0 — sembilan skill bersertifikat menjadi persona praktisi).
 
-> `ec-cnd` (persona network defender) berada di cabang `feat/ec-cnd-persona-injection`, belum di `dev`. Barisnya ditambahkan ke matriks ini saat cabang itu digabung. Karena itu jumlah skill di sini 28, bukan 29.
+> `ec-cnd` sudah berada di `dev` (berkasnya mendarat pada `abae7be`, cabangnya digabung pada 0.21.0), jadi barisnya kini ada di matriks dan jumlah skill di sini 29.
 
 ## Kriteria
 
@@ -29,6 +29,7 @@ Alasan dua jalur: skill bersertifikat memilih **persona** (tanpa angka ujian, ja
 | comptia-cysa | ya | ya | — | ya | 6 | ya | Selesai |
 | cpent | ya | ya | — | ya | 21 | ya | Selesai |
 | devsecops-mindset | — | — | — | — | 0 | — | Belum |
+| ec-cnd | ya | ya | — | ya | 14 | ya | Selesai |
 | ec-ecih | ya | ya | — | ya | 8 | ya | Selesai |
 | incident-response-plan | — | ya | — | — | 0 | — | Sebagian |
 | lf-cks | ya | ya | — | ya | 10 | ya | Selesai |
@@ -58,11 +59,11 @@ Alasan dua jalur: skill bersertifikat memilih **persona** (tanpa angka ujian, ja
 
 | Status | Jumlah |
 |---|---|
-| Selesai | 12 |
+| Selesai | 13 |
 | Sebagian | 11 |
 | Belum | 5 |
 
-Cakupan **Frame 23/28 (82%)**, naik dari 19/28 pada 0.19.0 setelah `threat-modeling`, `incident-response-plan`, `risk-management-framework`, dan `owasp-top10-2025` mendapat Decision Frame operasional pada 0.20.0.
+Cakupan **Frame 24/29 (83%)**, naik dari 19/28 pada 0.19.0 setelah `threat-modeling`, `incident-response-plan`, `risk-management-framework`, dan `owasp-top10-2025` mendapat Decision Frame operasional pada 0.20.0, lalu `ec-cnd` masuk pada 0.21.0.
 
 Lima "Belum" yang tersisa bukan kekurangan frame semata: `security-auditor`, `log-management-nist-800-92`, `devsecops-mindset`, dan `soc-analyst` adalah skill monolitik tanpa berkas referensi (backlog C), sedangkan `code-security-audit` sudah punya 4 referensi tetapi belum punya frame.
 
@@ -73,12 +74,12 @@ Lima "Belum" yang tersisa bukan kekurangan frame semata: `security-auditor`, `lo
 | **C** | Pecah skill monolitik tanpa references: `security-auditor` (282 baris), `log-management-nist-800-92` (415), `devsecops-mindset` (350), `soc-analyst` | empat "Belum" terakhir ada di sini |
 | **D2** | Tambahkan `Gotchas` pada `threat-modeling`, `incident-response-plan`, `risk-management-framework` | frame sudah ada, failure modes belum |
 | **E** | Perluas fact sheet ke standar non-sertifikasi (PTES, STIX, TLP, OWASP CRS, PCI DSS), lalu daftarkan tiga skill "Sebagian" ke `check-fact-notes.js` | membuka jalan 3 "Sebagian" menjadi "Selesai" |
-| **H** | Sisa tautan tingkat-3: exam blueprint di `ec-cnd` (cabang), halaman sertifikasi `cpent` dipertahankan sebagai jangkar identitas | `ptes-standard` sudah dibersihkan pada 0.20.0 |
+| **H** | Sisa tautan tingkat-3: exam blueprint di `ec-cnd/references/referensi.md`, halaman sertifikasi `cpent` dipertahankan sebagai jangkar identitas | `ptes-standard` sudah dibersihkan pada 0.20.0 |
 | **F** | Evaluasi perilaku: himpunan tugas aktivasi + A/B ablation | membuktikan tuning menaikkan performa, bukan hanya kerapian |
 
 ## Kapan enforcement dibuat
 
-Cakupan Frame kini **23/28 (82%)**, melewati ambang yang ditetapkan dokumen ini sejak 0.6.0 (≥80%). Artinya penegakan Frame di CI sudah bisa dinyalakan: 5 pengecualian (`security-auditor`, `log-management-nist-800-92`, `devsecops-mindset`, `soc-analyst`, `code-security-audit`) jauh lebih kecil dan lebih mudah dipertahankan daripada 9 pengecualian sebelumnya.
+Cakupan Frame kini **24/29 (83%)**, melewati ambang yang ditetapkan dokumen ini sejak 0.6.0 (≥80%). Artinya penegakan Frame di CI sudah bisa dinyalakan: 5 pengecualian (`security-auditor`, `log-management-nist-800-92`, `devsecops-mindset`, `soc-analyst`, `code-security-audit`) jauh lebih kecil dan lebih mudah dipertahankan daripada 9 pengecualian sebelumnya.
 
 Keputusan menyalakannya sengaja ditunda ke pekerjaan tersendiri, karena checker baru butuh allowlist yang ditulis eksplisit dan diuji terhadap working tree yang juga dipegang sesi lain.
 

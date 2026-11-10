@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.21.0] — 2026-11-10 — menggabungkan cabang `feat/ec-cnd-persona-injection` ke `dev`
 
 **Commit dasar:** `c8f9376` (branch `dev`)
-**Status:** `pending`
+**Status:** committed in `e267e08`
 **Ruang lingkup:** permintaan langsung — menggabungkan cabang `feat/ec-cnd-persona-injection` (satu commit, `1c51abc`) ke `dev` agar riwayat `ec-cnd` hanya punya satu jalur. Berkas skill-nya sendiri sudah identik dan sudah ada di `dev` sejak `abae7be`, jadi merge tidak mengubah isi `skills/ec-cnd/`, `manifest.json`, maupun `skills/index.json`. Yang berubah hanya dokumen: baris `ec-cnd` akhirnya masuk matriks kualitas, dan entri `0.19.0` versi cabang tidak dipakai karena nomor itu sudah terpakai di `dev` untuk refactor sembilan persona.
 
 ### Diubah

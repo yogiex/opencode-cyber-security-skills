@@ -1,45 +1,54 @@
 ---
-name: "Domain 3 — Incident Response and Management (24%)"
-description: "CompTIA CySA+ Domain 3 covering attack methodology frameworks (Cyber Kill Chain, Diamond Model, MITRE ATT&CK), 7-phase incident response process (Preparation, Detection, Containment, Eradication, Recovery, Post-Incident), evidence acquisition (chain of custody, hashing, write blockers), containment strategies, and escalation procedures."
-tags: [comptia, cysa, incident-response, kill-chain, diamond-model, evidence, containment]
+name: "Incident Response — Framework, Fase, Bukti"
+description: "Penanganan insiden dari sisi analyst: Cyber Kill Chain, Diamond Model, dan MITRE ATT&CK; fase IR dari preparation sampai post-incident; akuisisi bukti dengan chain of custody, hashing, dan write blocker; serta strategi containment per lapisan."
+tags: [incident-response, kill-chain, diamond-model, mitre-attack, evidence, chain-of-custody, containment, forensics]
 ---
 
-# Domain 3: Incident Response and Management (24%)
+# Incident Response — Framework, Fase, Bukti
 
-## Attack Methodology Frameworks
+Analyst sering menjadi orang pertama yang menyebut "ini insiden" atau "ini bukan". Kualitas keputusan itu bergantung pada framework yang dipakai untuk membaca serangan, fase yang sedang berjalan, dan bukti yang diamankan sebelum tindakan apa pun mengubah keadaan.
 
-- **Cyber Kill Chain**: Recon → Weaponization → Delivery → Exploitation → Installation → C2 → Actions
-- **Diamond Model**: Adversary, Capability, Infrastructure, Victim + meta-features
-- **MITRE ATT&CK**: 15 tactics, 200+ techniques for TTP mapping
+## 1. Attack methodology frameworks
 
-## IR Process (7 Phases)
+- **Cyber Kill Chain** — Recon → Weaponization → Delivery → Exploitation → Installation → C2 → Actions.
+- **Diamond Model** — Adversary, Capability, Infrastructure, Victim, ditambah meta-features.
+- **MITRE ATT&CK** — 15 tactics dan 200+ techniques untuk memetakan TTP.
 
-1. **Preparation**: IR plan, playbook, tools, training, tabletop exercises
-2. **Detection & Analysis**: Triage (true/false positive), timeline, root cause analysis
-3. **Containment**: Scope assessment, isolation (network/host/cloud/identity)
-4. **Eradication**: Remove malware, patch, reset credentials, rebuild
-5. **Recovery**: Restore from backup, monitor for re-infection
-6. **Post-Incident Activity**: Forensic analysis, lessons learned
-7. (CompTIA consolidates into 4 phases: Preparation, Detection & Analysis, Containment/Eradication/Recovery, Post-Incident)
+Framework tidak saling menggantikan. Kill Chain memberi urutan, Diamond Model memberi hubungan antar-elemen, dan ATT&CK memberi kosakata teknik yang bisa dipakai lintas tim.
 
-## Evidence Acquisition
+## 2. IR process
 
-- **Chain of Custody**: Tag evidence, log every transfer, secure storage
-- **Data Integrity**: SHA256 hashing before/after analysis, write blockers
-- **Preservation**: Legal hold, bit-for-bit imaging
+1. **Preparation** — IR plan, playbook, tool, pelatihan, dan tabletop exercise.
+2. **Detection and analysis** — triage true/false positive, penyusunan timeline, dan root cause analysis.
+3. **Containment** — penilaian scope dan isolasi pada network, host, cloud, atau identity.
+4. **Eradication** — hapus malware, patch, reset kredensial, rebuild bila perlu.
+5. **Recovery** — restore dari backup dan pantau kemungkinan infeksi ulang.
+6. **Post-incident activity** — analisis forensik dan lessons learned.
 
-## Containment Strategies
+Dalam praktik, fase-fase ini sering diringkas menjadi empat kelompok: preparation; detection and analysis; containment, eradication, and recovery; post-incident activity. Yang penting bukan jumlah fasenya, melainkan keputusan yang diambil di tiap peralihan.
 
-| Strategy | Techniques |
-|----------|------------|
-| Network | Block IP/domain, disable port, segmentation |
-| Host | Isolate, disable account, kill process |
-| Cloud | Disable API keys, revoke session, isolate instance |
-| Identity | Reset credentials, revoke tokens, enable MFA |
+## 3. Evidence acquisition
+
+- **Chain of custody** — beri tag bukti, catat setiap perpindahan, simpan di tempat terkontrol.
+- **Data integrity** — hash SHA256 sebelum dan sesudah analisis; gunakan write blocker saat akuisisi.
+- **Preservation** — legal hold dan imaging bit-for-bit.
+
+Bukti yang sudah berubah tidak bisa dikembalikan ke keadaan semula. Ambil yang volatil lebih dulu, lalu yang persisten.
+
+## 4. Containment strategies
+
+| Lapisan | Teknik |
+|---|---|
+| Network | blokir IP/domain, matikan port, segmentasi |
+| Host | isolasi host, nonaktifkan akun, hentikan proses |
+| Cloud | nonaktifkan API key, cabut sesi, isolasi instance |
+| Identity | reset kredensial, cabut token, aktifkan MFA |
+
+Containment selalu trade-off dengan ketersediaan. Keputusan memutus layanan ada pada pemilik layanan, bukan pada analyst yang menemukan alert.
 
 ## Best Practices
 
-- Define escalation criteria before incidents occur
-- Establish clear communication plan per stakeholder
-- Document everything — chain of custody is critical
-- Conduct post-incident lessons learned for continuous improvement
+- Tentukan kriteria eskalasi sebelum insiden terjadi.
+- Siapkan rencana komunikasi per stakeholder.
+- Dokumentasikan semuanya — chain of custody adalah bukti, bukan formalitas.
+- Lakukan lessons learned setelah setiap insiden untuk perbaikan berkelanjutan.

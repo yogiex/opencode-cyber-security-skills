@@ -1,6 +1,6 @@
 ---
 name: "Password Cracking Methodology — Hashcat & Rules"
-description: "Password cracking strategy for OSCP covering hash identification, layered hashcat attack strategy (wordlist → rules → hybrid → mask), common hash modes, and rule-based attack optimization."
+description: "Password cracking strategy: hash identification, layered hashcat attack strategy (wordlist → rules → hybrid → mask), common hash modes, and rule-based attack optimization."
 tags: [password-cracking, hashcat, john, rules, wordlist, mask-attack]
 ---
 
@@ -29,7 +29,7 @@ Format prefix: `$1$` = MD5 crypt, `$5$` = SHA256 crypt, `$6$` = SHA512 crypt, `$
 
 Rules transform setiap word di wordlist sebelum di-hash. Rule `c $1$2$3` mengubah `password` menjadi `Password123`. Dengan best64 (64 rules), 14 juta kata rockyou menjadi 900 juta candidates — semua di RAM.
 
-## Hashcat Modes for OSCP
+## Hashcat Modes
 
 | Hash Type | Mode (-m) |
 |-----------|-----------|
@@ -47,6 +47,6 @@ Rules transform setiap word di wordlist sebelum di-hash. Rule `c $1$2$3` menguba
 ## Best Practices
 
 - Mulai dengan wordlist langsung (rockyou) sebelum rules
-- best64 adalah minimal viable rule — cukup untuk OSCP
+- best64 adalah minimal viable rule; mulailah dari situ sebelum menambah rules yang lebih agresif
 - Cracking di VM dengan GPU passthrough jauh lebih cepat
 - Prioritaskan NTLM (mode 1000) dan NetNTLMv2 (mode 5600)

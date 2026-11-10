@@ -1,7 +1,7 @@
 ---
 name: "Windows Event Log & Sysmon Reference"
-description: "Complete reference for Windows Security Event IDs, Sysmon Event IDs, PowerShell logging, and Event-to-Attack mapping for OSDA."
-tags: [windows, event-logs, sysmon, powershell, event-ids, detection, osda]
+description: "Referensi lengkap Security Event ID Windows, Sysmon Event ID, PowerShell logging, dan pemetaan event ke teknik serangan untuk analisis insiden."
+tags: [windows, event-logs, sysmon, powershell, event-ids, detection]
 ---
 
 # Windows Event Log & Sysmon Reference

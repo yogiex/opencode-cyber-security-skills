@@ -1,6 +1,6 @@
 ---
 name: "Active Directory — Full Attack Chain"
-description: "Complete Active Directory attack chain for OSCP+ AD set covering assumed breach methodology, BloodHound enumeration, Kerberos attacks (AS-REP, Kerberoast), ADCS exploitation, delegation abuse, ACL abuse, DCSync, and golden/silver tickets."
+description: "Active Directory attack chain: assumed breach, BloodHound enumeration, Kerberos attacks (AS-REP, Kerberoast), ADCS exploitation, delegation abuse, ACL abuse, DCSync, and golden/silver tickets."
 tags: [active-directory, bloodhound, kerberos, adcs, dcsync, golden-ticket, delegation]
 ---
 
@@ -8,7 +8,7 @@ tags: [active-directory, bloodhound, kerberos, adcs, dcsync, golden-ticket, dele
 
 ## Assumed Breach Mindset
 
-OSCP+ AD set dimulai dengan assumed breach: Anda diberi satu standard domain user credentials. Pertanyaan pertama: apa yang bisa user ini akses, lihat, dan pengaruhi?
+Sebagian engagement dimulai dari assumed breach: klien memberi satu kredensial user domain biasa dan meminta bukti sejauh mana ia bisa bergerak. Pertanyaan pertama: apa yang bisa user ini akses, lihat, dan pengaruhi?
 
 ## Attack Chain Framework
 
@@ -98,7 +98,7 @@ impacket-ticketer -nthash $HASH -domain-sid $SID -domain DOMAIN -spn cifs/TARGET
 
 ## Best Practices
 
-- AD set adalah prioritas #1 (40 pts)
-- BloodHound harus dijalankan di awal dengan `-c All`
-- Enumeration > exploitation — habiskan 80% waktu untuk mapping
-- ADCS sering jadi vector tercepat ke DA
+- Jalankan BloodHound di awal dengan `-c All` sebelum mengejar jalur serangan.
+- Enumeration > exploitation — mapping dulu, eksploitasi kemudian.
+- Jangan asumsikan ADCS aktif; verifikasi template dan CA sebelum mengejar ESC.
+- ADCS sering jadi jalur tercepat ke DA.

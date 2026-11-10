@@ -1,12 +1,14 @@
 ---
-name: "OSDA Report Template"
-description: "Structured report template for OSDA exam submission."
-tags: [osda, exam, report, template]
+name: "Detection Report Template"
+description: "Struktur laporan investigasi deteksi: ringkasan eksekutif, analisis per tindakan, IoC terkonsolidasi, aturan deteksi, dan lampiran."
+tags: [report, template, detection, investigation, iocs, documentation]
 ---
 
-# OSDA Report Template
+# Detection Report Template
 
-Gunakan struktur ini untuk report exam:
+Struktur ini dipakai untuk laporan investigasi — baik untuk insiden nyata maupun latihan di lab. Yang membuatnya berguna bukan panjangnya, melainkan bahwa pembaca bisa mengulang setiap langkah.
+
+Gunakan struktur ini:
 
 ```
 1. Executive Summary (1 page)
@@ -14,8 +16,8 @@ Gunakan struktur ini untuk report exam:
    - Key findings summary
    - Overall risk assessment
 
-2. Per-Phase Analysis
-   Phase 1: [Title]
+2. Per-Action Analysis
+   Action 1: [Title]
    - Time window
    - Initial access vector
    - Attacker IP / Victim host
@@ -42,3 +44,11 @@ Gunakan struktur ini untuk report exam:
    - Host-to-IP mapping
    - OSQuery results
 ```
+
+## Catatan penulisan
+
+- **Analisis per tindakan, bukan per timestamp.** Revert dan ingestion yang tertunda membuat urutan waktu menyesatkan; sebutkan di mana urutannya putus.
+- **Query ditulis bersama hasilnya.** Temuan tanpa query, host, dan rentang waktu tidak bisa diverifikasi pembaca.
+- **Keyakinan dinyatakan.** Pisahkan yang terbukti, yang paling mungkin, dan yang belum dikecualikan.
+- **Sumber yang tidak tersedia dicatat.** "Tidak ada log" dan "tidak ada aktivitas" adalah dua kesimpulan berbeda.
+- **IoC harus bisa dipakai.** Alamat, nama proses, hash, dan nama service ditulis apa adanya, siap dimasukkan ke aturan deteksi.

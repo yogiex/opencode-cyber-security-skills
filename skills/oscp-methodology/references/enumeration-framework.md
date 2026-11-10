@@ -1,6 +1,6 @@
 ---
 name: "Reconnaissance & Enumeration Framework"
-description: "Systematic enumeration methodology for OSCP including 3 attack vectors (vulnerable versions, misconfigurations, sensitive information), Nmap workflow, and per-service enumeration checklists for ports 21-27017."
+description: "Systematic enumeration methodology: three attack vectors (vulnerable versions, misconfigurations, sensitive information), Nmap workflow, and per-service enumeration checklists for ports 21-27017."
 tags: [enumeration, reconnaissance, nmap, attack-vectors, service-enumeration]
 ---
 

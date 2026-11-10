@@ -1,12 +1,12 @@
 ---
-name: "13 Module Deep-Dive"
-description: "Complete breakdown of all IR-200 modules including case studies, attack techniques, detection methods, and exam strategies."
-tags: [modules, ir-200, case-studies, mitre-attack, kill-chain]
+name: "Peta Kapabilitas Incident Response"
+description: "Peta kapabilitas incident response beserta studi kasus, teknik serangan, dan metode deteksi per kemampuan."
+tags: [capability, incident-response, case-studies, mitre-attack, kill-chain]
 ---
 
-# 13 Module Deep-Dive
+# Peta Kapabilitas Incident Response
 
-## Modul 1: Incident Response Overview
+## Klasifikasi dan Ruang Lingkup Insiden
 
 **Cyber Incident Definitions:**
 - **Event**: Any observable occurrence
@@ -22,7 +22,7 @@ tags: [modules, ir-200, case-studies, mitre-attack, kill-chain]
 - **MOVEit** (2023): File transfer vulnerability — mass data exfiltration
 - **MGM 2023**: Social engineering → ransomware — lack of MFA
 
-## Modul 2: Fundamentals of Incident Response
+## Kerangka dan Peran: NIST 800-61 dan CSIRT
 
 **NIST SP 800-61 Rev 2:** 4 phases: Preparation, Detection & Analysis, Containment/Eradication/Recovery, Post-Incident
 
@@ -30,7 +30,7 @@ tags: [modules, ir-200, case-studies, mitre-attack, kill-chain]
 
 **CSIRT:** Internal, external (MSSP), virtual/coordinated. Tier 1 (triage) → Tier 2 (investigation) → Tier 3 (forensics/threat intel).
 
-## Modul 3: Phases of Incident Response
+## Fase Siklus IR
 
 **Preparation:** IR plan, playbooks, tools, training, communication tree, pre-deployed collection (Sysmon, PowerShell logging, audit policy)
 
@@ -40,7 +40,7 @@ tags: [modules, ir-200, case-studies, mitre-attack, kill-chain]
 
 **Post-Incident:** Lessons learned, root cause analysis, control improvements, evidence retention
 
-## Modul 4: Incident Response Communication Plans
+## Komunikasi Insiden
 
 **Pre-Crisis:** Communication tree, stakeholder contact list, templates (breach notification, press statement)
 
@@ -56,7 +56,7 @@ US State Laws: Varies (30-60 days)
 SEC (2024): 4 days for material cybersecurity incidents
 ```
 
-## Modul 5: Common Attack Techniques
+## Teknik Serangan yang Sering Ditemui
 
 **MITRE ATT&CK Tactics:**
 ```
@@ -78,7 +78,7 @@ Impact (TA0040): T1486 Data Encrypted for Impact (Ransomware)
 
 **Diamond Model:** Adversary → Infrastructure → Capability → Victim
 
-## Modul 6: Incident Detection and Identification
+## Deteksi dan Identifikasi
 
 **Passive Alerting:** SIEM correlation rules, EDR alerts, email security gateway, network IDS/IPS
 
@@ -92,7 +92,7 @@ Is there business justification?
 → If no to all, escalate to investigation
 ```
 
-## Modul 7: Initial Impact Assessment
+## Penilaian Dampak Awal
 
 **CIA Impact Categories:** Confidentiality (data exposed?), Integrity (data modified?), Availability (systems down?)
 
@@ -106,7 +106,7 @@ LOW IMPACT + HIGH CONFIDENCE → Scheduled remediation
 LOW IMPACT + LOW CONFIDENCE → Monitor
 ```
 
-## Modul 8: Digital Forensics for Incident Responders
+## Forensik Digital untuk Responder
 
 **Order of Volatility (RFC 3227):** CPU registers → RAM → Network connections → Running processes → Disk → Archive/backup
 
@@ -122,7 +122,7 @@ LOW IMPACT + LOW CONFIDENCE → Monitor
 
 **Linux Forensic Artifacts:** /var/log/auth.log, syslog, kern.log, .bash_history, wtmp, btmp, journalctl
 
-## Modul 9: Incident Response Case Management
+## Manajemen Kasus
 
 **Case Structure:** Unique case ID, timeline, evidence inventory, findings, actions taken
 
@@ -130,7 +130,7 @@ LOW IMPACT + LOW CONFIDENCE → Monitor
 
 **Ticketing Integration:** ServiceNow, Jira, RTIR. Setiap phase IR harus memiliki ticket entry.
 
-## Modul 10: Active Incident Containment
+## Containment Insiden Aktif
 
 **Network Isolation:** ACL block, VLAN isolation, DNS sinkhole, proxy block
 
@@ -146,7 +146,7 @@ Insider threat → Disable account + preserve evidence
 Phishing campaign → Block sender domain + email rules
 ```
 
-## Modul 11: Incident Eradication and Recovery
+## Eradikasi dan Pemulihan
 
 **Eradication:** Malware removal, service/task removal, user account removal, registry cleanup, file cleanup, image rebuild
 
@@ -154,7 +154,7 @@ Phishing campaign → Block sender domain + email rules
 
 **Post-Incident Hardening:** MFA (FIDO2/WebAuthn), network segmentation, EDR deployment, Credential Guard, LAPS, Admin tiering, AppLocker/WDAC
 
-## Modul 12: Post-Mortem Reporting
+## Pelaporan Post-Mortem
 
 **Executive Summary (1 page):** What happened? When? Impact? Containment actions? Current status? Recommendations?
 
@@ -162,16 +162,16 @@ Phishing campaign → Block sender domain + email rules
 
 **Lessons Learned:** Detection speed, containment effectiveness, communication, tools, process
 
-## Modul 13: Challenge Lab
+## Latihan Mandiri
 
-Full-scale breach simulation — mirror image of OSIR exam. Phase 1 (Splunk) + Phase 2 (Forensics). Realistic enterprise network with pre-recorded attacker actions.
+Simulasi breach skala penuh: jaringan enterprise dengan aksi penyerang yang sudah direkam, agar timeline bisa direkonstruksi dari telemetri yang sama.
 
-**Strategy:** Kerjakan seolah-olah exam — dokumentasi penuh. Buat report lengkap. Ulangi sampai bisa complete all 6 exercises.
+**Cara berlatih:** kerjakan dengan dokumentasi penuh — timeline, query, hash, dan laporan. Ulangi sampai semua skenario bisa dijelaskan dari bukti, bukan dari ingatan.
 
 ## Gotchas
 
-- Case studies di modul 1 sering muncul sebagai referensi di soal — hafal 1-2 kalimat per case
-- Modul 8 (Forensics) adalah yang paling kritis dan memiliki bobot soal terbanyak di Phase 2
+- Hafalkan satu-dua kalimat kunci per studi kasus — pola yang sama berulang di insiden nyata
+- Forensik disk dan memori paling sering menentukan kesimpulan — tetapi jangan mulai dari sana sebelum bukti volatil diamankan
 - Jangan menghafal semua Event ID — fokus pada 20-30 Event ID yang paling sering digunakan
 
 ## Best Practices

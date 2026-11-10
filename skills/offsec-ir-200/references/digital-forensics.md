@@ -182,7 +182,7 @@ journalctl: Systemd journal
 
 ## Gotchas
 
-- Di exam, Autopsy ingest bisa memakan waktu 20-30 menit — jangan tunggu pasif, kerjakan Phase 1 sambil menunggu
+- Autopsy ingest bisa memakan waktu 20-30 menit — jangan tunggu pasif, kerjakan analisis log sambil menunggu
 - Volatility 3 tidak memerlukan profile (berbeda dengan Volatility 2) — cukup `windows.info` untuk identifikasi
 - `windows.psscan` bisa menemukan process yang di-hidden oleh rootkit — selalu bandingkan dengan `pslist`
 - Chain of custody harus diisi untuk setiap evidence item — ini bagian dari penilaian report

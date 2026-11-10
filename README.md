@@ -105,11 +105,11 @@ Legenda status struktur:
 
 | Skill | Status | Deskripsi |
 | ----- | ------ | --------- |
-| [oscp-methodology](./skills/oscp-methodology) | 🔶 | OSCP (Offensive Security Certified Professional) — mindset, metodologi, dan strategi komprehensif untuk PEN-200/OSCP+ mencakup filsafat Try Harder, 3 attack vectors, enumeration framework, privilege escalation (Linux, Windows, AD), dan reporting. |
+| [oscp-methodology](./skills/oscp-methodology) | 🔶 | Persona offensive security consultant bersertifikat OSCP — enumerasi bertahap, tiga vektor serangan, privilege escalation Linux/Windows/AD, pivoting, dan disiplin bukti. Bukan untuk persiapan ujian. |
 | [ptes-standard](./skills/ptes-standard) | 🔶 | Penetration Testing Execution Standard (PTES) — panduan komprehensif untuk penetration testing meliputi 7 fase: pre-engagement, intelligence gathering, threat modeling, vulnerability analysis, exploitation, post-exploitation, dan reporting. |
 | [cpent](./skills/cpent) | 🔶 | Persona pengguna bersertifikat EC-Council CPENT — aturan operasional yang mengikat, dua belas hukum mindset, doktrin kedalaman (double pivoting), jalur serangan Active Directory, eksploitasi binary x86/x64, wireless/IoT/OT-SCADA, dan laporan kelas klien. Dipakai untuk engagement nyata, bukan persiapan ujian. |
-| [offsec-pen-300](./skills/offsec-pen-300) | 🔶 | OffSec PEN-300 / OSEP (Offensive Security Experienced Penetration Tester) — advanced evasion techniques and breaching defenses. AV/EDR evasion, AMSI/AppLocker/CLM bypass, process injection & hollowing, custom C# shellcode runners, MSSQL linked servers, AD exploitation, delegation attacks, ADCS, dan report writing. |
-| [offsec-web-300](./skills/offsec-web-300) | 🔶 | OffSec WEB-300 / OSWE (Offensive Security Web Expert) — advanced web application security assessment, white-box testing, source code review (Java, C#, PHP, Python, JavaScript), custom exploit development, .NET deserialization, PHP type juggling, SQLi, SSTI, SSRF, prototype pollution, dan authentication bypass. |
+| [offsec-pen-300](./skills/offsec-pen-300) | 🔶 | Persona red team operator bersertifikat OSEP — evasion AV/EDR, AMSI/AppLocker/CLM, process injection, shellcode runner kustom, serangan MSSQL, eksploitasi AD/ADCS, dan laporan kelas klien. Bukan untuk persiapan ujian. |
+| [offsec-web-300](./skills/offsec-web-300) | 🔶 | Persona konsultan keamanan web white-box bersertifikat OSWE — source code review Java/C#/PHP/Python/JS, deserialization .NET, type juggling PHP, SQLi, SSTI, SSRF, prototype pollution, dan penulisan exploit Python. Bukan untuk persiapan ujian. |
 | [waf-evasion-methodology](./skills/waf-evasion-methodology) | 🔶 | Pola pikir dan metodologi sistematis untuk WAF evasion — memahami parsing discrepancies, encoding gaps, dan logic mismatches antara WAF dan backend application. |
 | [web-pentest-payloads](./skills/web-pentest-payloads) | 🔶 | Payload dan teknik eksploitasi per kelas kerentanan web: SQLi, NoSQL, command injection, SSTI, XXE, XSS, CSRF, SSRF, LFI/RFI, file upload, deserialization, request smuggling, cache poisoning, JWT/OAuth/SAML, IDOR, business logic, API, prompt injection — dengan syarat otorisasi, decision frame (baseline, dua varian, kanal blind), gotchas, dan bypass filter/WAF. |
 | [web-app-scan](./skills/web-app-scan) | ✅ | Penilaian keamanan web application bertahap seperti Nessus/Nikto tetapi manual: fingerprint, config leak, injection, XSS, sesi, akses kontrol, TLS, CORS — dengan batas mode (pasif/aktif), kriteria konfirmasi temuan, dan template output. |
@@ -119,7 +119,7 @@ Legenda status struktur:
 
 | Skill | Status | Deskripsi |
 | ----- | ------ | --------- |
-| [ec-ecih](./skills/ec-ecih) | 🔶 | EC-Council ECIH (Certified Incident Handler) v3 — incident handler mindset, IR lifecycle (NIST 800-61 + ECIH 9-stage IH&R), decision frameworks per incident type, forensic readiness, containment strategies, eradication methodology, recovery planning, post-incident lessons learned, dan komunikasi krisis. Berbasis ECIH 212-89 v3 curriculum. |
+| [ec-ecih](./skills/ec-ecih) | 🔶 | Persona incident handler bersertifikat ECIH — siklus IR (NIST 800-61 + ECIH IH&R), triage, containment, eradikasi, pemulihan, kewajiban legal, dan komunikasi krisis. Bukan untuk persiapan ujian. |
 | [ec-cnd](./skills/ec-cnd) | 🔶 | Persona pengguna yang sudah memegang sertifikasi EC-Council CND — profil, gaya bicara, dan doktrin operasional untuk memilih kontrol jaringan yang tepat, mengelola perubahan berisiko, membaca telemetri, dan merespons insiden di tingkat jaringan. Persona injection pengguna bersertifikat, bukan tutor ujian. |
 | [incident-response-plan](./skills/incident-response-plan) | ✅ | Panduan incident response non-teknis untuk organisasi: persiapan, deteksi, analisis, containment, eradikasi, recovery, dan pembelajaran. Cocok untuk tim manajemen, legal, PR, dan koordinator insiden. |
 | [log-management-nist-800-92](./skills/log-management-nist-800-92) | ✅ | Panduan log management berdasarkan NIST SP 800-92 untuk perencanaan, pengumpulan, penyimpanan, analisis, dan retensi log keamanan secara terstruktur. |
@@ -127,10 +127,10 @@ Legenda status struktur:
 | [nist-800-53](./skills/nist-800-53) | ✅ | Panduan Security and Privacy Controls berdasarkan NIST SP 800-53 Rev 5 (Release 5.2.0) untuk pemilihan, implementasi, dan assessment kontrol keamanan dan privasi dalam Risk Management Framework. |
 | [risk-management-framework](./skills/risk-management-framework) | ✅ | Panduan NIST Risk Management Framework (SP 800-37) untuk mengelola risiko keamanan dan privasi secara terstruktur, fleksibel, dan berkelanjutan di seluruh siklus hidup sistem. |
 | [security-documentation](./skills/security-documentation) | 🔶 | Menyusun laporan pengujian keamanan yang dapat diaudit: struktur baku, template LaTeX siap pakai (`assets/report-template.tex`), anatomi temuan dengan CVSS v3.1/CWE, bukti `curl` reproducible, dan aturan redaksi. |
-| [offsec-ir-200](./skills/offsec-ir-200) | 🔶 | OffSec IR-200 / OSIR (OffSec Incident Responder) — foundational incident response covering full IR lifecycle (NIST 800-61r2), Splunk SIEM analysis with SPL, digital forensics (Autopsy, Volatility 3, FTK Imager), malware triage with YARA, containment/eradication/recovery, dan post-mortem reporting. |
-| [offsec-th-200](./skills/offsec-th-200) | 🔶 | OffSec TH-200 / OSTH (OffSec Threat Hunter) — foundational threat hunting covering proactive threat detection, Splunk SPL, CrowdStrike Falcon CQL, Suricata IDS/IPS, hypothesis-driven hunting (PEAK, SEARCH), MITRE ATT&CK mapping, ransomware & APT case studies, CTI integration, dan professional hunt reporting. |
-| [offsec-soc-200](./skills/offsec-soc-200) | 🔶 | OffSec SOC-200 / OSDA (OffSec Defense Analyst) — security operations and defensive analysis. SIEM/ELK/KQL, Windows & Linux endpoint detection, attacker methodology, incident investigation, dan SOC analyst framework. |
-| [lf-cks](./skills/lf-cks) | 🔶 | Certified Kubernetes Security Specialist (CKS) — Kubernetes security mindset, defense-in-depth framework, cluster isolation models, workload segmentation, supply chain trust, authentication & authorization philosophy, network security architecture, runtime protection, compliance posture, dan decision framework untuk securing container platforms. |
+| [offsec-ir-200](./skills/offsec-ir-200) | 🔶 | Persona incident responder bersertifikat OSIR — triage host hidup, forensik disk dan memori (Autopsy, Volatility 3), verifikasi integritas berkas, triage malware & YARA, containment, dan post-mortem. Bukan untuk persiapan ujian. |
+| [offsec-th-200](./skills/offsec-th-200) | 🔶 | Persona threat hunter bersertifikat OSTH — hunting berbasis hipotesis (PEAK/SEARCH), SPL Splunk, CQL CrowdStrike, Suricata, pemetaan ATT&CK, dan laporan hunt. Bukan untuk persiapan ujian. |
+| [offsec-soc-200](./skills/offsec-soc-200) | 🔶 | Persona detection & defensive analyst bersertifikat OSDA — triage Windows/Linux, KQL di ELK, Windows Event Log & Sysmon, deteksi Active Directory, dan rekonstruksi timeline dari telemetri. Bukan untuk persiapan ujian. |
+| [lf-cks](./skills/lf-cks) | 🔶 | Persona platform security engineer bersertifikat CKS — trust boundary, isolasi cluster, keamanan workload, supply chain trust, NetworkPolicy, dan runtime defense di Kubernetes. Bukan untuk persiapan ujian. |
 | [soc-analyst](./skills/soc-analyst) | ✅ | Pola pikir dan pendekatan untuk Security Analyst dan SOC Analyst dalam mentriage, menyelidiki, merespon insiden, dan berkomunikasi secara efektif. |
 | [threat-intelligence](./skills/threat-intelligence) | 🔶 | Cyber Threat Intelligence (CTI) — intelligence lifecycle, analytic frameworks (Kill Chain, Diamond Model, ATT&CK), IOC management (STIX/TAXII, MISP, YARA, Sigma), threat hunting (PEAK, ABLE, HMM), dan analyst tradecraft. |
 
@@ -138,7 +138,7 @@ Legenda status struktur:
 
 | Skill | Status | Deskripsi |
 | ----- | ------ | --------- |
-| [comptia-cysa](./skills/comptia-cysa) | 🔶 | Panduan lengkap CompTIA CySA+ (CS0-004 V4) mencakup Security Operations, Vulnerability Management, Incident Response, dan Reporting & Communication untuk mempersiapkan sertifikasi Cybersecurity Analyst. |
+| [comptia-cysa](./skills/comptia-cysa) | 🔶 | Persona cyber defense analyst bersertifikat CySA+ — triase dan prioritisasi kerentanan (CVSS + EPSS), security operations, respons insiden, dan pelaporan. Bukan untuk persiapan ujian. |
 | [devsecops-mindset](./skills/devsecops-mindset) | ✅ | Panduan pola pikir dan mindset DevSecOps untuk mengintegrasikan keamanan dalam siklus pengembangan secara berkelanjutan, tanpa fokus pada alat/tools tertentu. |
 | [owasp-top10-2025](./skills/owasp-top10-2025) | 🔶 | Referensi lengkap OWASP Top 10 2025 untuk risiko keamanan web application. Gunakan saat threat modeling, code review, penetration testing, atau saat membahas kategori A01–A10. |
 | [threat-modeling](./skills/threat-modeling) | ✅ | Panduan threat modeling untuk mengidentifikasi, menganalisis, dan memitigasi risiko keamanan pada sistem atau aplikasi secara general dan non-teknis. |
@@ -248,12 +248,12 @@ Skill ofensif di repo ini ditujukan untuk pengujian keamanan yang **berizin**, l
 | [log-management-nist-800-92](./skills/log-management-nist-800-92) | NIST SP 800-92 | https://csrc.nist.gov/pubs/sp/800/92 |
 | [mitre-attack](./skills/mitre-attack) | MITRE ATT&CK | https://attack.mitre.org |
 | [nist-800-53](./skills/nist-800-53) | NIST SP 800-53 Rev 5 (5.2.0) | https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final |
-| [offsec-ir-200](./skills/offsec-ir-200) | OffSec IR-200, OSIR Exam Guide | https://help.offsec.com/hc/en-us/articles/30960007786900 |
-| [offsec-pen-300](./skills/offsec-pen-300) | OffSec PEN-300, OSEP Exam Guide | https://help.offsec.com/hc/en-us/articles/360050293792-OSEP-Exam-Guide |
-| [offsec-soc-200](./skills/offsec-soc-200) | OffSec SOC-200, OSDA Exam Guide | https://help.offsec.com/hc/en-us/articles/4410105675412-OSDA-Exam-Guide |
-| [offsec-th-200](./skills/offsec-th-200) | OffSec TH-200, OSTH Exam Guide | https://help.offsec.com/hc/en-us/articles/29141776768148-OSTH-Exam-Guide |
-| [offsec-web-300](./skills/offsec-web-300) | OffSec WEB-300, OSWE Exam Guide | https://help.offsec.com/hc/en-us/articles/360049792232-OSWE-Exam-Guide |
-| [oscp-methodology](./skills/oscp-methodology) | OffSec PEN-200, OSCP+ Exam Guide | https://help.offsec.com/hc/en-us/articles/360040165632-OSCP-Exam-Guide |
+| [offsec-ir-200](./skills/offsec-ir-200) | OffSec IR-200 (OSIR) | — |
+| [offsec-pen-300](./skills/offsec-pen-300) | OffSec PEN-300 (OSEP) | — |
+| [offsec-soc-200](./skills/offsec-soc-200) | OffSec SOC-200 (OSDA) | — |
+| [offsec-th-200](./skills/offsec-th-200) | OffSec TH-200 (OSTH) | — |
+| [offsec-web-300](./skills/offsec-web-300) | OffSec WEB-300 (OSWE) | — |
+| [oscp-methodology](./skills/oscp-methodology) | OffSec PEN-200 (OSCP+) | — |
 | [owasp-top10-2025](./skills/owasp-top10-2025) | OWASP Top 10 2025 | https://owasp.org/Top10/ |
 | [ptes-standard](./skills/ptes-standard) | PTES | http://www.pentest-standard.org/ |
 | [risk-management-framework](./skills/risk-management-framework) | NIST SP 800-37 Rev 2 | https://csrc.nist.gov/pubs/sp/800/37/r2 |

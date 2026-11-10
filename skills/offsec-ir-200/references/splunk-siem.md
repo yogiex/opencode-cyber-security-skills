@@ -177,12 +177,12 @@ index=windows sourcetype="WinEventLog:Microsoft-Windows-Sysmon/Operational" Even
 
 ## Gotchas
 
-- Di exam, pastikan time range yang digunakan benar — default "All Time" bisa menyebabkan hasil tidak akurat atau timeout
-- SPL di exam Splunk bisa memiliki data model yang berbeda dari lab — selalu cek field names dengan `| fields _raw` dulu
-- Sysmon EventCode 22 (DNS) tidak selalu tersedia — tergantung konfigurasi Sysmon di environment exam
+- Pastikan time range yang digunakan benar — default "All Time" bisa menyebabkan hasil tidak akurat atau timeout
+- Data model di Splunk produksi bisa berbeda dari lab — selalu cek field names dengan `| fields _raw` dulu
+- Sysmon EventCode 22 (DNS) tidak selalu tersedia — tergantung konfigurasi Sysmon di environment target
 
 ## Best Practices
 
-- Simpan query favorites di Notepad/notes selama exam
+- Simpan query favorit di notes pribadi agar bisa dipakai ulang
 - Gunakan `| table` di akhir query untuk mengontrol output — jangan tampilkan raw data
 - Dokumentasikan setiap query dengan komentar (SPL tidak support comment inline — tulis di notes terpisah)

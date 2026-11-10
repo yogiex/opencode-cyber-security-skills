@@ -1,6 +1,6 @@
 ---
 name: "Windows Privilege Escalation — 6 Attack Vectors"
-description: "Windows privilege escalation methodology for OSCP covering token abuse (SeImpersonate, SeBackup), service misconfigurations (unquoted paths, weak permissions), AlwaysInstallElevated, credential hunting, scheduled tasks, and startup applications."
+description: "Windows privilege escalation methodology: token abuse (SeImpersonate, SeBackup), service misconfigurations (unquoted paths, weak permissions), AlwaysInstallElevated, credential hunting, scheduled tasks, and startup applications."
 tags: [windows, privilege-escalation, token-abuse, service-misconfig, alwaysinstallelevated, credential-hunting]
 ---
 

@@ -79,4 +79,4 @@ Layer 6: AppLocker bypass
 - Jangan pernah taruh shellcode plaintext di source code
 - Selalu gunakan sleep timer sebelum injection
 - Siapkan minimal 3 AMSI bypass methods berbeda
-- Test payload di Windows Defender sebelum exam
+- Uji payload di replika Windows Defender yang sesuai sebelum dipakai di target

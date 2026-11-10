@@ -120,14 +120,14 @@ index=proxy sourcetype=proxylogs
 
 ## Gotchas
 
-- Suricata alerts di exam mungkin tidak 100% akurat — selalu verifikasi dengan data sources lain
-- Zeek logs memiliki field names yang berbeda dari Suricata — jangan tertukar
-- PCAP analysis biasanya tidak diperlukan di exam — fokus pada Suricata dan Zeek logs yang sudah diparse ke Splunk
-- DNS tunneling detection perlu threshold yang tepat — domain length > 50 adalah indikasi tapi bukan konfirmasi
+- Suricata alert tidak 100% akurat — selalu verifikasi dengan data sources lain; false positive tinggi pada alert kategori umum.
+- Zeek logs memiliki field names yang berbeda dari Suricata — jangan tertukar (mis. `id.orig_h` vs `src_ip`).
+- Analisis PCAP mahal dan biasanya bukan langkah pertama — mulai dari Suricata dan Zeek logs yang sudah terparse, buka PCAP untuk sesi yang menentukan.
+- DNS tunneling detection perlu threshold yang tepat — domain length > 50 adalah indikasi tapi bukan konfirmasi.
 
 ## Best Practices
 
-- Selalu korelasikan network alerts dengan endpoint data untuk konfirmasi
-- Gunakan Suricata alert severity sebagai prioritas triase (Severity 1 = critical)
-- Untuk beaconing detection, gunakan kombinasi count + regularity analysis
-- DNS logs adalah sumber paling underrated untuk threat hunting — prioritaskan analisis ini
+- Selalu korelasikan network alerts dengan endpoint data untuk konfirmasi.
+- Gunakan Suricata alert severity sebagai prioritas triase (Severity 1 = critical).
+- Untuk beaconing detection, gunakan kombinasi count + regularity analysis.
+- DNS logs adalah sumber paling underrated untuk threat hunting — prioritaskan analisis ini.

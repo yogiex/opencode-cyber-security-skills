@@ -1,10 +1,10 @@
 ---
-name: "OSTH Hunt Report Template"
-description: "Professional hunt report template for OSTH exam including executive summary, timeline, IoCs table, MITRE ATT&CK mapping, and recommendations."
-tags: [report-template, osth, exam, hunt-narrative]
+name: "Hunt Report Template"
+description: "Template laporan hunt untuk pekerjaan nyata: executive summary, hipotesis dan metodologi, timeline, IOC table, MITRE ATT&CK mapping, dampak, rekomendasi, dan chain of custody."
+tags: [report-template, hunt-narrative, timeline, ioc, mitre-attack, chain-of-custody]
 ---
 
-# OSTH Hunt Report Template
+# Hunt Report Template
 
 ## Executive Summary
 
@@ -51,7 +51,7 @@ Hunting Methodology:
 - **Artifact details**: IP, hash, user, process, registry key
 - **MITRE ATT&CK**: [Tactic] - [Technique ID] - [Technique Name]
 
-### Finding 2-7: (same structure)
+### Finding berikutnya: struktur yang sama
 
 ## IOCs Table
 

@@ -117,7 +117,6 @@ Ketika `kubectl` tidak cukup, `crictl` adalah interface langsung ke container ru
 - Falco rule yang terlalu broad akan menghasilkan banyak false positive — tune secara bertahap
 - Immutable container ≠ container tanpa logs — gunakan sidecar atau stdout
 - `crictl` hanya bisa digunakan di node (SSH), bukan dari kubectl
-- Di CKS exam, Falco rules biasanya sudah pre-installed — fokus pada analisis alert, bukan instalasi
 
 ## Best Practices
 

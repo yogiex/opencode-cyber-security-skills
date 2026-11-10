@@ -1,7 +1,7 @@
 /* 
- * OSTH SPL Query Library — Threat Hunting
- * Copy-paste ready queries for Phase 1 Splunk analysis
- * Adjust time range and field names as needed for exam environment
+ * SPL Query Library — Threat Hunting
+ * Copy-paste ready queries, grouped by hunt phase
+ * Adjust time range and field names to match your environment
  */
 
 /* ========================================== */

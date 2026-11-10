@@ -81,12 +81,12 @@ LOW: Scan, failed login spike → scheduled
 
 ## Gotchas
 
-- OSIR exam tidak menguji ITIL secara mendalam — cukup tahu perbedaan Incident vs Problem dan CSIRT roles
-- Severity matrix di exam bisa berbeda dari yang dipelajari — baca skenario dengan teliti
+- ITIL tidak perlu didalami — cukup tahu perbedaan Incident vs Problem dan CSIRT roles
+- Matriks severity berbeda antar organisasi — baca definisi lokal sebelum menetapkan tingkat
 - CSIRT tiers berbeda dengan SOC tiers — jangan tertukar
 
 ## Best Practices
 
-- Buat IR plan template sebelum exam agar tidak mulai dari nol
+- Siapkan template IR plan sebelum insiden, bukan saat insiden berjalan
 - Hafalkan NIST lifecycle 4 phases dan urutannya
 - Gunakan Diamond Model (Adversary → Infrastructure → Capability → Victim) untuk analisis insiden

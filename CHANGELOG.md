@@ -13,6 +13,157 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.19.0] — 2026-11-10 — Sembilan skill bersertifikat menjadi persona praktisi
+
+**Commit dasar:** `04c4e1a` (branch `dev`)
+**Status:** `pending`
+**Ruang lingkup:** permintaan langsung — skill yang tujuannya lulus ujian sertifikasi bukan lagi tempat yang tepat untuk repo ini; tujuannya persona injection agar agent paham cybersecurity. Audit 2026-11-10 menemukan **sembilan** skill dengan sinyal tujuan-ujian (description, artefak ujian, atau Decision Frame berisi taktik ujian). Kesembilan dikonversi ke bentuk persona: identitas peran, mandat, batas klaim, Persona Contract, Decision Frame operasional, doktrin, suara, dan contoh penalaran. Seluruh angka ujian dihapus dan dipusatkan di `docs/CERTIFICATION-FACTS.md`. Standar kerja: `docs/PERSONA-CONVERSION.md`; analisis kebutuhan: `docs/PERSONA-INJECTION-NEEDS.md`.
+
+### Ditambahkan — persona (9 berkas)
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/comptia-cysa/references/persona.md` | cyber defense analyst: profil, kedalaman, kebiasaan berpikir, suara, preferensi, batas klaim, 5 jawaban contoh | persona butuh suara, bukan hanya daftar domain | 5 jawaban contoh; bagian batas klaim ada |
+| `skills/ec-ecih/references/persona.md` | incident handler: profil, kebiasaan, suara, penolakan, 6 jawaban contoh | idem | 6 jawaban contoh |
+| `skills/lf-cks/references/persona.md` | Kubernetes platform security engineer: 5 jawaban contoh | idem | 5 jawaban contoh |
+| `skills/offsec-ir-200/references/persona.md` | incident responder: 5 jawaban contoh termasuk penolakan reboot | idem | 5 jawaban contoh |
+| `skills/offsec-pen-300/references/persona.md` | evasion / red team operator: 5 jawaban contoh | idem | 5 jawaban contoh |
+| `skills/offsec-soc-200/references/persona.md` | detection & defensive analyst: 5 jawaban contoh | idem | 5 jawaban contoh |
+| `skills/offsec-th-200/references/persona.md` | threat hunter: 6 jawaban contoh | idem | 6 jawaban contoh |
+| `skills/offsec-web-300/references/persona.md` | konsultan web white-box: 6 jawaban contoh | idem | 6 jawaban contoh |
+| `skills/oscp-methodology/references/persona.md` | offensive security consultant: 5 jawaban contoh | idem | 5 jawaban contoh |
+
+### Ditambahkan — turunan konversi (16 berkas)
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `docs/PERSONA-CONVERSION.md` | 193 baris: audit berbukti, bentuk akhir wajib, larangan isi ujian, disposisi berkas, kriteria selesai | standar kerja harus tertulis sebelum eksekusi | 9 skill diaudit; pola verifikasi §5 dapat dijalankan |
+| `docs/PERSONA-INJECTION-NEEDS.md` | 194 baris: temuan tiga lapis, definisi, 8 komponen persona, 10 FR, 6 NFR, 8 antipattern, 8 tes perilaku, metrik, rencana | jawaban atas "seperti memiliki sertifikasi" dan "mindset" perlu terukur, bukan slogan | 8 komponen; 8 skenario uji |
+| `skills/offsec-ir-200/references/capability-domains.md` | pengganti nama `modules-overview.md`: 13 "modul" menjadi kemampuan, studi kasus utuh | nomor modul adalah struktur kursus | 0 kemunculan "modul"/"exam" |
+| `skills/offsec-pen-300/references/capability-domains.md` | 8 domain kapabilitas menggantikan silabus 16 modul | idem | 0 nomor modul/bobot |
+| `skills/offsec-soc-200/references/capability-domains.md` | 9 domain kapabilitas, tanpa nomor modul dan bobot fase | idem | 0 bobot/poin |
+| `skills/offsec-th-200/references/capability-domains.md` | 7 domain kapabilitas, aktor dan TLP dipertahankan | idem | 0 bobot |
+| `skills/offsec-web-300/references/capability-domains.md` | 10 domain kapabilitas, pola aplikasi nyata | idem | 0 nomor modul |
+| `skills/oscp-methodology/references/engagement-playbook.md` | pengganti `exam-strategy.md`: scope/RoE, disiplin bukti, urutan laporan, kriteria berhenti, serah terima | jadwal ujian tidak punya padanan kerja; disiplin delivery punya | 0 jam ujian |
+| `skills/offsec-pen-300/references/engagement-playbook.md` | scope, higiene payload, bukti, urutan laporan, stop, pembersihan | idem | 0 jam ujian |
+| `skills/offsec-web-300/references/engagement-playbook.md` | laporan sisi klien untuk asesmen white-box, remediasi, retest, redaksi | idem | 0 jadwal ujian |
+| `skills/offsec-soc-200/references/detection-labs.md` | 8 latihan mandiri yang bisa dibangun sendiri: sumber telemetri, dataset, temuan yang diharapkan | lab ujian tidak bisa diakses; latihan nyata bisa | 8 latihan |
+| `skills/offsec-web-300/references/source-review-playbook.md` | metodologi white-box dipindah dari SKILL.md: entry point, alur data, sink, 7 pola | materi teknis dipindahkan, bukan dibuang | 0 kehilangan bagian |
+| `skills/offsec-web-300/references/exploit-development.md` | syarat exploit, template Python, workflow, disiplin uji | idem | 4 snippet |
+| `skills/offsec-th-200/references/referensi.md` | sumber eksternal: ATT&CK, Splunk, CrowdStrike, Suricata, Zeek, STIX/TAXII, MISP, TLP | daftar sumber belum ada sebagai berkas | 0 tautan ujian |
+| `skills/offsec-web-300/references/referensi.md` | sumber eksternal: OWASP, PortSwigger, HackTricks, php.net, postgresql, CVE, repo tool | daftar sumber dipindah dari SKILL.md | 0 tautan ujian |
+
+### Diubah — SKILL.md menjadi persona
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/comptia-cysa/SKILL.md` | 163 baris; description "untuk mempersiapkan sertifikasi" → persona; "When to Use: exam preparation" → kondisi kerja; Frame #6 waktu ujian diganti keputusan operasional | tujuan skill bukan ujian | 0 pola §5; 6 komponen |
+| `skills/ec-ecih/SKILL.md` | 438 baris; bagian "ECIH Exam Overview & Strategy" dan seluruh "Daftar Isi" dihapus; blok persona ditambahkan; 7 keputusan operasional | TOC bernomor tidak bisa dipertahankan saat judul wajib `## Gotchas` | `(Get-Content).Count` = 438; 0 pola §5 |
+| `skills/lf-cks/SKILL.md` | 199 baris; tabel bobot domain, "Exam Format", "Strategi 3-Pass", gotcha prasyarat CKA dihapus | bobot domain = blueprint ujian | 0 pola §5 |
+| `skills/offsec-ir-200/SKILL.md` | 189 baris; "Scoring & Exam Environment" dan "8h Time Management" dihapus; tabel perbandingan tanpa baris durasi/passing | skema poin bukan keputusan kerja | 0 pola §5 |
+| `skills/offsec-pen-300/SKILL.md` | 176 baris; tabel 16 modul dan tangga sertifikasi OSCE³ dihapus; Frame ujian diganti keputusan engagement | silabus kursus bukan taksonomi kerja | 0 pola §5 |
+| `skills/offsec-soc-200/SKILL.md` | 186 baris; Frame 10 phase × 10 poin diganti keputusan deteksi; Golden Rules dipertahankan sebagai doktrin | aturan deteksi tetap berlaku, skema poin tidak | 0 pola §5 |
+| `skills/offsec-th-200/SKILL.md` | 199 baris; "Scoring & Exam Environment" dan timetable 8 jam menjadi kadens hunt multi-hari; "Key Exam Queries" → "Hunting Queries" | hipotesis tetap, jadwal ujian tidak | 0 pola §5 |
+| `skills/offsec-web-300/SKILL.md` | 170 baris; §1 "Overview & Exam Structure" dan §5 "Exam Strategy" dihapus; materi teknis dipindah ke 4 referensi baru | dari 447 baris; isi tidak hilang, hanya berpindah | 4 berkas tujuan; 0 pola §5 |
+| `skills/oscp-methodology/SKILL.md` | 180 baris; lima butir Frame yang berisi aturan ujian diganti keputusan engagement | proof.txt dan kuota revert hanya ada di ujian | 0 pola §5 |
+
+### Diubah — referensi (42 berkas)
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/comptia-cysa/references/domain1-security-operations.md` | bobot 34% dan framing ujian dihapus; isi logging/CTI/hunting/SOAR utuh | bobot domain adalah cetak biru ujian | isi teknis utuh |
+| `skills/comptia-cysa/references/domain2-vulnerability-management.md` | bobot 26% dihapus; tabel tool, CVSS/EPSS, kontrol utuh | idem | idem |
+| `skills/comptia-cysa/references/domain3-incident-response.md` | bobot 24% dan catatan konsolidasi fase CompTIA dihapus | idem | idem |
+| `skills/comptia-cysa/references/domain4-reporting.md` | bobot 16% dihapus; template executive summary dan KPI utuh | idem | idem |
+| `skills/comptia-cysa/references/tools-frameworks.md` | penomoran domain ujian diganti pemetaan fokus | idem | idem |
+| `skills/lf-cks/references/referensi.md` | baris logistik ujian (handbook, FAQ, prasyarat CKA, killer.sh, halaman kursus) dihapus; sumber teknis dipertahankan | logistik ujian bukan sumber belajar | 0 tautan ujian |
+| `skills/lf-cks/references/runtime-defense.md` | satu gotcha tentang Falco yang sudah terpasang di ujian dihapus | tidak berlaku di cluster nyata | 0 |
+| `skills/offsec-ir-200/references/containment-eradication-recovery.md` | description dan 2 kalimat ujian diganti framing insiden nyata | idem | 0 |
+| `skills/offsec-ir-200/references/digital-forensics.md` | catatan "di exam" pada waktu ingest Autopsy dihapus | waktu ingest berlaku umum | 0 |
+| `skills/offsec-ir-200/references/ir-lifecycle.md` | 3 kalimat ujian diganti disiplin kerja (ITIL, matriks severity lokal, template plan) | idem | 0 |
+| `skills/offsec-ir-200/references/malware-triage.md` | 2 kalimat ujian diganti konteks sampel nyata | idem | 0 |
+| `skills/offsec-ir-200/references/reporting.md` | description dan 2 kalimat skema nilai diganti disiplin dokumentasi | idem | 0 |
+| `skills/offsec-ir-200/references/splunk-siem.md` | 4 kalimat "di exam" diganti "di environment target" | query tetap, konteks diganti | 0 |
+| `skills/offsec-pen-300/references/ad-exploitation.md` | description dan best practice bebas ujian | idem | 0 |
+| `skills/offsec-pen-300/references/av-edr-evasion.md` | frasa "sebelum exam" pada praktik pengujian dihapus | idem | 0 |
+| `skills/offsec-pen-300/references/c2-strategy.md` | heading dan best practice ujian dihapus; panduan C2 netral | idem | 0 |
+| `skills/offsec-pen-300/references/mssql-attacks.md` | kalimat "di exam" diganti konteks enterprise | idem | 0 |
+| `skills/offsec-pen-300/references/referensi.md` | exam guide, FAQ, halaman sertifikasi, silabus, dan blog "passing the OSEP exam" dihapus; dokumentasi hulu Sliver/Mythic ditambahkan | tautan ujian tetap materi ujian walau berada di URL | 0 `exam` di seluruh berkas |
+| `skills/offsec-pen-300/references/shellcode-runners.md` | description bebas ujian | idem | 0 |
+| `skills/offsec-soc-200/assets/report-template.md` | bahasa pengumpulan ujian dihapus; struktur laporan utuh | template adalah deliverable kerja | struktur utuh |
+| `skills/offsec-soc-200/references/elk-kql.md` | kalimat ujian dihapus | idem | 0 |
+| `skills/offsec-soc-200/references/referensi.md` | OSDA Exam Guide, Exam FAQ, OpenExamsPrep practice questions, tabel exam review, study group, logistik kursus, dan 3 video review dihapus; nomor dirapikan 1–82 | vendor latihan soal adalah pelanggaran paling jelas | 0 tautan ujian |
+| `skills/offsec-soc-200/references/windows-event-logs.md` | kalimat ujian dihapus; tabel event ID utuh | idem | tabel utuh |
+| `skills/offsec-soc-200/scripts/common-detection-queries.kql` | komentar ujian dihapus; query utuh | idem | query utuh |
+| `skills/offsec-th-200/assets/report-template.md` | kata ujian di frontmatter/judul dihapus; struktur dan tabel chain of custody utuh | idem | struktur utuh |
+| `skills/offsec-th-200/references/case-studies.md` | kalimat ujian diganti disiplin hunt | idem | 0 |
+| `skills/offsec-th-200/references/crowdstrike-cql.md` | kalimat ujian diganti konteks hunian | idem | 0 |
+| `skills/offsec-th-200/references/endpoint-hunting.md` | idem | idem | 0 |
+| `skills/offsec-th-200/references/network-hunting.md` | idem | idem | 0 |
+| `skills/offsec-th-200/references/splunk-hunting.md` | idem | idem | 0 |
+| `skills/offsec-th-200/references/th-mindset.md` | "OSTH teaches", "report carries the 70 points", dan gotcha exam briefing diganti; PEAK/SEARCH/Diamond utuh | mindset hunt dipertahankan | PEAK/SEARCH utuh |
+| `skills/offsec-th-200/references/ti-integration.md` | kalimat ujian diganti konteks hunt | idem | 0 |
+| `skills/offsec-th-200/scripts/spl-queries.spl` | header "exam environment" → "your environment"; 30+ query tidak berubah | query tidak perlu diubah | query identik |
+| `skills/oscp-methodology/references/ad-attack-chain.md` | prioritas 40 poin dan pembagian waktu ujian dihapus | idem | 0 |
+| `skills/oscp-methodology/references/buffer-overflow.md` | catatan ujian dan anggaran 30 menit dihapus | idem | 0 |
+| `skills/oscp-methodology/references/enumeration-framework.md` | framing ujian di frontmatter dihapus | idem | 0 |
+| `skills/oscp-methodology/references/linux-privesc.md` | idem | idem | 0 |
+| `skills/oscp-methodology/references/password-cracking.md` | label dan framing OSCP dihapus | idem | 0 |
+| `skills/oscp-methodology/references/pivoting.md` | alasan "for exam" diganti alasan kerja | idem | 0 |
+| `skills/oscp-methodology/references/referensi.md` | tautan persiapan ujian dan klaim "145+" dihapus; sumber teknis dipertahankan | klaim jumlah tidak terverifikasi | 0 tautan ujian |
+| `skills/oscp-methodology/references/web-attacks.md` | larangan sqlmap diganti trade-off noise/reliability | larangan itu aturan ujian, bukan aturan kerja | 0 |
+| `skills/oscp-methodology/references/windows-privesc.md` | framing ujian di frontmatter dihapus | idem | 0 |
+
+### Diubah — ir-200 referensi yang dibawa sesi lain
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/offsec-ir-200/references/file-integrity-check.md` | 211 baris; berkas baru dari sesi paralel, ikut di-commit agar indeks tidak menunjuk berkas yang tidak ada | sudah didokumentasikan pada 0.18.0 | terindeks 1:1 |
+| `skills/offsec-ir-200/references/hidden-file-hunting.md` | berkas baru dari sesi paralel, ikut di-commit karena alasan yang sama | didokumentasikan pada 0.15.0 | terindeks 1:1 |
+| `skills/offsec-ir-200/references/live-response.md` | berkas baru dari sesi paralel, ikut di-commit karena alasan yang sama | didokumentasikan pada 0.13.0 | terindeks 1:1 |
+
+### Diubah — infra dan katalog
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `scripts/check-fact-notes.js` | `EXPECTED` turun dari 11 menjadi 2 entri (`mitre-attack`, `nist-800-53`); komentar menjelaskan skill bersertifikat kini persona-only | tidak ada lagi skill yang memuat angka ujian untuk dilacak | checker exit 0: "2 fact-bearing skill(s)" |
+| `skills/index.json` | deskripsi dan daftar berkas 9 skill diperbarui; total 28 skill | indeks harus mencerminkan berkas yang dapat dimuat | `node scripts/sync-skills.js` |
+| `manifest.json` | deskripsi 9 skill menjadi persona; total 28 skill | manifest adalah sumber kebenaran global | `node scripts/sync-skills.js` |
+| `README.md` | 9 baris katalog menjadi persona; 6 baris sumber "… Exam Guide" menjadi "OffSec PEN-300 (OSEP)" dan seterusnya dengan tautan `—` | tautan exam guide adalah materi ujian; URL pengganti tidak dikarang | 0 kemunculan `exam` di README |
+| `docs/SKILL-QUALITY.md` | kolom **Persona** ditambahkan; Status = Frame + (Provenance atau Persona); 28 skill; Selesai 12 / Sebagian 7 / Belum 9; backlog G dan H | tanpa jalur persona, konversi akan tercatat sebagai kemunduran | dihitung ulang dari matriks |
+
+### Dihapus
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/comptia-cysa/references/exam-overview.md` | dihapus | cetak biru ujian murni: durasi, jumlah soal, passing 750/900, bobot domain | 0 rujukan tersisa |
+| `skills/offsec-ir-200/references/modules-overview.md` | diganti nama | struktur 13 modul kursus | pengganti: `capability-domains.md` |
+| `skills/offsec-pen-300/assets/exam-checklist.md` | dihapus | checklist pra/saat/pasca ujian | direktori `assets/` ikut dihapus |
+| `skills/offsec-pen-300/references/exam-strategy.md` | dihapus | jadwal 47h45m dan kontrol panel | pengganti: `engagement-playbook.md` |
+| `skills/offsec-pen-300/references/modules-overview.md` | dihapus | silabus 16 modul | pengganti: `capability-domains.md` |
+| `skills/offsec-soc-200/assets/pre-exam-checklist.md` | dihapus | checklist hari ujian | 0 rujukan tersisa |
+| `skills/offsec-soc-200/references/challenge-labs.md` | diganti nama | lab tantangan berbayar | pengganti: `detection-labs.md` |
+| `skills/offsec-soc-200/references/modules-overview.md` | dihapus | struktur modul kursus | pengganti: `capability-domains.md` |
+| `skills/offsec-soc-200/references/overview-exam.md` | dihapus | struktur ujian, skor, lingkungan | 0 rujukan tersisa |
+| `skills/offsec-th-200/references/modules-overview.md` | dihapus | struktur modul kursus | pengganti: `capability-domains.md` |
+| `skills/offsec-web-300/references/modules-overview.md` | dihapus | daftar modul kursus | pengganti: `capability-domains.md` |
+| `skills/oscp-methodology/references/exam-architecture.md` | dihapus | mekanika penilaian, kombinasi lulus, pembatasan tool | tidak ada padanan kerja |
+| `skills/oscp-methodology/references/exam-strategy.md` | dihapus | perencanaan waktu ujian | pengganti: `engagement-playbook.md` |
+
+### Catatan
+
+Angka ujian tidak dihapus dari repo: seluruhnya tetap tersedia di `docs/CERTIFICATION-FACTS.md` sebagai arsip fakta. Yang berubah adalah skill tidak lagi mengajarkannya.
+
+Hitungan baris memakai `(Get-Content <path>).Count` mengikuti konvensi yang dikoreksi pada 0.16.1.
+
+Verifikasi yang dijalankan: `node scripts/check-fact-notes.js` (exit 0, 2 skill), `node scripts/check-changelog.js --base 04c4e1a` di worktree terpisah, perhitungan ulang jumlah berkas `references/` per skill, resolusi seluruh tautan relatif, paritas sel tabel, dan `grep` pola materi ujian termasuk di dalam URL.
+
+**Tidak dijalankan:** tes perilaku §9 `docs/PERSONA-INJECTION-NEEDS.md` (8 skenario) dan A/B ablation; keduanya menunggu backlog F.
+
+**Temuan yang belum dikerjakan** (dicatat di backlog G dan H): `security-auditor`, `log-management-nist-800-92`, `devsecops-mindset`, `owasp-top10-2025` masih memuat katalog sertifikasi, harga, dan vendor latihan soal; `ec-cnd` masih menautkan exam blueprint; `ptes-standard` masih menautkan dua halaman sertifikasi. Keempat skill pertama belum disentuh pada entri ini.
+
+`skills/ec-cnd` berada di cabang `feat/ec-cnd-persona-injection` dan tidak ada di `dev`, sehingga tidak ikut di-commit dan tidak masuk matriks. Angka total skill pada `manifest.json`, `skills/index.json`, dan `docs/SKILL-QUALITY.md` konsisten di 28.
+
 ## [0.18.0] — 2026-11-10 — offsec-ir-200: verifikasi integritas file
 
 **Commit dasar:** `16a89b9` (branch `dev`)

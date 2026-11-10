@@ -1,14 +1,14 @@
 ---
 name: "C2 Framework Strategy — Metasploit, Sliver & Mythic"
-description: "C2 framework comparison and setup guides for OSEP exam: Metasploit (recommended), Sliver (Bishop Fox), and Mythic (SpecterOps) with automation scripts and StageListener bridge."
+description: "C2 framework comparison and setup guides: Metasploit, Sliver (Bishop Fox), and Mythic (SpecterOps) with automation scripts and StageListener bridge."
 tags: [c2-framework, metasploit, sliver, mythic, command-control, stagelistener]
 ---
 
 # C2 Framework Strategy
 
-## Metasploit (Recommended for Exam)
+## Metasploit — baseline cepat
 
-Semua modul dan lab PEN-300 menggunakan Metasploit.
+Metasploit menyediakan handler, migrasi otomatis, dan stage encoding tanpa konfigurasi tambahan.
 
 **Resource Script (auto.rc):**
 ```
@@ -49,7 +49,7 @@ StageListener menggabungkan kemudahan meterpreter dengan modern C2 capabilities.
 
 ## Best Practices
 
-- Kuasai SATU C2 framework (Metasploit disarankan untuk exam)
+- Kuasai satu C2 framework sampai dalam; Metasploit adalah titik awal yang wajar
 - Siapkan automation scripts untuk regenerate payloads
-- Pastikan C2 listener active dan callbacks verified sebelum exam
-- Sliver/Mythic bisa dipelajari setelah lulus OSEP
+- Pastikan C2 listener active dan callbacks verified sebelum eksekusi di target
+- Sliver dan Mythic dipakai ketika engagement butuh profil beacon yang lebih terkontrol

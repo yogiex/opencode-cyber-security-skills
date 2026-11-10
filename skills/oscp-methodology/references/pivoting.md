@@ -1,6 +1,6 @@
 ---
 name: "Pivoting & Lateral Movement — Ligolo-ng, Chisel, SSH"
-description: "Pivoting decision tree and setup guides for OSCP covering Ligolo-ng (TUN-based), Chisel (SOCKS/HTTP), SSH tunneling, and socat port forwarding with practical configuration examples."
+description: "Pivoting decision tree and setup guides: Ligolo-ng (TUN-based), Chisel (SOCKS/HTTP), SSH tunneling, and socat port forwarding with practical configuration examples."
 tags: [pivoting, lateral-movement, ligolo-ng, chisel, ssh-tunneling, socat, port-forwarding]
 ---
 
@@ -79,5 +79,5 @@ nohup socat TCP-LISTEN:4444,fork TCP:10.10.10.10:4444 &
 
 - Foothold didapat → langsung cek interfaces (`ip addr`, `ifconfig`)
 - Setiap interface baru adalah subnet potensial
-- Prioritaskan Ligolo-ng untuk exam karena native tool support
+- Prioritaskan Ligolo-ng karena native tool support: tool berjalan tanpa proxychains.
 - Double pivot: deploy agent ke deep network → route tambahan

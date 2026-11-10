@@ -257,14 +257,15 @@ index=sysmon
 
 ## Gotchas
 
-- OSTH exam menggunakan Splunk untuk breadth analysis — pastikan query difilter dengan time range yang tepat
-- Jangan gunakan `search *` — selalu specify index dan sourcetype untuk performance
-- Data model di exam bisa berbeda dari lab — cek field names dengan `| fields _raw` sebelum menjalankan query kompleks
-- `transaction` command mahal secara performa — gunakan terbatas dengan maxpause yang sesuai
+- Splunk adalah sumber breadth — batasi time range sedini mungkin; query tanpa batas waktu adalah cara termahal untuk menemukan hal yang tidak relevan.
+- Jangan gunakan `search *` — selalu specify index dan sourcetype untuk performance.
+- Data model dan nama field berbeda antar estate — cek dengan `| fields _raw` atau `| head 5` sebelum menjalankan query kompleks.
+- `transaction` command mahal secara performa — gunakan terbatas dengan maxpause yang sesuai.
+- Hasil kosong pada satu index tidak berarti tidak ada aktivitas: cek dulu apakah sourcetype-nya memang mengirim data pada rentang itu.
 
 ## Best Practices
 
-- Bangun SPL query library sebelum exam (20+ copy-paste queries)
-- Simpan query yang sudah terbukti bekerja di notes
-- Dokumentasikan setiap query dengan konteks penggunaannya
-- Gunakan komentar di notes (SPL tidak support inline comments)
+- Simpan query library pribadi (20+ query siap pakai) beserta konteks pemakaiannya.
+- Simpan query yang sudah terbukti bekerja, bukan yang terlihat paling canggih.
+- Dokumentasikan setiap query dengan konteks penggunaannya.
+- Gunakan komentar di notes (SPL tidak support inline comments).

@@ -1,6 +1,6 @@
 ---
 name: "Containment, Eradication & Recovery"
-description: "Containment strategies, eradication procedures, recovery validation, and post-incident hardening for OSIR exam scenarios."
+description: "Containment strategies, eradication procedures, recovery validation, and post-incident hardening untuk skenario insiden nyata."
 tags: [containment, eradication, recovery, hardening, incident-response]
 ---
 
@@ -67,12 +67,12 @@ AppLocker or WDAC (Windows Defender Application Control)
 ## Gotchas
 
 - Di OSIR report, containment strategy harus **spesifik** — jangan tulis "block the attacker" tapi sebutkan "block IP 10.0.0.5 at firewall using ACL rule #100"
-- Short-term containment ≠ long-term containment — exam akan membedakan keduanya di soal
+- Short-term containment ≠ long-term containment — keduanya punya tujuan dan risiko berbeda
 - Eradication harus diverifikasi — jangan asumsikan malware hilang setelah scan. Tulis langkah verifikasinya
 
 ## Best Practices
 
-- Buat containment decision tree sebelum exam agar bisa mengambil keputusan cepat
+- Buat containment decision tree sebelum insiden, bukan saat tekanan waktu
 - Selalu prioritaskan containment di atas forensik — data bisa dikumpulkan setelah host terisolasi
 - Dokumentasikan timeline containment (siapa melakukan apa, kapan) untuk report
 - Recovery validation adalah langkah yang paling sering dilupakan — pastikan monitoring diaktifkan kembali

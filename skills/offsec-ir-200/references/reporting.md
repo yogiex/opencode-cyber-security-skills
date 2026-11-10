@@ -1,6 +1,6 @@
 ---
 name: "Post-Mortem Reporting & Communication Plans"
-description: "OSIR exam report structure, executive summary template, incident communication plans, regulatory timelines, and chain of custody."
+description: "Struktur laporan insiden, template executive summary, incident communication plans, regulatory timelines, and chain of custody."
 tags: [reporting, communication, post-mortem, chain-of-custody, templates]
 ---
 
@@ -118,14 +118,14 @@ details are provided in the sections below.
 
 ## Gotchas
 
-- Report bukan komponen nilai terpisah (total 70 = 4×10 + 2×15) — tetapi poin hanya diberikan untuk temuan yang terdokumentasi; dokumentasi kurang = poin dikurangi/nol. Alokasikan waktu khusus untuk report setelah exam
+- Temuan yang tidak terdokumentasi tidak bisa dipertanggungjawabkan; sisihkan waktu khusus untuk menulis laporan sebelum tim bubar
 - Executive summary harus bisa dipahami oleh non-technical stakeholder (management, legal)
 - Screenshot harus menyertakan timestamp yang terbaca — screenshot tanpa timestamp tidak berguna untuk report
 - Chain of custody adalah komponen yang sering dilupakan — pastikan diisi untuk setiap evidence item
 
 ## Best Practices
 
-- Siapkan template report sebelum exam agar tinggal diisi
+- Siapkan template laporan sebelum insiden agar tinggal diisi
 - Gunakan format PDF/DOCX sesuai ketentuan OffSec
 - Pastikan semua exercise questions terjawab di report — jangan sampai ada yang terlewat
 - Sertakan MITRE ATT&CK mapping untuk menunjukkan pemahaman TTP

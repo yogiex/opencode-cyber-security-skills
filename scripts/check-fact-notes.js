@@ -25,19 +25,10 @@ const FACTS_PATH = join(ROOT, "docs", "CERTIFICATION-FACTS.md");
 const FACTS_LINK = "../../docs/CERTIFICATION-FACTS.md";
 
 // Skills whose numbers must be traceable to the fact sheet, and the sentence
-// variant each one must use. Certifications talk about exam numbers; standards
-// talk about versions.
+// variant each one must use. Certification skills are persona-only: they carry
+// no exam numbers, so they are deliberately absent from this list. Only
+// standards still publish versions that must stay traceable.
 const EXPECTED = {
-  "comptia-cysa": "sertifikasi",
-  "cpent": "sertifikasi",
-  "ec-ecih": "sertifikasi",
-  "lf-cks": "sertifikasi",
-  "offsec-ir-200": "sertifikasi",
-  "offsec-pen-300": "sertifikasi",
-  "offsec-soc-200": "sertifikasi",
-  "offsec-th-200": "sertifikasi",
-  "offsec-web-300": "sertifikasi",
-  "oscp-methodology": "sertifikasi",
   "mitre-attack": "standar",
   "nist-800-53": "standar",
 };

@@ -107,7 +107,7 @@ index=sysmon EventCode=9
 
 ## Best Practices
 
-- Hafalkan 10-15 Event ID yang paling sering digunakan untuk hunting
-- Gunakan Sysmon Event 1 untuk parent-child process analysis (lebih detail dari 4688)
-- Kombinasikan Sysmon Event 3 (network) dengan Event 1 (process) untuk korelasi
-- Selalu filter known-good processes untuk mengurangi noise
+- Kuasai 10–15 Event ID yang paling sering dipakai; sisanya dicari saat dibutuhkan.
+- Gunakan Sysmon Event 1 untuk parent-child process analysis (lebih detail dari 4688).
+- Kombinasikan Sysmon Event 3 (network) dengan Event 1 (process) untuk korelasi.
+- Selalu filter known-good processes untuk mengurangi noise.

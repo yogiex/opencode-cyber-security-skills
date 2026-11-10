@@ -1,12 +1,12 @@
 ---
 name: "Buffer Overflow Methodology — 7-Step Workflow"
-description: "Complete x86 Windows buffer overflow exploitation methodology for OSCP: fuzzing, EIP offset, bad character identification, JMP ESP, shellcode generation, and full exploit development."
+description: "x86 Windows buffer overflow exploitation methodology: fuzzing, EIP offset, bad character identification, JMP ESP, shellcode generation, and full exploit development."
 tags: [buffer-overflow, bof, exploit-development, x86, immunity-debugger, mona]
 ---
 
 # Buffer Overflow Methodology
 
-BOF tidak lagi dijamin ada di exam OSCP+ (sejak 2023), tapi tetap mungkin muncul. Metodologi ini harus bisa dieksekusi dalam <30 menit.
+BOF masih muncul di aplikasi internal dan perangkat lama. Metodologi ini harus bisa dijalankan ulang oleh engineer klien tanpa saya, dan hasilnya bisa direproduksi.
 
 ## 7-Step Workflow (x86 Windows)
 

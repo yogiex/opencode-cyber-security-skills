@@ -147,14 +147,15 @@ event_simpleName=ProcessRollup2
 
 ## Gotchas
 
-- CQL syntax mirip Splunk tapi tidak identik — perhatikan perbedaan di operator `IN` dan `LIKE`
-- CrowdStrike Falcon di exam mungkin memiliki data yang berbeda dari yang terlihat di lab
-- IOA events tidak selalu muncul — jika tidak ada, fokus pada ProcessRollup2 dan NetworkConnectIP4
-- Field names di CQL menggunakan CamelCase (FileName, CommandLine, ParentBaseFileName)
+- CQL syntax mirip Splunk tapi tidak identik — perhatikan perbedaan di operator `IN` dan `LIKE`.
+- Falcon di estate pelanggan tidak selalu sama dengan lab: versi sensor, kebijakan retensi, dan event type yang aktif bisa berbeda.
+- IOA events tidak selalu muncul — jika tidak ada, fokus pada ProcessRollup2 dan NetworkConnectIP4.
+- Field names di CQL menggunakan CamelCase (FileName, CommandLine, ParentBaseFileName).
+- Beaconing dinilai dari `count` saja mudah salah: koneksi sah yang sering (update, telemetri) juga menghasilkan count tinggi, jadi perlu dicek interval dan tujuannya.
 
 ## Best Practices
 
-- Gunakan `event_simpleName=` sebagai filter pertama untuk efisiensi
-- Untuk behavioral hunting, fokus pada ProcessRollup2 karena paling kaya informasi
-- Simpan CQL queries yang sudah terbukti di notes untuk akses cepat saat exam
-- Kombinasikan CQL dengan Splunk untuk coverage lengkap (breadth + depth)
+- Gunakan `event_simpleName=` sebagai filter pertama untuk efisiensi.
+- Untuk behavioral hunting, fokus pada ProcessRollup2 karena paling kaya informasi.
+- Simpan CQL yang sudah terbukti di notes/runbook, beserta konteks pemakaiannya.
+- Kombinasikan CQL dengan Splunk untuk coverage lengkap (breadth + depth).

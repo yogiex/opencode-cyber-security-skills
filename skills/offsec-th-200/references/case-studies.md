@@ -83,11 +83,11 @@ Phase 6: Impact (T1486)
 
 ## Gotchas
 
-- Case studies di exam mungkin menggunakan threat actor yang berbeda dari yang dipelajari — fokus pada TTP pattern, bukan nama group
-- LockBit adalah contoh paling umum — pahami full attack chain-nya
-- APT29 sering muncul karena kaitannya dengan SolarWinds supply chain attack
-- Jangan hanya menghafal case studies — pahami methodology hunting untuk setiap fase
-- Setiap fase Kill Chain memiliki hunt indicators yang berbeda — pastikan semua fase tercakup
+- Aktor di laporan nyata tidak selalu grup yang sudah dikenal — pakai pola TTP, bukan nama grup.
+- LockBit adalah pola rantai lengkap yang paling sering dipakai sebagai contoh — pahami rantainya, bukan namanya.
+- APT29 sering dibahas karena rantai SolarWinds memberi contoh supply chain yang terdokumentasi.
+- Jangan hanya menghafal case studies — pahami methodology hunting untuk setiap fase.
+- Setiap fase Kill Chain memiliki hunt indicators yang berbeda — pastikan semua fase tercakup.
 
 ## Best Practices
 

@@ -1,6 +1,6 @@
 ---
 name: "Shellcode Runner Development & Encoding Pipeline"
-description: "Guide to building custom C# shellcode runners with XOR/AES encryption, payload encoding pipeline, and automation scripts for OSEP exam preparation."
+description: "Guide to building custom C# shellcode runners with XOR/AES encryption, payload encoding pipeline, and automation scripts for red team payload development."
 tags: [shellcode-runner, csharp, payload-encoding, xor-encryption, aes-encryption, automation]
 ---
 

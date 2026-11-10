@@ -1,34 +1,30 @@
 ---
-name: "Referensi Lengkap — OSEP External Resources"
-description: "Curated collection of 100+ OSEP/PEN-300 external resources including official OffSec links, exam reviews, GitHub repos, C2 framework guides, AMSI/AppLocker/AD/MSSQL references, books, practice labs, and YouTube channels."
-tags: [referensi, resources, offsec, github, books, labs, youtube, communities]
+name: "Referensi Eksternal — Payload, Evasion & Active Directory"
+description: "Kumpulan sumber eksternal untuk pekerjaan evasion dan red team: kode payload, dokumentasi AMSI, riset AD/ADCS, buku, dan lab latihan."
+tags: [referensi, resources, github, books, labs, amsi, active-directory]
 ---
 
-# Referensi Lengkap OSEP
+# Referensi Eksternal
 
-## Official OffSec Resources
+## Materi sumber OffSec
 
 | Resource | URL |
-|----------|-----|
+|---|---|
 | PEN-300 Course Page | https://www.offsec.com/courses/pen-300/ |
-| OSEP Exam Guide | https://help.offsec.com/hc/en-us/articles/360050293792-OSEP-Exam-Guide |
-| OSEP Exam FAQ | https://help.offsec.com/hc/en-us/articles/360049781352-OSEP-Exam-FAQ |
-| PEN-300 Syllabus | https://www.offsec.com/documentation/PEN300-Syllabus.pdf |
-| OSCE³ Certification | https://www.offsec.com/certificates/osce3/ |
 
-## Top GitHub Repositories
+## GitHub Repositories
 
 | Repository | Author | Description |
-|------------|--------|-------------|
-| chvancooten/OSEP-Code-Snippets | chvancooten | Most referenced OSEP code repo |
-| In3x0rabl3/OSEP | In3x0rabl3 | Checklist, reference, payloads |
-| r4ulcl/Mythic-OSEP-CheatSheet | r4ulcl | Mythic C2 cheatsheet |
-| hackinaggie/OSEP-Tools-v2 | hackinaggie | Marriage of multiple tools |
+|---|---|---|
+| chvancooten/OSEP-Code-Snippets | chvancooten | Snippet C# untuk loader, injection, dan evasion |
+| In3x0rabl3/OSEP | In3x0rabl3 | Payload dan catatan referensi |
+| r4ulcl/Mythic-OSEP-CheatSheet | r4ulcl | Cheatsheet Mythic C2 |
+| hackinaggie/OSEP-Tools-v2 | hackinaggie | Kumpulan tool payload dan post-exploitation |
 
-## C2 Framework Guides
+## C2 Framework
 
-- Bishop Fox — Passing OSEP using Sliver: https://bishopfox.com/blog/passing-the-osep-exam-using-sliver
-- r4ulcl — Passing OSEP using Mythic: https://r4ulcl.com/posts/passing-the-osep-exam-using-mythic-c2/
+- Sliver — dokumentasi dan repositori: https://github.com/BishopFox/sliver
+- Mythic — dokumentasi: https://docs.mythic-c2.net/
 - StageListener: https://medium.com/@kash.kat/introducing-stagelistener-a-meterpreter-listener-for-c2-payloads-bd2835835d92
 
 ## AMSI & PowerShell Security
@@ -46,7 +42,7 @@ tags: [referensi, resources, offsec, github, books, labs, youtube, communities]
 ## Books
 
 | Book | Author |
-|------|--------|
+|---|---|
 | The Hacker Playbook 3 | Peter Kim |
 | Red Team Field Manual v2 | Ben Clark & Nick Downer |
 | Black Hat Python (2nd Ed.) | Justin Seitz & Tim Arnold |
@@ -59,8 +55,8 @@ tags: [referensi, resources, offsec, github, books, labs, youtube, communities]
 - GOAD: https://github.com/Orange-Cyberdefense/GOAD
 - VulnLab: https://vulnlab.com
 
-## Communities
+## Best Practices
 
-- r/OSEP Reddit: https://reddit.com/r/osep
-- OffSec Discord: https://discord.gg/offsec
-- OffSec Forums: https://forums.offsec.com
+- Pilih sumber berdasarkan teknik yang sedang diuji, bukan berdasarkan popularitas.
+- Verifikasi ulang teknik dari repositori publik terhadap build target; kode lama sering mengasumsikan versi Windows tertentu.
+- Simpan tautan dan tanggal akses di catatan engagement agar bukti bisa dipertahankan.

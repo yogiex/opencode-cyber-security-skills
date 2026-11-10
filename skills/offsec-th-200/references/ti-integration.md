@@ -78,16 +78,16 @@ tags: [threat-intelligence, ioc, stix, taxii, misp, ti-integration, intel-driven
 
 ## Gotchas
 
-- Threat intel report di exam adalah sumber utama — baca dengan teliti sebelum memulai hunting
-- Tidak semua IoCs akan match — wajar. Fokus pada IoCs yang match untuk membangun timeline
-- STIX/TAXII tidak akan diminta secara langsung di exam — cukup pahami konsepnya
-- MISP query tidak tersedia di exam — fokus pada cara mengintegrasikan intel ke Splunk via inputlookup
-- TLP marking penting untuk report — pastikan menggunakan TLP yang benar di laporan
+- Intel brief adalah titik mulai — baca sampai selesai sebelum query pertama: IOC memberi pintu masuk, TTP memberi ruang pencarian.
+- Tidak semua IOC akan match — wajar. Fokus pada IOC yang match untuk membangun timeline.
+- STIX/TAXII lebih berguna untuk pertukaran antar-organisasi daripada query harian; pahami konsepnya tanpa memaksakannya di setiap hunt.
+- Yang paling sering dipakai harian adalah jalur feed → lookup di Splunk (`inputlookup`); integrasi itu yang perlu dirapikan lebih dulu.
+- TLP marking penting untuk report — pastikan label yang dipakai sesuai dengan sumber dan audiensnya.
 
 ## Best Practices
 
-- Buat IOC checklist dari threat report sebelum memulai query
-- Prioritaskan IoCs berdasarkan type: IP/domain (real-time) > hash (post-execution)
-- Dokumentasikan setiap IoC match dengan timestamp dan source
-- Gunakan threat intel untuk hypothesis-driven hunting (bukan cuma IOC matching)
-- Update IOC list secara real-time selama hunting — temuan baru = IoCs baru
+- Buat IOC checklist dari threat report sebelum memulai query.
+- Prioritaskan IoCs berdasarkan type: IP/domain (real-time) > hash (post-execution).
+- Dokumentasikan setiap IoC match dengan timestamp dan source.
+- Gunakan threat intel untuk hypothesis-driven hunting, bukan cuma IOC matching.
+- Update IOC list selama hunting — temuan baru menghasilkan IoC baru.

@@ -1,55 +1,67 @@
 ---
-name: "Domain 4 — Reporting and Communication (16%)"
-description: "CompTIA CySA+ Domain 4 covering vulnerability management reporting (executive summary, compliance findings, risk scorecards, action plans), incident response reporting (executive summary, threat intel report, communication plan), stakeholder communication per audience, and metrics/KPIs (MTTD, MTTR, MTTC, false positive rate, alert volume)."
-tags: [comptia, cysa, reporting, communication, metrics, kpi, stakeholder]
+name: "Reporting and Communication — Laporan, Stakeholder, Metrik"
+description: "Menyampaikan temuan kepada audiens yang berbeda: laporan vulnerability management, hambatan remediasi, template executive summary insiden, fokus komunikasi per stakeholder, serta metrik MTTD/MTTR/MTTC yang dipakai untuk memutuskan."
+tags: [reporting, communication, stakeholder, metrics, kpi, mttd, mttr, executive-summary, remediation]
 ---
 
-# Domain 4: Reporting and Communication (16%)
+# Reporting and Communication — Laporan, Stakeholder, Metrik
 
-## Vulnerability Management Reporting
+Laporan adalah produk kerja analyst, bukan lampiran. Temuan yang benar tetapi tidak dipahami audiensnya tidak akan mengubah apa pun; metrik yang tidak mengubah keputusan sebaiknya tidak ditampilkan.
 
-**Report Types:**
-- Executive summary (business risk, not technical details)
-- Compliance findings (PCI DSS, HIPAA, SOX)
-- Risk scorecards per system/department
-- Action plans with remediation recommendations
+## 1. Vulnerability management reporting
 
-**Inhibitors to Remediation:**
-Contractual agreements, organizational governance, business process interruption, legacy systems, proprietary systems, patch availability.
+**Jenis laporan:**
 
-**Stakeholder Communication:**
-| Audience | Focus |
-|----------|-------|
-| Technical team | IoC, timeline, technical details |
-| Management | Business impact, risk, recommendations |
-| Legal | Compliance, liability, disclosure |
-| PR/Customer | Data breach notification |
+- **Executive summary** — risiko bisnis, bukan detail teknis.
+- **Compliance findings** — PCI DSS, HIPAA, SOX sesuai kebutuhan.
+- **Risk scorecard** per sistem atau departemen.
+- **Action plan** dengan rekomendasi remediasi.
 
-## Incident Response Reporting
+**Hambatan remediasi:** kesepakatan kontraktual, tata kelola organisasi, gangguan proses bisnis, sistem legacy, sistem proprietary, dan ketersediaan patch.
 
-**Executive Summary Template:**
-- Who: Threat actor / affected users
-- What: Type of incident
-- When: Timeline
-- Where: Systems and data affected
-- Why: Root cause
-- Impact: Business impact
-- Recommendations: Actions needed
+Hambatan yang tidak disebutkan akan muncul lagi sebagai temuan yang sama pada periode berikutnya.
 
-## Metrics and KPIs
+## 2. Stakeholder communication
 
-| Metric | Description |
-|--------|-------------|
+| Audiens | Fokus |
+|---|---|
+| Tim teknis | IoC, timeline, detail teknis |
+| Manajemen | dampak bisnis, risiko, rekomendasi |
+| Legal | kepatuhan, liabilitas, kewajiban disclosure |
+| PR/customer | notifikasi kebocoran data |
+
+Satu laporan untuk semua audiens biasanya terlalu teknis untuk manajemen dan terlalu dangkal untuk engineer.
+
+## 3. Incident response reporting
+
+**Template executive summary:**
+
+- **Who** — aktor ancaman atau pengguna terdampak.
+- **What** — jenis insiden.
+- **When** — timeline.
+- **Where** — sistem dan data yang terdampak.
+- **Why** — root cause.
+- **Impact** — dampak bisnis.
+- **Recommendations** — tindakan yang dibutuhkan.
+
+Ringkasan tanpa timeline dan tanpa bukti yang bisa ditunjuk hanyalah narasi.
+
+## 4. Metrics and KPIs
+
+| Metrik | Arti |
+|---|---|
 | MTTD | Mean Time to Detect |
 | MTTR | Mean Time to Respond |
 | MTTC | Mean Time to Close |
-| False Positive Rate | % alerts that are false |
-| Alert Volume | Alerts per day/shift |
-| Remediation Rate | How fast findings are fixed |
+| False positive rate | persentase alert yang ternyata false positive |
+| Alert volume | jumlah alert per hari atau per shift |
+| Remediation rate | kecepatan temuan diperbaiki |
+
+Setiap metrik butuh definisi, periode, dan sumber data yang sama agar tren antar-periode bisa dibandingkan dan dipertanggungjawabkan.
 
 ## Best Practices
 
-- Tailor communication per audience (technical vs executive)
-- Use metrics to demonstrate SOC effectiveness
-- Document shift handovers thoroughly
-- Include remediation timelines in reports
+- Sesuaikan komunikasi dengan audiens: teknis untuk engineer, dampak dan keputusan untuk eksekutif.
+- Gunakan metrik untuk menunjukkan efektivitas SOC dan dasar perbaikan, bukan untuk pamer.
+- Dokumentasikan shift handover secara menyeluruh.
+- Sertakan timeline remediasi di dalam laporan.

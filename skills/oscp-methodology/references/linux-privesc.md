@@ -1,6 +1,6 @@
 ---
 name: "Linux Privilege Escalation — 7 Attack Vectors"
-description: "Linux privilege escalation methodology for OSCP covering sudo abuse, SUID/SGID binaries, Linux capabilities, cron jobs, credential hunting, internal ports, and kernel exploits as last resort."
+description: "Linux privilege escalation methodology: sudo abuse, SUID/SGID binaries, Linux capabilities, cron jobs, credential hunting, internal ports, and kernel exploits as last resort."
 tags: [linux, privilege-escalation, sudo, suid, capabilities, cron, kernel-exploit]
 ---
 

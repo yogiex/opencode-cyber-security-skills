@@ -1,6 +1,6 @@
 ---
 name: "Web Application Attacks — SQLi, LFI, CMDi & File Upload"
-description: "Comprehensive web application attack methodology for OSCP covering SQL injection (manual, no sqlmap), LFI to RCE via log poisoning, command injection detection, file upload bypass techniques, and structured attack roadmap."
+description: "Web application attack methodology: manual SQL injection, LFI to RCE via log poisoning, command injection detection, file upload bypass techniques, and structured attack roadmap."
 tags: [web, sqli, lfi, command-injection, file-upload, webshell]
 ---
 
@@ -32,7 +32,7 @@ Target URL
 3. PHP wrappers: `php://filter/convert.base64-encode/resource=config.php`
 4. Proc enumeration: `/proc/self/environ`, `/proc/PID/cmdline`
 
-## SQL Injection (Manual — no sqlmap)
+## SQL Injection (Manual)
 
 1. Deteksi: `' OR 1=1--`, `' AND SLEEP(5)--`
 2. UNION-based: tentukan jumlah columns, extract data
@@ -56,7 +56,7 @@ Target URL
 
 ## Best Practices
 
-- Manual SQLi adalah keharusan — sqlmap dilarang
+- Manual SQLi adalah bukti yang bisa direproduksi; sqlmap cepat tetapi berisik di log dan sering gagal pada endpoint stateful, jadi pakai untuk memetakan kandidat, bukan sebagai satu-satunya bukti
 - LFI sering jadi entry vector paling cepat
 - Setiap parameter adalah potensi CMDi/SSTI
 - Simpan semua payload yang berhasil untuk reuse

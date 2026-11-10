@@ -32,19 +32,43 @@
     },
     {
       "name": "comptia-cysa",
-      "description": "Panduan lengkap CompTIA CySA+ (CS0-004 V4) mencakup Security Operations, Vulnerability Management, Incident Response, dan Reporting & Communication untuk mempersiapkan sertifikasi Cybersecurity Analyst.",
+      "description": "Persona cyber defense analyst bersertifikat CompTIA CySA+ — triage alert, prioritisasi vulnerability dengan CVSS/EPSS/konteks, hunting berbasis TTP, penanganan bukti, dan komunikasi temuan ke teknis maupun manajemen. Pakai saat agent harus berperan sebagai analis SOC atau vulnerability-management yang mengambil keputusan triase dan prioritas — bukan untuk persiapan ujian.",
       "version": "1.0.0",
       "source": "./skills/comptia-cysa",
       "license": "MIT",
-      "keywords": []
+      "keywords": [
+        "cysa",
+        "cyber defense analyst",
+        "soc analyst",
+        "triage",
+        "vulnerability management",
+        "cvss",
+        "epss",
+        "threat hunting",
+        "incident response",
+        "chain of custody",
+        "reporting"
+      ]
     },
     {
       "name": "cpent",
-      "description": "EC-Council CPENT (Certified Penetration Testing Professional) — mindset, metodologi, dan strategi komprehensif untuk CPENT exam mencakup 14 modul inti, binary exploitation 32/64-bit, IoT/OT/SCADA, double pivoting, report writing, dan LPT Master pathway.",
+      "description": "Persona pengguna bersertifikat EC-Council CPENT — aturan operasional yang mengikat, dua belas hukum mindset, doktrin kedalaman (double pivoting), jalur serangan Active Directory, eksploitasi binary x86/x64, wireless/IoT/OT-SCADA, dan laporan kelas klien. Pakai saat agent harus berperan sebagai praktisi CPENT pada engagement nyata — bukan untuk persiapan ujian.",
       "version": "1.0.0",
       "source": "./skills/cpent",
       "license": "MIT",
-      "keywords": []
+      "keywords": [
+        "cpent",
+        "penetration testing",
+        "pivoting",
+        "double pivot",
+        "active directory",
+        "binary exploitation",
+        "iot",
+        "ot",
+        "scada",
+        "red team",
+        "reporting"
+      ]
     },
     {
       "name": "devsecops-mindset",
@@ -56,11 +80,25 @@
     },
     {
       "name": "ec-ecih",
-      "description": "EC-Council ECIH (Certified Incident Handler) v3 — incident handler mindset, IR lifecycle framework (NIST 800-61 + ECIH 9-stage IH&R), decision frameworks per incident type, forensic readiness, containment strategies, eradication methodology, recovery planning, post-incident lessons learned, dan komunikasi krisis. Berbasis ECIH 212-89 v3 curriculum.",
+      "description": "Persona incident handler bersertifikat EC-Council ECIH — menjalankan satu insiden dari alert pertama sampai post-mortem: triage dan prioritas, keputusan contain-versus-evidence, chain of custody, eradikasi, recovery, serta koordinasi legal dan komunikasi krisis. Pakai saat agent harus berperan sebagai incident handler yang memegang insiden nyata — bukan untuk persiapan ujian.",
       "version": "1.0.0",
       "source": "./skills/ec-ecih",
       "license": "MIT",
-      "keywords": []
+      "keywords": [
+        "ecih",
+        "incident handler",
+        "incident response",
+        "csirt",
+        "triage",
+        "containment",
+        "evidence",
+        "chain of custody",
+        "eradication",
+        "recovery",
+        "notification",
+        "post-incident",
+        "playbooks"
+      ]
     },
     {
       "name": "incident-response-plan",
@@ -72,11 +110,27 @@
     },
     {
       "name": "lf-cks",
-      "description": "Certified Kubernetes Security Specialist (CKS) — Kubernetes security mindset, defense-in-depth framework, cluster isolation models, workload segmentation, supply chain trust, authentication & authorization philosophy, network security architecture, runtime protection, compliance posture, dan decision framework untuk securing container platforms. Berbasis CNCF CKS curriculum dan CIS Kubernetes Benchmark.",
+      "description": "Persona Kubernetes platform security engineer bersertifikat CKS — memutuskan hardening cluster, isolasi workload, kontrol supply chain, dan respons runtime tanpa memutus layanan. Pakai saat agent harus berperan sebagai pemilik keamanan cluster pada pekerjaan nyata — bukan untuk persiapan ujian.",
       "version": "1.0.0",
       "source": "./skills/lf-cks",
       "license": "MIT",
-      "keywords": []
+      "keywords": [
+        "cks",
+        "kubernetes security",
+        "rbac",
+        "serviceaccount",
+        "pod security admission",
+        "pss",
+        "network policy",
+        "seccomp",
+        "apparmor",
+        "supply chain",
+        "image signing",
+        "falco",
+        "audit log",
+        "etcd encryption",
+        "multi-tenancy"
+      ]
     },
     {
       "name": "log-management-nist-800-92",
@@ -104,51 +158,131 @@
     },
     {
       "name": "offsec-ir-200",
-      "description": "OffSec IR-200 / OSIR (OffSec Incident Responder) — foundational incident response covering full IR lifecycle (NIST 800-61r2), Splunk SIEM analysis with SPL, digital forensics (Autopsy, Volatility 3, FTK Imager), malware triage with YARA, containment/eradication/recovery strategies, incident communication plans, and post-mortem reporting.",
+      "description": "Persona incident responder bersertifikat OffSec IR-200 / OSIR — triage host hidup, akuisisi bukti volatil sebelum host disentuh, forensik disk dan memori (Autopsy, Volatility 3), verifikasi integritas berkas, triage malware dengan YARA, analisis Splunk/SPL, containment dan eradikasi bertahap, serta laporan post-mortem yang bisa dipertanggungjawabkan. Pakai saat agent harus berperan sebagai responder yang menangani insiden nyata — bukan untuk persiapan ujian.",
       "version": "1.0.0",
       "source": "./skills/offsec-ir-200",
       "license": "MIT",
-      "keywords": []
+      "keywords": [
+        "incident response",
+        "dfir",
+        "splunk",
+        "volatility",
+        "autopsy",
+        "yara",
+        "file integrity",
+        "containment",
+        "eradication",
+        "malware triage",
+        "live response",
+        "post-mortem"
+      ]
     },
     {
       "name": "offsec-pen-300",
-      "description": "OffSec PEN-300 / OSEP — advanced evasion techniques, AV/EDR bypass, AMSI/AppLocker/CLM evasion, process injection, custom shellcode runners, MSSQL attacks, AD exploitation, delegation, ADCS, and professional report writing.",
+      "description": "Persona evasion dan red team operator bersertifikat OffSec OSEP (PEN-300) — penulisan payload custom, bypass AV/EDR/AMSI/AppLocker/CLM, process injection, shellcode runner, serangan MSSQL, eksploitasi Active Directory dan ADCS, serta disiplin bukti untuk klien. Pakai saat agent harus berperan sebagai operator yang menembus lingkungan berpertahanan pada engagement nyata — bukan untuk persiapan ujian.",
       "version": "1.0.0",
       "source": "./skills/offsec-pen-300",
       "license": "MIT",
-      "keywords": []
+      "keywords": [
+        "osep",
+        "pen-300",
+        "evasion",
+        "red team",
+        "av edr",
+        "amsi",
+        "applocker",
+        "clm",
+        "process injection",
+        "shellcode runner",
+        "mssql",
+        "active directory",
+        "adcs",
+        "c2",
+        "payload custom"
+      ]
     },
     {
       "name": "offsec-soc-200",
-      "description": "OffSec SOC-200 / OSDA (OffSec Defense Analyst) — security operations and defensive analysis. Covers SOC operations, Windows & Linux endpoint detection, SIEM analysis with ELK/Kibana/KQL, attacker methodology (Kill Chain, MITRE ATT&CK), Windows Event Log & Sysmon analysis, Active Directory threat detection, network detections, and incident investigation.",
+      "description": "Persona detection and defensive analyst bersertifikat OffSec SOC-200 / OSDA — merekonstruksi intrusi dari telemetri: Windows Event Log dan Sysmon, PowerShell logging, KQL di ELK, deteksi endpoint Windows dan Linux, pergerakan lateral serta persistence Active Directory, sampai laporan investigasi yang bisa direplikasi. Pakai saat agent harus berperan sebagai SOC analyst atau detection engineer yang menjelaskan apa yang sebenarnya terjadi di jaringan — bukan untuk persiapan ujian.",
       "version": "1.0.0",
       "source": "./skills/offsec-soc-200",
       "license": "MIT",
-      "keywords": []
+      "keywords": [
+        "soc",
+        "detection engineering",
+        "osda",
+        "siem",
+        "elk",
+        "kql",
+        "sysmon",
+        "windows event log",
+        "linux detection",
+        "active directory",
+        "lateral movement",
+        "investigation"
+      ]
     },
     {
       "name": "offsec-th-200",
-      "description": "OffSec TH-200 / OSTH (OffSec Threat Hunter) — foundational threat hunting covering proactive threat detection, behavioral analysis, threat actor profiling, Splunk SIEM analysis with SPL, CrowdStrike Falcon endpoint hunting, Suricata IDS/IPS, hypothesis-driven hunting methodologies (PEAK, SEARCH), MITRE ATT&CK mapping, ransomware & APT case studies, cyber threat intelligence integration, and professional hunt reporting.",
+      "description": "Persona threat hunter bersertifikat OffSec TH-200 (OSTH) — hipotesis yang bisa difalsifikasi, korelasi Splunk (SPL), CrowdStrike Falcon (CQL), dan Suricata atas estate yang diasumsikan sudah dikompromikan, serta hunt narrative yang bisa direproduksi. Pakai saat agent harus berperan sebagai threat hunter pada hunt multi-hari yang nyata — bukan untuk persiapan ujian.",
       "version": "1.0.0",
       "source": "./skills/offsec-th-200",
       "license": "MIT",
-      "keywords": []
+      "keywords": [
+        "threat hunting",
+        "hypothesis-driven",
+        "peak",
+        "search",
+        "splunk",
+        "spl",
+        "crowdstrike falcon",
+        "cql",
+        "suricata",
+        "zeek",
+        "sysmon",
+        "mitre attack",
+        "hunt narrative",
+        "assumed compromise"
+      ]
     },
     {
       "name": "offsec-web-300",
-      "description": "OffSec WEB-300 / OSWE (Offensive Security Web Expert) — advanced web application security assessment covering white-box testing methodology, source code review in Java, C#, PHP, Python, and JavaScript, custom exploit development for .NET deserialization, PHP type juggling, SQL injection, SSTI, SSRF, prototype pollution, authentication bypass, XXE, OS command injection, and professional exploit scripting in Python.",
+      "description": "Persona konsultan keamanan aplikasi web white-box bersertifikat OffSec OSWE — source code review Java, C#, PHP, Python, dan JavaScript, perancangan rantai eksploit, dan penulisan exploit Python yang bisa dijalankan ulang. Pakai saat agent harus berperan sebagai senior pentester / appsec engineer yang membaca kode dan menulis exploit pada engagement nyata — bukan untuk persiapan ujian.",
       "version": "1.0.0",
       "source": "./skills/offsec-web-300",
       "license": "MIT",
-      "keywords": []
+      "keywords": [
+        "white-box",
+        "source code review",
+        "oswe",
+        "web exploitation",
+        "deserialization",
+        "prototype pollution",
+        "ssti",
+        "sqli",
+        "ssrf",
+        "xxe",
+        "exploit development",
+        "python"
+      ]
     },
     {
       "name": "oscp-methodology",
-      "description": "OSCP (Offensive Security Certified Professional) — mindset, metodologi, dan strategi komprehensif untuk PEN-200/OSCP+ mencakup filsafat Try Harder, 3 attack vectors, enumeration framework, privilege escalation AD/Linux/Windows, dan reporting.",
+      "description": "Persona konsultan offensive security bersertifikat OSCP — disiplin scope dan otorisasi, enumeration tiga vektor, jalur serangan termurah, eskalasi hak Linux/Windows, rantai serangan Active Directory, pivoting, dan laporan yang bisa direproduksi klien. Pakai saat agent harus berperan sebagai penetration tester pada engagement klien nyata — bukan untuk persiapan ujian.",
       "version": "1.0.0",
       "source": "./skills/oscp-methodology",
       "license": "MIT",
-      "keywords": []
+      "keywords": [
+        "oscp",
+        "penetration testing",
+        "offensive security",
+        "enumeration",
+        "privilege escalation",
+        "active directory",
+        "pivoting",
+        "buffer overflow",
+        "reporting"
+      ]
     },
     {
       "name": "owasp-top10-2025",

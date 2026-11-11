@@ -29,15 +29,16 @@ Pola di bawah berasal dari studi kasus kursus WEB-300; detail versi dan CVE teta
 
 | Aplikasi | Pola yang berulang |
 |---|---|
-| Tutor LMS (PHP) | reset token dari `mt_rand()` enam digit tanpa rate limiting; upload PHP dengan validasi ekstensi lemah; `strcmp()` menerima array |
-| ManageEngine (Java) | input tanpa sanitasi di query; PostgreSQL `COPY ... FROM PROGRAM` mengubah SQLi menjadi RCE |
-| Node.js `eval()` (Bassmaster) | input request langsung masuk `eval()`; pola yang sama muncul kini sebagai sandbox escape dan template injection |
-| DotNetNuke (C#) | cookie 3DES dengan kunci hardcoded, didekripsi lalu `LosFormatter.Deserialize` (CVE-2017-9822) |
-| ERPNext (Python/Frappe) | logic flaw pada alur reset password; Jinja2 SSTI di email, print, dan report template |
-| openCRX (Java) | string concatenation di `authenticate()`; H2 `CREATE ALIAS` mengeksekusi Java dari SQL |
-| openIT COCKPIT (PHP) | stored XSS → pencurian CSRF token → command injection lewat WebSocket |
-| Concord (Java) | validasi JWT longgar (`alg: none` atau secret di source), lalu Java deserialization |
-| Guacamole Lite (Node.js) | recursive merge pada JSON → `__proto__` pollution |
+| ATutor (PHP) | blind SQLi + salah pakai parameterization, bypass file upload, escape jail, disclosure web root; type juggling lewat magic hash pada email |
+| ManageEngine (Java) | input tanpa sanitasi ke query; PostgreSQL `COPY ... TO PROGRAM`, extension UDF, dan large object mengubah SQLi menjadi RCE |
+| Bassmaster (Node.js) | input request langsung masuk `eval()`; pola yang sama muncul kini sebagai sandbox escape dan template injection |
+| DotNetNuke (C#) | root type dipilih dari input → `XmlSerializer` + `ExpandedWrapper<T1,T2>` + `ObjectDataProvider`; `LosFormatter`/`ObjectStateFormatter` sebagai inner payload |
+| ERPNext (Python/Frappe) | SQLi di alur reset password (bukan sekadar logic flaw); Jinja2 SSTI di email, print, dan report template dengan filter evasion |
+| openCRX (Java) | reset token dari RNG lemah; XXE → kredensial → Java routine (HSQLDB/H2) → web shell |
+| openIT COCKPIT (PHP) | DOM-based XSS → WebSocket command injection |
+| Reflected XSS (umum) | parameter/header/path/cookie yang di-echo tanpa context-aware encoding → eksekusi di origin korban; sering di halaman pencarian, error 404, dan dashboard admin yang merender UA/Referer |
+| Concord (Java) | CORS permisif + CSRF, lalu insecure defaults; bukan JWT |
+| Guacamole Lite (Node.js) | recursive merge pada JSON → `__proto__` pollution → gadget EJS/Handlebars |
 
 ## 3. Perantai dampak
 

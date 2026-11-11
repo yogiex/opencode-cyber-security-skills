@@ -149,6 +149,41 @@
       ]
     },
     {
+      "name": "network-security",
+      "description": "Network security for defensive engineers: architecture, segmentation, modern protocols, Wi-Fi (WPA3, 802.1X/RADIUS, controllers), monitoring, hardening, cloud/container, wireless/OT, and emerging threats.",
+      "files": [
+        "SKILL.md",
+        "references/attack-surface-trends.md",
+        "references/cloud-container-networking.md",
+        "references/ddos-mitigation.md",
+        "references/dns-security.md",
+        "references/encrypted-traffic-analysis.md",
+        "references/firewall-and-vpn-technologies.md",
+        "references/kubernetes-network-security.md",
+        "references/modern-network-protocols.md",
+        "references/network-architecture-segmentation.md",
+        "references/network-detection-engineering.md",
+        "references/network-forensics.md",
+        "references/network-hardening-baselines.md",
+        "references/network-monitoring-detection.md",
+        "references/network-security-fundamentals.md",
+        "references/network-security-tools-ecosystem.md",
+        "references/network-threat-hunting.md",
+        "references/sase-and-sse.md",
+        "references/tls-and-pki.md",
+        "references/wifi-6-7-security.md",
+        "references/wifi-8021x-eap-radius.md",
+        "references/wifi-controller-architecture.md",
+        "references/wifi-enterprise-hardening.md",
+        "references/wifi-rf-security.md",
+        "references/wifi-wifite-tooling.md",
+        "references/wifi-wpa2-attacks.md",
+        "references/wifi-wpa3-protocol.md",
+        "references/wireless-iot-ot-network-security.md",
+        "references/zero-trust-architecture.md"
+      ]
+    },
+    {
       "name": "nist-800-53",
       "description": "Panduan Security and Privacy Controls berdasarkan NIST SP 800-53 Rev 5 (Release 5.2.0) untuk pemilihan, implementasi, dan assessment kontrol keamanan dan privasi dalam Risk Management Framework.",
       "files": [
@@ -237,12 +272,21 @@
         "references/engagement-playbook.md",
         "references/exploit-development.md",
         "references/injection-attacks.md",
+        "references/java-web-exploitation.md",
         "references/persona.md",
         "references/php-auth-bypass.md",
         "references/prototype-pollution.md",
         "references/referensi.md",
+        "references/reflected-xss-detection-oswe.md",
+        "references/reflected-xss-tooling-automation-oswe.md",
+        "references/reflected-xss.md",
+        "references/source-recovery-debugging.md",
         "references/source-review-playbook.md",
-        "references/ssrf-xxe.md"
+        "references/ssrf-internal-chains.md",
+        "references/ssrf-xxe.md",
+        "references/waf-bypass-payloads.md",
+        "references/xss-dom-reflected-hybrid-oswe.md",
+        "references/xss-reflected-chains-oswe.md"
       ]
     },
     {
@@ -402,6 +446,7 @@
         "references/type-juggling.md",
         "references/websocket-attacks.md",
         "references/xs-leak.md",
+        "references/xss-reflected-filter-waf-bypass.md",
         "references/xss.md",
         "references/xxe.md"
       ]

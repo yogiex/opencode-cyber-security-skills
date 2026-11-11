@@ -6,6 +6,8 @@ tags: [oswe, ssrf, xxe, xml, cloud-metadata, dns-rebinding, blind-xxe, dtd]
 
 ## Server-Side Request Forgery (SSRF)
 
+> Berkas ini memuat dasar SSRF/XXE. Untuk sink map, header wajib metadata cloud, admin API internal, dan headless renderer, lihat [ssrf-internal-chains.md](./ssrf-internal-chains.md).
+
 ### SSRF Types
 
 | Type | Description | Difficulty |

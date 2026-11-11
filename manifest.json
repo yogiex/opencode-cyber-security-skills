@@ -170,6 +170,36 @@
       "keywords": []
     },
     {
+      "name": "network-security",
+      "description": "Network security for defensive engineers: architecture, segmentation, modern protocols, Wi-Fi (WPA3, 802.1X/RADIUS, controllers), monitoring, hardening, cloud/container, wireless/OT, and emerging threats.",
+      "version": "1.0.0",
+      "source": "./skills/network-security",
+      "license": "MIT",
+      "keywords": [
+        "network security",
+        "wifi",
+        "wpa3",
+        "wpa2",
+        "sae",
+        "802.1x",
+        "eap",
+        "radius",
+        "wifite",
+        "wireless controller",
+        "zero trust",
+        "segmentation",
+        "tls",
+        "quic",
+        "sase",
+        "ndr",
+        "ddos",
+        "dns",
+        "firewall",
+        "vpn",
+        "kubernetes"
+      ]
+    },
+    {
       "name": "nist-800-53",
       "description": "Panduan Security and Privacy Controls berdasarkan NIST SP 800-53 Rev 5 (Release 5.2.0) untuk pemilihan, implementasi, dan assessment kontrol keamanan dan privasi dalam Risk Management Framework.",
       "version": "1.0.0",
@@ -283,8 +313,14 @@
         "sqli",
         "ssrf",
         "xxe",
+        "xss",
+        "reflected xss",
         "exploit development",
-        "python"
+        "python",
+        "waf bypass",
+        "filter evasion",
+        "crs",
+        "coraza"
       ]
     },
     {

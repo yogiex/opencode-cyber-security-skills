@@ -40,7 +40,7 @@ Alasan dua jalur: skill bersertifikat memilih **persona** (tanpa angka ujian, ja
 | offsec-pen-300 | ya | ya | — | ya | 10 | ya | Selesai |
 | offsec-soc-200 | ya | ya | — | ya | 6 | ya | Selesai |
 | offsec-th-200 | ya | ya | — | ya | 10 | ya | Selesai |
-| offsec-web-300 | ya | ya | — | ya | 11 | ya | Selesai |
+| offsec-web-300 | ya | ya | — | ya | 15 | ya | Selesai |
 | oscp-methodology | ya | ya | — | ya | 11 | ya | Selesai |
 | owasp-top10-2025 | ya | ya | — | — | 1 | ya | Sebagian |
 | ptes-standard | ya | ya | — | — | 11 | ya | Sebagian |

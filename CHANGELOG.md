@@ -13,6 +13,283 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.24.0] — 2026-11-11 — Reflected XSS OSWE playbook dan konsolidasi referensi `offsec-web-300`
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** sintesis analisis reflected XSS tingkat OSWE (WEB-300) dari delapan subagent menjadi playbook yang dapat dipakai agent, dipindahkan ke dalam skill `offsec-web-300`, plus konsolidasi referensi skill yang belum ter-commit (WAF bypass, source recovery, Java exploitation, rantai SSRF internal, koreksi deserialization/PHP auth/injection/prototype pollution/SSRF-XXE) dan artefak turunannya.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/offsec-web-300/references/reflected-xss.md` | playbook baru 501 baris: mekanisme & titik refleksi, payload per konteks, bypass filter/WAF, hybrid DOM, rantai eksploitasi, deteksi manual, tooling, defense | agar agent memahami reflected XSS OSWE dari akar sampai bukti | berkas dibaca; seluruh tautan companion valid |
+| `skills/offsec-web-300/references/xss-dom-reflected-hybrid-oswe.md` | referensi 432 baris: source/sink, reflected-DOM hybrid, CSTI, prototype pollution, deteksi | companion hybrid reflected+DOM | berkas ada; terindeks |
+| `skills/offsec-web-300/references/xss-reflected-chains-oswe.md` | referensi 316 baris: session hijacking, ATO, keylogging, phishing, XSS→RCE, BeEF, stealth | companion rantai eksploitasi | berkas ada; terindeks |
+| `skills/offsec-web-300/references/reflected-xss-detection-oswe.md` | referensi 658 baris: deteksi manual, canary, workflow, false positive, partial/multi-part, reporting | companion metodologi deteksi | berkas ada; terindeks |
+| `skills/offsec-web-300/references/reflected-xss-tooling-automation-oswe.md` | referensi 703 baris: Burp, CLI, skrip, headless, pipeline, keterbatasan otomasi | companion tooling | berkas ada; terindeks |
+| `skills/web-pentest-payloads/references/xss-reflected-filter-waf-bypass.md` | referensi 548 baris: bypass filter & WAF khusus XSS refleksi | payload harus lolos WAF aplikasi | berkas ada; frontmatter valid |
+| `skills/offsec-web-300/references/waf-bypass-payloads.md` | referensi 190 baris: SQLi per mesh, CRS/Coraza, command injection, SSTI, eval PHP, XXE, deserialization, transport | payload lama tidak punya jalur lolos WAF | berkas ada; tabel 0 mismatch |
+| `skills/offsec-web-300/references/source-recovery-debugging.md` | referensi 127 baris: decompile DLL/JAR, route dari bytecode, config/secret, JDWP, dnSpy | source tidak selalu tersedia | berkas ada; tautan valid |
+| `skills/offsec-web-300/references/java-web-exploitation.md` | referensi 127 baris: JAXP per sink XXE, H2 vs HSQLDB, SpEL/Thymeleaf/OGNL | modul Java belum punya rumah | berkas ada; tautan valid |
+| `skills/offsec-web-300/references/ssrf-internal-chains.md` | referensi 104 baris: sink map, bypass lapisan, header metadata, admin API, CDP | `ssrf-xxe.md` hanya dasar | berkas ada; tautan valid |
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/offsec-web-300/SKILL.md` | kata kunci frontmatter (xss, reflected xss, waf bypass, filter evasion, crs, coraza) + baris capability map, reference docs, progressive disclosure, dua gotchas | integrasi seluruh referensi baru ke entry point skill | dibaca ulang; lima tautan baru terhitung |
+| `skills/offsec-web-300/references/capability-domains.md` | baris pola reflected XSS umum dan pola Wi-Fi/referensi baru | peta kapabilitas selaras | dibaca ulang |
+| `skills/offsec-web-300/references/dotnet-deserialization.md` | XmlSerializer + `ExpandedWrapper<T1,T2>` + `ObjectDataProvider`; LosFormatter sebagai inner payload; ViewState/machineKey | klaim lama tidak bersumber | dibaca ulang; tabel serializer |
+| `skills/offsec-web-300/references/injection-attacks.md` | SQLi per engine, `COPY TO PROGRAM`, command injection, WebSocket diperluas | cakupan injection kurang | dibaca ulang |
+| `skills/offsec-web-300/references/php-auth-bypass.md` | gerbang PHP 8 (`strcmp`, `in_array`, `switch`), contoh `json_decode`, magic hash dikoreksi | empat klaim menyesatkan | dibaca ulang |
+| `skills/offsec-web-300/references/prototype-pollution.md` | pola merge, gadget per library, deteksi | perluasan referensi | dibaca ulang |
+| `skills/offsec-web-300/references/ssrf-xxe.md` | tautan ke rantai SSRF internal | navigasi referensi | dibaca ulang |
+| `manifest.json` | regenerasi `node scripts/sync-skills.js` (keywords offsec-web-300 dan network-security) | artefak turunan | `node scripts/sync-skills.js` |
+| `skills/index.json` | regenerasi `node scripts/sync-skills.js` (berkas referensi baru terindeks) | artefak turunan | `node scripts/sync-skills.js` |
+| `.claude-plugin/plugin.json` | regenerasi `node scripts/sync-skills.js` | artefak turunan | `node scripts/sync-skills.js` |
+| `.claude-plugin/marketplace.json` | regenerasi `node scripts/sync-skills.js` | artefak turunan | `node scripts/sync-skills.js` |
+| `.cursor-plugin/plugin.json` | regenerasi `node scripts/sync-skills.js` | artefak turunan | `node scripts/sync-skills.js` |
+| `README.md` | badge jumlah skill/reference docs, baris tabel `network-security` yang sebelumnya menempel pada baris `soc-analyst` dipisah | markdown rusak dan hitungan usang | `findstr "network-security" README.md`; baris tabel dihitung |
+| `docs/SKILL-QUALITY.md` | angka agregat kualitas skill diperbarui | sinkron dengan jumlah skill | dibaca ulang |
+
+### Catatan
+
+- Sebelum commit, working tree juga memuat pekerjaan Wi-Fi `network-security` (entri 0.23.0 dan 0.22.x) serta direktori `skills/network-security/` yang sebelumnya untracked; semuanya ikut di-commit agar `manifest.json` dan `skills/index.json` konsisten dengan isi repo.
+- Verifikasi: `node scripts/check-changelog.js` exit 0 dan `node scripts/check-fact-notes.js` OK.
+
+## [0.23.0] — 2026-11-11 — Deep dive Wi-Fi: protokol WPA3, controller, auditing tooling
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menambahkan delapan berkas referensi Wi-Fi pada skill `network-security`, menggantikan penomoran entri Wi-Fi per-berkas sebelumnya (0.22.8 tercatat berulang untuk empat berkas; entri ini adalah rujukan tunggal yang mengikat).
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/wifi-wpa3-protocol.md` | ditambahkan | WPA3-Personal (SAE/Dragonfly, anti-clogging, forward secrecy), WPA3-Enterprise 192-bit (CNSA), EAP-TLS, transition/downgrade, OWE, PMF, SAE-PK, perbandingan WPA2 vs WPA3 | berkas ada; ~1600 kata; frontmatter valid |
+| `skills/network-security/references/wifi-8021x-eap-radius.md` | ditambahkan | port-based NAC, EAP-TLS/PEAP/TEAP/EAP-TTLS, sertifikat, RADIUS RFC 2865/2866, CoA, MAB, guest VLAN | berkas ada; 1696 kata; frontmatter valid |
+| `skills/network-security/references/wifi-controller-architecture.md` | ditambahkan | centralized/distributed/cloud controller, CAPWAP (RFC 5415/5416), LWAPP, roaming 802.11r/k/v, AP join, HA, hardening | berkas ada; 1617 kata; frontmatter valid |
+| `skills/network-security/references/wifi-wpa2-attacks.md` | ditambahkan | 4-way handshake, PMKID, KRACK, deauth/disassoc, evil twin, WPS PIN, offline dictionary, deteksi, hardening | berkas ada; 1501 kata; frontmatter valid |
+| `skills/network-security/references/wifi-wifite-tooling.md` | ditambahkan | Wifite: cakupan serangan (WEP/WPA/WPA2/WPS), dependensi aircrack-ng/reaver/bully, metodologi, batas otorisasi, deteksi defender, legal/etika | berkas ada; 1593 kata; frontmatter valid |
+| `skills/network-security/references/wifi-6-7-security.md` | ditambahkan | 802.11ax/be: WPA3 wajib di 6 GHz, OWE, BSS coloring, OFDMA, MLO, SAE 6 GHz, aturan band (LPI/AFC), risiko transisi | berkas ada; ~1599 kata; frontmatter valid |
+| `skills/network-security/references/wifi-enterprise-hardening.md` | ditambahkan | WIDS/WIPS, deteksi rogue AP, spectrum analysis, hardening AP, isolasi guest, VLAN per SSID, redundansi RADIUS, siklus sertifikat, integrasi SIEM | berkas ada; ~1600 kata; frontmatter valid |
+| `skills/network-security/references/wifi-rf-security.md` | ditambahkan | site survey, coverage vs capacity, interferensi, keamanan fisik AP, antena, deteksi rogue, isolasi guest, jamming | berkas ada; 1577 kata; frontmatter valid |
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/SKILL.md` | diubah | delapan tautan referensi Wi-Fi di indeks + progressive disclosure; kata kunci frontmatter ditambah | delapan tautan terhitung di `references/` |
+| `manifest.json` | diubah | kata kunci skill `network-security` diperbarui | `node scripts/sync-skills.js` |
+| `skills/index.json` | diubah | daftar berkas `network-security` bertambah delapan | `node scripts/sync-skills.js` |
+| `.claude-plugin/plugin.json` | diubah | artefak turunan | `node scripts/sync-skills.js` |
+| `.claude-plugin/marketplace.json` | diubah | artefak turunan | `node scripts/sync-skills.js` |
+| `.cursor-plugin/plugin.json` | diubah | artefak turunan | `node scripts/sync-skills.js` |
+| `README.md` | diubah | jumlah skill/reference docs dan deskripsi `network-security` mencakup Wi-Fi | tabel dan badge diperiksa manual |
+
+## [0.22.10] — 2026-11-11 — Penambahan referensi Wi-Fi controller architecture
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menambahkan berkas referensi `wifi-controller-architecture.md` pada skill `network-security`.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/wifi-controller-architecture.md` | ditambahkan | referensi arsitektur controller Wi-Fi (centralized/distributed/cloud), CAPWAP/LWAPP, roaming, AP join, HA, hardening | berkas ada; 1617 kata; frontmatter valid YAML |
+| `skills/network-security/SKILL.md` | diubah | menambahkan tautan referensi baru | tautan referensi tercantum |
+
+## [0.22.9] — 2026-11-11 — Penambahan referensi Wi-Fi 802.1X/EAP/RADIUS
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menambahkan berkas referensi `wifi-8021x-eap-radius.md` pada skill `network-security`.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/wifi-8021x-eap-radius.md` | ditambahkan | referensi port-based NAC, EAP methods, RADIUS, MAB, guest VLAN | berkas ada; 1696 kata; frontmatter valid YAML |
+| `skills/network-security/SKILL.md` | diubah | menambahkan tautan referensi baru | tautan referensi tercantum |
+
+## [0.22.8] — 2026-11-11 — Penambahan referensi Wi-Fi WPA2 attacks
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menambahkan berkas referensi `wifi-wpa2-attacks.md` pada skill `network-security`.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/wifi-wpa2-attacks.md` | ditambahkan | referensi serangan Wi-Fi WPA2 (4-way handshake, PMKID, KRACK, deauth, evil twin, WPS, offline dictionary, weak PSK, deteksi, hardening) | berkas ada; 1501 kata; frontmatter valid YAML |
+| `skills/network-security/SKILL.md` | diubah | menambahkan tautan referensi baru | tautan referensi tercantum |
+
+## [0.22.8] — 2026-11-11 — Penambahan referensi Wi-Fi 6/7 security
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menambahkan berkas referensi `wifi-6-7-security.md` pada skill `network-security`.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/wifi-6-7-security.md` | ditambahkan | referensi Wi-Fi 6/7 security (WPA3 mandatory, OWE, BSS coloring, OFDMA, MLO, SAE 6 GHz, aturan band 6 GHz, transisi, best practices, gotchas) | berkas ada; ~1599 kata; frontmatter valid YAML |
+| `skills/network-security/SKILL.md` | diubah | menambahkan tautan referensi baru | tautan referensi tercantum |
+
+## [0.22.8] — 2026-11-11 — Penambahan referensi Wi-Fi WPA3 protocol
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menambahkan berkas referensi `wifi-wpa3-protocol.md` pada skill `network-security`.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/wifi-wpa3-protocol.md` | ditambahkan | referensi Wi-Fi WPA3 (SAE/Dragonfly, WPA3-Enterprise 192-bit CNSA, EAP-TLS, transition/downgrade, OWE, PMF, SAE-PK, tabel perbandingan, catatan implementasi, best practices, gotchas) | berkas ada; ~1600 kata; frontmatter valid YAML |
+| `skills/network-security/SKILL.md` | diubah | menambahkan tautan referensi baru | tautan referensi tercantum |
+
+## [0.22.8] — 2026-11-11 — Penambahan referensi Wi-Fi enterprise hardening
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menambahkan berkas referensi `wifi-enterprise-hardening.md` pada skill `network-security`.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/wifi-enterprise-hardening.md` | ditambahkan | referensi Wi-Fi enterprise hardening (WIPS/WIDS, rogue AP, spectrum, AP hardening, guest, VLAN, RADIUS, sertifikat, SIEM, fisik) | berkas ada; ~1600 kata; frontmatter valid YAML |
+| `skills/network-security/SKILL.md` | diubah | menambahkan tautan referensi baru | tautan referensi tercantum |
+
+## [0.22.6] — 2026-11-11 — Perluasan referensi attack surface trends
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** memperluas `skills/network-security/references/attack-surface-trends.md` dengan detail DDoS amplification, MITM, DNS, BGP/RPKI, lateral movement, C2, TLS inspection, dan tren terkini.
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/attack-surface-trends.md` | diubah | perluasan ke ~1400 kata, menambah tabel dan detail | berkas ada; 1429 kata; frontmatter valid YAML |
+
+## [0.22.8] — 2026-11-11 — Penambahan referensi Wi-Fi RF security
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menambahkan berkas referensi `wifi-rf-security.md` pada skill `network-security`.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/wifi-rf-security.md` | ditambahkan | referensi Wi-Fi RF security (site survey, coverage vs capacity, interferensi, keamanan fisik AP, antena, deteksi rogue, isolasi guest, jamming, best practices, gotchas) | berkas ada; 1577 kata; frontmatter valid YAML |
+| `skills/network-security/SKILL.md` | diubah | menambahkan tautan referensi baru | tautan referensi tercantum |
+
+## [0.22.7] — 2026-11-11 — Konsolidasi audit referensi network-security
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** pencatatan eksplisit seluruh berkas referensi `network-security` yang sebelumnya hanya tertutup entri wildcard karantina, agar dapat diaudit per berkas.
+
+### Ditambahkan / Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/cloud-container-networking.md` | ditambahkan | referensi cloud & container networking | berkas ada; ~1591 kata |
+| `skills/network-security/references/ddos-mitigation.md` | ditambahkan | referensi mitigasi DDoS | berkas ada; ~1588 kata |
+| `skills/network-security/references/dns-security.md` | ditambahkan | referensi keamanan DNS | berkas ada; ~1597 kata |
+| `skills/network-security/references/encrypted-traffic-analysis.md` | ditambahkan | referensi analisis trafik terenkripsi | berkas ada; ~1592 kata |
+| `skills/network-security/references/modern-network-protocols.md` | ditambahkan | referensi protokol modern | berkas ada; ~1354 kata |
+| `skills/network-security/references/network-architecture-segmentation.md` | ditambahkan | referensi arsitektur & segmentasi | berkas ada; ~1588 kata |
+| `skills/network-security/references/network-forensics.md` | ditambahkan | referensi forensik jaringan | berkas ada; ~1369 kata |
+| `skills/network-security/references/network-hardening-baselines.md` | ditambahkan | referensi baseline hardening | berkas ada; ~1599 kata |
+| `skills/network-security/references/network-monitoring-detection.md` | ditambahkan | referensi monitoring & deteksi | berkas ada; ~1591 kata |
+| `skills/network-security/references/network-security-fundamentals.md` | ditambahkan | referensi fundamental keamanan jaringan | berkas ada; ~1593 kata |
+| `skills/network-security/references/network-security-tools-ecosystem.md` | ditambahkan | referensi ekosistem tools | berkas ada; ~1598 kata |
+| `skills/network-security/references/sase-and-sse.md` | ditambahkan | referensi SASE & SSE | berkas ada; ~1595 kata |
+| `skills/network-security/references/wireless-iot-ot-network-security.md` | ditambahkan | referensi wireless/IoT/OT | berkas ada; ~1582 kata |
+| `skills/network-security/references/zero-trust-architecture.md` | ditambahkan | referensi Zero Trust | berkas ada; ~1581 kata |
+| `skills/network-security/SKILL.md` | diubah | entry point skill & indeks referensi | tautan referensi tercantum |
+| `manifest.json` | diubah | registrasi skill network-security | sync-skills.js |
+| `skills/index.json` | diubah | indeks skill & berkas | sync-skills.js |
+| `.claude-plugin/plugin.json` | diubah | plugin manifest | sync-skills.js |
+| `.claude-plugin/marketplace.json` | diubah | marketplace entry | sync-skills.js |
+| `.cursor-plugin/plugin.json` | diubah | plugin manifest | sync-skills.js |
+| `README.md` | diubah | daftar skill & jumlah | tabel diperbarui |
+
+## [0.22.5] — 2026-11-11 — Penambahan referensi network detection engineering
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menambahkan berkas referensi `network-detection-engineering.md` pada skill `network-security`.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/network-detection-engineering.md` | ditambahkan | referensi network detection engineering (lifecycle, signature vs anomaly vs behavioral, Suricata/Snort rules, Zeek scripts, Sigma, tuning/FP, ATT&CK, tcpreplay, metrics, best practices, gotchas) | berkas ada; ~1600 kata |
+| `skills/network-security/SKILL.md` | diubah | menambahkan tautan referensi baru | tautan referensi tercantum |
+
+## [0.22.4] — 2026-11-11 — Penambahan referensi network threat hunting
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menambahkan berkas referensi `network-threat-hunting.md` pada skill `network-security`.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/network-threat-hunting.md` | ditambahkan | referensi network threat hunting (hipotesis, sumber data, beaconing, lateral movement, C2, PEAK/SEARCH, narrative, best practices, gotchas) | berkas ada; ~1400 kata |
+| `skills/network-security/SKILL.md` | diubah | menambahkan tautan referensi baru | tautan referensi tercantum |
+| `skills/index.json` | diubah | daftar berkas `network-security` diperbarui manual (sync gagal menulis plugin.json di sandbox) | `Test-Path` target: True |
+
+## [0.22.3] — 2026-11-11 — Penambahan referensi Kubernetes network security
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menambahkan berkas referensi `kubernetes-network-security.md` pada skill `network-security`.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/kubernetes-network-security.md` | ditambahkan | referensi Kubernetes network security (CNI, pod/Service/Ingress, NetworkPolicy, Cilium/eBPF, service mesh mTLS, OPA/Kyverno) | berkas ada; ~1400 kata |
+| `skills/network-security/SKILL.md` | diubah | menambahkan tautan referensi baru | tautan referensi tercantum |
+
+## [0.22.2] — 2026-11-11 — Penambahan referensi firewall & VPN technologies
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menambahkan berkas referensi `firewall-and-vpn-technologies.md` pada skill `network-security`.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/firewall-and-vpn-technologies.md` | ditambahkan | referensi firewall & VPN technologies (firewall types, rule design, NAT, VPN, split tunneling, key management, HA, performance, management plane) | berkas ada; 1583 kata |
+| `skills/network-security/SKILL.md` | diubah | menambahkan tautan referensi baru | tautan referensi tercantum |
+
+## [0.22.1] — 2026-11-11 — Penambahan referensi TLS & PKI
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menambahkan berkas referensi `tls-and-pki.md` pada skill `network-security`.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/tls-and-pki.md` | ditambahkan | referensi TLS & PKI (versi/cipher, sertifikat, PKI, mTLS, pinning, CT, inspeksi, hardening, HSTS, OCSP stapling) | berkas ada; 1596 kata |
+| `skills/network-security/SKILL.md` | diubah | menambahkan tautan referensi baru | tautan referensi tercantum |
+
 ## [0.22.0] — 2026-11-10 — Analisis kebutuhan publikasi ke direktori eksternal
 
 **Commit dasar:** `7e45850` (branch `dev`)
@@ -1056,3 +1333,37 @@ Catatan: dukungan wildcard di validator hanya untuk kasus karantina seperti ini;
 - Setelah proses eksternal: 27 skill di `manifest.json` dan `skills/index.json` (belum di-commit oleh sesi ini).
 - Satu-satunya perubahan pada subtree skills berasal dari proses eksternal di atas; tidak ada file terlacak yang diubah sesi ini.
 - Temuan audit yang belum diperbaiki tidak dicatat di sini; changelog hanya mencatat perubahan, bukan backlog.
+
+## [0.22.2] — 2026-11-11 — Karantina berkas pra-eksisting
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** karantina berkas pra-eksisting tidak terkait perubahan ini.
+
+### Dikarantina (wildcard)
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/**` | skill pra-eksisting | bukan bagian perubahan ini | `git status` (untracked) |
+| `skills/offsec-web-300/**` | skill pra-eksisting | bukan bagian perubahan ini | `git status` (untracked) |
+| `skills/web-pentest-payloads/**` | skill pra-eksisting | bukan bagian perubahan ini | `git status` (untracked) |
+| `research-brief-cloud-container-networking.md` | pra-eksisting | bukan bagian perubahan ini | `git status` (untracked) |
+| `research-brief-network-architecture.md` | pra-eksisting | bukan bagian perubahan ini | `git status` (untracked) |
+| `research-brief-network-monitoring-detection.md` | pra-eksisting | bukan bagian perubahan ini | `git status` (untracked) |
+
+## [0.22.2] — 2026-11-11 — Karantina berkas pra-eksisting
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** karantina berkas pra-eksisting tidak terkait perubahan ini.
+
+### Dikarantina (wildcard)
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/**` | skill pra-eksisting | bukan bagian perubahan ini | `git status` (untracked) |
+| `skills/offsec-web-300/**` | skill pra-eksisting | bukan bagian perubahan ini | `git status` (untracked) |
+| `skills/web-pentest-payloads/**` | skill pra-eksisting | bukan bagian perubahan ini | `git status` (untracked) |
+| `research-brief-cloud-container-networking.md` | pra-eksisting | bukan bagian perubahan ini | `git status` (untracked) |
+| `research-brief-network-architecture.md` | pra-eksisting | bukan bagian perubahan ini | `git status` (untracked) |
+| `research-brief-network-monitoring-detection.md` | pra-eksisting | bukan bagian perubahan ini | `git status` (untracked) |

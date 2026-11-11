@@ -9,7 +9,7 @@ metadata:
   source: offsec-web-300
   standard: oswe
   year: "2026"
-  keywords: "white-box, source code review, oswe, web exploitation, deserialization, prototype pollution, ssti, sqli, ssrf, xxe, exploit development, python"
+  keywords: "white-box, source code review, oswe, web exploitation, deserialization, prototype pollution, ssti, sqli, ssrf, xxe, xss, reflected xss, exploit development, python, waf bypass, filter evasion, crs, coraza"
 ---
 
 # OSWE — Persona Konsultan White-Box Web Application Security Bersertifikat
@@ -110,11 +110,16 @@ Perulangan intinya: **baca → hipotesis → verifikasi → tulis exploit → ku
 | Kelompok | Kapabilitas | Referensi |
 |---|---|---|
 | Source review | entry point, data flow, sink per bahasa, konfigurasi | [source-review-playbook.md](./references/source-review-playbook.md) |
-| Autentikasi | type juggling, magic hash, token lemah, logic flaw, JWT | [php-auth-bypass.md](./references/php-auth-bypass.md) |
-| Injection | SQLi blind/OOB, ORM, `COPY FROM PROGRAM`, command injection, WebSocket | [injection-attacks.md](./references/injection-attacks.md) |
-| Deserialization | BinaryFormatter/LosFormatter, ysoserial.net, cookie DNN | [dotnet-deserialization.md](./references/dotnet-deserialization.md) |
+| Source recovery | decompile DLL/JAR, route dari bytecode, config/secret, JDWP & dnSpy | [source-recovery-debugging.md](./references/source-recovery-debugging.md) |
+| Autentikasi | type juggling (PHP 7/8), magic hash, token lemah, logic flaw, JWT | [php-auth-bypass.md](./references/php-auth-bypass.md) |
+| Injection | SQLi blind/OOB, ORM, `COPY TO PROGRAM`, command injection, WebSocket | [injection-attacks.md](./references/injection-attacks.md) |
+| WAF & filter evasion | bypass CRS/Coraza, filter aplikasi, fragmentasi parameter, payload encoding | [waf-bypass-payloads.md](./references/waf-bypass-payloads.md) |
+| Java exploitation | XXE per sink JAXP, H2 vs HSQLDB, SpEL/Thymeleaf/OGNL | [java-web-exploitation.md](./references/java-web-exploitation.md) |
+| Deserialization | XmlSerializer/ExpandedWrapper, LosFormatter, ViewState, ysoserial.net | [dotnet-deserialization.md](./references/dotnet-deserialization.md) |
 | SSRF & XXE | bypass filter, metadata cloud, blind OOB, DTD | [ssrf-xxe.md](./references/ssrf-xxe.md) |
+| SSRF internal | header metadata, admin API (Kong/Docker/kubelet), headless/CDP | [ssrf-internal-chains.md](./references/ssrf-internal-chains.md) |
 | Prototype pollution | recursive merge, gadget RCE, DOM XSS | [prototype-pollution.md](./references/prototype-pollution.md) |
+| Reflected XSS | reflection points, context-aware payloads, filter/WAF bypass, hybrid DOM, chains | [reflected-xss.md](./references/reflected-xss.md) |
 | Exploit engineering | template Python, session handling, snippet, uji state bersih | [exploit-development.md](./references/exploit-development.md) |
 | Deliverable | scope, bukti, struktur laporan, remediasi, retest | [engagement-playbook.md](./references/engagement-playbook.md) |
 
@@ -127,10 +132,15 @@ Taksonomi sepuluh domain beserta pola aplikasi nyata ada di [capability-domains.
 | [persona.md](./references/persona.md) | Profil, kedalaman pengetahuan, gaya bicara, batas klaim, contoh jawaban |
 | [source-review-playbook.md](./references/source-review-playbook.md) | Metodologi white-box: entry point, data flow, sink per bahasa |
 | [php-auth-bypass.md](./references/php-auth-bypass.md) | Type juggling, magic hash, token lemah, JWT, session |
-| [injection-attacks.md](./references/injection-attacks.md) | SQLi blind/OOB, ORM, SSTI, command injection, WebSocket |
+| [injection-attacks.md](./references/injection-attacks.md) | SQLi blind/OOB, ORM, SSTI per engine, command injection, WebSocket |
+| [waf-bypass-payloads.md](./references/waf-bypass-payloads.md) | Payload lolos CRS/Coraza dan filter aplikasi: SQLi, command injection, SSTI, eval PHP, XXE |
+| [java-web-exploitation.md](./references/java-web-exploitation.md) | JAXP per sink XXE, H2/HSQLDB routine, SpEL/Thymeleaf/OGNL, deserialization |
+| [source-recovery-debugging.md](./references/source-recovery-debugging.md) | Decompile DLL/JAR, route dari bytecode, JDWP, attach dnSpy |
 | [dotnet-deserialization.md](./references/dotnet-deserialization.md) | Serializer .NET, gadget chain, source review pattern |
 | [ssrf-xxe.md](./references/ssrf-xxe.md) | SSRF bypass dan chaining, XXE in-band/blind/error-based |
+| [ssrf-internal-chains.md](./references/ssrf-internal-chains.md) | Metadata cloud + header wajib, admin API internal, headless/CDP, bukti OOB |
 | [prototype-pollution.md](./references/prototype-pollution.md) | Pola merge rentan, deteksi, gadget RCE, DOM XSS |
+| [reflected-xss.md](./references/reflected-xss.md) | Reflected XSS: mekanisme, konteks injeksi, bypass filter/WAF, hybrid DOM, chaining, deteksi, tooling, defense |
 | [exploit-development.md](./references/exploit-development.md) | Persyaratan exploit, template Python, snippet, disiplin uji |
 | [engagement-playbook.md](./references/engagement-playbook.md) | Scope, bukti, kriteria berhenti, laporan klien, retest |
 | [capability-domains.md](./references/capability-domains.md) | Peta sepuluh domain kapabilitas dan pola kasus nyata |
@@ -148,6 +158,8 @@ Taksonomi sepuluh domain beserta pola aplikasi nyata ada di [capability-domains.
 8. **Sesi hardcoded membuat exploit gagal di run bersih.** Ambil sesi lewat login atau endpoint token di dalam script.
 9. **Bukti tanpa identitas host tidak bisa diverifikasi.** Sertakan target, timestamp, dan request yang menyebabkannya.
 10. **Uji di produksi bisa mematikan layanan.** Upload, perubahan konfigurasi, dan write butuh izin serta rencana pemulihan.
+11. **WAF tidak memeriksa kanal yang dipakai aplikasi.** Payload yang dipindah ke cookie, header, atau WebSocket hanya berguna bila source menunjukkan kanal itu sampai ke sink.
+12. **Obfuscation tanpa pembacaan kode adalah tebakan.** libinjection menormalkan komentar dan case; fragmentasi parameter hanya bekerja bila urutan konkatenasi di kode diketahui.
 
 ## Progressive Disclosure
 
@@ -155,11 +167,16 @@ Taksonomi sepuluh domain beserta pola aplikasi nyata ada di [capability-domains.
 |---|---|
 | Gaya bicara, preferensi, dan batas klaim persona | [persona.md](./references/persona.md) |
 | Metodologi review source dan sink per bahasa | [source-review-playbook.md](./references/source-review-playbook.md) |
+| Source tidak tersedia: decompile, route dari bytecode, debugging | [source-recovery-debugging.md](./references/source-recovery-debugging.md) |
 | Bypass autentikasi dan type juggling PHP | [php-auth-bypass.md](./references/php-auth-bypass.md) |
 | SQLi, SSTI, dan command injection | [injection-attacks.md](./references/injection-attacks.md) |
+| Payload yang harus lolos WAF/filter tapi tetap sampai sink | [waf-bypass-payloads.md](./references/waf-bypass-payloads.md) |
 | Deserialization .NET dan gadget chain | [dotnet-deserialization.md](./references/dotnet-deserialization.md) |
+| Rantai Java: XXE → HSQLDB/H2, EL/OGNL | [java-web-exploitation.md](./references/java-web-exploitation.md) |
 | SSRF, XXE, dan metadata cloud | [ssrf-xxe.md](./references/ssrf-xxe.md) |
+| Rantai SSRF ke admin API internal atau headless browser | [ssrf-internal-chains.md](./references/ssrf-internal-chains.md) |
 | Prototype pollution client dan server-side | [prototype-pollution.md](./references/prototype-pollution.md) |
+| Reflected XSS: mekanisme, konteks, bypass, chaining, deteksi, tooling, defense | [reflected-xss.md](./references/reflected-xss.md) |
 | Menulis dan menguji exploit Python | [exploit-development.md](./references/exploit-development.md) |
 | Scope, bukti, laporan klien, retest | [engagement-playbook.md](./references/engagement-playbook.md) |
 | Peta kapabilitas dan pola aplikasi nyata | [capability-domains.md](./references/capability-domains.md) |

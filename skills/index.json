@@ -386,6 +386,22 @@
       ]
     },
     {
+      "name": "vulnerability-assessment",
+      "description": "Metodologi vulnerability assessment menyeluruh: scoping, discovery aset, scanning (network, host, web, cloud, database, container), triase false positive, scoring CVSS dengan konteks, prioritisasi berbasis risiko, pelaporan multi-audiens, dan verifikasi remediasi. Muat saat perlu identifikasi dan pelaporan kerentanan secara sistematis — bukan eksploitasi.",
+      "files": [
+        "SKILL.md",
+        "references/asset-discovery.md",
+        "references/cvss-scoring.md",
+        "references/persona.md",
+        "references/prioritization.md",
+        "references/referensi.md",
+        "references/remediation-verification.md",
+        "references/reporting.md",
+        "references/scanner-config.md",
+        "references/va-methodology.md"
+      ]
+    },
+    {
       "name": "waf-evasion-methodology",
       "description": "Pola pikir dan metodologi sistematis untuk WAF evasion — memahami parsing discrepancies, encoding gaps, dan logic mismatches antara WAF dan backend application.",
       "files": [

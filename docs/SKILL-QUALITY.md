@@ -1,8 +1,8 @@
 # Skill Quality Ledger
 
-Matriks status kualitas 31 skill. Tujuannya membuat pekerjaan tuning **terlihat** — bukan tersembunyi di riwayat commit — sampai cakupan cukup untuk ditegakkan lewat CI.
+Matriks status kualitas 32 skill. Tujuannya membuat pekerjaan tuning **terlihat** — bukan tersembunyi di riwayat commit — sampai cakupan cukup untuk ditegakkan lewat CI.
 
-Diperbarui: **2026-11-13** (setelah 0.25.0 — `wazuh` dan `network-security` masuk matriks; sebelumnya 0.21.0 — cabang `feat/ec-cnd-persona-injection` digabung dan `ec-cnd` masuk matriks).
+Diperbarui: **2026-11-14** (setelah `vulnerability-assessment` ditambahkan — 32 skill; sebelumnya 0.25.0 — `wazuh` dan `network-security` masuk matriks).
 
 > `ec-cnd` sudah berada di `dev` (berkasnya mendarat pada `abae7be`, cabangnya digabung pada 0.21.0), jadi barisnya kini ada di matriks dan jumlah skill di sini 29.
 
@@ -51,6 +51,7 @@ Alasan dua jalur: skill bersertifikat memilih **persona** (tanpa angka ujian, ja
 | soc-analyst | ya | — | — | — | 0 | — | Belum |
 | threat-intelligence | ya | ya | — | — | 8 | ya | Sebagian |
 | threat-modeling | ya | ya | — | — | 0 | — | Sebagian |
+| vulnerability-assessment | ya | ya | — | ya | 9 | ya | Selesai |
 | waf-evasion-methodology | ya | ya | — | — | 4 | ya | Sebagian |
 | wazuh | ya | ya | — | — | 14 | ya | Sebagian |
 | web-app-scan | ya | ya | — | — | 0 | ya | Sebagian |
@@ -61,11 +62,11 @@ Alasan dua jalur: skill bersertifikat memilih **persona** (tanpa angka ujian, ja
 
 | Status | Jumlah |
 |---|---|
-| Selesai | 13 |
+| Selesai | 14 |
 | Sebagian | 13 |
 | Belum | 5 |
 
-Cakupan **Frame 26/31 (84%)**, naik dari 24/29 pada 0.24.0 setelah `network-security` (sebelumnya belum masuk matriks) dan `wazuh` (skill baru) ditambahkan pada 0.25.0.
+Cakupan **Frame 27/32 (84%)**, setelah `vulnerability-assessment` (skill baru, 9 referensi) ditambahkan.
 
 Lima "Belum" yang tersisa bukan kekurangan frame semata: `security-auditor`, `log-management-nist-800-92`, `devsecops-mindset`, dan `soc-analyst` adalah skill monolitik tanpa berkas referensi (backlog C), sedangkan `code-security-audit` sudah punya 4 referensi tetapi belum punya frame.
 

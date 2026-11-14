@@ -15,8 +15,8 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 
 ## [0.25.0] — 2026-11-13 — Skill `wazuh`: triage alert SOC di Wazuh open source
 
-**Commit dasar:** `pending` (branch `dev`)
-**Status:** pending
+**Commit dasar:** `f9d6e67` (branch `feat/wazuh-soc-triage`)
+**Status:** committed in `e8d432f`
 **Ruang lingkup:** menambahkan skill `wazuh` untuk triage alert SOC di Wazuh open source 4.x (deployment all-in-one), memperbaiki URL `repository`/`homepage` di manifest, meregenerasi artefak turunan, menyinkronkan matriks kualitas, dan mencatat perubahan `skills/network-security/` yang sebelumnya belum masuk changelog.
 
 ### Ditambahkan

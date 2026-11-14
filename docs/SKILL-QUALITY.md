@@ -2,7 +2,7 @@
 
 Matriks status kualitas 32 skill. Tujuannya membuat pekerjaan tuning **terlihat** — bukan tersembunyi di riwayat commit — sampai cakupan cukup untuk ditegakkan lewat CI.
 
-Diperbarui: **2026-11-14** (setelah `vulnerability-assessment` ditambahkan — 32 skill; sebelumnya 0.25.0 — `wazuh` dan `network-security` masuk matriks).
+Diperbarui: **2026-11-14** (setelah `vulnerability-assessment` diperluas — 77 referensi; sebelumnya 9 referensi).
 
 > `ec-cnd` sudah berada di `dev` (berkasnya mendarat pada `abae7be`, cabangnya digabung pada 0.21.0), jadi barisnya kini ada di matriks dan jumlah skill di sini 29.
 
@@ -51,7 +51,7 @@ Alasan dua jalur: skill bersertifikat memilih **persona** (tanpa angka ujian, ja
 | soc-analyst | ya | — | — | — | 0 | — | Belum |
 | threat-intelligence | ya | ya | — | — | 8 | ya | Sebagian |
 | threat-modeling | ya | ya | — | — | 0 | — | Sebagian |
-| vulnerability-assessment | ya | ya | — | ya | 9 | ya | Selesai |
+| vulnerability-assessment | ya | ya | — | ya | 77 | ya | Selesai |
 | waf-evasion-methodology | ya | ya | — | — | 4 | ya | Sebagian |
 | wazuh | ya | ya | — | — | 14 | ya | Sebagian |
 | web-app-scan | ya | ya | — | — | 0 | ya | Sebagian |

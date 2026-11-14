@@ -5,7 +5,7 @@ license: MIT
 compatibility: opencode
 metadata:
   author: "yogiex"
-  repository: "https://github.com/cyber-security/agent-skills"
+  repository: "https://github.com/yogiex/opencode-cyber-security-skills"
   version: "1.0.0"
   audience: network engineers, security engineers, soc analysts, cloud engineers
   workflow: defensive-engineering
@@ -139,6 +139,11 @@ Stop and reassess if a proposed control breaks production traffic without a roll
 8. **eBPF privilege**: requires CAP_BPF/CAP_SYS_ADMIN; audit programs; rootkit risk.
 9. **WireGuard UDP-only**: no TCP fallback; plan reachability.
 10. **HTTP/2 Rapid Reset (CVE-2023-44487)**: rate-limit streams/resets or disable HTTP/2 where unnecessary.
+11. **WPA3 transition mode membuka downgrade**: selama SSID masih menerima WPA2, klien dapat dipaksa turun; matikan mode transisi setelah inventaris klien selesai.
+12. **PMF harus aktif di kedua sisi**: 802.11w yang hanya aktif di AP membuat klien lama gagal asosiasi — uji perangkat sebelum menegakkan.
+13. **PMKID membuat serangan WPA2 clientless**: handshake tidak lagi diperlukan; PSK lemah dapat diuji offline dari satu frame. Mitigasi utama adalah frasa sandi panjang + WPA3/SAE.
+14. **Wifite dan alat sejenis adalah alat uji berizin**: hanya pada jaringan milik sendiri atau dengan izin tertulis; deauth dan rogue AP mengganggu layanan dan dapat melanggar hukum.
+15. **CAPWAP tidak mengenkripsi payload data klien secara default**: control channel DTLS opsional; jangan menganggap jalur AP–controller aman tanpa memeriksa konfigurasi.
 
 ## License
 

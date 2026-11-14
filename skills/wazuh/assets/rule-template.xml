@@ -1,0 +1,50 @@
+<!--
+  Kerangka rule kustom Wazuh (4.x) untuk hasil triage.
+  Simpan sebagai /var/ossec/etc/rules/local_rules.xml atau berkas baru di etc/rules/.
+
+  Aturan yang harus diikuti:
+  - ID kustom: 100000-120000.
+  - Setiap <rule> wajib berada di dalam <group name="...">.
+  - level 0/2 tidak muncul di dashboard (log_alert_level default 3).
+  - Untuk mengubah rule bawaan: salin definisinya, tambahkan overwrite="yes",
+    dan jangan menyertakan if_sid/if_group/if_level/if_matched_* (diabaikan).
+  - Setelah menyimpan: uji dengan /var/ossec/bin/wazuh-logtest, lalu restart
+    manager agar alert produksi mengikuti ruleset baru.
+-->
+
+<group name="local,syslog,sshd,">
+
+  <!-- Rule korelasi: beberapa kegagalan login dari IP yang sama.
+       if_matched_sid merujuk rule bawaan 5710 (percobaan login user tidak valid). -->
+  <rule id="100200" level="10" frequency="6" timeframe="120">
+    <if_matched_sid>5710</if_matched_sid>
+    <same_source_ip />
+    <description>sshd: brute force terdeteksi dari $(srcip) ($(firedtimes) percobaan/120 detik)</description>
+    <mitre>
+      <id>T1110</id>
+    </mitre>
+    <group>authentication_failures,pci_dss_10.2.4,</group>
+  </rule>
+
+  <!-- Rule pengecualian sempit: whitelist scanner internal lewat CDB.
+       Deklarasikan list di <ruleset> sebagai <list>etc/lists/scanner-whitelist</list>. -->
+  <rule id="100210" level="0">
+    <if_sid>5710</if_sid>
+    <list field="srcip" lookup="address_match_key">etc/lists/scanner-whitelist</list>
+    <description>sshd: percobaan login dari scanner internal yang terdaftar (CDB)</description>
+    <group>scanner_whitelist,</group>
+  </rule>
+
+  <!-- Contoh menaikkan level rule bawaan tanpa mengubah percabangannya.
+       Perhatikan: if_sid tidak boleh disertakan pada rule overwrite. -->
+  <rule id="5710" level="12" overwrite="yes">
+    <description>sshd: percobaan login dengan user tidak valid (level dinaikkan)</description>
+    <group>invalid_login,authentication_failed,</group>
+  </rule>
+
+</group>
+
+<!--
+  Catatan change request (isi saat mengajukan perubahan):
+  Ringkasan | Bukti (>= 3 sampel alert) | Usulan | Risiko | Verifikasi
+-->

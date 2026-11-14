@@ -1,6 +1,6 @@
 ---
 name: "Network Attack Surface & Exploitation Trends"
-description: "Research brief on network attack surface and exploitation trends: DDoS and amplification, MITM, DNS attacks, BGP hijacking, lateral movement, C2 channels, encrypted malware and TLS inspection, and recent notable trends."
+description: "Network attack surface and exploitation trends: DDoS and amplification, MITM, DNS attacks, BGP hijacking, lateral movement, C2 channels, encrypted malware and TLS inspection, and recent notable trends."
 tags: [ddos, amplification, mitm, dns, bgp, rpki, lateral-movement, c2, tls-inspection, quic, http2, rapid-reset]
 ---
 

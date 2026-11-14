@@ -2,14 +2,14 @@
 
 <p align="left">
   <a href="https://github.com/yogiex/opencode-cyber-security-skills/actions/workflows/validate-and-sync.yml"><img alt="CI" src="https://github.com/yogiex/opencode-cyber-security-skills/actions/workflows/validate-and-sync.yml/badge.svg?branch=main"></a>
-  <img alt="Skills" src="https://img.shields.io/badge/skills-30-blue">
-  <img alt="Reference docs" src="https://img.shields.io/badge/reference%20docs-230%2B-informational">
+  <img alt="Skills" src="https://img.shields.io/badge/skills-31-blue">
+  <img alt="Reference docs" src="https://img.shields.io/badge/reference%20docs-257-informational">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-green"></a>
   <a href="https://github.com/yogiex/opencode-cyber-security-skills/commits/main"><img alt="Last commit" src="https://img.shields.io/github/last-commit/yogiex/opencode-cyber-security-skills"></a>
   <a href=".github/CONTRIBUTING.md"><img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen"></a>
 </p>
 
-Kumpulan **Agent Skills** untuk keamanan siber: 30 skill dan 230+ dokumen referensi yang memberi agen AI cara kerja, batas keputusan, dan prosedur yang bisa diaudit untuk pekerjaan red team, blue team, audit, dan rekayasa keamanan.
+Kumpulan **Agent Skills** untuk keamanan siber: 31 skill dan 257 dokumen referensi yang memberi agen AI cara kerja, batas keputusan, dan prosedur yang bisa diaudit untuk pekerjaan red team, blue team, audit, dan rekayasa keamanan.
 
 Repo ini bukan kumpulan prompt. Setiap skill adalah unit terstruktur berisi persona, *decision frame*, referensi bertingkat, dan *gotchas* yang membuat agen berhenti pada batas yang benar — bukan sekadar menghasilkan jawaban yang terdengar meyakinkan.
 
@@ -113,6 +113,7 @@ Legenda status struktur:
 | [waf-evasion-methodology](./skills/waf-evasion-methodology) | 🔶 | Pola pikir dan metodologi sistematis untuk WAF evasion — memahami parsing discrepancies, encoding gaps, dan logic mismatches antara WAF dan backend application. |
 | [web-pentest-payloads](./skills/web-pentest-payloads) | 🔶 | Payload dan teknik eksploitasi per kelas kerentanan web: SQLi, NoSQL, command injection, SSTI, XXE, XSS, CSRF, SSRF, LFI/RFI, file upload, deserialization, request smuggling, cache poisoning, JWT/OAuth/SAML, IDOR, business logic, API, prompt injection — dengan syarat otorisasi, decision frame (baseline, dua varian, kanal blind), gotchas, dan bypass filter/WAF. |
 | [web-app-scan](./skills/web-app-scan) | ✅ | Penilaian keamanan web application bertahap seperti Nessus/Nikto tetapi manual: fingerprint, config leak, injection, XSS, sesi, akses kontrol, TLS, CORS — dengan batas mode (pasif/aktif), kriteria konfirmasi temuan, dan template output. |
+| [vulnerability-assessment](./skills/vulnerability-assessment) | 🔶 | Metodologi vulnerability assessment menyeluruh: scoping, discovery aset, scanning (network, host, web, cloud, database, container), triase false positive, scoring CVSS dengan konteks, prioritisasi berbasis risiko, pelaporan multi-audiens, dan verifikasi remediasi. Bukan eksploitasi. |
 | [web-reconnaissance](./skills/web-reconnaissance) | 🔶 | Recon web/SPA: inventarisasi chunk JS (manifest build, tabel chunk webpack, Coverage, source map), alur data dari aksi UI ke endpoint, analisis bundle, rekam network tab lewat Chrome DevTools MCP atau HAR manual, baca storage browser (localStorage, cookie termasuk HttpOnly, IndexedDB, Cache Storage, OPFS), peta rute frontend + API backend, konfigurasi auth (JWT, cookie, OAuth/OIDC, SAML), identifikasi teknologi dan versi berkeyakinan (header, cookie, jalur aset, banner bundle), triage token, dan CVE. |
 
 ### 🔵 Blue Team (Defensif)
@@ -133,6 +134,7 @@ Legenda status struktur:
 | [lf-cks](./skills/lf-cks) | 🔶 | Persona platform security engineer bersertifikat CKS — trust boundary, isolasi cluster, keamanan workload, supply chain trust, NetworkPolicy, dan runtime defense di Kubernetes. Bukan untuk persiapan ujian. |
 | [network-security](./skills/network-security) | 🔶 | Network security untuk engineer defensif: arsitektur, segmentasi, protokol modern (QUIC/HTTP/3, TLS 1.3, DoH/DoT, WireGuard, eBPF), monitoring/NDR, hardening, cloud/container, hingga Wi-Fi (WPA3/SAE, 802.1X/EAP/RADIUS, arsitektur controller, auditing Wifite, Wi-Fi 6/7, RF), wireless/OT, dan ancaman jaringan baru. |
 | [soc-analyst](./skills/soc-analyst) | ✅ | Pola pikir dan pendekatan untuk Security Analyst dan SOC Analyst dalam mentriage, menyelidiki, merespon insiden, dan berkomunikasi secara efektif. |
+| [wazuh](./skills/wazuh) | 🔶 | Triage alert SOC di Wazuh open source 4.x: skema alert dan batas visibilitas (`level 0–2`, `logall`, retensi), bukti dari syscollector/syscheck/SCA, kueri indexer `wazuh-alerts-*`, Wazuh API (JWT, WQL, RBAC), verdict TP/FP/Benign/Unknown, playbook per kelas alert, tuning berbasis sampel FP, active response yang reversible, plus 3 skrip (klien API, penarik antrean, validator ruleset). |
 | [threat-intelligence](./skills/threat-intelligence) | 🔶 | Cyber Threat Intelligence (CTI) — intelligence lifecycle, analytic frameworks (Kill Chain, Diamond Model, ATT&CK), IOC management (STIX/TAXII, MISP, YARA, Sigma), threat hunting (PEAK, ABLE, HMM), dan analyst tradecraft. |
 
 ### 🟢 General (Keduanya)
@@ -262,6 +264,7 @@ Skill ofensif di repo ini ditujukan untuk pengujian keamanan yang **berizin**, l
 | [soc-analyst](./skills/soc-analyst) | MITRE ATT&CK, NIST SP 800-61 | — |
 | [threat-intelligence](./skills/threat-intelligence) | CTI Lifecycle, MITRE ATT&CK, Cyber Kill Chain, Diamond Model, STIX/TAXII | https://attack.mitre.org |
 | [threat-modeling](./skills/threat-modeling) | STRIDE, DFD, NIST SP 800-154 | — |
+| [wazuh](./skills/wazuh) | Wazuh Documentation 4.x (ruleset, API, indexer, FIM/SCA, active response), MITRE ATT&CK | https://documentation.wazuh.com/current/ |
 | [waf-evasion-methodology](./skills/waf-evasion-methodology) | OWASP CRS, MITRE ATT&CK | — |
 | [web-app-scan](./skills/web-app-scan) | OWASP WSTG, PTES | — |
 | [web-pentest-payloads](./skills/web-pentest-payloads) | PayloadsAllTheThings, PortSwigger WSA, OWASP WSTG | https://github.com/swisskyrepo/PayloadsAllTheThings |

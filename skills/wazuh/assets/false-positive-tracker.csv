@@ -1,0 +1,4 @@
+date,rule_id,rule_level,agent_id,agent_name,alert_id,evidence_summary,root_cause,tuning_option,change_request_id,status,requested_by
+2026-11-12,5710,5,003,web-01,1684401234.12345,"240 alert/10 menit dari 10.10.5.20; scanner internal terjadwal; tanpa login sukses","aktivitas sah tidak dikenal rule","CDB whitelist scanner-whitelist (rule 100210)","CHG-1234","applied,tier1
+2026-11-12,550,7,004,db-01,1684401234.20001,"nginx.conf berubah saat deploy terjadwal; ada tiket CHG-1240","perubahan konfigurasi rutin","nodiff pada path deploy (bukan mematikan FIM)","CHG-1241","proposed,tier2
+2026-11-13,31151,6,007,web-03,1684401234.30011,"pola SQLi dari alat uji internal; scope pengujian disetujui","uji keamanan terjadwal","tidak diubah; catat jendela pengujian di runbook","","rejected,tier2

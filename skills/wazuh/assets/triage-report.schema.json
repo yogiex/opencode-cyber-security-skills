@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Laporan triase Wazuh",
+  "description": "Struktur JSON yang dihasilkan `scripts/wazuh_triage.py report --out-json`; bagian verdict dan bukti diisi analis setelah alert dibuka.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "alert_id",
+    "rule_id",
+    "rule_level",
+    "agent_id",
+    "timestamp",
+    "verdict"
+  ],
+  "properties": {
+    "alert_id": {
+      "type": "string",
+      "description": "ID dokumen alert pada indexer."
+    },
+    "rule_id": {
+      "type": "string",
+      "description": "ID rule Wazuh yang terpicu."
+    },
+    "rule_level": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 16,
+      "description": "Level rule sesuai ruleset."
+    },
+    "rule_description": {
+      "type": "string"
+    },
+    "agent_id": {
+      "type": "string"
+    },
+    "agent_name": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "Waktu alert dari manager (UTC)."
+    },
+    "location": {
+      "type": "string"
+    },
+    "decoder": {
+      "type": "string"
+    },
+    "mitre": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "ID teknik ATT&CK yang dipetakan rule; kosong bila rule tidak memetakan."
+    },
+    "full_log": {
+      "type": "string",
+      "description": "Log mentah; wajib diredaksi sebelum dibagikan."
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["TP", "FP", "Benign", "Unknown"]
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["P0", "P1", "P2", "P3", "P4", ""]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "source": { "type": "string" },
+          "value": { "type": "string" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

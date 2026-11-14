@@ -1,4 +1,4 @@
-﻿# Changelog â€” Audit Trail Perubahan File
+# Changelog â€” Audit Trail Perubahan File
 
 Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya agar setiap penambahan, perubahan, penghapusan, dan penggantian nama file dapat diaudit tanpa harus membaca diff git satu per satu.
 
@@ -15,8 +15,8 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 
 ## [0.26.0] — 2026-11-14 — Skill `vulnerability-assessment`: metodologi VA menyeluruh
 
-**Commit dasar:** `d1749d0` (branch `dev`)
-**Status:** pending
+**Commit dasar:** `a6c5494` (branch `feat/wazuh-soc-triage`)
+**Status:** committed in `6f76de1`
 **Ruang lingkup:** permintaan langsung — menambah skill baru `vulnerability-assessment` yang mencakup metodologi VA menyeluruh: scoping, discovery aset, scanning (network/host/web/cloud/database/container), triase false positive, scoring CVSS dengan konteks, prioritisasi berbasis risiko, pelaporan multi-audiens, dan verifikasi remediasi. Skill ini melengkapi `web-app-scan` (web-specific) dengan cakupan lintas target. Bukan eksploitasi — VA berhenti di identifikasi dan pelaporan.
 
 ### Ditambahkan

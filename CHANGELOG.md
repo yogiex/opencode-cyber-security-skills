@@ -16,7 +16,7 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 ## [0.27.0] — 2026-11-14 — Implementasi 68 referensi VA + perluasan 8 shared file
 
 **Commit dasar:** `cce8b1b` (branch `feat/wazuh-soc-triage`)
-**Status:** pending
+**Status:** committed in `27b5f30`
 **Ruang lingkup:** permintaan langsung — implementasi penuh aspek VA dari 8 dokumen analisis kebutuhan (VA-NETWORK, VA-WEB, VA-CLOUD, VA-CONTAINER, VA-DATABASE, VA-CVSS, VA-PROGRAM, VA-REPORTING). Membuat 68 file reference baru dan memperluas 8 file existing (va-methodology, asset-discovery, scanner-config, reporting, referensi, prioritization, cvss-scoring, remediation-verification). Memperbarui SKILL.md (Capability Map, Reference Documentation 77 baris, Progressive Disclosure, Gotchas). Tidak ada file skill lain yang disentuh.
 
 ### Ditambahkan

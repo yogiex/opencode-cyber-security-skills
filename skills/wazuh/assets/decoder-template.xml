@@ -1,0 +1,51 @@
+<!--
+  Kerangka decoder kustom Wazuh (4.x).
+  Simpan sebagai /var/ossec/etc/decoders/local_decoder.xml atau berkas baru di etc/decoders/.
+
+  Aturan yang harus diikuti:
+  - <regex> wajib disertai <order>, dan jumlah capture group harus sama
+    dengan jumlah field pada <order>.
+  - Decoder dengan <regex> harus punya <prematch> atau <program_name>
+    pada dirinya sendiri atau pada decoder induk (<parent>).
+  - Decoder tidak punya "cucu": parent hanya satu tingkat dari child.
+  - Sibling decoder (name sama, parent sama) berhenti pada match pertama.
+  - Setelah menyimpan: uji dengan /var/ossec/bin/wazuh-logtest.
+-->
+
+<!-- Parent: mengenali program pada header syslog -->
+<decoder name="myapp">
+  <program_name>^myapp</program_name>
+</decoder>
+
+<!-- Child: mengekstrak field dari baris log -->
+<decoder name="myapp">
+  <parent>myapp</parent>
+  <regex>user '(\w+)' from '(\d+\.\d+\.\d+\.\d+)'</regex>
+  <order>dstuser, srcip</order>
+</decoder>
+
+<!-- Sibling decoder: nama dan parent sama, mengekstrak field lain.
+     Cocok untuk format log yang bervariasi. -->
+<decoder name="myapp">
+  <parent>myapp</parent>
+  <prematch>action=</prematch>
+  <regex>action=(\w+) status=(\d+) url='([^']+)'</regex>
+  <order>action, status, url</order>
+</decoder>
+
+<!-- Decoder JSON: dipakai bila log berupa JSON valid.
+     Array of objects tidak didukung; gunakan offset="after_prematch"
+     bila JSON tertanam di dalam teks. -->
+<decoder name="myapp-json">
+  <prematch>^{\s*"event"</prematch>
+  <plugin_decoder>JSON_Decoder</plugin_decoder>
+</decoder>
+
+<!--
+  Menimpa decoder bawaan:
+  1. Salin berkas dari /var/ossec/ruleset/decoders/ ke /var/ossec/etc/decoders/.
+  2. Sunting berkas salinan.
+  3. Kecualikan berkas asli di <ruleset> pada /var/ossec/etc/ossec.conf:
+     <decoder_exclude>ruleset/decoders/0310-ssh_decoders.xml</decoder_exclude>
+  4. Restart manager. Ingat: berkas asli tidak lagi menerima pembaruan upstream.
+-->

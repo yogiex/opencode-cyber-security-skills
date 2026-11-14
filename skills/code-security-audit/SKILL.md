@@ -6,7 +6,7 @@ compatibility: opencode
 metadata:
   version: "1.0.0"
   author: "yogiex"
-  repository: "https://github.com/cyber-security/agent-skills"
+  repository: "https://github.com/yogiex/opencode-cyber-security-skills"
   audience: "security-engineer, appsec, pentester, code-reviewer"
   workflow: "audit, vulnerability-research, code-review"
   source: "cloudflare/security-audit-skill@c1c8a8c"

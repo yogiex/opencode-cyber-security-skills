@@ -153,7 +153,6 @@
       "description": "Network security for defensive engineers: architecture, segmentation, modern protocols, Wi-Fi (WPA3, 802.1X/RADIUS, controllers), monitoring, hardening, cloud/container, wireless/OT, and emerging threats.",
       "files": [
         "SKILL.md",
-        "references/attack-surface-trends.md",
         "references/cloud-container-networking.md",
         "references/ddos-mitigation.md",
         "references/dns-security.md",
@@ -162,6 +161,7 @@
         "references/kubernetes-network-security.md",
         "references/modern-network-protocols.md",
         "references/network-architecture-segmentation.md",
+        "references/network-attack-surface-trends.md",
         "references/network-detection-engineering.md",
         "references/network-forensics.md",
         "references/network-hardening-baselines.md",
@@ -395,6 +395,36 @@
         "references/evaluation-framework.md",
         "references/evasion-techniques.md",
         "references/understanding-waf.md"
+      ]
+    },
+    {
+      "name": "wazuh",
+      "description": "Menjalankan triage alert SOC di Wazuh open source 4.x (all-in-one: manager, indexer, dashboard, agent) — menarik alert dan bukti dari indexer serta Wazuh API, memberi verdict TP/FP/Benign/Unknown, memprioritaskan, mengeskalasi atau menutup dengan alasan terverifikasi, lalu mengusulkan tuning rule. Pakai saat antrean alert Wazuh harus ditriase, bukan untuk instalasi dari nol, hunting proaktif, atau SIEM lain.",
+      "files": [
+        "SKILL.md",
+        "assets/decoder-template.xml",
+        "assets/false-positive-tracker.csv",
+        "assets/rule-template.xml",
+        "assets/shift-handover-template.md",
+        "assets/triage-report-template.md",
+        "assets/triage-report.schema.json",
+        "references/active-response.md",
+        "references/alert-schema.md",
+        "references/api-and-automation.md",
+        "references/common-alert-playbooks.md",
+        "references/evidence-collection.md",
+        "references/fim-sca-vulnerability.md",
+        "references/indexer-queries.md",
+        "references/referensi.md",
+        "references/reporting-and-handover.md",
+        "references/rules-and-decoders.md",
+        "references/telemetry-health-and-troubleshooting.md",
+        "references/triage-workflow.md",
+        "references/tuning-and-false-positive.md",
+        "references/verdict-and-severity.md",
+        "scripts/check-ruleset.py",
+        "scripts/wazuh_api.py",
+        "scripts/wazuh_triage.py"
       ]
     },
     {

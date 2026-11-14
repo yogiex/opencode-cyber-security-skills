@@ -13,6 +13,69 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 7. **Wildcard hanya untuk karantina.** Entri wildcard (nama direktori minimal tiga tingkat, diakhiri dua bintang) hanya boleh dipakai untuk perubahan yang bukan milik sesi ini dan belum diputuskan; validator akan menampilkannya sebagai peringatan, bukan audit eksplisit. Wildcard yang terlalu luas ditolak.
 8. **Validasi wajib:** `node scripts/check-changelog.js --base <ref>` harus exit 0 sebelum commit.
 
+## [0.25.0] — 2026-11-13 — Skill `wazuh`: triage alert SOC di Wazuh open source
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menambahkan skill `wazuh` untuk triage alert SOC di Wazuh open source 4.x (deployment all-in-one), memperbaiki URL `repository`/`homepage` di manifest, meregenerasi artefak turunan, menyinkronkan matriks kualitas, dan mencatat perubahan `skills/network-security/` yang sebelumnya belum masuk changelog.
+
+### Ditambahkan
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/wazuh/SKILL.md` | skill baru 225 baris: pemicu/anti-pemicu, Decision Frame 7 aturan, tabel level 0–16, alur pakai, 14 gotcha, capability map, progressive disclosure | antrean alert Wazuh butuh triage berbasis bukti, bukan pembacaan dashboard | `(Get-Content skills/wazuh/SKILL.md).Count` = 225 (< 500) |
+| `skills/wazuh/references/alert-schema.md` | pipeline alert, field inti vs per-modul, `alerts` vs `archives`, batas visibilitas | analis perlu tahu dari mana alert berasal dan field yang benar | berkas ada; frontmatter `name`/`description`/`tags` |
+| `skills/wazuh/references/triage-workflow.md` | tier L1/L2/L3, timebox, kriteria eskalasi, definisi selesai, handover, metrik | menyamakan proses antar shift | berkas ada; frontmatter valid |
+| `skills/wazuh/references/evidence-collection.md` | checklist bukti per kelas alert + urutan termurah + batas waktu | verdict tanpa bukti adalah sumber kesalahan utama | berkas ada; frontmatter valid |
+| `skills/wazuh/references/indexer-queries.md` | index pattern, Discover/DQL, DSL OpenSearch, agregasi, batas 10.000, retensi ISM | triase butuh kueri yang bisa diulang | berkas ada; frontmatter valid |
+| `skills/wazuh/references/api-and-automation.md` | JWT, token 900 dtk, RBAC, WQL, paginasi, tabel endpoint, `error: 2` | otomasi penarikan bukti lewat API manager | berkas ada; frontmatter valid |
+| `skills/wazuh/references/verdict-and-severity.md` | definisi TP/FP/Benign/Unknown, matriks kecukupan bukti, contoh verdict | verdict konsisten dan bisa diaudit | berkas ada; frontmatter valid |
+| `skills/wazuh/references/common-alert-playbooks.md` | 8 playbook: SSH, Windows auth, FIM, malware, privilege escalation, web, CVE/SCA, USB | mempercepat triase kelas alert berulang | berkas ada; frontmatter valid |
+| `skills/wazuh/references/rules-and-decoders.md` | sintaks XML, rentang ID 100000–120000, batasan `overwrite`, `frequency`/`timeframe`/`noalert`, decoder parent/sibling/JSON, loop `wazuh-logtest` | tuning hasil triase harus benar secara sintaks dan semantik | berkas ada; frontmatter valid |
+| `skills/wazuh/references/fim-sca-vulnerability.md` | opsi `syscheck`, field alert FIM, SCA, vulnerability detection 4.3–5.x | tiga modul ini menyumbang sebagian besar bukti triase | berkas ada; frontmatter valid |
+| `skills/wazuh/references/tuning-and-false-positive.md` | klasifikasi FP, 9 opsi tuning berurutan, format change request, pengukuran dampak | tuning tanpa sampel dan angka tidak dapat dipertanggungjawabkan | berkas ada; frontmatter valid |
+| `skills/wazuh/references/active-response.md` | konfigurasi `<command>`/`<active-response>`, semantik OR, kontrak stdin JSON, rollback, guardrail | containment harus reversible dan tidak destruktif | berkas ada; frontmatter valid |
+| `skills/wazuh/references/reporting-and-handover.md` | struktur laporan, IoC, ATT&CK, bahasa per audiens, redaksi, format handover | laporan triase harus bisa dipahami tanpa dashboard | berkas ada; frontmatter valid |
+| `skills/wazuh/references/telemetry-health-and-troubleshooting.md` | enam pemeriksaan dasar, gejala alert hilang/duplikat/terlambat, log yang dibaca | "tidak ada alert" sering berarti telemetri mati | berkas ada; frontmatter valid |
+| `skills/wazuh/references/referensi.md` | tautan resmi per topik, matriks perbedaan 4.x vs 5.x, cara cek versi | mencegah menyalin panduan versi yang salah | berkas ada; frontmatter valid |
+| `skills/wazuh/scripts/wazuh_api.py` | klien Wazuh API stdlib: `agents`, `agent`, `logs`, `status`, `rules`, `restart`/`active-response` dengan `--apply --yes` | bukti triage perlu ditarik tanpa dependensi | `compile(...)` OK; `--help` keluar 0 |
+| `skills/wazuh/scripts/wazuh_triage.py` | penarik alert indexer: `queue`, `timeline`, `report`, `--dry-run` | antrean dan laporan triase bisa dibentuk otomatis | `queue --dry-run --since 24h` keluar 0 |
+| `skills/wazuh/scripts/check-ruleset.py` | validator rule/decoder: ID, level, duplikat, `overwrite` + `if_*`, `order` vs capture group | mencegah tuning gagal senyap | `check-ruleset.py` pada `rule-template.xml` dan `decoder-template.xml` = 0 error |
+| `skills/wazuh/assets/triage-report-template.md` | template laporan dengan placeholder `{{...}}` | keluaran `wazuh_triage.py report` langsung terisi | berkas ada; dipakai skrip |
+| `skills/wazuh/assets/shift-handover-template.md` | template handover shift | mencegah kehilangan konteks antar shift | berkas ada |
+| `skills/wazuh/assets/triage-report.schema.json` | skema JSON laporan triase | validasi keluaran `--out-json` | `ConvertFrom-Json` OK |
+| `skills/wazuh/assets/rule-template.xml` | kerangka rule korelasi, CDB whitelist, dan `overwrite` | contoh yang lolos validator | `check-ruleset.py` = 0 error |
+| `skills/wazuh/assets/decoder-template.xml` | decoder parent, sibling, dan JSON | contoh decoder yang lolos validator | `check-ruleset.py` = 0 error |
+| `skills/wazuh/assets/false-positive-tracker.csv` | pelacak FP → usulan tuning → change request | tuning butuh bukti sampel yang tersimpan | berkas ada; header CSV valid |
+| `skills/network-security/references/network-attack-surface-trends.md` | berkas referensi hasil rename (sebelumnya `attack-surface-trends.md`) | nama berkas diselaraskan dengan tautan `SKILL.md` (perubahan sesi sebelumnya yang belum tercatat) | `node scripts/sync-skills.js` mengindeks berkas ini |
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `manifest.json` | `homepage`/`repository` diperbaiki ke `https://github.com/yogiex/opencode-cyber-security-skills`; entri skill `wazuh` ditambahkan | URL lama (`cyber-security/agent-skills`) salah dan menyebar ke frontmatter saat sync | `node scripts/sync-skills.js`; baris 9-10 dan 417 dicek |
+| `skills/index.json` | regenerasi: 31 skill, seluruh berkas di direktori `skills/wazuh` terindeks | artefak turunan | `node scripts/sync-skills.js` |
+| `.claude-plugin/plugin.json` | regenerasi | artefak turunan | `node scripts/sync-skills.js` |
+| `.claude-plugin/marketplace.json` | regenerasi | artefak turunan | `node scripts/sync-skills.js` |
+| `.cursor-plugin/plugin.json` | regenerasi | artefak turunan | `node scripts/sync-skills.js` |
+| `skills/code-security-audit/SKILL.md` | frontmatter `repository` diperbarui | normalisasi generator ke URL repo yang benar | `node scripts/sync-skills.js` (Updated 3 SKILL.md) |
+| `skills/web-pentest-payloads/SKILL.md` | frontmatter `repository` diperbarui | normalisasi generator | `node scripts/sync-skills.js` |
+| `skills/network-security/SKILL.md` | frontmatter `repository` diperbarui; gotcha Wi-Fi/PMF/PMKID/CAPWAP (perubahan sesi sebelumnya) ikut tercatat | berkas ini sudah berubah sebelum entri ini; sekarang masuk audit | `git diff skills/network-security/SKILL.md` |
+| `README.md` | baris `wazuh` di tabel Blue Team dan tabel Referensi & Sumber; badge `skills-31`, badge `reference docs-257`; prosa 31 skill / 257 dokumen | skill baru harus muncul di katalog | `Select-String -Path README.md -Pattern wazuh` |
+| `docs/SKILL-QUALITY.md` | baris `wazuh` (14 refs) dan `network-security` (28 refs) di matriks; total 31 skill; rekap Selesai 13 / Sebagian 13 / Belum 5; cakupan Frame 26/31; tanggal | matriks sebelumnya 29 skill dan tidak memuat `network-security` | `Select-String -Path docs/SKILL-QUALITY.md -Pattern 'wazuh|network-security'` |
+
+### Diganti nama
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/attack-surface-trends.md` | diganti nama menjadi `network-attack-surface-trends.md` | tautan `SKILL.md` menunjuk nama baru | `git status --porcelain` menampilkan `D` dan `??` berpasangan |
+
+### Catatan
+
+- `node scripts/sync-skills.js` tidak dapat menulis langsung pada sesi ini: sandbox Windows menolak tulis ke subdirektori workspace dari proses anak (`EPERM`). Generator dijalankan pada salinan repo di direktori temp (`%TEMP%`), lalu keluarannya disalin ke working tree. Hasilnya identik dengan keluaran generator; tidak ada berkas repo yang diedit manual untuk artefak turunan.
+- Hanya 3 `SKILL.md` berubah akibat normalisasi frontmatter (yang memiliki baris `  author:`), bukan 27 seperti perkiraan awal audit.
+- Verifikasi: `node scripts/check-fact-notes.js` OK; `python` compile 3 skrip OK; `check-ruleset.py` 0 error; 53 tautan relatif di `skills/wazuh/SKILL.md` resolve; tidak ada kemunculan `CERTIFICATION-FACTS.md` pada skill baru.
+
 ## [0.24.0] — 2026-11-11 — Reflected XSS OSWE playbook dan konsolidasi referensi `offsec-web-300`
 
 **Commit dasar:** `pending` (branch `dev`)
@@ -57,6 +120,28 @@ Dokumen ini adalah catatan resmi setiap perubahan file di repo ini. Tujuannya ag
 
 - Sebelum commit, working tree juga memuat pekerjaan Wi-Fi `network-security` (entri 0.23.0 dan 0.22.x) serta direktori `skills/network-security/` yang sebelumnya untracked; semuanya ikut di-commit agar `manifest.json` dan `skills/index.json` konsisten dengan isi repo.
 - Verifikasi: `node scripts/check-changelog.js` exit 0 dan `node scripts/check-fact-notes.js` OK.
+
+## [0.23.1] — 2026-11-11 — Perbaikan nama berkas referensi attack surface
+
+**Commit dasar:** `pending` (branch `dev`)
+**Status:** pending
+**Ruang lingkup:** menyeragamkan nama berkas referensi agar sesuai dengan tautan di `SKILL.md` dan konvensi awalan `network-*`. Entri ini mengoreksi entri 0.22.6 yang menyebut nama lama.
+
+### Diganti nama
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `skills/network-security/references/network-attack-surface-trends.md` | diganti nama dari `skills/network-security/references/attack-surface-trends.md` | tautan di `SKILL.md` sudah memakai nama `network-attack-surface-trends.md`; 28 tautan referensi kini resolve semua | `Test-Path skills/network-security/references/network-attack-surface-trends.md` True; pemeriksa tautan: 0 hilang |
+
+### Diubah
+
+| File | Perubahan | Alasan | Verifikasi |
+|---|---|---|---|
+| `manifest.json` | diubah | artefak turunan setelah penggantian nama berkas | `node scripts/sync-skills.js` |
+| `skills/index.json` | diubah | daftar berkas `network-security` diperbarui | `node scripts/sync-skills.js` |
+| `.claude-plugin/plugin.json` | diubah | artefak turunan | `node scripts/sync-skills.js` |
+| `.claude-plugin/marketplace.json` | diubah | artefak turunan | `node scripts/sync-skills.js` |
+| `.cursor-plugin/plugin.json` | diubah | artefak turunan | `node scripts/sync-skills.js` |
 
 ## [0.23.0] — 2026-11-11 — Deep dive Wi-Fi: protokol WPA3, controller, auditing tooling
 

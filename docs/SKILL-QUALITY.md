@@ -1,8 +1,8 @@
 # Skill Quality Ledger
 
-Matriks status kualitas 29 skill. Tujuannya membuat pekerjaan tuning **terlihat** — bukan tersembunyi di riwayat commit — sampai cakupan cukup untuk ditegakkan lewat CI.
+Matriks status kualitas 31 skill. Tujuannya membuat pekerjaan tuning **terlihat** — bukan tersembunyi di riwayat commit — sampai cakupan cukup untuk ditegakkan lewat CI.
 
-Diperbarui: **2026-11-10** (setelah 0.21.0 — cabang `feat/ec-cnd-persona-injection` digabung dan `ec-cnd` masuk matriks; 0.20.0 — katalog sertifikasi dibersihkan dan Decision Frame mencapai 23/28; 0.19.0 — sembilan skill bersertifikat menjadi persona praktisi).
+Diperbarui: **2026-11-13** (setelah 0.25.0 — `wazuh` dan `network-security` masuk matriks; sebelumnya 0.21.0 — cabang `feat/ec-cnd-persona-injection` digabung dan `ec-cnd` masuk matriks).
 
 > `ec-cnd` sudah berada di `dev` (berkasnya mendarat pada `abae7be`, cabangnya digabung pada 0.21.0), jadi barisnya kini ada di matriks dan jumlah skill di sini 29.
 
@@ -35,6 +35,7 @@ Alasan dua jalur: skill bersertifikat memilih **persona** (tanpa angka ujian, ja
 | lf-cks | ya | ya | — | ya | 10 | ya | Selesai |
 | log-management-nist-800-92 | ya | — | — | — | 0 | — | Belum |
 | mitre-attack | ya | ya | ya | — | 0 | — | Selesai |
+| network-security | ya | ya | — | — | 28 | ya | Sebagian |
 | nist-800-53 | ya | ya | ya | — | 0 | — | Selesai |
 | offsec-ir-200 | ya | ya | — | ya | 11 | ya | Selesai |
 | offsec-pen-300 | ya | ya | — | ya | 10 | ya | Selesai |
@@ -51,6 +52,7 @@ Alasan dua jalur: skill bersertifikat memilih **persona** (tanpa angka ujian, ja
 | threat-intelligence | ya | ya | — | — | 8 | ya | Sebagian |
 | threat-modeling | ya | ya | — | — | 0 | — | Sebagian |
 | waf-evasion-methodology | ya | ya | — | — | 4 | ya | Sebagian |
+| wazuh | ya | ya | — | — | 14 | ya | Sebagian |
 | web-app-scan | ya | ya | — | — | 0 | ya | Sebagian |
 | web-pentest-payloads | ya | ya | — | — | 39 | ya | Sebagian |
 | web-reconnaissance | ya | ya | — | — | 9 | ya | Sebagian |
@@ -60,10 +62,10 @@ Alasan dua jalur: skill bersertifikat memilih **persona** (tanpa angka ujian, ja
 | Status | Jumlah |
 |---|---|
 | Selesai | 13 |
-| Sebagian | 11 |
+| Sebagian | 13 |
 | Belum | 5 |
 
-Cakupan **Frame 24/29 (83%)**, naik dari 19/28 pada 0.19.0 setelah `threat-modeling`, `incident-response-plan`, `risk-management-framework`, dan `owasp-top10-2025` mendapat Decision Frame operasional pada 0.20.0, lalu `ec-cnd` masuk pada 0.21.0.
+Cakupan **Frame 26/31 (84%)**, naik dari 24/29 pada 0.24.0 setelah `network-security` (sebelumnya belum masuk matriks) dan `wazuh` (skill baru) ditambahkan pada 0.25.0.
 
 Lima "Belum" yang tersisa bukan kekurangan frame semata: `security-auditor`, `log-management-nist-800-92`, `devsecops-mindset`, dan `soc-analyst` adalah skill monolitik tanpa berkas referensi (backlog C), sedangkan `code-security-audit` sudah punya 4 referensi tetapi belum punya frame.
 
@@ -79,7 +81,7 @@ Lima "Belum" yang tersisa bukan kekurangan frame semata: `security-auditor`, `lo
 
 ## Kapan enforcement dibuat
 
-Cakupan Frame kini **24/29 (83%)**, melewati ambang yang ditetapkan dokumen ini sejak 0.6.0 (≥80%). Artinya penegakan Frame di CI sudah bisa dinyalakan: 5 pengecualian (`security-auditor`, `log-management-nist-800-92`, `devsecops-mindset`, `soc-analyst`, `code-security-audit`) jauh lebih kecil dan lebih mudah dipertahankan daripada 9 pengecualian sebelumnya.
+Cakupan Frame kini **26/31 (84%)**, melewati ambang yang ditetapkan dokumen ini sejak 0.6.0 (≥80%). Artinya penegakan Frame di CI sudah bisa dinyalakan: 5 pengecualian (`security-auditor`, `log-management-nist-800-92`, `devsecops-mindset`, `soc-analyst`, `code-security-audit`) jauh lebih kecil dan lebih mudah dipertahankan daripada 9 pengecualian sebelumnya.
 
 Keputusan menyalakannya sengaja ditunda ke pekerjaan tersendiri, karena checker baru butuh allowlist yang ditulis eksplisit dan diuji terhadap working tree yang juga dipegang sesi lain.
 
